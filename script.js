@@ -32,6 +32,10 @@ var CONFIG = {
   whatsapp:  '14703146160',
   telefone:  '(470) 314-6160',
   email:     'monica@providentiafinancial.com', // vale quando o dominio for comprado
+  /* Agenda da Monica. Todo botão "Agendar uma conversa" do site aponta
+     para cá. Vazio faz esses botões voltarem a levar para a seção de
+     contato, com telefone e WhatsApp, em vez de quebrarem. */
+  calendly:  'https://calendly.com/monicaprovidentia',
   instagram: 'monica.providentia',
   facebook:  '',                             // <<< vazio esconde o ícone
   linkedin:  ''                              // <<< vazio esconde o ícone
@@ -81,6 +85,19 @@ function montarContatos() {
     el.setAttribute('href', 'https://wa.me/' + CONFIG.whatsapp + '?text=' + encodeURIComponent(MENSAGEM));
     el.setAttribute('target', '_blank');
     el.setAttribute('rel', 'noopener');
+  });
+
+  /* A agenda abre em aba nova: é ferramenta de terceiro, e mandar a pessoa
+     para fora do site sem volta no meio de uma decisão é perder a pessoa.
+     Sem endereço configurado, o botão cai para a seção de contato. */
+  $$('[data-agendar]').forEach(function (el) {
+    if (CONFIG.calendly) {
+      el.setAttribute('href', CONFIG.calendly);
+      el.setAttribute('target', '_blank');
+      el.setAttribute('rel', 'noopener');
+    } else {
+      el.setAttribute('href', (el.getAttribute('data-agendar') || '') + '#contato');
+    }
   });
 
   $$('[data-telefone]').forEach(function (el) {

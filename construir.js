@@ -85,7 +85,7 @@ ${submenu(base, atual)}
       </ul>
     </nav>
 
-    <a class="botao botao--marinho botao--topo" href="${base}index.html#contato">Agendar uma conversa</a>
+    <a class="botao botao--marinho botao--topo" href="${base}index.html#contato" data-agendar="${base}index.html">Agendar uma conversa</a>
 
     <button class="sanduiche" type="button" aria-expanded="false" aria-controls="menu-movel">
       <span class="sanduiche__txt">Menu</span>
@@ -107,7 +107,7 @@ ${SERVICOS.map(s => `      <li class="painel__sub"><a href="${base}servicos/${s.
       <li><a href="${base}index.html#contato">Contato</a></li>
     </ul>
     <div class="painel__pe">
-      <a class="botao botao--marinho botao--cheio" href="${base}index.html#contato">Agendar uma conversa</a>
+      <a class="botao botao--marinho botao--cheio" href="${base}index.html#contato" data-agendar="${base}index.html">Agendar uma conversa</a>
       <a class="botao botao--linha botao--cheio" href="#" data-whatsapp>${ZAP} Falar no WhatsApp</a>
     </div>
   </nav>
@@ -337,7 +337,7 @@ ${s.texto.map(p => `      <p>${esc(p)}</p>`).join('\n')}
     </div>
 ${lista}
     <div class="servico__acoes">
-      <a class="botao botao--marinho" href="${base}index.html#contato">Agendar uma conversa</a>
+      <a class="botao botao--marinho" href="${base}index.html#contato" data-agendar="${base}index.html">Agendar uma conversa</a>
       <a class="botao botao--linha" href="#" data-whatsapp>${ZAP} Falar no WhatsApp</a>
     </div>
 

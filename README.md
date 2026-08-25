@@ -28,6 +28,15 @@ O gerador existe porque sao oito paginas com o mesmo cabecalho e o mesmo
 rodape. Sem ele, mudar um item do menu significaria abrir oito arquivos e
 editar o mesmo trecho oito vezes.
 
+### Para mudar o link da agenda
+
+Todo botao "Agendar uma conversa" do site aponta para o Calendly da Monica.
+O endereco fica no campo `calendly` do bloco `CONFIG`, no topo do
+**`script.js`**. Um lugar so, e vale para as dez paginas.
+
+Se o campo ficar vazio, os botoes voltam a levar para a secao de contato da
+pagina inicial, com telefone e WhatsApp. Eles nao quebram.
+
 ### Para mudar telefone, e-mail ou redes sociais
 
 Edite o bloco `CONFIG` no topo de **`script.js`**. Um lugar so; ele preenche
