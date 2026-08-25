@@ -1,0 +1,14 @@
+# Versoes antigas do site. Ficam na maquina, nao vao para o repositorio.
+_anterior/
+_v2-editorial/
+_v3-marca/
+_v4-servicos/
+
+# Gerado pelo construir.js para as paginas da raiz lerem o menu.
+# Nao e fonte: sai do dados.js.
+_parciais.json
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store

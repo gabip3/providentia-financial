@@ -1,0 +1,15 @@
+<!-- Favicon. O desenho segue a silhueta do escudo oficial: entalhe no topo,
+     ombros que sobem, laterais retas e ponta embaixo.
+
+     Por que nao e o escudo.png direto: em 16px, um contorno dourado fino
+     sobre fundo transparente some na aba do navegador. Aqui o escudo e
+     solido sobre o marinho, que e o que se enxerga nesse tamanho.
+     O escudo.png entra como icone grande (apple-touch-icon) no HTML. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#0a2368"/>
+  <path d="M32 7c3 4.4 8.6 6.6 17 6.6v20.8c0 8.6-6 15.2-17 20.6-11-5.4-17-12-17-20.6V13.6c8.4 0 14-2.2 17-6.6z"
+        fill="none" stroke="#c4a961" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M26 22v20M26 22h7.5a6 6 0 0 1 0 12H26M35.5 31v12"
+        fill="none" stroke="#ffffff" stroke-width="3"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

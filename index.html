@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ==========================================================================
+     PROVIDENTIA FINANCIAL
+     --------------------------------------------------------------------------
+     Layout construído a partir do mockup enviado pela Monica.
+     Sete blocos, nesta ordem: topo, abertura, pilares, sobre, soluções,
+     chamada, rodapé. Nada além disso, de propósito.
+
+     TRÊS ARQUIVOS, SEM DEPENDÊNCIA:  index.html · style.css · script.js
+     Pronto para Netlify. Basta arrastar a pasta.
+
+     TUDO QUE PRECISA SER TROCADO ESTÁ MARCADO COM [SUBSTITUIR] OU
+     [CONFIRMAR]. Os dados de contato ficam no bloco CONFIG do script.js.
+     ========================================================================== -->
+
+<title>Providentia Financial | Proteção financeira para o que mais importa</title>
+
+<!-- [SUBSTITUIR] Reveja a descrição depois que a bio real da Monica entrar. -->
+<meta name="description" content="Providentia Financial. A Monica ajuda famílias e donos de negócio a construir segurança financeira, proteger o que já conquistaram e planejar o futuro.">
+
+<link rel="canonical" href="https://providentiafinancial.com/"><!-- [SUBSTITUIR] domínio real -->
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="escudo.png">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Providentia Financial">
+<meta property="og:title" content="Providentia Financial | Proteção financeira para o que mais importa">
+<meta property="og:description" content="A Monica ajuda famílias e donos de negócio a construir segurança financeira, proteger o que já conquistaram e planejar o futuro.">
+<meta property="og:url" content="https://providentiafinancial.com/"><!-- [SUBSTITUIR] -->
+<meta property="og:image" content="https://providentiafinancial.com/Monica01.jpeg"><!-- [SUBSTITUIR] -->
+<meta name="twitter:card" content="summary_large_image">
+<!-- [REMOVER ANTES DE PUBLICAR DE VERDADE]
+     Enquanto o site for rascunho para revisão, ele não pode aparecer no
+     Google. Ainda tem dados por confirmar e nenhum bloco jurídico.
+     Quando tudo estiver aprovado, apague estas duas linhas e o robots.txt. -->
+<meta name="robots" content="noindex, nofollow">
+
+<meta name="theme-color" content="#0a2368">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&amp;family=Poppins:wght@300;400;500;600;700&amp;family=Allura&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="pular" href="#conteudo">Ir para o conteúdo</a>
+
+
+<!-- ==========================================================================
+     TOPO
+     No desktop a navegação fica aberta. O sanduíche só existe abaixo de
+     900px, onde ele resolve alguma coisa.
+
+     [CONFIRMAR] O mockup traz cinco itens: HOME ABOUT SERVICES RESOURCES
+     CONTACT. "Recursos" ficou de fora porque não existe conteúdo para
+     apontar, e link de menu que não leva a lugar nenhum é pior que menu
+     curto. No dia em que houver blog ou biblioteca de vídeos, é somar um
+     <li> aqui e outro no menu do celular.
+     ========================================================================== -->
+<header class="topo" id="topo">
+  <div class="faixa topo__in">
+
+    <a class="marca" href="index.html" aria-label="Providentia Financial, início">
+      <img class="marca__escudo" src="escudo.png" alt="" width="500" height="500" decoding="async">
+      <span class="marca__nome"><b>Providentia</b><i>Financial</i></span>
+    </a>
+
+    <nav class="nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="index.html">Início</a></li>
+        <li><a href="index.html#sobre">Sobre</a></li>
+        <li class="tem-sub">
+          <button class="sub-abre" type="button" aria-expanded="false" aria-controls="sub-servicos">
+            Serviços
+            <svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <ul class="sub" id="sub-servicos">
+            <li><a href="servicos/beneficios-em-vida.html">Benefícios em Vida</a></li>
+            <li><a href="servicos/aposentadoria-livre-de-impostos.html">Aposentadoria livre de impostos</a></li>
+            <li><a href="servicos/iul-para-criancas.html">IUL para crianças</a></li>
+            <li><a href="servicos/protecao-hipotecaria.html">Proteção hipotecária</a></li>
+            <li><a href="servicos/protecao-do-negocio.html">Proteção do seu negócio</a></li>
+            <li><a href="servicos/anuidades.html">Anuidades com índice fixo</a></li>
+            <li><a href="servicos/planejamento-imobiliario.html">Planejamento imobiliário</a></li>
+            <li><a href="servicos/planejamento-universitario.html">Planejamento universitário</a></li>
+            <li class="sub__todos"><a href="index.html#solucoes">Ver todos os serviços</a></li>
+          </ul>
+        </li>
+        <li><a href="depoimentos.html">Depoimentos</a></li>
+        <li><a href="index.html#educacao">Educação</a></li>
+        <li><a href="index.html#contato">Contato</a></li>
+      </ul>
+    </nav>
+
+    <a class="botao botao--marinho botao--topo" href="index.html#contato">Agendar uma conversa</a>
+
+    <button class="sanduiche" type="button" aria-expanded="false" aria-controls="menu-movel">
+      <span class="sanduiche__txt">Menu</span>
+      <svg class="ico-menu" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </button>
+
+  </div>
+</header>
+
+<div class="painel" id="menu-movel" inert>
+  <nav class="faixa painel__in" aria-label="Navegação">
+    <ul class="painel__lista">
+      <li><a href="index.html">Início</a></li>
+      <li><a href="index.html#sobre">Sobre</a></li>
+      <li><a href="index.html#solucoes">Serviços</a></li>
+      <li class="painel__sub"><a href="servicos/beneficios-em-vida.html">Benefícios em Vida</a></li>
+      <li class="painel__sub"><a href="servicos/aposentadoria-livre-de-impostos.html">Aposentadoria livre de impostos</a></li>
+      <li class="painel__sub"><a href="servicos/iul-para-criancas.html">IUL para crianças</a></li>
+      <li class="painel__sub"><a href="servicos/protecao-hipotecaria.html">Proteção hipotecária</a></li>
+      <li class="painel__sub"><a href="servicos/protecao-do-negocio.html">Proteção do seu negócio</a></li>
+      <li class="painel__sub"><a href="servicos/anuidades.html">Anuidades com índice fixo</a></li>
+      <li class="painel__sub"><a href="servicos/planejamento-imobiliario.html">Planejamento imobiliário</a></li>
+      <li class="painel__sub"><a href="servicos/planejamento-universitario.html">Planejamento universitário</a></li>
+      <li><a href="depoimentos.html">Depoimentos</a></li>
+      <li><a href="index.html#educacao">Educação</a></li>
+      <li><a href="index.html#contato">Contato</a></li>
+    </ul>
+    <div class="painel__pe">
+      <a class="botao botao--marinho botao--cheio" href="index.html#contato">Agendar uma conversa</a>
+      <a class="botao botao--linha botao--cheio" href="#" data-whatsapp><svg class="ico-zap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg> Falar no WhatsApp</a>
+    </div>
+  </nav>
+</div>
+
+
+<main id="conteudo">
+
+<!-- ==========================================================================
+     ABERTURA
+     Texto à esquerda, fotografia à direita. A foto não leva cor por cima:
+     ela some para a esquerda com uma máscara, e não com um véu colorido,
+     para o rosto continuar com a cor original.
+     ========================================================================== -->
+<section class="abertura">
+
+  <!-- A foto foi feita para este enquadramento: a Monica à direita, o lado
+       esquerdo vazio e claro, que é exatamente onde o texto entra. Por isso
+       o véu de creme cobre só a metade vazia e nunca chega no rosto dela.
+
+       [OTIMIZAR] hero.png tem 1,6 MB, que é muito para a primeira imagem da
+       página. Exporte a MESMA imagem como JPEG qualidade 82 ou WebP: cai
+       para algo entre 150 e 250 KB, sem diferença visível. Depois é só
+       trocar o src aqui. Não dá para fazer isso daqui, não há conversor
+       de imagem nesta máquina. -->
+  <div class="abertura__foto">
+    <img src="hero.png" alt="Monica, da Providentia Financial, sentada à mesa de trabalho." width="1717" height="916" fetchpriority="high" decoding="async">
+  </div>
+
+  <div class="faixa abertura__in">
+    <div class="abertura__txt">
+
+      <h1>Proteção financeira para o que mais importa</h1>
+
+      <p class="abertura__sub">
+        Ajudo famílias e donos de negócio a construir segurança, fazer o
+        patrimônio crescer e deixar um legado duradouro, com soluções
+        pensadas para a sua vida.
+      </p>
+
+      <div class="acoes">
+        <a class="botao botao--marinho" href="#contato">Agendar uma conversa</a>
+        <a class="botao botao--linha" href="#" data-whatsapp>
+          <svg class="ico-zap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+          Falar no WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ==========================================================================
+     PILARES
+     A faixa marinho logo abaixo da abertura. Quatro itens, divididos por
+     filete. É a única fileira de ícones do site.
+     ========================================================================== -->
+<section class="pilares" aria-label="O que orienta o trabalho da Monica">
+  <ul class="faixa pilares__lista">
+
+    <li class="pilar">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+      <h3>A família primeiro</h3>
+      <p>Soluções desenhadas para proteger quem você ama.</p>
+    </li>
+
+    <li class="pilar">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+      <h3>Solidez financeira</h3>
+      <p>Construa segurança hoje e prepare o amanhã com confiança.</p>
+    </li>
+
+    <li class="pilar">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>
+      <h3>Patrimônio que cresce</h3>
+      <p>Estratégias que ajudam você a acumular, proteger e crescer.</p>
+    </li>
+
+    <li class="pilar">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>
+      <h3>Alguém de confiança</h3>
+      <p>Orientação com quem você pode contar em cada etapa.</p>
+    </li>
+
+  </ul>
+</section>
+
+
+<!-- ==========================================================================
+     A MANHÃ
+     A parte mais antiga do site, do primeiro rascunho. É a única seção que
+     não fala de produto nenhum: fala de uma terça-feira.
+
+     O 08:28 não é aleatório. É Romanos 8:28, e foi escolha da Monica.
+
+     [VERSÃO B - COMPLIANCE]
+     Risco: indução pelo medo. A frase "a vida não manda convite antes de
+     mudar" é sugestiva. Se o compliance apertar, troque o parágrafo por:
+
+       Você deixou as crianças na escola, respondeu mensagens, pensou no
+       jantar e seguiu a vida. A parte difícil é que nem tudo dá para prever.
+     ========================================================================== -->
+<section class="manha" id="manha">
+  <div class="faixa">
+
+    <p class="manha__hora">08:28</p>
+    <h2>Até aqui, era só uma terça-feira comum.</h2>
+
+    <p class="manha__lead">
+      Você deixou as crianças na escola, respondeu mensagens, pensou no jantar
+      e seguiu a vida. A parte difícil é que a vida não manda convite antes de
+      mudar.
+    </p>
+
+    <ol class="linha">
+      <li>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M6.38 18.7 4 21"/><path d="M17.64 18.67 20 21"/></svg>
+        <b>06:15</b>
+        <span>o despertador toca</span>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11 20H2"/><path d="M11 4.562v16.157a1 1 0 0 0 1.242.97L19 20V5.562a2 2 0 0 0-1.515-1.94l-4-1A2 2 0 0 0 11 4.561z"/><path d="M11 4H8a2 2 0 0 0-2 2v14"/><path d="M14 12h.01"/><path d="M22 20h-3"/></svg>
+        <b>07:30</b>
+        <span>todo mundo sai</span>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><rect x="3" y="4" width="6" height="6" rx="1"/></svg>
+        <b>08:05</b>
+        <span>você pensa no resto do dia</span>
+      </li>
+      <li class="linha--virada">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15.914 4a1.5 1.5 0 0 0-2.474-1.561l-9 9A1.5 1.5 0 0 0 5.5 14h4.002a.5.5 0 0 1 .471.666L8.086 20a1.5 1.5 0 0 0 2.475 1.56l9-9A1.5 1.5 0 0 0 18.5 10h-3.997a.5.5 0 0 1-.472-.667z"/></svg>
+        <b>08:28</b>
+        <span>alguma coisa muda</span>
+      </li>
+    </ol>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SE A RENDA PARASSE
+     A pergunta que a manhã prepara. Também é do primeiro rascunho.
+
+     [VERSÃO B - COMPLIANCE]
+     Risco no último item: "pior momento possível" é indução pelo medo.
+     Troca sugerida: "Proteção também é dar tempo para que sua família
+     possa decidir com calma, sem pressa e sem aperto."
+     ========================================================================== -->
+<section class="renda" id="renda">
+  <div class="faixa">
+
+    <h2>Se sua renda parasse amanhã, o que continuaria?</h2>
+    <p class="renda__lead">Não é uma pergunta para assustar. É uma pergunta para organizar.</p>
+
+    <ul class="renda__lista">
+      <li>
+        <h3>A casa <em>continua?</em></h3>
+        <p>Aluguel ou mortgage, contas, manutenção e tudo que mantém a rotina funcionando.</p>
+      </li>
+      <li>
+        <h3>Os filhos <em>seguem?</em></h3>
+        <p>Escola, faculdade, atividades e oportunidades que você não quer que desapareçam por causa de um imprevisto.</p>
+      </li>
+      <li>
+        <h3>Os planos <em>ficam?</em></h3>
+        <p>Viagens, aposentadoria, negócio, mudança, sonhos que ainda não aconteceram mas já fazem parte da vida de vocês.</p>
+      </li>
+      <li>
+        <h3>O tempo <em>existe?</em></h3>
+        <p>Proteção também é comprar tempo para que sua família não precise tomar decisões urgentes no pior momento possível.</p>
+      </li>
+    </ul>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SOBRE
+     Fotografia à esquerda, texto à direita.
+
+     [SUBSTITUIR] O TEXTO ABAIXO VEIO DO MOCKUP DA MONICA, NÃO FUI EU QUE
+     ESCREVI. Antes de publicar ela precisa confirmar palavra por palavra,
+     em especial:
+       · "consultora licenciada". Dizer que é licenciada é declaração
+         regulada. Só fica no ar com o número da licença e os estados.
+       · o vínculo com a Alliance Group. Confirmar como o compliance da
+         Alliance exige que a relação seja descrita: agente independente,
+         agente nomeado e representante são coisas diferentes no papel.
+         Por isso o nome da Alliance NÃO está no ar aqui.
+     ========================================================================== -->
+<section class="sobre" id="sobre">
+  <div class="faixa sobre__in">
+
+    <!-- A foto do café. É retrato (2:3), então o recorte aqui é 4:5 e não o
+         4:3 do mockup: cortar uma vertical em horizontal ia decepar a xícara
+         ou o alto da cabeça. -->
+    <div class="sobre__foto">
+      <img src="Monica01.jpeg" alt="Monica, da Providentia Financial, conversando com uma cliente em um café." width="1024" height="1536" loading="lazy" decoding="async">
+    </div>
+
+    <div class="sobre__txt">
+
+      <h2>Sua parceira em segurança financeira e tranquilidade</h2>
+
+      <!-- [CONFIRMAR PALAVRA POR PALAVRA] Este texto é um rascunho meu, a
+           partir do que a Monica contou: o nome completo e os cinco filhos.
+           O resto é escrita, não é informação que ela me deu. Ela precisa
+           ler e corrigir antes de publicar.
+
+           O que eu deliberadamente NÃO escrevi, e ela precisa preencher:
+             · há quanto tempo trabalha com isso
+             · onde nasceu, onde mora, há quanto tempo está nos EUA
+             · formação, certificações, licença
+           Não inventei nenhum desses porque bio de agente de seguro é
+           declaração, e não texto de marketing. -->
+      <p>
+        Sou a Monica Silva, mãe de cinco filhos. Quando cinco pessoas dependem
+        da sua rotina, aquela pergunta que todo mundo evita, o "e se acontecer
+        alguma coisa comigo", para de ser abstrata e vira uma conta muito
+        concreta.
+      </p>
+
+      <p>
+        Foi por aí que eu entrei neste trabalho: primeiro organizando a
+        proteção da minha própria família, depois ajudando outras a fazer o
+        mesmo. Hoje sento com famílias brasileiras nos Estados Unidos para
+        montar um plano que continue funcionando mesmo nos anos em que a vida
+        não coopera.
+      </p>
+
+      <p>
+        A conversa começa sempre pela sua situação, e nunca por um produto. Se
+        no fim não fizer sentido para você, eu falo isso com todas as letras.
+      </p>
+
+      <p class="assinatura" aria-hidden="true">Monica Silva</p>
+
+      <!-- [SUBSTITUIR] Bloco obrigatório antes de publicar. Sem isto o site
+           não pode ir ao ar. Peça à Monica e ao compliance:
+             · nome legal da agência
+             · número da licença e estados em que ela pode atender
+             · o disclosure exato que a Alliance ou a carrier exige -->
+      <p class="falta">[SUBSTITUIR] Licença nº, estados atendidos e nome da agência</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     A FRASE QUE ABRE COM A ROLAGEM
+     O painel entra estreito e vai abrindo até quase a largura da tela,
+     com o canto endireitando no caminho. É o único movimento do site.
+
+     Sem JavaScript, ou com prefers-reduced-motion, o painel já nasce
+     aberto e a frase aparece igual. A calibragem fica no objeto ABRE,
+     no script.js.
+
+     [VERSÃO B - CONFERIR COM O COMPLIANCE]
+     Risco na palavra "tudo": nenhuma apólice cobre tudo, sempre há
+     carência, exclusão e limite. Se o compliance apertar, troque o
+     parágrafo por este, que guarda a mesma ideia sem o absoluto:
+
+       <p>Seguro não é sobre esperar o pior.
+          <em>É sobre cuidar do que você já construiu.</em></p>
+     ========================================================================== -->
+<section class="frase" data-abre>
+  <div class="frase__painel">
+    <div class="faixa">
+      <p>Seguro não é sobre esperar o pior. <em>É sobre proteger tudo o que já está dando certo.</em></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     VÍDEO EM DESTAQUE
+     Texto escrito pela Monica. O vídeo é do Vimeo da Alliance Group e ela
+     informou que pode usá-lo por ser afiliada.
+
+     [CONFIRMAR] "não custam nada a mais" é afirmação forte. Em muitas
+     apólices o recurso vem incluso sem prêmio adicional, mas isso depende
+     da companhia e do produto. Confirme que vale para TODAS as apólices
+     que a Monica oferece, ou troque por "costumam vir inclusos sem custo
+     adicional".
+     ========================================================================== -->
+<section class="destaque" id="destaque">
+  <div class="faixa destaque__in">
+
+    <div class="destaque__txt">
+      <p class="destaque__olho">Clientes reais. Histórias reais.</p>
+      <h2>Histórias de Benefícios em Vida</h2>
+      <p>Os Benefícios em Vida existem há 20 anos, mas a maioria dos americanos ainda não sabe o que são ou o que significam. Eles permitem que o segurado tenha acesso ao valor do seguro de vida por causa de morte, para ter dinheiro em mãos quando mais precisa, caso sofra um ataque cardíaco, derrame, câncer ou outra doença qualificada. E a melhor parte é que esses benefícios não custam nada a mais.</p>
+      <a class="botao botao--linha-clara" href="depoimentos.html">Ver todos os depoimentos</a>
+    </div>
+
+    <div class="video video--largo">
+      <button class="video__capa" type="button" data-vimeo="520044841" aria-label="Assistir: Histórias de Benefícios em Vida">
+        <img src="https://i.vimeocdn.com/video/1076941238-cfe8e67248cdc38e62c8162ee0a8602671b5cc47861b18d76462d9a03771661d-d_1280?region=us" alt="" width="1280" height="720" fetchpriority="low" decoding="async">
+        <span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+      </button>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     BENEFÍCIOS EM VIDA
+     O conteúdo central da Alliance Group, que é a IMO com quem a Monica
+     trabalha. Sem isto o site fala de seguro em geral; com isto ele fala
+     do que a Alliance de fato vende.
+
+     FONTE, e a tradução NÃO é minha:
+       https://alliancegroupatl.com/living-benefits
+       https://alliancegroupatl.com/portuguese   <- a página em PT deles
+     Os termos saíram de lá:
+       Living Benefits ............ Benefícios em Vida
+       "life insurance you don't
+        have to die to use" ....... "seguro de vida que não precisa
+                                     morrer para utilizar"
+       Medical bankruptcy ......... Falência Médica
+
+     [CONFERIR COM A MONICA / COMPLIANCE]
+     · O texto explica o CONCEITO. Não cita companhia, não cita valor e não
+       diz que a pessoa tem direito: diz que existem apólices com esses
+       recursos. Quem se qualifica a quê depende da apólice, da companhia e
+       da aprovação, e isso está escrito no fim da seção.
+     · A régua de valores existe no material da Alliance (ex.: uma apólice
+       de 500 mil liberando parte grande num diagnóstico grave) e NÃO entrou
+       aqui de propósito. Número de pagamento em página de agente vira
+       promessa.
+     · Eles publicam "até 70% dos americanos estão sem seguro ou com seguro
+       insuficiente". É estatística deles, não minha, e ficou fora: número
+       sem fonte no ar é passivo.
+     ========================================================================== -->
+<section class="beneficios" id="beneficios">
+  <div class="faixa">
+
+    <h2>Existe um seguro de vida que você não precisa morrer para utilizar.</h2>
+
+    <p class="beneficios__lead">
+      Algumas apólices trazem recursos chamados <em>Benefícios em Vida</em>. Se
+      você for diagnosticado com uma condição séria, pode antecipar parte do
+      próprio benefício ainda em vida e usar como precisar: tratamento, contas
+      da casa, escola das crianças, o que for.
+    </p>
+
+    <ul class="condicoes">
+      <li>
+        <h3>Doença terminal</h3>
+        <p>Quando a expectativa de vida passa a ser de um a dois anos.</p>
+      </li>
+      <li>
+        <h3>Doença crônica</h3>
+        <p>Quando você deixa de conseguir fazer duas de seis atividades básicas do dia, ou há perda cognitiva grave.</p>
+      </li>
+      <li>
+        <h3>Doença crítica</h3>
+        <p>Câncer, infarto e derrame estão entre as condições que costumam estar na lista.</p>
+      </li>
+      <li>
+        <h3>Lesão crítica</h3>
+        <p>Paralisia, coma, queimadura grave, lesão cerebral séria.</p>
+      </li>
+    </ul>
+
+    <!-- [REMOVIDO A PEDIDO DA MONICA] Aqui havia o parágrafo de ressalva:
+         o que sobra segue valendo como benefício por morte, e quem se
+         qualifica a quê depende da apólice, da companhia e da aprovação.
+
+         O mesmo conteúdo continua no ar dentro da página do serviço, em
+         servicos/beneficios-em-vida.html, que é onde o assunto é explicado
+         por inteiro. Para trazer de volta para cá, é descomentar:
+
+         <p class="nota nota--esq">
+           O que sobra continua valendo como benefício por morte. Quais
+           condições entram, quanto é liberado e quem se qualifica dependem
+           da apólice, da companhia e dos critérios de aprovação de cada
+           caso. É exatamente isso que eu explico na nossa conversa.
+         </p>
+    -->
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SOLUÇÕES
+     Os seis cartões do mockup, na mesma ordem.
+
+     [CONFIRMAR COM A MONICA] Ela atende os seis? Se não faz algum, apague o
+     <li> inteiro. Listar serviço que ela não presta é problema de
+     compliance, e não de texto.
+
+     [ATENÇÃO NO QUINTO] O mockup diz "tax-advantaged strategies". Aqui ficou
+     "estratégias de longo prazo", sem promessa tributária. Promessa de
+     imposto em página de agente é o item mais arriscado da categoria:
+     depende do desenho da apólice, e uma apólice mal desenhada vira MEC e
+     perde o tratamento. Só volte ao texto original com autorização escrita
+     do compliance.
+     ========================================================================== -->
+<section class="solucoes" id="solucoes">
+  <div class="faixa">
+
+    <div class="titulo-centro">
+      <h2>Como eu posso ajudar você</h2>
+    </div>
+
+    <ul class="cartoes">
+      <li class="cartao">
+        <a href="servicos/beneficios-em-vida.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg>
+          <span class="cartao__en">Living Benefits</span>
+          <h3>Benefícios em Vida</h3>
+          <p>Cobertura que protege você ainda em vida.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="servicos/aposentadoria-livre-de-impostos.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-4V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1z"/><path d="M16 10h.01"/><path d="M2 8v1a2 2 0 0 0 2 2h1"/></svg>
+          <span class="cartao__en">Tax-Free Retirement</span>
+          <h3>Aposentadoria livre de impostos</h3>
+          <p>Uma forma de acumular valor ao longo dos anos e acessar depois.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="servicos/iul-para-criancas.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M15 12h.01"/><path d="M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/><path d="M9 12h.01"/></svg>
+          <span class="cartao__en">IUL for Kids</span>
+          <h3>IUL para crianças</h3>
+          <p>Começar cedo trava a idade e a saúde da criança.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="servicos/protecao-hipotecaria.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          <span class="cartao__en">Mortgage Protection</span>
+          <h3>Proteção hipotecária</h3>
+          <p>Ajuda a manter sua casa e o futuro da sua família.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="servicos/protecao-do-negocio.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+          <span class="cartao__en">Business Planning</span>
+          <h3>Proteção do seu negócio</h3>
+          <p>Proteja seu negócio, seus sócios e o seu legado.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="servicos/anuidades.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          <span class="cartao__en">Fixed Indexed Annuities</span>
+          <h3>Anuidades com índice fixo</h3>
+          <p>Um piso garantido, com participação limitada na alta de um índice.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="servicos/planejamento-imobiliario.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></svg>
+          <span class="cartao__en">Estate Planning</span>
+          <h3>Planejamento imobiliário</h3>
+          <p>Organizar hoje o que fica para quem vem depois.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="servicos/planejamento-universitario.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+          <span class="cartao__en">College Planning</span>
+          <h3>Planejamento universitário</h3>
+          <p>Preparar-se para o custo do ensino superior nos Estados Unidos.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+    </ul>
+
+    <p class="nota">
+      Nem todos os produtos estão disponíveis em todos os estados, e o que
+      serve para você depende da sua idade, da sua saúde, de onde você mora
+      e da aprovação da companhia.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     CENTRO DE EDUCAÇÃO
+     Estrutura tirada de https://alliancegroupatl.com/education-center
+     Lá são duas fileiras: histórias reais de clientes, e temas curtos.
+     Aqui é a mesma coisa.
+
+     COMO COLOCAR OS VÍDEOS
+     Não mexa neste HTML. Abra o script.js e preencha o objeto VIDEOS, no
+     topo do arquivo. A chave de cada card está no data-video abaixo.
+     Aceita link do YouTube ou do Vimeo, colado como está na barra do
+     navegador. Enquanto a chave estiver vazia o card aparece marcado como
+     pendente, de propósito, para ninguém publicar sem ver que faltou.
+
+     O vídeo só é carregado quando a pessoa clica. Antes disso não existe
+     iframe na página, então o YouTube não escreve cookie em quem só
+     passou pelo site, e a página abre mais rápido.
+
+     [SUBSTITUIR] OS TRÊS DEPOIMENTOS
+     Os depoimentos do site da Alliance são de clientes DELES, não da
+     Monica, e estão publicados no canal deles. Duas saídas:
+       a) usar depoimentos de clientes da própria Monica, com autorização
+          por escrito de cada pessoa. É o melhor caminho.
+       b) usar os vídeos institucionais da Alliance, e aí o texto tem que
+          dizer que são clientes da Alliance Group, e não dela. Precisa da
+          autorização de uso da Alliance.
+     Não invente nome nem história. Enquanto não houver os dois, deixe
+     esta fileira inteira comentada.
+     ========================================================================== -->
+<section class="educacao" id="educacao">
+  <div class="faixa">
+
+    <h2>Entenda antes de decidir</h2>
+
+    <p class="educacao__lead">
+      Oito vídeos curtos, nenhum passa de quatro minutos. Nada aqui é venda:
+      são as ideias que costumam aparecer na conversa, explicadas com calma
+      para você poder pensar sem ninguém do lado esperando resposta.
+    </p>
+
+    <!-- Cada card leva para a página do serviço, onde o vídeo toca. Assim o
+         mesmo vídeo tem UM lugar só onde ele vive, e não duas cópias na
+         mesma página disputando quem carrega primeiro. -->
+    <ul class="videos videos--quatro">
+      <li class="video">
+        <a href="servicos/beneficios-em-vida.html">
+          <span class="video__capa video__capa--link">
+            <img src="https://i.vimeocdn.com/video/834592931-b9abdc5c95909691d6b7edf3b635b3e57046cb8b4c5a8999800304be6c70e46c-d_1280?region=us" alt="" width="1280" height="720" loading="lazy" decoding="async">
+            <span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+            <span class="video__tempo">2:49</span>
+          </span>
+          <h3>Benefícios em Vida: os smartphones do seguro de vida</h3>
+          <p>Cobertura que protege você ainda em vida.</p>
+        </a>
+      </li>
+      <li class="video">
+        <a href="servicos/aposentadoria-livre-de-impostos.html">
+          <span class="video__capa video__capa--link">
+            <img src="https://i.vimeocdn.com/video/701276398-2e52f83f8f4e4fec5ba89a54b362a81d1d34f47f9286628425df387f50e6fda4-d_1280?region=us" alt="" width="1280" height="720" loading="lazy" decoding="async">
+            <span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+            <span class="video__tempo">3:36</span>
+          </span>
+          <h3>O que é o seguro de vida universal indexado (IUL)?</h3>
+          <p>Uma forma de acumular valor ao longo dos anos e acessar depois.</p>
+        </a>
+      </li>
+      <li class="video">
+        <a href="servicos/iul-para-criancas.html">
+          <span class="video__capa video__capa--link">
+            <img src="https://i.vimeocdn.com/video/784437285-64fb45e61442064bc0a15c6c63905b7d67d447bc72287e48c4c65f5442fd7a88-d_1280?region=us" alt="" width="1280" height="720" loading="lazy" decoding="async">
+            <span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+            <span class="video__tempo">2:21</span>
+          </span>
+          <h3>IUL para crianças</h3>
+          <p>Começar cedo trava a idade e a saúde da criança.</p>
+        </a>
+      </li>
+      <li class="video">
+        <a href="servicos/protecao-hipotecaria.html">
+          <span class="video__capa video__capa--link">
+            <img src="https://i.vimeocdn.com/video/701231944-30cac0aa52487ae618af5c7840fe061f82afebc16575da5ae41d0ea78c05be84-d_1280?region=us" alt="" width="1280" height="720" loading="lazy" decoding="async">
+            <span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+            <span class="video__tempo">2:39</span>
+          </span>
+          <h3>Proteção hipotecária</h3>
+          <p>Ajuda a manter sua casa e o futuro da sua família.</p>
+        </a>
+      </li>
+      <li class="video">
+        <a href="servicos/protecao-do-negocio.html">
+          <span class="video__capa video__capa--link">
+            <img src="https://i.vimeocdn.com/video/701233818-96fcf4f3dd44f2cbc6eafde36c00dcf52987a6e879153168eed26634220f6b38-d_1280?region=us" alt="" width="1280" height="720" loading="lazy" decoding="async">
+            <span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+            <span class="video__tempo">1:43</span>
+          </span>
+          <h3>Preservação de negócios</h3>
+          <p>Proteja seu negócio, seus sócios e o seu legado.</p>
+        </a>
+      </li>
+      <li class="video">
+        <a href="servicos/anuidades.html">
+          <span class="video__capa video__capa--link">
+            <img src="https://i.vimeocdn.com/video/685987616-3b6f0e02398228549c7ec1a457889d74fbf531207db9c2cb63d3e193449549f8-d_1280?region=us" alt="" width="1280" height="720" loading="lazy" decoding="async">
+            <span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+            <span class="video__tempo">2:59</span>
+          </span>
+          <h3>Anuidades indexadas fixas</h3>
+          <p>Um piso garantido, com participação limitada na alta de um índice.</p>
+        </a>
+      </li>
+      <li class="video">
+        <a href="servicos/planejamento-imobiliario.html">
+          <span class="video__capa video__capa--link">
+            <img src="https://i.vimeocdn.com/video/836685560-ec0760807b42d9f1785770e49e727922bee637eaaa74973ccc44e0f5d0134ec5-d_1280?region=us" alt="" width="1280" height="720" loading="lazy" decoding="async">
+            <span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+            <span class="video__tempo">1:22</span>
+          </span>
+          <h3>Planejamento sucessório</h3>
+          <p>Organizar hoje o que fica para quem vem depois.</p>
+        </a>
+      </li>
+      <li class="video">
+        <a href="servicos/planejamento-universitario.html">
+          <span class="video__capa video__capa--link">
+            <img src="https://i.vimeocdn.com/video/701257637-71f3cd8899bcb889559497cf7ddc0af2c286c3bd845581f6f42f38bcd6e07ce0-d_1280?region=us" alt="" width="1280" height="720" loading="lazy" decoding="async">
+            <span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+            <span class="video__tempo">1:39</span>
+          </span>
+          <h3>Planejamento universitário</h3>
+          <p>Preparar-se para o custo do ensino superior nos Estados Unidos.</p>
+        </a>
+      </li>
+    </ul>
+
+    <!-- [REMOVIDO A PEDIDO DA MONICA] Aqui havia a atribuição dos vídeos à
+         Alliance Group. Saiu do ar por decisão dela.
+
+         Fica registrado o motivo de existir, caso alguém pergunte depois:
+         material de marketing de uma IMO costuma vir com regra própria de
+         uso, e algumas exigem que o crédito apareça. Se a Alliance exigir,
+         é só descomentar:
+
+         <p class="nota nota--esq">
+           Os vídeos são material da Alliance Group, a organização com quem
+           eu trabalho.
+         </p>
+    -->
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     CHAMADA
+     A faixa marinho do fim. Título à esquerda, texto no meio separado por
+     filete vertical, botões à direita.
+     ========================================================================== -->
+<section class="chamada" id="contato">
+  <div class="faixa chamada__in">
+
+    <div class="chamada__tit">
+      <h2>Pronto para o próximo passo?</h2>
+    </div>
+
+    <p class="chamada__txt">
+      Agende uma conversa gratuita e vamos criar um plano desenhado para a
+      sua vida, os seus objetivos e o seu futuro.
+    </p>
+
+    <div class="chamada__acoes">
+      <a class="botao botao--ouro botao--cheio" href="#" data-telefone>
+        <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+        <span data-preencher="telefone">[ TELEFONE ]</span>
+      </a>
+      <a class="botao botao--linha-clara botao--cheio" href="#" data-whatsapp>
+        <svg class="ico-zap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+        Falar no WhatsApp
+      </a>
+    </div>
+
+  </div>
+</section>
+
+</main>
+
+
+<!-- ==========================================================================
+     RODAPÉ
+     ========================================================================== -->
+<footer class="rodape">
+  <div class="faixa rodape__in">
+
+    <a class="marca marca--rodape" href="index.html" aria-label="Providentia Financial, início">
+      <img class="marca__escudo" src="escudo.png" alt="" width="500" height="500" decoding="async">
+      <span class="marca__nome"><b>Providentia</b><i>Financial</i></span>
+    </a>
+
+    <ul class="rodape__dados">
+      <li>
+        <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+        <a href="#" data-telefone><span data-preencher="telefone">[ TELEFONE ]</span></a>
+      </li>
+      <li>
+        <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+        <a href="#" data-email><span data-preencher="email">[ E-MAIL ]</span></a>
+      </li>
+      <li>
+        <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+        <!-- [CONFIRMAR] A Monica mora na Flórida. Isto precisa bater com os
+             estados em que ela e de fato licenciada, que podem ser mais de um. -->
+        <span>Atendendo a Flórida e estados vizinhos</span>
+      </li>
+    </ul>
+
+    <ul class="rodape__redes">
+      <li><a href="#" data-facebook aria-label="Facebook da Providentia Financial"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 8.6V7.1c0-.8.2-1.2 1.4-1.2h1.5V3.2c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v1.5H8.3V11h2.4v8h3v-8h2.5l.4-2.4H14z"/></svg></a></li>
+      <li><a href="#" data-instagram aria-label="Instagram da Providentia Financial"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.6" y="3.6" width="16.8" height="16.8" rx="5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="3.9" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.1" cy="6.9" r="1.3"/></svg></a></li>
+      <li><a href="#" data-linkedin aria-label="Meu perfil no LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.9 8.9H4.2V19h2.7zM5.5 4.4a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2zM19.8 19h-2.7v-4.9c0-1.2 0-2.7-1.6-2.7s-1.9 1.3-1.9 2.6V19H11V8.9h2.6v1.4h.1a2.9 2.9 0 0 1 2.6-1.4c2.8 0 3.3 1.8 3.3 4.2z"/></svg></a></li>
+    </ul>
+
+  </div>
+
+  <div class="faixa rodape__legal">
+    <p class="falta">[SUBSTITUIR] Razão social, nº da licença, estados atendidos e disclosure obrigatório</p>
+    <p class="rodape__mini">
+      Este site tem finalidade informativa e não constitui aconselhamento
+      fiscal, jurídico ou de investimento. Garantias dependem da capacidade
+      de pagamento da companhia emissora. Nem todos os produtos estão
+      disponíveis em todos os estados. Não envie dados financeiros por
+      este site.
+    </p>
+    <p class="rodape__mini">&copy; <span data-ano>2026</span> Providentia Financial.</p>
+  </div>
+</footer>
+
+<a class="zap" href="#" data-whatsapp aria-label="Falar comigo no WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>

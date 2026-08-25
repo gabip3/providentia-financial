@@ -1,0 +1,1556 @@
+/* ==========================================================================
+   PROVIDENTIA FINANCIAL — style.css
+   --------------------------------------------------------------------------
+   Construído a partir do mockup. As decisões que não são óbvias:
+
+   O DOURADO TEM TRÊS VERSÕES, E ISSO NÃO É ENFEITE
+   O dourado da marca (#9d8239) mede 3,69 sobre branco. O mínimo para texto
+   pequeno é 4,5. Então:
+     --ouro        #9d8239  o da marca. Linha, contorno de ícone, botão cheio
+     --ouro-fundo  #7c6529  escurecido, para TEXTO pequeno sobre claro
+     --ouro-claro  #c4a961  clareado, para TEXTO pequeno sobre o marinho
+   Onde o mockup mostra dourado escrito em cima do branco, aqui entra o
+   --ouro-fundo. A olho a diferença é mínima; na medição é o que separa
+   aprovado de reprovado.
+
+   O CREME
+   O mockup tem um fundo quente na seção de soluções e na abertura, mais
+   quente que o #F9F9FB da especificação da marca. Ficou #faf9f6, porque é
+   esse calor que faz a página parecer o mockup. Está registrado aqui de
+   propósito: é um desvio consciente do manual, não um descuido.
+
+   A LARGURA DOS TÍTULOS
+   Todo título de display tem text-wrap: balance, que reparte as palavras
+   entre as linhas em vez de encher a primeira e largar o resto. Isso só
+   funciona se houver espaço para ele escolher onde quebrar.
+
+   O erro que estava aqui: max-width apertado 4 a 12 pixels ABAIXO da
+   largura natural do título. "Como eu posso ajudar você" precisa de 580px
+   numa linha e estava limitado a 576. Quebrava em duas por 4 pixels, numa
+   caixa de 1163px de largura. Quebra que não compra nada.
+
+   A regra passa a ser: ou o título não tem max-width nenhum e cabe numa
+   linha, ou o max-width é folgado o bastante para o balance escolher um
+   ponto de quebra decente. Nunca encostado no limite.
+
+   AS FOTOS NÃO LEVAM COR POR CIMA
+   A foto da abertura foi feita com a Monica à direita e o lado esquerdo
+   vazio. O véu de creme desce só sobre a metade vazia e já sumiu antes de
+   chegar nela. Nenhum filtro, nenhuma cor sobre o rosto.
+
+   --------------------------------------------------------------------------
+   01. Base            05. Pilares        09. Chamada
+   02. Peças           06. Sobre          10. Rodapé
+   03. Topo e submenu  07. A frase        11. WhatsApp flutuante
+   04. Abertura        08. Soluções       12. Responsivo e movimento
+   ========================================================================== */
+
+
+/* ==========================================================================
+   01. BASE
+   ========================================================================== */
+:root {
+  --marinho:      #0a2368;
+  --marinho-esc:  #071a4e;
+  --marinho-cl:   #14357f;
+
+  --ouro:         #9d8239;
+  --ouro-fundo:   #7c6529;
+  --ouro-claro:   #c4a961;
+  /* Dourado do botão cheio. O da marca com texto branco em cima mede 3,69,
+     e o mínimo é 4,5. Este é o tom mais próximo do original que passa:
+     mede 4,63. A olho a diferença é quase nula; na medição é o que separa
+     aprovado de reprovado. */
+  --ouro-botao:   #8a7231;
+
+  --branco:       #ffffff;
+  --creme:        #faf9f6;
+  --creme-fundo:  #f3f1ea;
+
+  --cinza:        #5a6070;
+  --cinza-claro:  #aab3c7;
+
+  --filete:       rgba(10, 35, 104, .12);
+  --filete-ouro:  rgba(157, 130, 57, .35);
+  --filete-claro: rgba(196, 169, 97, .30);
+
+  /* Lora no lugar da Playfair Display. A Playfair tem contraste alto entre
+     traço grosso e fino, e é isso que faz o texto parecer fora de foco em
+     corpo pequeno. A Lora tem traço mais uniforme e x-height maior: mesma
+     elegância, sem a vista forçando. */
+  --serifa: "Lora", Georgia, "Times New Roman", serif;
+  --texto:  "Poppins", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --script: "Allura", "Segoe Script", "Brush Script MT", cursive;
+
+  --calha:  clamp(20px, 4vw, 56px);
+  --largura: 1240px;
+  --respiro: clamp(56px, 7vw, 96px);
+  --barra: 84px;
+  --curva: cubic-bezier(.2, .6, .35, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--barra) + 10px);
+}
+
+body {
+  margin: 0;
+  background: var(--branco);
+  color: var(--marinho);
+  font-family: var(--texto);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3 {
+  font-family: var(--serifa);
+  font-weight: 500;
+  margin: 0;
+  line-height: 1.14;
+  text-wrap: balance;
+}
+/* text-wrap: pretty pede ao navegador que evite terminar o parágrafo com
+   uma linha muito curta. O lead do Centro de Educação fechava com 213px de
+   texto depois de três linhas de mais de 500: a órfã clássica.
+   Onde não houver suporte, a propriedade é simplesmente ignorada. */
+p { margin: 0 0 1.1em; text-wrap: pretty; }
+p:last-child { margin-bottom: 0; }
+ul { margin: 0; padding: 0; list-style: none; }
+img { display: block; max-width: 100%; height: auto; }
+svg { display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; }
+
+::selection { background: var(--marinho); color: var(--branco); }
+
+.faixa {
+  width: min(var(--largura), calc(100% - var(--calha) * 2));
+  margin-inline: auto;
+}
+
+.pular {
+  position: absolute; left: -9999px; top: 0; z-index: 200;
+  background: var(--marinho); color: var(--branco);
+  padding: 12px 20px; font-size: 14px;
+}
+.pular:focus { left: 0; }
+
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--ouro-fundo);
+  outline-offset: 3px;
+}
+.pilares a:focus-visible, .chamada a:focus-visible, .rodape a:focus-visible {
+  outline-color: var(--ouro-claro);
+}
+
+
+/* ==========================================================================
+   02. PEÇAS
+   ========================================================================== */
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 30px;
+  border: 1.5px solid transparent;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color .25s var(--curva),
+              border-color .25s var(--curva),
+              color .25s var(--curva);
+}
+.botao--marinho { background: var(--marinho); border-color: var(--marinho); color: var(--branco); }
+.botao--marinho:hover { background: var(--marinho-esc); border-color: var(--marinho-esc); }
+
+.botao--ouro { background: var(--ouro-botao); border-color: var(--ouro-botao); color: var(--branco); }
+.botao--ouro:hover { background: var(--ouro-fundo); border-color: var(--ouro-fundo); }
+
+/* Contorno dourado sobre fundo claro. O texto usa o dourado escurecido,
+   porque o da marca não passa em corpo 13. */
+.botao--linha { background: var(--branco); border-color: var(--ouro); color: var(--ouro-fundo); }
+.botao--linha:hover { background: var(--ouro); color: var(--branco); }
+
+/* Contorno dourado sobre o marinho */
+.botao--linha-clara { background: transparent; border-color: var(--ouro-claro); color: var(--ouro-claro); }
+.botao--linha-clara:hover { background: var(--ouro-claro); color: var(--marinho); }
+
+.botao--cheio { width: 100%; }
+.botao--topo { min-height: 46px; padding: 0 24px; font-size: 12px; }
+
+.ico-zap  { width: 19px; height: 19px; fill: currentColor; flex: none; }
+.ico-mini {
+  width: 17px; height: 17px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* --------------------------------------------------------------------------
+   ÍCONES
+   Todos vêm do Lucide, numa grade de 24x24 desenhada para traço 2. Como
+   aqui eles aparecem grandes, o traço cai para 1.5: a 40px, um traço 2
+   renderiza com 3,3px na tela e o ícone fica pesado demais ao lado de uma
+   serifa fina. A 1.5 ele sai com 2,5px, que é o peso do resto da página.
+   -------------------------------------------------------------------------- */
+.ico {
+  width: 40px; height: 40px;
+  fill: none;
+  stroke: var(--ouro);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ico-seta {
+  width: 18px; height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.ico-menu {
+  width: 26px; height: 26px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+.ico-play { width: 24px; height: 24px; fill: var(--marinho); stroke: none; margin-left: 2px; }
+
+/* O que ainda falta da Monica. Marcação de revisão, não caixa decorativa. */
+.falta {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--ouro-fundo);
+  border-left: 2px solid var(--ouro);
+  padding: 3px 0 3px 12px;
+  line-height: 1.6;
+  margin: 26px 0 0;
+}
+
+.nota {
+  margin: clamp(34px, 4vw, 48px) auto 0;
+  max-width: 66ch;
+  text-align: center;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--cinza);
+}
+
+
+/* ==========================================================================
+   03. TOPO E MENU
+   ========================================================================== */
+.topo {
+  position: sticky; top: 0; z-index: 60;
+  background: rgba(255, 255, 255, .95);
+  border-bottom: 1px solid var(--filete);
+}
+@supports (backdrop-filter: blur(10px)) {
+  .topo { backdrop-filter: blur(10px); }
+}
+
+.topo__in {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  min-height: var(--barra);
+}
+
+/* --------------------------------------------------------------------------
+   O LOCKUP
+   Escudo à esquerda, PROVIDENTIA em cima e FINANCIAL embaixo, menor e em
+   dourado. O "Pf" dentro do escudo é composto em Playfair itálico, que é
+   o mais perto do monograma manuscrito da logo real.
+
+   [SUBSTITUIR] Quando o SVG oficial chegar, este bloco todo pode sair.
+   -------------------------------------------------------------------------- */
+.marca {
+  display: inline-flex;
+  align-items: center;
+  gap: 13px;
+  flex: none;
+}
+/* O ESCUDO
+   Arquivo oficial, PNG 500x500 com fundo transparente. Antes daqui existir,
+   eu recortava o escudo de dentro do JPG do logotipo inteiro usando
+   background-position em porcentagem. Isso foi embora: com o arquivo certo,
+   é só uma imagem.
+
+   Altura fixa e largura automática, porque o escudo é mais alto que largo e
+   quem manda no alinhamento do topo é a altura. */
+.marca__escudo {
+  flex: none;
+  height: 52px;
+  width: auto;
+  max-width: none;
+}
+.marca__nome { display: grid; gap: 3px; line-height: 1; }
+.marca__nome b {
+  font-family: var(--serifa);
+  font-weight: 600;
+  font-size: clamp(17px, 1.5vw, 21px);
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--marinho);
+}
+/* "FINANCIAL" fica no dourado exato da marca. Ele mede 3,51 sobre o branco,
+   abaixo do mínimo de 4,5 — mas a WCAG isenta logotipo e nome de marca
+   dessa regra (1.4.3, exceção "Logotypes"). Escurecer aqui descaracterizaria
+   a logo à toa. Quando o arquivo real entrar, isto vira imagem e a questão
+   deixa de existir. */
+.marca__nome i {
+  font-style: normal;
+  font-size: clamp(9px, .78vw, 11px);
+  font-weight: 500;
+  letter-spacing: .38em;
+  text-transform: uppercase;
+  color: var(--ouro);
+  padding-left: .2em;
+}
+
+.nav { display: none; margin-left: auto; }
+.nav > ul { display: flex; align-items: center; gap: clamp(20px, 2.6vw, 40px); }
+.nav a {
+  display: inline-block;
+  padding: 6px 0;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--marinho);
+  border-bottom: 2px solid transparent;
+  transition: color .2s var(--curva), border-color .2s var(--curva);
+}
+.nav a:hover { color: var(--ouro-fundo); border-bottom-color: var(--ouro); }
+/* O item da página atual fica sublinhado em dourado, como no mockup */
+.nav__ativo { color: var(--ouro-fundo) !important; border-bottom-color: var(--ouro) !important; }
+
+.botao--topo { display: none; flex: none; }
+
+/* --------------------------------------------------------------------------
+   O SUBMENU DE SERVIÇOS
+   Abre no hover E no :focus-within. O segundo é o que faz funcionar no
+   teclado: sem ele, quem navega por Tab nunca chegaria nos seis itens.
+
+   A ponte invisível de 10px entre o botão e a lista existe porque, sem ela,
+   o menu fecha no meio do caminho quando o ponteiro desce. É o defeito
+   clássico de submenu no hover.
+   -------------------------------------------------------------------------- */
+.tem-sub { position: relative; }
+
+.sub-abre {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--marinho);
+  border-bottom: 2px solid transparent;
+  transition: color .2s var(--curva), border-color .2s var(--curva);
+}
+.sub-abre svg {
+  width: 10px; height: 7px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform .25s var(--curva);
+}
+.tem-sub:hover .sub-abre,
+.tem-sub:focus-within .sub-abre { color: var(--ouro-fundo); border-bottom-color: var(--ouro); }
+.tem-sub:hover .sub-abre svg,
+.tem-sub:focus-within .sub-abre svg { transform: rotate(180deg); }
+
+.sub {
+  display: block;   /* nunca flex: sao seis itens empilhados */
+  position: absolute;
+  top: 100%;
+  left: -18px;
+  z-index: 70;
+  min-width: 268px;
+  margin-top: 10px;
+  padding: 8px 0;
+  background: var(--branco);
+  border: 1px solid var(--filete);
+  border-top: 2px solid var(--ouro);
+  box-shadow: 0 14px 34px rgba(10, 35, 104, .13);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-6px);
+  transition: opacity .2s var(--curva), transform .2s var(--curva), visibility .2s;
+}
+/* A ponte: cobre o vão entre o botão e a lista para o menu não fechar
+   quando o ponteiro atravessa. */
+.sub::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: -12px;
+  height: 12px;
+}
+.tem-sub:hover .sub,
+.tem-sub:focus-within .sub { opacity: 1; visibility: visible; transform: none; }
+.tem-sub.fechado .sub { opacity: 0; visibility: hidden; transform: translateY(-6px); }
+
+.sub a {
+  display: block;
+  padding: 9px 20px;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--cinza);
+  border-bottom: 0;
+  transition: color .18s var(--curva), background-color .18s var(--curva);
+}
+.sub a:hover { color: var(--marinho); background: var(--creme); border-bottom: 0; }
+
+.sub__todos { margin-top: 6px; border-top: 1px solid var(--filete); }
+.sub__todos a {
+  padding-top: 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ouro-fundo);
+}
+
+.sanduiche {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+  padding: 6px 0;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--marinho);
+}
+.sanduiche svg {
+  width: 30px; height: 30px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+}
+/* O ícone gira 90 graus quando abre. Antes eram três traços que viravam um
+   X à mão; com o ícone da biblioteca, girar é mais honesto que fingir. */
+.sanduiche .ico-menu { transition: transform .3s var(--curva); }
+.sanduiche[aria-expanded="true"] .ico-menu { transform: rotate(90deg); }
+
+/* O painel nunca sai do documento: fica invisível e inerte. É o inert que
+   tira os links do caminho do teclado e do leitor de tela sem matar a
+   transição, o que display:none faria. */
+.painel {
+  position: fixed;
+  inset: var(--barra) 0 0;
+  z-index: 55;
+  background: var(--marinho);
+  color: var(--branco);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity .3s var(--curva), visibility .3s;
+  overflow-y: auto;
+}
+.painel.aberto { visibility: visible; opacity: 1; }
+body.travado { overflow: hidden; }
+
+.painel__in { padding-block: clamp(32px, 6vw, 56px); }
+.painel__lista li { border-bottom: 1px solid rgba(255, 255, 255, .13); }
+.painel__lista li:first-child { border-top: 1px solid rgba(255, 255, 255, .13); }
+.painel__lista a {
+  display: block;
+  padding: 20px 0;
+  font-family: var(--serifa);
+  font-size: clamp(26px, 6vw, 36px);
+  color: var(--branco);
+  transition: padding-left .25s var(--curva), color .25s var(--curva);
+}
+.painel__lista a:hover { padding-left: 14px; color: var(--ouro-claro); }
+/* No celular não há hover, então os seis serviços ficam sempre à vista,
+   recuados sob "Serviços". Submenu que só abre no toque some para quem
+   não descobre que ele existe. */
+.painel__sub a {
+  padding: 13px 0 13px 22px;
+  font-family: var(--texto);
+  font-size: 15px;
+  color: var(--cinza-claro);
+}
+.painel__sub a:hover { padding-left: 30px; }
+
+.painel__pe { display: grid; gap: 14px; margin-top: 36px; max-width: 340px; }
+.painel .botao--linha { background: transparent; border-color: var(--ouro-claro); color: var(--ouro-claro); }
+.painel .botao--linha:hover { background: var(--ouro-claro); color: var(--marinho); }
+
+
+/* ==========================================================================
+   04. ABERTURA
+   No celular a foto vai para cima do texto e ocupa a largura toda.
+   No desktop ela sai da faixa e encosta na borda direita da tela.
+   ========================================================================== */
+.abertura {
+  position: relative;
+  background: linear-gradient(180deg, var(--creme) 0%, var(--branco) 100%);
+  overflow: hidden;
+}
+
+.abertura__foto { position: relative; }
+.abertura__foto img {
+  width: 100%;
+  height: clamp(280px, 52vw, 400px);
+  object-fit: cover;
+  /* No celular a foto vira faixa. O recorte puxa para a direita porque é
+     onde ela está; centralizado, sobraria só a estante desfocada. */
+  object-position: 72% center;
+}
+
+.abertura__in { position: relative; z-index: 2; }
+.abertura__txt { padding-block: clamp(38px, 6vw, 60px) clamp(48px, 7vw, 76px); }
+
+/* A frase tem 43 caracteres e precisa de cerca de 1180px numa linha só com
+   corpo 56. Na coluna de 580px isso virava três linhas de 514, 275 e 347:
+   uma cheia e duas sobras.
+
+   Com corpo 50 ela mede cerca de 1050, o que cabe em duas linhas de ~525
+   dentro da mesma coluna. Manchete em duas linhas parelhas vale mais que
+   seis pixels de corpo.
+
+   Sem max-width: quem limita é a própria coluna, e um teto em cima disso
+   só criaria a mesma quebra à toa que havia nos outros títulos. */
+.abertura h1 {
+  font-size: clamp(34px, 4.6vw, 50px);
+  line-height: 1.1;
+  margin: 0 0 22px;
+}
+
+.abertura__sub {
+  font-size: clamp(15.5px, 1.25vw, 17px);
+  line-height: 1.75;
+  color: var(--cinza);
+  max-width: 46ch;
+  margin: 0 0 34px;
+}
+
+.acoes { display: flex; flex-wrap: wrap; gap: 14px; }
+
+
+/* ==========================================================================
+   05. PILARES
+   ========================================================================== */
+.pilares {
+  background: var(--marinho);
+  color: var(--branco);
+  padding-block: clamp(38px, 5vw, 54px);
+}
+
+.pilares__lista {
+  display: grid;
+  gap: clamp(28px, 3.4vw, 40px);
+}
+
+.pilar h3 {
+  font-family: var(--texto);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .13em;
+  text-transform: uppercase;
+  color: var(--branco);
+  margin: 16px 0 8px;
+}
+.pilar p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--cinza-claro);
+  max-width: 30ch;
+}
+.pilares .ico { stroke: var(--ouro-claro); }
+
+
+/* ==========================================================================
+   06. SOBRE
+   ========================================================================== */
+.sobre { padding-block: var(--respiro); }
+
+.sobre__in {
+  display: grid;
+  gap: clamp(32px, 4.5vw, 64px);
+  align-items: center;
+}
+
+.sobre__foto img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 18%;
+  background: var(--creme-fundo);
+}
+
+/* Sem max-width: quem limita já é a coluna do texto, de 603px. Com o teto
+   de 17ch em cima disso, sobravam três linhas curtas e desiguais. */
+.sobre h2 {
+  font-size: clamp(28px, 3.4vw, 40px);
+  margin-bottom: 26px;
+}
+.sobre__txt p {
+  font-size: 15.5px;
+  line-height: 1.8;
+  color: var(--cinza);
+  max-width: 52ch;
+}
+
+/* A assinatura manuscrita. É decorativa e está marcada aria-hidden no HTML,
+   porque o nome dela já foi lido no olho da seção. */
+/* A assinatura
+   Allura no lugar da Pinyon Script: a Pinyon é caligrafia de convite de
+   casamento, muito regular para parecer punho de alguém. A Allura tem
+   inclinação e ligadura de escrita corrida, e por isso lê como assinatura.
+
+   O tamanho é grande de propósito. Assinatura pequena vira rodapé; grande,
+   ela fecha o texto como fecharia uma carta. */
+/* Seletor com o pai junto, e não .assinatura sozinho: ".sobre__txt p" tem
+   especificidade (0,2,1) e vencia (0,1,0), então a assinatura saía com os
+   15,5px do corpo do texto em vez do tamanho daqui. */
+.sobre__txt p.assinatura {
+  font-family: var(--script);
+  font-size: clamp(34px, 3.2vw, 44px);
+  line-height: 1;
+  color: var(--marinho);
+  max-width: none;
+  margin: 26px 0 0;
+}
+
+
+/* ==========================================================================
+   A FRASE QUE ABRE COM A ROLAGEM
+   --------------------------------------------------------------------------
+   A seção é transparente; quem carrega a cor é o painel de dentro. Ele entra
+   estreito e vai abrindo, com o canto endireitando no caminho.
+
+   O CONTRASTE SOBRE O DOURADO
+   Marinho escuro sobre o dourado da marca mede 4,27 e o branco mede 3,69.
+   Os dois ficam abaixo de 4,5, que é o mínimo para texto pequeno. Por isso
+   a frase tem piso de 26px: acima de 24px o critério que vale é 3:1, e aí
+   os dois passam com folga. Não reduza esse clamp.
+
+   Sem JavaScript, ou com prefers-reduced-motion, o painel já nasce aberto.
+   ========================================================================== */
+.frase { padding-block: clamp(40px, 5vw, 64px); }
+
+.frase__painel {
+  margin-inline: auto;
+  width: 95%;
+  padding: clamp(48px, 7vw, 88px) 0;
+  background: linear-gradient(150deg, var(--ouro) 0%, #8d7433 100%);
+  border-radius: 22px;
+  overflow: hidden;
+  will-change: width, border-radius;
+}
+
+.frase p {
+  margin: 0;
+  font-family: var(--serifa);
+  font-size: clamp(26px, 3.4vw, 44px);
+  line-height: 1.16;
+  color: var(--marinho-esc);
+  max-width: 22ch;
+  text-wrap: balance;
+}
+/* A segunda metade da frase muda de cor no meio. É esse corte que faz a
+   frase "abrir": a mesma sentença em duas tintas. */
+.frase em {
+  font-style: normal;
+  color: var(--branco);
+}
+
+
+/* ==========================================================================
+   BENEFÍCIOS EM VIDA
+   --------------------------------------------------------------------------
+   As quatro condições ficam numa grade de filete, e não em quatro cartões.
+   A página já tem seis cartões logo abaixo; repetir o mesmo objeto aqui
+   faria a página inteira virar fileira de caixinha.
+
+   O filete é borda de verdade, e não gap com fundo colorido: com fundo, a
+   cor da régua fica POR BAIXO do texto e escurece o que estiver em cima.
+   ========================================================================== */
+.beneficios { padding-block: var(--respiro); }
+
+.beneficios h2 {
+  font-size: clamp(28px, 3.6vw, 46px);
+  max-width: 34ch;
+  margin-bottom: clamp(18px, 2.2vw, 26px);
+}
+
+.beneficios__lead {
+  font-size: clamp(15.5px, 1.3vw, 18px);
+  line-height: 1.75;
+  color: var(--cinza);
+  max-width: 56ch;
+  margin: 0 0 clamp(32px, 4vw, 50px);
+}
+.beneficios__lead em { font-style: normal; color: var(--marinho); font-weight: 500; }
+
+.condicoes {
+  display: grid;
+  border-top: 1px solid var(--filete);
+  border-left: 1px solid var(--filete);
+}
+.condicoes li {
+  padding: clamp(20px, 2.4vw, 30px);
+  border-right: 1px solid var(--filete);
+  border-bottom: 1px solid var(--filete);
+}
+.condicoes h3 {
+  font-family: var(--serifa);
+  font-size: clamp(20px, 1.9vw, 27px);
+  margin: 0 0 8px;
+}
+.condicoes p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--cinza);
+  max-width: 36ch;
+}
+
+.nota--esq { margin-inline: 0; text-align: left; max-width: 62ch; }
+
+
+/* ==========================================================================
+   08. SOLUÇÕES
+   ========================================================================== */
+.solucoes {
+  background: var(--creme);
+  border-top: 1px solid var(--filete);
+  padding-block: var(--respiro);
+}
+
+.titulo-centro { text-align: center; margin-bottom: clamp(36px, 4.5vw, 56px); }
+/* Sem max-width: 25 caracteres cabem numa linha com folga. */
+.titulo-centro h2 { font-size: clamp(30px, 3.8vw, 46px); margin-inline: auto; }
+
+.cartoes {
+  display: grid;
+  gap: clamp(16px, 1.8vw, 22px);
+}
+
+/* O filete dourado embaixo é o único traço de cor do cartão. Sem sombra:
+   sombra em seis cartões seguidos é o que faz a fileira parecer template. */
+.cartao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  padding: clamp(26px, 2.6vw, 34px) clamp(16px, 1.6vw, 22px);
+  background: var(--branco);
+  border: 1px solid var(--filete);
+  border-bottom: 3px solid var(--ouro);
+  transition: transform .25s var(--curva), border-color .25s var(--curva);
+}
+.cartao:hover { transform: translateY(-4px); }
+
+.cartao h3 {
+  font-family: var(--texto);
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--marinho);
+  margin: 18px 0 10px;
+}
+.cartao p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--cinza);
+}
+
+
+/* ==========================================================================
+   CENTRO DE EDUCAÇÃO
+   --------------------------------------------------------------------------
+   A capa do vídeo é um <button>, e não uma <div> com onclick: assim ela já
+   nasce alcançável pelo teclado, anunciável pelo leitor de tela e com o
+   Enter funcionando, sem eu escrever nada disso.
+
+   O quadro guarda 16:9 antes e depois de o vídeo entrar, então a página
+   não pula quando alguém clica.
+   ========================================================================== */
+.educacao {
+  background: var(--creme);
+  border-top: 1px solid var(--filete);
+  padding-block: var(--respiro);
+}
+
+/* Sem max-width: cabe numa linha e não tem por que quebrar. */
+.educacao h2 { font-size: clamp(28px, 3.6vw, 46px); margin-bottom: 16px; }
+
+.educacao__lead {
+  font-size: clamp(15.5px, 1.3vw, 18px);
+  line-height: 1.75;
+  color: var(--cinza);
+  max-width: 52ch;
+  margin: 0 0 clamp(34px, 4vw, 52px);
+}
+
+.educacao__grupo {
+  font-family: var(--texto);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ouro-fundo);
+  padding-bottom: 12px;
+  margin: clamp(34px, 4vw, 50px) 0 22px;
+  border-bottom: 1px solid var(--filete);
+}
+.educacao__grupo:first-of-type { margin-top: 0; }
+
+.videos { display: grid; gap: clamp(18px, 2.2vw, 28px); }
+
+.video h3 {
+  font-family: var(--texto);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--marinho);
+  margin: 14px 0 7px;
+}
+.video p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--cinza);
+}
+
+.video__capa {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 0;
+  cursor: pointer;
+  background: var(--marinho);
+  border: 1px solid var(--filete);
+  overflow: hidden;
+  transition: background-color .25s var(--curva);
+}
+.video__capa:hover { background: var(--marinho-esc); }
+
+/* Com poster: a imagem cobre o quadro e o play fica por cima */
+/* A capa vem do CDN do Vimeo. É imagem, e não o player: enquanto ninguém
+   clicar, o Vimeo não carrega script nem escreve cookie. */
+.video__capa img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform .4s var(--curva);
+}
+.video:hover .video__capa img { transform: scale(1.03); }
+
+/* Quando o card inteiro é link, a "capa" é um <span> e não um <button> */
+.video__capa--link {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--marinho);
+  border: 1px solid var(--filete);
+  overflow: hidden;
+}
+
+/* A duração dita se vale a pena começar agora. É a informação que mais
+   falta num card de vídeo. */
+.video__tempo {
+  position: absolute;
+  right: 8px; bottom: 8px;
+  padding: 3px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--branco);
+  background: rgba(7, 26, 78, .88);
+}
+
+.video > a { display: block; }
+.video > a h3 { transition: color .2s var(--curva); }
+.video > a:hover h3 { color: var(--ouro-fundo); }
+
+.video__play {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .94);
+  transition: transform .25s var(--curva);
+}
+.video__capa:hover .video__play { transform: scale(1.08); }
+.video__play svg { width: 26px; height: 26px; fill: var(--marinho); margin-left: 3px; }
+
+/* Enquanto não houver link, o card diz que está pendente. Placeholder que
+   parece pronto é o jeito mais fácil de publicar um site com buraco. */
+.video__vazio {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 7px 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--marinho);
+  background: var(--ouro-claro);
+}
+.video--pronto .video__vazio { display: none; }
+
+.video__capa iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+
+/* ==========================================================================
+   09. CHAMADA
+   ========================================================================== */
+.chamada {
+  background: var(--marinho);
+  color: var(--branco);
+  padding-block: clamp(48px, 6vw, 72px);
+}
+
+.chamada__in {
+  display: grid;
+  gap: clamp(28px, 3.4vw, 44px);
+  align-items: center;
+}
+
+.chamada h2 {
+  font-size: clamp(30px, 3.6vw, 44px);
+  color: var(--branco);
+  max-width: 18ch;
+}
+
+.chamada__txt {
+  margin: 0;
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--cinza-claro);
+  max-width: 40ch;
+}
+
+.chamada__acoes { display: grid; gap: 14px; max-width: 340px; }
+
+
+/* ==========================================================================
+   09. RODAPÉ
+   ========================================================================== */
+.rodape {
+  background: var(--branco);
+  border-top: 1px solid var(--filete);
+  padding-block: clamp(34px, 4vw, 48px) clamp(22px, 2.6vw, 30px);
+}
+
+.rodape__in {
+  display: grid;
+  gap: clamp(24px, 3vw, 40px);
+  align-items: center;
+}
+
+.rodape__dados { display: grid; gap: 12px; }
+.rodape__dados li {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 13.5px;
+  color: var(--cinza);
+}
+.rodape__dados svg { color: var(--ouro-fundo); }
+.rodape__dados a { color: var(--cinza); transition: color .2s var(--curva); }
+.rodape__dados a:hover { color: var(--marinho); }
+.rodape__dados [aria-disabled="true"] { pointer-events: none; }
+
+.rodape__redes { display: flex; gap: 12px; }
+.rodape__redes a {
+  display: grid;
+  place-items: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--marinho);
+  color: var(--branco);
+  transition: background-color .25s var(--curva), transform .25s var(--curva);
+}
+.rodape__redes a:hover { background: var(--ouro); transform: translateY(-2px); }
+.rodape__redes svg { width: 19px; height: 19px; fill: currentColor; }
+.rodape__redes [aria-disabled="true"] { opacity: .35; pointer-events: none; }
+
+.rodape__legal {
+  margin-top: clamp(26px, 3vw, 36px);
+  padding-top: clamp(18px, 2.2vw, 24px);
+  border-top: 1px solid var(--filete);
+}
+.rodape__legal .falta { margin-top: 0; margin-bottom: 16px; }
+.rodape__mini {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--cinza);
+  max-width: 92ch;
+  margin: 0 0 8px;
+}
+
+
+/* ==========================================================================
+   10. WHATSAPP FLUTUANTE
+   O verde oficial do WhatsApp com o glifo branco por cima mede 2,15, que
+   reprovaria como texto. Aqui ele é ícone dentro de um botão que já tem
+   aria-label, então o critério que vale é o 1.4.11 (3:1 do componente
+   contra o fundo da página), e o verde contra o branco cumpre.
+   ========================================================================== */
+/* O BOTÃO FLUTUANTE DO WHATSAPP
+   --------------------------------------------------------------------------
+   Tentativa anterior: tirei visibility da transição E do estado escondido,
+   deixando só opacity: 0 com pointer-events: none. Estava errado. Com
+   visibility: visible o elemento continua PINTADO, mesmo transparente:
+   segue na ordem do Tab, segue sendo anunciado pelo leitor de tela, e
+   segue como camada fixa que o compositor repinta a cada quadro. Numa
+   página com doze ícones animados, é ela que pisca.
+
+   O jeito certo é transicionar visibility com duração ZERO e um atraso:
+
+     escondido  -> transition: visibility 0s .3s   (só some DEPOIS do fade)
+     aparecendo -> transition: visibility 0s 0s    (aparece na hora)
+
+   Assim o fade de saída acontece inteiro antes de o elemento sumir, o de
+   entrada começa com ele já presente, e em nenhum momento existe estado
+   intermediário para piscar. */
+.zap {
+  position: fixed;
+  right: clamp(16px, 3vw, 28px);
+  bottom: clamp(16px, 3vw, 28px);
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  width: 54px; height: 54px;
+  border-radius: 50%;
+  background: #1faf54;
+  color: var(--branco);
+  box-shadow: 0 6px 20px rgba(10, 35, 104, .26);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity .3s var(--curva),
+              transform .3s var(--curva),
+              background-color .2s,
+              visibility 0s .3s;
+}
+.zap.aparece {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition: opacity .3s var(--curva),
+              transform .3s var(--curva),
+              background-color .2s,
+              visibility 0s 0s;
+}
+.zap:hover { background: #178f44; }
+.zap svg { width: 28px; height: 28px; fill: currentColor; }
+
+
+/* ==========================================================================
+   11. RESPONSIVO
+   ========================================================================== */
+
+/* Dois pilares e dois cartões por linha */
+@media (min-width: 620px) {
+  .condicoes { grid-template-columns: 1fr 1fr; }
+  .videos { grid-template-columns: 1fr 1fr; }
+  .pilares__lista { grid-template-columns: 1fr 1fr; }
+  .cartoes { grid-template-columns: 1fr 1fr; }
+  .chamada__acoes { grid-template-columns: 1fr 1fr; max-width: none; }
+}
+
+/* O ponto de virada do menu: nav aberta em cima, sanduíche embaixo.
+   Um dos dois sempre existe, nunca os dois ao mesmo tempo. */
+@media (min-width: 900px) {
+  .nav { display: block; }
+  .botao--topo { display: inline-flex; }
+  .sanduiche { display: none; }
+  .painel { display: none; }
+
+  .nav { margin-left: auto; margin-right: clamp(20px, 2.6vw, 36px); }
+
+  /* A foto ocupa a seção inteira, porque ela já foi feita assim: a Monica
+     à direita e o lado esquerdo vazio. O véu de creme desce sobre a metade
+     vazia e some antes de chegar nela. Nenhuma cor por cima do rosto. */
+  .abertura { min-height: clamp(520px, 64vh, 660px); display: grid; align-items: center; }
+  .abertura__in { grid-area: 1 / 1; z-index: 2; }
+  .abertura__foto { grid-area: 1 / 1; width: 100%; height: 100%; }
+  .abertura__foto img {
+    width: 100%; height: 100%;
+    object-position: center 30%;
+  }
+  /* O véu tem de terminar DEPOIS da coluna de texto, e não em cima dela.
+     A coluna vai até 49,9% da tela e a linha mais longa do título até 49%.
+     Com o véu opaco só até 30% e desaparecendo aos 58%, o fim do título
+     caía na parte transparente, e aí o contraste passava a depender do que
+     a fotografia tem atrás naquele ponto. Isso não se controla.
+
+     Agora ele é sólido até 52% (depois de todo o texto) e some aos 70%,
+     bem antes de encostar nela. */
+  .abertura__foto::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+      var(--creme) 0%,
+      var(--creme) 52%,
+      rgba(250, 249, 246, .82) 60%,
+      rgba(250, 249, 246, 0) 70%);
+    pointer-events: none;
+  }
+  .abertura__txt {
+    width: min(50%, 580px);
+    padding-block: clamp(56px, 7vw, 88px);
+  }
+
+  /* Os pilares ganham o filete vertical entre eles */
+  .pilares__lista { grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .pilar { padding-inline: clamp(20px, 2.4vw, 32px); }
+  .pilar:not(:first-child) { border-left: 1px solid rgba(196, 169, 97, .28); }
+  .pilar:first-child { padding-left: 0; }
+  .pilar:last-child { padding-right: 0; }
+
+  .sobre__in { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); }
+
+  .cartoes { grid-template-columns: repeat(6, 1fr); }
+
+  .videos { grid-template-columns: repeat(4, 1fr); }
+  .videos--tres { grid-template-columns: repeat(3, 1fr); }
+  .videos--quatro { grid-template-columns: repeat(4, 1fr); }
+
+  /* Chamada em três colunas, com filete vertical entre título e texto */
+  .chamada__in { grid-template-columns: minmax(0, 5fr) minmax(0, 5fr) minmax(0, 5fr); }
+  .chamada__txt {
+    border-left: 1px solid rgba(196, 169, 97, .3);
+    padding-left: clamp(26px, 3vw, 40px);
+  }
+  .chamada__acoes { grid-template-columns: 1fr; max-width: 320px; justify-self: end; }
+
+  .rodape__in { grid-template-columns: auto 1fr auto; gap: clamp(30px, 4vw, 60px); }
+  .rodape__dados { grid-auto-flow: column; grid-template-columns: none; justify-content: start; gap: clamp(20px, 2.6vw, 40px); }
+}
+
+/* Abaixo de 620px o botão do topo e as ações da abertura ocupam a linha */
+@media (max-width: 519px) {
+  .acoes { display: grid; }
+  .acoes .botao { width: 100%; }
+}
+
+/* No toque, alvo mínimo de 44px. Os links de telefone e e-mail do rodapé
+   são texto corrido e ficavam com 23px de altura, o que é errar o dedo. */
+@media (hover: none) {
+  .rodape__dados a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+  .rodape__redes a { width: 44px; height: 44px; }
+}
+
+
+/* ==========================================================================
+   12. MOVIMENTO
+   Quase nada se move. O que se move, se move pouco, e some inteiro para
+   quem pediu menos movimento no sistema.
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+  }
+  .cartao:hover { transform: none; }
+  .cartao .ico, .linha .ico { animation: none; transform: none; }
+  .zap { transform: none; }
+}
+
+
+/* ==========================================================================
+   O VÍDEO EM DESTAQUE
+   ========================================================================== */
+.destaque {
+  background: var(--marinho);
+  color: var(--branco);
+  padding-block: clamp(48px, 6vw, 80px);
+}
+.destaque__in { display: grid; gap: clamp(28px, 3.6vw, 48px); align-items: center; }
+
+.destaque__olho {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ouro-claro);
+  margin: 0 0 12px;
+}
+.destaque h2 {
+  font-size: clamp(28px, 3.4vw, 42px);
+  color: var(--branco);
+  margin-bottom: 18px;
+}
+.destaque__txt > p {
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--cinza-claro);
+  max-width: 52ch;
+  margin-bottom: 26px;
+}
+
+
+/* ==========================================================================
+   O CARTÃO VIROU LINK
+   A área clicável é o <a> inteiro, e não só o título: cartão em que só o
+   título clica é o erro de usabilidade mais comum desse padrão.
+   ========================================================================== */
+.cartao { padding: 0; }
+.cartao > a {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  height: 100%;
+  padding: clamp(24px, 2.4vw, 30px);
+}
+.cartao .ico { width: 34px; height: 34px; margin-bottom: 16px; }
+
+.cartao__en {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ouro-fundo);
+  margin-bottom: 12px;
+}
+.cartao h3 {
+  font-family: var(--serifa);
+  font-size: clamp(19px, 1.7vw, 23px);
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1.16;
+  margin: 0 0 10px;
+}
+.cartao p { margin: 0 0 18px; text-align: left; }
+.cartao__seta {
+  margin-top: auto;
+  color: var(--ouro-fundo);
+  /* Um pouco mais devagar que os 250ms de antes: o percurso triplicou, e no
+     mesmo tempo o movimento ficaria brusco em vez de decidido. */
+  transition: transform .32s var(--curva);
+}
+.cartao > a:hover .cartao__seta,
+.cartao > a:focus-visible .cartao__seta { transform: translateX(16px); }
+
+
+/* ==========================================================================
+   AS PÁGINAS DE SERVIÇO E A DE DEPOIMENTOS
+   ========================================================================== */
+.servico, .depo { padding-block: clamp(34px, 4vw, 52px) var(--respiro); }
+
+.migalha {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  font-size: 12px;
+  color: var(--cinza);
+  margin: 0 0 clamp(26px, 3vw, 38px);
+}
+.migalha a { color: var(--cinza); border-bottom: 1px solid var(--filete); }
+.migalha a:hover { color: var(--marinho); border-bottom-color: var(--marinho); }
+/* A barra separadora é decorativa, mas continua sendo texto na tela. No
+   --cinza-claro ela media 2,1 sobre o branco. Cor sólida, e não opacidade:
+   opacidade sobre branco clareia a cor e piora a medida em vez de manter. */
+.migalha span[aria-hidden] { color: var(--cinza); }
+.migalha [aria-current] { color: var(--marinho); }
+
+.servico__en {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ouro-fundo);
+  margin: 0 0 14px;
+}
+.servico h1, .depo h1 {
+  font-size: clamp(30px, 4.2vw, 52px);
+  max-width: 20ch;
+  margin-bottom: clamp(28px, 3.4vw, 44px);
+}
+.depo__lead {
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.7;
+  color: var(--cinza);
+  max-width: 54ch;
+  margin: 0 0 20px;
+}
+/* De quem são os depoimentos. Fica em destaque de propósito: dizer que são
+   clientes da Alliance, e não da Monica, é obrigação e não rodapé. */
+.depo__origem {
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--cinza);
+  border-left: 2px solid var(--ouro);
+  padding-left: 14px;
+  max-width: 56ch;
+  margin: 0 0 clamp(32px, 4vw, 46px);
+}
+
+.servico__texto { max-width: 62ch; margin-top: clamp(30px, 3.6vw, 44px); }
+.servico__texto p { font-size: 16px; line-height: 1.8; color: var(--cinza); }
+
+.servico__sub {
+  font-family: var(--texto);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ouro-fundo);
+  padding-bottom: 12px;
+  margin: clamp(38px, 4.5vw, 56px) 0 0;
+  border-bottom: 1px solid var(--filete);
+}
+.servico__sub + .condicoes { border-top: 0; }
+
+.servico__acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: clamp(34px, 4vw, 50px);
+}
+
+.video--largo { max-width: 900px; margin-block: clamp(8px, 1.4vw, 18px) 0; }
+
+/* Anterior e próximo, no pé da página de serviço */
+.vizinhos {
+  display: grid;
+  gap: 14px;
+  padding-top: clamp(26px, 3vw, 38px);
+  border-top: 1px solid var(--filete);
+}
+.vizinho {
+  display: grid;
+  gap: 5px;
+  padding: 18px 20px;
+  border: 1px solid var(--filete);
+  transition: border-color .25s var(--curva), background-color .25s var(--curva);
+}
+.vizinho:hover { border-color: var(--ouro); background: var(--creme); }
+.vizinho span {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--ouro-fundo);
+}
+.vizinho b { font-family: var(--serifa); font-weight: 500; font-size: 19px; }
+.vizinho--depois { text-align: right; }
+
+@media (min-width: 620px) {
+  .vizinhos { grid-template-columns: 1fr 1fr; gap: 18px; }
+}
+@media (min-width: 900px) {
+  .destaque__in { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+  .cartoes { grid-template-columns: repeat(4, 1fr); }
+}
+
+
+/* ==========================================================================
+   A MANHÃ
+   --------------------------------------------------------------------------
+   A hora é o maior número da página inteira, e é o único lugar onde um
+   número aparece grande. Ele funciona como imagem, e não como dado.
+   ========================================================================== */
+.manha {
+  background: var(--creme);
+  border-top: 1px solid var(--filete);
+  padding-block: var(--respiro);
+}
+
+.manha__hora {
+  font-family: var(--serifa);
+  font-size: clamp(56px, 9vw, 104px);
+  line-height: .9;
+  color: var(--ouro);
+  margin: 0 0 14px;
+}
+.manha h2 { font-size: clamp(26px, 3.4vw, 42px); max-width: 20ch; margin-bottom: 18px; }
+.manha__lead {
+  font-size: clamp(15.5px, 1.3vw, 18px);
+  line-height: 1.75;
+  color: var(--cinza);
+  max-width: 54ch;
+  margin: 0 0 clamp(36px, 4.5vw, 56px);
+}
+
+.linha { display: grid; gap: clamp(22px, 2.6vw, 30px); counter-reset: none; }
+.linha li {
+  display: grid;
+  gap: 4px;
+  padding-top: 22px;
+  border-top: 1px solid var(--filete);
+}
+.linha b {
+  font-family: var(--serifa);
+  font-weight: 500;
+  font-size: clamp(21px, 2vw, 27px);
+  margin-top: 12px;
+}
+.linha span { font-size: 14px; line-height: 1.55; color: var(--cinza); }
+
+/* O quarto momento é a virada. O filete dele é dourado e mais grosso: é a
+   única diferença, e é suficiente para o olho entender que ali muda. */
+.linha--virada { border-top-color: var(--ouro) !important; border-top-width: 2px !important; }
+.linha--virada b { color: var(--ouro-fundo); }
+
+
+/* ==========================================================================
+   SE A RENDA PARASSE
+   ========================================================================== */
+.renda { padding-block: var(--respiro); }
+.renda h2 { font-size: clamp(28px, 3.6vw, 46px); max-width: 26ch; margin-bottom: 16px; }
+.renda__lead {
+  font-size: clamp(15.5px, 1.3vw, 18px);
+  color: var(--cinza);
+  max-width: 50ch;
+  margin: 0 0 clamp(34px, 4vw, 50px);
+}
+
+.renda__lista {
+  display: grid;
+  border-top: 1px solid var(--filete);
+  border-left: 1px solid var(--filete);
+}
+.renda__lista li {
+  padding: clamp(22px, 2.6vw, 32px);
+  border-right: 1px solid var(--filete);
+  border-bottom: 1px solid var(--filete);
+}
+.renda__lista h3 {
+  font-family: var(--serifa);
+  font-size: clamp(21px, 2vw, 28px);
+  margin: 0 0 10px;
+}
+/* A pergunta fica em dourado dentro do próprio título: é ela que carrega
+   a seção, e separar em duas linhas quebrava o ritmo da leitura. */
+.renda__lista em { font-style: italic; color: var(--ouro-fundo); }
+.renda__lista p { margin: 0; font-size: 14px; line-height: 1.65; color: var(--cinza); max-width: 38ch; }
+
+@media (min-width: 620px) {
+  .linha { grid-template-columns: 1fr 1fr; }
+  .renda__lista { grid-template-columns: 1fr 1fr; }
+}
+@media (min-width: 900px) {
+  .linha { grid-template-columns: repeat(4, 1fr); }
+}
+
+
+/* O escudo do rodapé tem mais espaço que o do topo */
+.marca--rodape .marca__escudo { height: 60px; }
+
+
+/* ==========================================================================
+   OS ÍCONES DOS CARTÕES FLUTUAM
+   --------------------------------------------------------------------------
+   Seis pixels de sobe e desce, num ciclo de seis segundos. É pouco de
+   propósito: o objetivo é a página não parecer congelada, e não chamar
+   atenção para o ícone.
+
+   POR QUE CADA UM TEM UM TEMPO DIFERENTE
+   Com a mesma duração para os oito, eles sobem e descem em bloco, e o que
+   era sutil vira uma onda mecânica atravessando a grade. Durações primas
+   entre si (6s, 6.4s, 6.9s...) nunca voltam a coincidir depois do começo.
+
+   POR QUE OS ATRASOS SÃO NEGATIVOS
+   Atraso negativo faz a animação começar já no meio do ciclo. Sem isso, os
+   oito partiriam juntos do zero e o primeiro segundo da página seria
+   justamente o momento em que eles estão mais sincronizados.
+
+   Quem pediu menos movimento no sistema não vê nada disso: o bloco
+   prefers-reduced-motion no fim do arquivo desliga tudo.
+   ========================================================================== */
+@keyframes flutua {
+  from, to { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+/* Sem will-change: transform já é propriedade composta, e o navegador
+   promove a camada sozinho enquanto a animação roda. Declarar will-change
+   fixo mantém doze camadas vivas o tempo todo, mesmo com a seção fora da
+   tela, e é pressão de compositor sem contrapartida. */
+.cartao .ico {
+  animation: flutua 6s ease-in-out infinite;
+}
+.cartao:nth-child(1) .ico { animation-duration: 6s;   animation-delay: -0.4s; }
+.cartao:nth-child(2) .ico { animation-duration: 6.7s; animation-delay: -2.1s; }
+.cartao:nth-child(3) .ico { animation-duration: 7.3s; animation-delay: -3.8s; }
+.cartao:nth-child(4) .ico { animation-duration: 6.4s; animation-delay: -1.2s; }
+.cartao:nth-child(5) .ico { animation-duration: 7.1s; animation-delay: -4.6s; }
+.cartao:nth-child(6) .ico { animation-duration: 6.2s; animation-delay: -2.9s; }
+.cartao:nth-child(7) .ico { animation-duration: 6.9s; animation-delay: -0.9s; }
+.cartao:nth-child(8) .ico { animation-duration: 7.6s; animation-delay: -5.3s; }
+
+/* No hover o cartão inteiro já sobe. Se o ícone continuasse flutuando por
+   cima disso, os dois movimentos brigariam: ele para e fica onde está. */
+.cartao:hover .ico { animation-play-state: paused; }
+
+
+/* ==========================================================================
+   OS ÍCONES DA MANHÃ FLUTUAM
+   --------------------------------------------------------------------------
+   Mesmo desenho dos cartões: pouco deslocamento, ciclo longo, e nenhuma
+   duração igual à outra para os quatro nunca subirem em bloco.
+
+   São só quatro e ficam lado a lado, então aqui a diferença entre eles
+   precisa ser MAIOR que nos cartões: com oito numa grade, um pouco de
+   defasagem já basta para o olho não ver padrão; com quatro em linha, o
+   olho acha o padrão fácil. Por isso as durações vão de 6,5s a 8,3s, e
+   não de 6s a 7,6s.
+   ========================================================================== */
+.linha .ico {
+  animation: flutua 7s ease-in-out infinite;
+}
+.linha li:nth-child(1) .ico { animation-duration: 6.5s; animation-delay: -1.7s; }
+.linha li:nth-child(2) .ico { animation-duration: 7.4s; animation-delay: -4.2s; }
+.linha li:nth-child(3) .ico { animation-duration: 8.3s; animation-delay: -0.6s; }
+.linha li:nth-child(4) .ico { animation-duration: 6.9s; animation-delay: -5.5s; }

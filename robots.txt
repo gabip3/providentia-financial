@@ -1,0 +1,5 @@
+# [REMOVER ANTES DE PUBLICAR DE VERDADE]
+# O site esta no ar apenas para revisao. Enquanto houver dado por confirmar
+# e o bloco juridico obrigatorio faltando, ele nao deve ser indexado.
+User-agent: *
+Disallow: /
