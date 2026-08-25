@@ -55,9 +55,13 @@ cole em **`icones.js`** com um nome novo.
 
 Bloqueiam a publicacao:
 
-- [ ] Numero da licenca, estados atendidos, razao social e o disclosure
-      obrigatorio. Aparecem marcados em amarelo no site de proposito, para
-      ninguem publicar sem ver.
+- [ ] Nome legal sob o qual ela e licenciada, estados atendidos e o
+      disclosure exigido pela companhia. Aparecem marcados no site de
+      proposito, para ninguem publicar sem ver.
+- [ ] Decidir com o compliance se o numero da licenca entra. Ele e registro
+      publico, nao e sigiloso, e alguns estados exigem em publicidade. Se a
+      Florida exige em site, confirme antes: a linha ja esta pronta e
+      comentada no rodape.
 - [ ] Confirmar o telefone. O `(404) 955-7002` veio do mockup e e DDD de
       Atlanta, mas a Monica mora na Florida.
 - [ ] Confirmar o e-mail.

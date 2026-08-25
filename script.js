@@ -9,10 +9,8 @@
 /* ==========================================================================
    CONFIG — [CONFIRMAR] dados de contato
    --------------------------------------------------------------------------
-   Telefone e e-mail abaixo vieram do MOCKUP que a Monica enviou. Eu não
-   inventei nem descobri em lugar nenhum, mas também não confirmei com ela.
-   Confirme antes de publicar: telefone errado num site de seguro é pior
-   que telefone ausente.
+   O telefone foi informado pela Monica e esta correto.
+   O e-mail ainda veio do mockup e nao foi confirmado.
 
    whatsapp    Só números, com código do país. Nos EUA começa com 1.
                Exemplo: '14049557002'
@@ -26,9 +24,10 @@
    é assim que você percebe que faltou preencher.
    ========================================================================== */
 var CONFIG = {
-  whatsapp:  '14049557002',                  // <<< CONFIRMAR
-  telefone:  '(404) 955-7002',               // <<< CONFIRMAR
-  email:     'monica@providentiafinancial.com', // <<< CONFIRMAR
+  // Telefone real, informado pela Monica.
+  whatsapp:  '14703146160',
+  telefone:  '(470) 314-6160',
+  email:     'monica@providentiafinancial.com', // <<< AINDA POR CONFIRMAR
   instagram: 'monica.providentia',
   facebook:  '',                             // <<< vazio esconde o ícone
   linkedin:  ''                              // <<< vazio esconde o ícone
