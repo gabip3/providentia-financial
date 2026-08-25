@@ -681,14 +681,28 @@ body.travado { overflow: hidden; }
   will-change: width, border-radius;
 }
 
+/* CENTRALIZADA, E COM LARGURA TRAVADA EM PIXELS
+   --------------------------------------------------------------------------
+   O max-width é em px de propósito, e não em ch nem em porcentagem. O painel
+   cresce de 74% para 95% da seção durante a rolagem; se a largura do texto
+   acompanhasse esse crescimento, ele refluiria de três linhas para duas no
+   meio do caminho, a altura do painel mudaria junto e a página pularia.
+
+   Com 800px fixos o texto nunca reflui: o painel abre em volta dele.
+
+   O corpo caiu de 44 para 34 pela mesma razão. Medido: a segunda sentença
+   pede 987px a 44 e 762px a 34. A faixa útil dentro do painel no estado
+   mais estreito é 835px. A 44 não cabia, e era isso que forçava a quebra
+   errada no meio de "esperar o pior". */
 .frase p {
-  margin: 0;
+  margin-inline: auto;
+  margin-block: 0;
+  max-width: 800px;
+  text-align: center;
   font-family: var(--serifa);
-  font-size: clamp(26px, 3.4vw, 44px);
-  line-height: 1.16;
+  font-size: clamp(24px, 2.7vw, 34px);
+  line-height: 1.3;
   color: var(--marinho-esc);
-  max-width: 22ch;
-  text-wrap: balance;
 }
 /* A segunda metade da frase muda de cor no meio. É esse corte que faz a
    frase "abrir": a mesma sentença em duas tintas. */

@@ -328,7 +328,10 @@ function montarZap() {
    e a frase aparece igual. O efeito é enfeite, nunca requisito de leitura.
    ========================================================================== */
 var ABRE = {
-  desktop: { larguraDe: 66, larguraAte: 95 },
+  /* 74 e nao 66: abaixo disso a faixa util dentro do painel fica menor que
+     os 800px do texto, e a frase quebraria no comeco da rolagem para
+     desquebrar no fim. O movimento perde seis pontos e ganha em nao pular. */
+  desktop: { larguraDe: 74, larguraAte: 95 },
   mobile:  { larguraDe: 84, larguraAte: 100 },
   raioAte: 22,
   raioTermina: 0.9,
