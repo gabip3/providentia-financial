@@ -608,11 +608,15 @@ body.travado { overflow: hidden; }
   align-items: center;
 }
 
+/* O recorte 4:5 tira 256px de uma foto 1024x1536. Em "center 18%" saem 46px
+   de cima e 210 de baixo, o que cortava o laptop no meio. Em 8% saem 20 de
+   cima e 236 de baixo: sobra o teto que não interessa, mas a mesa fecha
+   inteira embaixo dela. */
 .sobre__foto img {
   width: 100%;
   aspect-ratio: 4 / 5;
   object-fit: cover;
-  object-position: center 18%;
+  object-position: center 8%;
   background: var(--creme-fundo);
 }
 
@@ -1485,7 +1489,10 @@ body.travado { overflow: hidden; }
    SE A RENDA PARASSE
    ========================================================================== */
 .renda { padding-block: var(--respiro); }
-.renda h2 { font-size: clamp(28px, 3.6vw, 46px); max-width: 26ch; margin-bottom: 16px; }
+/* 26ch dava cerca de 600px, e "Se sua renda parasse amanhã," precisa de 620.
+   Faltando 20px, a quebra manual era ignorada e o navegador partia de novo
+   onde queria. Sem teto: quem limita é a coluna. */
+.renda h2 { font-size: clamp(28px, 3.6vw, 46px); margin-bottom: 16px; }
 .renda__lead {
   font-size: clamp(15.5px, 1.3vw, 18px);
   color: var(--cinza);
@@ -1591,3 +1598,17 @@ body.travado { overflow: hidden; }
 .linha li:nth-child(2) .ico { animation-duration: 7.4s; animation-delay: -4.2s; }
 .linha li:nth-child(3) .ico { animation-duration: 8.3s; animation-delay: -0.6s; }
 .linha li:nth-child(4) .ico { animation-duration: 6.9s; animation-delay: -5.5s; }
+
+
+/* ==========================================================================
+   QUEBRA DITA
+   --------------------------------------------------------------------------
+   Existe para as poucas frases em que a quebra automática parte o sentido.
+   Só vale acima de 760px: abaixo disso não há largura para escolher nada, e
+   forçar uma quebra ali deixaria linhas soltas de duas palavras.
+   ========================================================================== */
+.quebra { display: none; }
+
+@media (min-width: 760px) {
+  .quebra { display: inline; }
+}

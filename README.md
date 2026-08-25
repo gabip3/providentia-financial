@@ -76,8 +76,9 @@ Convem resolver:
 - [ ] `familia.png` tem 1,8 MB e e a primeira imagem que a pagina carrega.
       Exportar como JPEG qualidade 82 ou WebP derruba para algo entre 150 e
       250 KB, sem diferenca visivel. E o item que mais pesa no site hoje.
-- [ ] `hero.png` e `Monica.png` nao sao mais usados por nenhuma pagina.
-      Ficaram no repositorio caso voce queira voltar atras.
+- [ ] `hero.png`, `Monica.png`, `Monica01.jpeg` e `Monica02.jpeg` nao sao
+      mais usados por nenhuma pagina. Ficaram no repositorio caso voce
+      queira voltar atras. Somados dao cerca de 2,4 MB.
 
 ## Antes de publicar de verdade
 

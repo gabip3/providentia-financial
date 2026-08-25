@@ -312,8 +312,20 @@
 <section class="renda" id="renda">
   <div class="faixa">
 
-    <h2>Se sua renda parasse amanhã, o que continuaria?</h2>
-    <p class="renda__lead">Não é uma pergunta para assustar. É uma pergunta para organizar.</p>
+    <!-- A quebra aqui é manual, e isso é de propósito. O text-wrap: balance
+         iguala o tamanho das linhas, mas não sabe onde está o sentido: ele
+         escolhia "Se sua renda parasse / amanhã, o que continuaria?", que
+         parte "parasse amanhã" no meio, porque essa divisão dá linhas mais
+         parelhas (450 e 593) do que a divisão na vírgula (620 e 420).
+
+         Balance ganha do acaso, mas perde para a intenção. Onde a frase tem
+         um ponto de respiro claro, vírgula ou fim de sentença, a quebra é
+         marcada na mão.
+
+         O <br class="quebra"> só existe acima de 760px. Abaixo disso não há
+         largura para escolher nada, e o texto volta a fluir sozinho. -->
+    <h2>Se sua renda parasse amanhã,<br class="quebra"> o que continuaria?</h2>
+    <p class="renda__lead">Não é uma pergunta para assustar.<br class="quebra"> É uma pergunta para organizar.</p>
 
     <ul class="renda__lista">
       <li>
@@ -355,11 +367,16 @@
 <section class="sobre" id="sobre">
   <div class="faixa sobre__in">
 
-    <!-- A foto do café. É retrato (2:3), então o recorte aqui é 4:5 e não o
-         4:3 do mockup: cortar uma vertical em horizontal ia decepar a xícara
-         ou o alto da cabeça. -->
+    <!-- Retrato no escritório. Entrou no lugar da foto do café por um motivo
+         simples: aqui ela olha para a câmera, e lá olhava para a cliente.
+         Numa seção em que o texto é ela falando na primeira pessoa, olhar
+         para quem lê vale mais que a cena.
+
+         É retrato (2:3), então o recorte é 4:5 e não o 4:3 do mockup:
+         cortar uma vertical em horizontal decepava a mesa ou o alto da
+         cabeça. E são 95 KB, contra 1,8 MB da foto da abertura. -->
     <div class="sobre__foto">
-      <img src="Monica01.jpeg" alt="Monica, da Providentia Financial, conversando com uma cliente em um café." width="1024" height="1536" loading="lazy" decoding="async">
+      <img src="monica-escritorio.jpeg" alt="Monica Silva à mesa de trabalho, olhando para a câmera." width="1024" height="1536" loading="lazy" decoding="async">
     </div>
 
     <div class="sobre__txt">
