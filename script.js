@@ -9,8 +9,12 @@
 /* ==========================================================================
    CONFIG — [CONFIRMAR] dados de contato
    --------------------------------------------------------------------------
-   O telefone foi informado pela Monica e esta correto.
-   O e-mail ainda veio do mockup e nao foi confirmado.
+   Telefone informado pela Monica e conferido.
+
+   O e-mail depende da compra do dominio providentiafinancial.com. Ele ja
+   esta escrito aqui e vai funcionar assim que o dominio existir e a caixa
+   for criada. Enquanto isso, o link mailto abre normalmente no programa de
+   e-mail de quem clicar, mas a mensagem volta.
 
    whatsapp    Só números, com código do país. Nos EUA começa com 1.
                Exemplo: '14049557002'
@@ -27,7 +31,7 @@ var CONFIG = {
   // Telefone real, informado pela Monica.
   whatsapp:  '14703146160',
   telefone:  '(470) 314-6160',
-  email:     'monica@providentiafinancial.com', // <<< AINDA POR CONFIRMAR
+  email:     'monica@providentiafinancial.com', // vale quando o dominio for comprado
   instagram: 'monica.providentia',
   facebook:  '',                             // <<< vazio esconde o ícone
   linkedin:  ''                              // <<< vazio esconde o ícone

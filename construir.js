@@ -130,9 +130,22 @@ function rodape(base) {
       </li>
       <li>
         <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-        <!-- [CONFIRMAR] A Monica mora na Flórida. Isto precisa bater com os
-             estados em que ela e de fato licenciada, que podem ser mais de um. -->
-        <span>Atendendo a Flórida e estados vizinhos</span>
+        <!-- [CONFIRMAR ANTES DE PUBLICAR] A Monica informou que atende os
+             Estados Unidos inteiros. Isso e comum entre agentes: da para ser
+             licenciado em varios estados de uma vez. Mas "todos os EUA" e
+             afirmacao verificavel, e um estado em que ela NAO esteja
+             licenciada torna a frase falsa.
+
+             Peca a lista dos estados em que ela tem licenca ativa. Se for
+             mesmo todos, esta frase fica. Se faltar algum, troque por
+             "Atendendo clientes em XX estados" e ponha a lista numa pagina
+             ou no rodape.
+
+             O texto abaixo evita o problema maior de proposito: fala de
+             ONDE ela atende, e nao promete que todo produto existe em todo
+             lugar. Nem todos os produtos estao disponiveis em todos os
+             estados, e isso ja esta escrito no bloco juridico. -->
+        <span>Atendendo famílias brasileiras em todos os Estados Unidos</span>
       </li>
     </ul>
 
@@ -341,6 +354,38 @@ SERVICOS.forEach((s, i) => {
   fs.writeFileSync(path.join(saida, s.slug + '.html'), pagina(s, i));
 });
 
+/* --------------------------------------------------------------------------
+   depoimentos.html tem corpo próprio, mas cabeçalho e rodapé são os mesmos.
+   Ela era escrita inteira à mão, e divergiu: enquanto as outras nove páginas
+   já diziam "Flórida", o rodapé dela continuava em "Geórgia". Foi
+   exatamente o problema que este gerador existe para não deixar acontecer.
+
+   Agora o construir.js reescreve o cabeçalho e o rodapé dela a cada rodada.
+   O miolo, entre <main> e </main>, fica intocado: aquilo é conteúdo.
+   -------------------------------------------------------------------------- */
+function costurarDepoimentos() {
+  const arq = path.join(raiz, 'depoimentos.html');
+  if (!fs.existsSync(arq)) { return false; }
+  let t = fs.readFileSync(arq, 'utf8');
+
+  const iniCab = t.indexOf('<header class="topo"');
+  const fimCab = t.indexOf('<main id="conteudo">');
+  const iniRod = t.indexOf('<footer class="rodape">');
+  const fimRod = t.indexOf('<script src="script.js">');
+  if (iniCab < 0 || fimCab < 0 || iniRod < 0 || fimRod < 0) {
+    console.log('  aviso: depoimentos.html mudou de forma, cabecalho/rodape nao costurados');
+    return false;
+  }
+
+  t = t.slice(0, iniCab) + cabecalho('', '') + '\n\n' + t.slice(fimCab);
+  const iniRod2 = t.indexOf('<footer class="rodape">');
+  const fimRod2 = t.indexOf('<script src="script.js">');
+  t = t.slice(0, iniRod2) + rodape('') + '\n\n' + t.slice(fimRod2);
+
+  fs.writeFileSync(arq, t);
+  return true;
+}
+
 /* O menu e o rodapé das páginas da raiz saem daqui também, para não
    divergirem das páginas de serviço. */
 fs.writeFileSync(path.join(raiz, '_parciais.json'), JSON.stringify({
@@ -351,6 +396,7 @@ fs.writeFileSync(path.join(raiz, '_parciais.json'), JSON.stringify({
 }, null, 2));
 
 console.log('geradas ' + SERVICOS.length + ' paginas em servicos/');
+if (costurarDepoimentos()) { console.log('  depoimentos.html: cabecalho e rodape atualizados'); }
 SERVICOS.forEach(s => console.log('  servicos/' + s.slug + '.html   vimeo ' + s.video));
 if (SERVICOS.some(s => s.alerta)) {
   console.log('\nATENCAO:');

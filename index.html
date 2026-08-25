@@ -33,7 +33,7 @@
 <meta property="og:title" content="Providentia Financial | Proteção financeira para o que mais importa">
 <meta property="og:description" content="A Monica ajuda famílias e donos de negócio a construir segurança financeira, proteger o que já conquistaram e planejar o futuro.">
 <meta property="og:url" content="https://providentiafinancial.com/"><!-- [SUBSTITUIR] -->
-<meta property="og:image" content="https://providentiafinancial.com/Monica01.jpeg"><!-- [SUBSTITUIR] -->
+<meta property="og:image" content="https://providentiafinancial.com/familia.png"><!-- [SUBSTITUIR] dominio real, e a versao leve da imagem -->
 <meta name="twitter:card" content="summary_large_image">
 <!-- [REMOVER ANTES DE PUBLICAR DE VERDADE]
      Enquanto o site for rascunho para revisão, ele não pode aparecer no
@@ -146,17 +146,22 @@
      ========================================================================== -->
 <section class="abertura">
 
-  <!-- A foto foi feita para este enquadramento: a Monica à direita, o lado
+  <!-- A foto foi feita para este enquadramento: a família à direita, o lado
        esquerdo vazio e claro, que é exatamente onde o texto entra. Por isso
-       o véu de creme cobre só a metade vazia e nunca chega no rosto dela.
+       o véu de creme cobre só a metade vazia e nunca chega neles.
 
-       [OTIMIZAR] hero.png tem 1,6 MB, que é muito para a primeira imagem da
-       página. Exporte a MESMA imagem como JPEG qualidade 82 ou WebP: cai
-       para algo entre 150 e 250 KB, sem diferença visível. Depois é só
-       trocar o src aqui. Não dá para fazer isso daqui, não há conversor
-       de imagem nesta máquina. -->
+       [CONFIRMAR] Esta é uma foto de banco de imagens, não são clientes da
+       Monica. Isso é uso comum e legítimo, mas em nenhum lugar da página
+       pode aparecer texto sugerindo que sejam pessoas reais atendidas por
+       ela. O texto ao lado fala do leitor, não das pessoas da foto.
+
+       [OTIMIZAR] familia.png tem 1,8 MB, e é a PRIMEIRA imagem que a página
+       carrega: e ela que segura o site abrindo no celular. Exporte a MESMA
+       imagem como JPEG qualidade 82 ou WebP e ela cai para algo entre 150 e
+       250 KB, sem diferença visivel. Depois troque só o src aqui. Não dá
+       para fazer isso daqui: não há conversor de imagem nesta máquina. -->
   <div class="abertura__foto">
-    <img src="hero.png" alt="Monica, da Providentia Financial, sentada à mesa de trabalho." width="1717" height="916" fetchpriority="high" decoding="async">
+    <img src="familia.png" alt="Uma família reunida na sala de casa: pai, mãe e duas crianças, sorrindo juntos." width="1693" height="929" fetchpriority="high" decoding="async">
   </div>
 
   <div class="faixa abertura__in">
@@ -267,6 +272,29 @@
         <span>alguma coisa muda</span>
       </li>
     </ol>
+
+    <!-- ====================================================================
+         O DESFECHO
+         A Monica leu e disse que faltava um fim, e ela estava certa: a
+         linha do tempo parava em "alguma coisa muda" e acabava ali. Susto
+         sem saída, que é justamente o que o resto do site evita.
+
+         O fim vem na mesma linguagem da história. Ela é contada em horas,
+         então o desfecho é a hora seguinte: 08:29. É a única hora do bloco
+         que não está na linha do tempo, porque ela ainda não aconteceu.
+
+         [VERSÃO B - SE O COMPLIANCE APERTAR]
+         "O que vem depois, sim" fala de preparo, não promete resultado
+         nenhum e não cita cobertura. Se ainda assim pedirem para suavizar:
+
+           <b>08:29</b>
+           <span>Ninguém escolhe o que acontece às 08:28.
+           Dá para chegar nele mais preparado.</span>
+         ==================================================================== -->
+    <p class="manha__fim">
+      <b>08:29</b>
+      <span>Ninguém escolhe o que acontece às 08:28. O que vem depois, sim.</span>
+    </p>
 
   </div>
 </section>
@@ -835,9 +863,22 @@
       </li>
       <li>
         <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-        <!-- [CONFIRMAR] A Monica mora na Flórida. Isto precisa bater com os
-             estados em que ela e de fato licenciada, que podem ser mais de um. -->
-        <span>Atendendo a Flórida e estados vizinhos</span>
+        <!-- [CONFIRMAR ANTES DE PUBLICAR] A Monica informou que atende os
+             Estados Unidos inteiros. Isso e comum entre agentes: da para ser
+             licenciado em varios estados de uma vez. Mas "todos os EUA" e
+             afirmacao verificavel, e um estado em que ela NAO esteja
+             licenciada torna a frase falsa.
+
+             Peca a lista dos estados em que ela tem licenca ativa. Se for
+             mesmo todos, esta frase fica. Se faltar algum, troque por
+             "Atendendo clientes em XX estados" e ponha a lista numa pagina
+             ou no rodape.
+
+             O texto abaixo evita o problema maior de proposito: fala de
+             ONDE ela atende, e nao promete que todo produto existe em todo
+             lugar. Nem todos os produtos estao disponiveis em todos os
+             estados, e isso ja esta escrito no bloco juridico. -->
+        <span>Atendendo famílias brasileiras em todos os Estados Unidos</span>
       </li>
     </ul>
 

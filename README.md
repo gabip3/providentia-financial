@@ -64,7 +64,8 @@ Bloqueiam a publicacao:
       comentada no rodape.
 - [ ] Confirmar o telefone. O `(404) 955-7002` veio do mockup e e DDD de
       Atlanta, mas a Monica mora na Florida.
-- [ ] Confirmar o e-mail.
+- [ ] Comprar o dominio providentiafinancial.com e criar a caixa de e-mail.
+      O endereco ja esta no site e passa a funcionar sozinho.
 
 Convem resolver:
 
@@ -72,8 +73,11 @@ Convem resolver:
 - [ ] Biografia revisada por ela. O texto atual e um rascunho.
 - [ ] Lockup horizontal da logo em SVG. Hoje o nome ao lado do escudo esta
       composto em tipografia.
-- [ ] `hero.png` tem 1,6 MB. Exportar como JPEG qualidade 82 ou WebP derruba
-      para algo entre 150 e 250 KB, sem diferenca visivel.
+- [ ] `familia.png` tem 1,8 MB e e a primeira imagem que a pagina carrega.
+      Exportar como JPEG qualidade 82 ou WebP derruba para algo entre 150 e
+      250 KB, sem diferenca visivel. E o item que mais pesa no site hoje.
+- [ ] `hero.png` e `Monica.png` nao sao mais usados por nenhuma pagina.
+      Ficaram no repositorio caso voce queira voltar atras.
 
 ## Antes de publicar de verdade
 
