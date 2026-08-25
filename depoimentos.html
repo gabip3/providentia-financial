@@ -130,18 +130,6 @@
       aconteceu quando elas precisaram usar a apólice.
     </p>
 
-    <!-- ====================================================================
-         [SUBSTITUIR] O TEXTO DE CADA CARD
-         Os vídeos são material da Alliance Group. A Monica informou que
-         pode usá-los por ser afiliada, e essa autorização precisa estar
-         guardada por escrito.
-
-         O texto ao lado de cada vídeo NÃO pode dizer que são clientes da
-         Monica, porque não são: são clientes da Alliance Group. Deixe isso
-         explícito, como está escrito acima da lista. Se um dia houver
-         depoimento de cliente da própria Monica, com autorização assinada
-         da pessoa, ele entra numa lista separada com esse título.
-         ==================================================================== -->
     <!-- [REMOVIDO A PEDIDO DA MONICA] Aqui ficava a frase que dizia de quem
          são as pessoas dos vídeos. Saiu do ar por decisão dela.
 
@@ -153,37 +141,53 @@
          </p>
     -->
 
-    <ul class="videos videos--tres">
+    <!-- ====================================================================
+         Os três vídeos são material da Alliance Group, e os dois de baixo
+         mostram pessoas identificadas pelo nome. Isso é diferente de
+         imagem genérica: são histórias reais de pessoas reais, e o direito
+         de uso vem da autorização de afiliada da Monica, não de uma
+         licença de banco de imagens. Guarde essa autorização por escrito.
 
+         O texto de cada card foi tirado da descrição do próprio vídeo no
+         Vimeo, sem acrescentar nada. Não invente detalhe de diagnóstico,
+         de valor pago nem de desfecho.
+
+         PARA ACRESCENTAR MAIS UM
+         Duplique um <li class="video">, troque o data-vimeo, a capa, o
+         tempo, o título e o texto. A capa sai de
+         https://vimeo.com/api/oembed.json?url=https://vimeo.com/NUMERO
+         no campo "thumbnail_url". A grade se reorganiza sozinha.
+         ==================================================================== -->
+    <ul class="videos videos--tres">
       <li class="video">
-        <button class="video__capa" type="button" data-vimeo="520044841" aria-label="Assistir: Histórias de Benefícios em Vida">
+        <button class="video__capa" type="button" data-vimeo="520044841" aria-label="Assistir: Pessoas reais, histórias reais">
           <img src="https://i.vimeocdn.com/video/1076941238-cfe8e67248cdc38e62c8162ee0a8602671b5cc47861b18d76462d9a03771661d-d_1280?region=us" alt="" width="1280" height="720" loading="lazy" decoding="async">
           <span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
+          <span class="video__tempo">2:14</span>
         </button>
-        <h2>Histórias de Benefícios em Vida</h2>
+        <h2>Pessoas reais, histórias reais</h2>
         <p>O que são os Benefícios em Vida, contado por quem precisou usar.</p>
       </li>
 
-      <!-- [SUBSTITUIR] Duplique este bloco para cada vídeo novo.
-           Troque o data-vimeo, o título e a descrição. -->
       <li class="video">
-        <button class="video__capa" type="button" data-vimeo="" aria-label="Vídeo ainda não publicado">
+        <button class="video__capa" type="button" data-vimeo="957368852" aria-label="Assistir: Roseli de Paula">
+          <img src="https://i.vimeocdn.com/video/1871251336-6306886955333fb83c53121b757f169fc632f7c0a0d3e291038bab5805a4a80a-d_1280?region=us" alt="" width="1280" height="720" loading="lazy" decoding="async">
           <span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
-          <span class="video__vazio">[SUBSTITUIR] número do vídeo</span>
+          <span class="video__tempo">4:44</span>
         </button>
-        <h2>[SUBSTITUIR] Título</h2>
-        <p>[SUBSTITUIR] Uma ou duas frases sobre a história.</p>
+        <h2>Roseli de Paula</h2>
+        <p>A jornada de uma brasileira, da chegada aos Estados Unidos até realizar o grande sonho, passando por desafios que ela não escolheu.</p>
       </li>
 
       <li class="video">
-        <button class="video__capa" type="button" data-vimeo="" aria-label="Vídeo ainda não publicado">
+        <button class="video__capa" type="button" data-vimeo="572648707" aria-label="Assistir: Latasha McCray">
+          <img src="https://i.vimeocdn.com/video/1184231154-ea6154248ce4e5c3dc4d235301cf3545b59922a254905a4ee6db156357ab9d8e-d_1280?region=us" alt="" width="1280" height="720" loading="lazy" decoding="async">
           <span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
-          <span class="video__vazio">[SUBSTITUIR] número do vídeo</span>
+          <span class="video__tempo">5:04</span>
         </button>
-        <h2>[SUBSTITUIR] Título</h2>
-        <p>[SUBSTITUIR] Uma ou duas frases sobre a história.</p>
+        <h2>Latasha McCray</h2>
+        <p>Ela estava em ótima forma, com um bom emprego e um plano financeiro pronto para o futuro. O diagnóstico de câncer de mama virou tudo de cabeça para baixo.</p>
       </li>
-
     </ul>
 
     <div class="servico__acoes">
