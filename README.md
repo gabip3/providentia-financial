@@ -56,8 +56,12 @@ cole em **`icones.js`** com um nome novo.
 Bloqueiam a publicacao:
 
 - [ ] Nome legal sob o qual ela e licenciada, estados atendidos e o
-      disclosure exigido pela companhia. Aparecem marcados no site de
-      proposito, para ninguem publicar sem ver.
+      disclosure exigido pela companhia.
+
+      ATENCAO: os marcadores visiveis foram removidos do rodape a pedido
+      da Monica, entao esta pendencia NAO aparece mais na tela. Ela
+      continua existindo. O lugar onde o texto entra esta comentado no
+      construir.js, na funcao rodape(), com o modelo pronto.
 - [ ] Decidir com o compliance se o numero da licenca entra. Ele e registro
       publico, nao e sigiloso, e alguns estados exigem em publicidade. Se a
       Florida exige em site, confirme antes: a linha ja esta pronta e
