@@ -12,3 +12,6 @@ _parciais.json
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Config do servidor de desenvolvimento, so vale nesta maquina
+.claude/
