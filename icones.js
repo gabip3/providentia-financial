@@ -50,6 +50,7 @@ var ICONES = {
   'chevron-down': '<path d="m6 9 6 6 6-6"/>',
   'menu':         '<path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/>',
   'x':            '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+  'arrow-left':   '<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
   'arrow-right':  '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
   /* o único cheio: seta de play dentro de um círculo já cheio */
   'play':         '<path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/>'

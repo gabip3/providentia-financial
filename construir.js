@@ -25,6 +25,7 @@
 const fs = require('fs');
 const path = require('path');
 const { SERVICOS, DESTAQUE, CAPAS, VIDEO_INFO } = require('./dados.js');
+const { icone } = require('./icones.js');
 
 const raiz = __dirname;
 const saida = path.join(raiz, 'servicos');
@@ -292,8 +293,14 @@ ${s.lista.itens.map(([t, d]) => `      <li>
 
   const vizinhos = (antes || depois) ? `
 <nav class="vizinhos faixa" aria-label="Outros serviços">
-  ${antes ? `<a class="vizinho vizinho--antes" href="${antes.slug}.html"><span>Anterior</span><b>${esc(antes.nome)}</b></a>` : '<span></span>'}
-  ${depois ? `<a class="vizinho vizinho--depois" href="${depois.slug}.html"><span>Próximo</span><b>${esc(depois.nome)}</b></a>` : '<span></span>'}
+  ${antes ? `<a class="vizinho vizinho--antes" href="${antes.slug}.html">
+    ${icone('arrow-left', 'ico-seta vizinho__seta')}
+    <span class="vizinho__txt"><span>Anterior</span><b>${esc(antes.nome)}</b></span>
+  </a>` : '<span></span>'}
+  ${depois ? `<a class="vizinho vizinho--depois" href="${depois.slug}.html">
+    ${icone('arrow-right', 'ico-seta vizinho__seta')}
+    <span class="vizinho__txt"><span>Próximo</span><b>${esc(depois.nome)}</b></span>
+  </a>` : '<span></span>'}
 </nav>
 ` : '';
 
