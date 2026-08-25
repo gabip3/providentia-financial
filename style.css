@@ -864,8 +864,18 @@ body.travado { overflow: hidden; }
   font-weight: 600;
   letter-spacing: .02em;
   color: var(--marinho);
-  margin: 14px 0 7px;
 }
+
+/* O título do card é h3 no Centro de Educação e h2 na página de depoimentos:
+   o nível acompanha a hierarquia de cada página, e não o desenho. O
+   espaçamento, esse, vale para os dois.
+
+   Na página de depoimentos ele estava em zero. A regra acima só alcançava
+   h3, então o h2 caía no margin: 0 do reset e o texto encostava no título,
+   e o título na capa. */
+.video h2,
+.video h3 { margin: 16px 0 10px; }
+
 .video p {
   margin: 0;
   font-size: 13.5px;
