@@ -940,16 +940,26 @@
      que deve receber as mensagens, e cole no campo "web3forms" do CONFIG,
      no topo do script.js.
 
-     Enquanto a chave estiver vazia, o formulário aparece desativado com um
-     aviso e um botão de WhatsApp do lado. Ele não some e não finge que
-     funciona: mostra que está pendente.
+     Enquanto a chave estiver vazia esta seção inteira fica escondida, e o
+     aviso aparece só no console do navegador. Assim o site nunca mostra um
+     formulário que não envia. Assim que a chave entrar, a seção aparece
+     sozinha, sem mexer em mais nada.
 
      [SOBRE OS DADOS] O aviso embaixo do botão pede para a pessoa NÃO mandar
      número de apólice, SSN nem dado bancário. Formulário de site não é
      canal seguro para isso, e num site de seguro essa frase precisa estar
      visível, não escondida na política de privacidade.
      ========================================================================== -->
-<section class="escrever" id="escrever">
+<!-- Nasce com hidden. O script.js tira o hidden SE houver chave do
+     Web3Forms configurada. Sem chave, a seção simplesmente não existe para
+     quem visita: nada de formulário desativado com aviso, que é jeito de
+     um site parecer inacabado.
+
+     Escondida por padrão, e não por JavaScript depois de aparecer, porque
+     assim ela nunca pisca na tela antes de sumir. E quem estiver sem
+     JavaScript também não vê um formulário que não teria como enviar: o
+     envio é por fetch. -->
+<section class="escrever" id="escrever" hidden>
   <div class="faixa escrever__in">
 
     <div class="escrever__txt">

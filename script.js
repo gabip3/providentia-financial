@@ -42,7 +42,8 @@ var CONFIG = {
   /* [SUBSTITUIR] Chave gratuita do Web3Forms, que recebe o formulário e
      encaminha por e-mail. Pegue em https://web3forms.com informando o
      e-mail que deve receber as mensagens.
-     Vazia deixa o formulário desativado, com aviso visível. */
+     Vazia deixa a seção "Prefere escrever?" escondida por inteiro, e o
+     aviso sai só no console. */
   web3forms: '',
   instagram: 'monica.providentia',
   facebook:  '',                             // <<< vazio esconde o ícone
@@ -470,13 +471,15 @@ function paraIncorporar(url) {
    Envia para o Web3Forms por fetch, sem sair da página. Sem servidor nosso e
    sem banco de dados: o Web3Forms recebe e encaminha por e-mail.
 
-   Sem chave configurada o formulário fica desativado com aviso visível. Ele
-   não some e não finge que funciona.
+   Sem chave configurada a seção inteira fica escondida, e o aviso vai só
+   para o console. Formulário desativado na tela é pior que formulário
+   nenhum: parece site quebrado.
    ========================================================================== */
 function montarFormulario() {
   var form = $('.form');
   if (!form) { return; }
 
+  var secao = form.closest('.escrever');
   var estado = $('.form__estado', form);
   var botao = $('button[type="submit"]', form);
   var chave = $('input[name="access_key"]', form);
@@ -485,17 +488,22 @@ function montarFormulario() {
   // guarda, o formulario inteiro parava de montar por causa disso.
   if (!chave) { return; }
 
+  /* Sem chave, a secao inteira fica escondida e o visitante nunca sabe que
+     ela existe. A versao anterior mostrava o formulario desativado com um
+     aviso, e o resultado era um site com cara de inacabado.
+
+     O aviso continua existindo, mas so no console, para quem for publicar. */
   if (!CONFIG.web3forms) {
-    chave.remove();
-    botao.disabled = true;
-    botao.textContent = 'Formulário ainda não configurado';
-    estado.className = 'form__estado form__estado--pendente';
-    estado.innerHTML = 'Falta a chave do Web3Forms para este formulário funcionar. ' +
-      'Enquanto isso, fale <a href="#" data-whatsapp>pelo WhatsApp</a>.';
-    montarContatos();
+    if (window.console && console.info) {
+      console.info('[Providentia] A secao "Prefere escrever?" esta oculta: ' +
+        'falta a chave do Web3Forms no CONFIG, no topo do script.js. ' +
+        'Pegue a chave gratuita em https://web3forms.com.');
+    }
     return;
   }
+
   chave.value = CONFIG.web3forms;
+  secao.removeAttribute('hidden');
 
   var regras = {
     nome:     { msg: 'Escreva seu nome.',              ok: function (v) { return v.trim().length >= 2; } },

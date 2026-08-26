@@ -1912,7 +1912,6 @@ body.travado { overflow: hidden; }
 .form__estado a { color: var(--ouro-fundo); border-bottom: 1px solid var(--filete-ouro); }
 .form__estado--certo     { border-left-color: #1f7a3d; color: #1f7a3d; }
 .form__estado--erro      { border-left-color: #a3282d; color: #a3282d; }
-.form__estado--pendente  { border-left-color: var(--ouro); color: var(--marinho); }
 
 .form__aviso {
   margin: 0;

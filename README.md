@@ -87,6 +87,11 @@ Bloqueiam a publicacao:
 
 Convem resolver:
 
+- [ ] Pegar a chave gratuita em https://web3forms.com e colar no campo
+      `web3forms` do CONFIG, no script.js. Enquanto ela estiver vazia, a
+      secao "Prefere escrever?" fica ESCONDIDA e o site nao tem formulario.
+      O aviso sai so no console do navegador.
+
 - [ ] Confirmar que ela carrega E&O (Errors & Omissions) ativo. O rodape
       das dez paginas diz "Licensed & Insured Agent", e no mercado
       americano "insured" quer dizer exatamente isso. Sem a apolice, a
