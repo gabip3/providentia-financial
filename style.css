@@ -1062,6 +1062,12 @@ body.travado { overflow: hidden; }
 .rodape__dados svg { color: var(--ouro-fundo); }
 .rodape__dados a { color: var(--cinza); transition: color .2s var(--curva); }
 .rodape__dados a:hover { color: var(--marinho); }
+/* Telefone nao quebra no meio: "(470)" numa linha e "314-6160" na outra
+   deixa de parecer um numero. */
+.rodape__dados [data-telefone] { white-space: nowrap; }
+/* Sem teto no item do local: eu tinha posto 30ch, que da uns 250px, dentro
+   de uma coluna de 419. Ele quebrava em tres linhas por causa do teto, e
+   nao por falta de espaco. */
 .rodape__dados [aria-disabled="true"] { pointer-events: none; }
 
 .rodape__redes { display: flex; gap: 12px; }
@@ -1234,8 +1240,18 @@ body.travado { overflow: hidden; }
   }
   .chamada__acoes { grid-template-columns: 1fr; max-width: 320px; justify-self: end; }
 
-  .rodape__in { grid-template-columns: auto 1fr auto; gap: clamp(30px, 4vw, 60px); }
-  .rodape__dados { grid-auto-flow: column; grid-template-columns: none; justify-content: start; gap: clamp(20px, 2.6vw, 40px); }
+  /* Quatro blocos: marca, selo, contatos e redes.
+     Os contatos ficam EMPILHADOS, e nao lado a lado. Enfileirados eles
+     precisavam de uns 700px (telefone 110, e-mail 250, local 250, mais os
+     vaos), e com o selo ocupando uma coluna sobrava um terco disso: o
+     telefone quebrava em tres linhas e o local em cinco.
+
+     Empilhados, o bloco todo cabe em 280px e ainda sobra folga. */
+  .rodape__in {
+    grid-template-columns: auto auto minmax(240px, 1fr) auto;
+    gap: clamp(28px, 3.4vw, 52px);
+    align-items: start;
+  }
 }
 
 /* Abaixo de 620px o botão do topo e as ações da abertura ocupam a linha */
@@ -1780,7 +1796,11 @@ body.travado { overflow: hidden; }
   margin: 0;
   padding-left: 13px;
   border-left: 2px solid var(--ouro);
-  max-width: 34ch;
+  /* 29ch e nao 34: a linha em portugues cabe igual em duas linhas, e os
+     40px que sobram vao para a coluna dos contatos, onde faziam falta.
+     "Atendendo familias brasileiras em todos os Estados Unidos" pedia
+     399px e tinha 391: quebrava por oito pixels. */
+  max-width: 29ch;
 }
 .selo .ico-mini { margin-top: 2px; color: var(--ouro-fundo); }
 .selo span { display: grid; gap: 3px; }
@@ -1799,11 +1819,6 @@ body.travado { overflow: hidden; }
   color: var(--cinza);
 }
 
-@media (min-width: 900px) {
-  /* O rodapé tinha três colunas: marca, contatos, redes. Com o selo passam
-     a ser quatro, e a dos contatos deixa de ser a que estica. */
-  .rodape__in { grid-template-columns: auto auto 1fr auto; }
-}
 
 
 /* ==========================================================================
