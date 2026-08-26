@@ -85,6 +85,36 @@ var VIDEO_INFO = {
   }
 };
 
+/* ==========================================================================
+   SEGURADORAS
+   --------------------------------------------------------------------------
+   [CONFIRMAR UMA POR UMA] Esta lista veio da orientação que a Monica
+   recebeu, e lá ela terminava em "etc.". Isso quer dizer que era exemplo,
+   e não a lista dela. Só pode ficar no ar a companhia com quem ela de fato
+   tem nomeação ativa. Listar companhia com quem não se trabalha é o tipo
+   de coisa que a própria companhia reclama.
+
+   [ANTES DE PÔR LOGO] O disclaimer no rodapé resolve a parte de dizer que
+   as marcas são de terceiros. Ele NÃO substitui a autorização de uso da
+   marca: a maioria das companhias exige aprovação do departamento de
+   marketing delas para um agente usar o logo, e várias têm manual de marca
+   com regra de tamanho, espaçamento e fundo. Peça a aprovação por escrito
+   de cada uma, e o kit de marca junto.
+
+   COMO PÔR O LOGO
+   Ponha o arquivo em  logos/  e escreva o nome dele no campo "logo".
+   Prefira PNG com fundo transparente, ou SVG. Enquanto o campo estiver
+   vazio, o nome aparece em tipografia, que é honesto e não fica feio.
+   Depois rode  node construir.js.
+   ========================================================================== */
+var SEGURADORAS = [
+  { nome: 'National Life Group', logo: '' },
+  { nome: 'Ameritas',            logo: '' },
+  { nome: 'Mutual of Omaha',     logo: '' },
+  { nome: 'Corebridge Financial', logo: '' },
+  { nome: 'Allianz',             logo: '' }
+];
+
 var SERVICOS = [
 
   {
@@ -233,4 +263,4 @@ var DESTAQUE = {
   texto: 'Os Benefícios em Vida existem há 20 anos, mas a maioria dos americanos ainda não sabe o que são ou o que significam. Eles permitem que o segurado tenha acesso ao valor do seguro de vida por causa de morte, para ter dinheiro em mãos quando mais precisa, caso sofra um ataque cardíaco, derrame, câncer ou outra doença qualificada. E a melhor parte é que esses benefícios não custam nada a mais.'
 };
 
-if (typeof module !== 'undefined') { module.exports = { SERVICOS: SERVICOS, DESTAQUE: DESTAQUE, CAPAS: CAPAS, VIDEO_INFO: VIDEO_INFO }; }
+if (typeof module !== 'undefined') { module.exports = { SERVICOS: SERVICOS, DESTAQUE: DESTAQUE, CAPAS: CAPAS, VIDEO_INFO: VIDEO_INFO, SEGURADORAS: SEGURADORAS }; }

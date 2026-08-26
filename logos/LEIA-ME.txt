@@ -1,0 +1,38 @@
+LOGOS DAS SEGURADORAS
+=====================
+
+Ponha aqui os arquivos de logo, e escreva o nome de cada arquivo no campo
+"logo" do array SEGURADORAS, no dados.js. Depois rode:
+
+    node construir.js
+
+Enquanto o campo estiver vazio, o nome da companhia aparece em tipografia
+no site. Isso funciona e nao fica feio: a propria orientacao de compliance
+diz "logos OU texto mencionando".
+
+
+O QUE PEDIR A CADA COMPANHIA
+----------------------------
+1. Autorizacao POR ESCRITO para usar a marca no site de agente.
+   O disclaimer do rodape diz que as marcas sao de terceiros, mas ele NAO
+   substitui essa autorizacao. A maioria das companhias exige aprovacao do
+   departamento de marketing.
+
+2. O kit de marca (brand kit). Varias tem regra de tamanho minimo, area de
+   respiro em volta e fundo permitido. Usar o logo fora da regra costuma
+   ser motivo de pedido de remocao.
+
+3. O arquivo em PNG com fundo transparente, ou SVG.
+
+
+FORMATO
+-------
+- PNG transparente ou SVG
+- Altura util de pelo menos 92px no arquivo (o site exibe em 46px, e o
+  dobro cobre tela de alta densidade)
+- Nome do arquivo sem espaco e sem acento:
+  national-life-group.png, ameritas.png, mutual-of-omaha.png,
+  corebridge.png, allianz.png
+
+O site limita a altura em 46px e usa object-fit: contain, entao logo largo
+ou logo alto funcionam igual: nenhum empurra os outros.
