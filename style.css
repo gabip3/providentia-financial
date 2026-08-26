@@ -1712,6 +1712,19 @@ body.travado { overflow: hidden; }
   .quebra { display: inline; }
 }
 
+/* Quando "Trabalhamos" virou "Trabalho", o titulo encurtou de 1159 para
+   1084px e passou a caber numa linha na caixa de 1163. Aí a quebra ditada
+   virou estorvo: forcava duas linhas de 708 e 365, 48% desiguais, onde uma
+   linha limpa cabe.
+
+   Mas ela continua util abaixo de 1200px, onde a caixa fica menor que os
+   1084 e o texto quebraria de qualquer jeito, so que num ponto escolhido
+   pelo acaso. Entao a quebra desta secao vale so no meio: some no largo,
+   volta no medio, e some de novo no estreito junto com todas as outras. */
+@media (min-width: 1200px) {
+  .seguradoras h2 .quebra { display: none; }
+}
+
 
 /* ==========================================================================
    SEGURADORAS
@@ -1922,4 +1935,21 @@ body.travado { overflow: hidden; }
 
 @media (min-width: 900px) {
   .escrever__in { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+}
+
+
+/* ==========================================================================
+   O BOTAO DO TOPO SAI NA FAIXA DO MEIO
+   --------------------------------------------------------------------------
+   Entre 900 e 1179px a barra tem marca, nav de seis itens e o botao. Medido
+   a 985px: ela precisa de 1050 e tem 905. Faltam 145.
+
+   Apertar os vaos e o padding do botao recupera uns 90, nao os 145. Entao o
+   botao sai nessa faixa. A nav fica inteira, e o item "Contato" leva ao
+   mesmo lugar que ele levaria.
+
+   Abaixo de 900 quem manda e o sanduiche, e o botao ja estava fora.
+   ========================================================================== */
+@media (max-width: 1179px) {
+  .botao--topo { display: none; }
 }
