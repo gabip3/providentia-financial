@@ -39,6 +39,11 @@ var CONFIG = {
      para cá. Vazio faz esses botões voltarem a levar para a seção de
      contato, com telefone e WhatsApp, em vez de quebrarem. */
   calendly:  'https://calendly.com/monicaprovidentia',
+  /* [SUBSTITUIR] Chave gratuita do Web3Forms, que recebe o formulário e
+     encaminha por e-mail. Pegue em https://web3forms.com informando o
+     e-mail que deve receber as mensagens.
+     Vazia deixa o formulário desativado, com aviso visível. */
+  web3forms: '',
   instagram: 'monica.providentia',
   facebook:  '',                             // <<< vazio esconde o ícone
   linkedin:  ''                              // <<< vazio esconde o ícone
@@ -459,6 +464,122 @@ function paraIncorporar(url) {
 }
 
 
+/* ==========================================================================
+   8. Formulário
+   --------------------------------------------------------------------------
+   Envia para o Web3Forms por fetch, sem sair da página. Sem servidor nosso e
+   sem banco de dados: o Web3Forms recebe e encaminha por e-mail.
+
+   Sem chave configurada o formulário fica desativado com aviso visível. Ele
+   não some e não finge que funciona.
+   ========================================================================== */
+function montarFormulario() {
+  var form = $('.form');
+  if (!form) { return; }
+
+  var estado = $('.form__estado', form);
+  var botao = $('button[type="submit"]', form);
+  var chave = $('input[name="access_key"]', form);
+
+  // O campo da chave pode nao existir se alguem editar o HTML. Sem esta
+  // guarda, o formulario inteiro parava de montar por causa disso.
+  if (!chave) { return; }
+
+  if (!CONFIG.web3forms) {
+    chave.remove();
+    botao.disabled = true;
+    botao.textContent = 'Formulário ainda não configurado';
+    estado.className = 'form__estado form__estado--pendente';
+    estado.innerHTML = 'Falta a chave do Web3Forms para este formulário funcionar. ' +
+      'Enquanto isso, fale <a href="#" data-whatsapp>pelo WhatsApp</a>.';
+    montarContatos();
+    return;
+  }
+  chave.value = CONFIG.web3forms;
+
+  var regras = {
+    nome:     { msg: 'Escreva seu nome.',              ok: function (v) { return v.trim().length >= 2; } },
+    email:    { msg: 'Confira o endereço de e-mail.',  ok: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); } },
+    mensagem: { msg: 'Escreva sua mensagem.',          ok: function (v) { return v.trim().length >= 5; } }
+  };
+
+  function campoDe(input) { return input.closest('.campo'); }
+
+  function mostrar(input, msg) {
+    var campo = campoDe(input);
+    var alvo = $('[data-erro="' + input.name + '"]', form);
+    if (campo) { campo.classList.toggle('com-erro', Boolean(msg)); }
+    if (alvo) {
+      alvo.textContent = msg || '';
+      // O erro só é anunciado quando existe: aria-describedby apontando
+      // para um span vazio faz o leitor de tela ler silêncio depois do
+      // rótulo, toda vez que a pessoa entra no campo.
+      if (msg) { input.setAttribute('aria-describedby', 'erro-' + input.name); alvo.id = 'erro-' + input.name; }
+      else { input.removeAttribute('aria-describedby'); }
+    }
+    if (msg) { input.setAttribute('aria-invalid', 'true'); }
+    else { input.removeAttribute('aria-invalid'); }
+  }
+
+  function validar(input) {
+    var r = regras[input.name];
+    if (!r) { return true; }
+    var vale = r.ok(input.value);
+    mostrar(input, vale ? '' : r.msg);
+    return vale;
+  }
+
+  // O erro some assim que a pessoa corrige, e não só no próximo envio
+  Object.keys(regras).forEach(function (nome) {
+    var input = form.elements[nome];
+    if (!input) { return; }
+    input.addEventListener('input', function () {
+      if (campoDe(input) && campoDe(input).classList.contains('com-erro')) { validar(input); }
+    });
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var primeiro = null;
+    Object.keys(regras).forEach(function (nome) {
+      var input = form.elements[nome];
+      if (input && !validar(input) && !primeiro) { primeiro = input; }
+    });
+    if (primeiro) {
+      estado.className = 'form__estado form__estado--erro';
+      estado.textContent = 'Faltam alguns campos.';
+      primeiro.focus();
+      return;
+    }
+
+    estado.className = 'form__estado';
+    estado.textContent = 'Enviando...';
+    botao.disabled = true;
+
+    fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(form)))
+    })
+      .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+      .then(function (res) {
+        if (!res.ok || !res.d.success) { throw new Error(res.d.message || 'falhou'); }
+        form.reset();
+        estado.className = 'form__estado form__estado--certo';
+        estado.textContent = 'Recebido. Respondo em até um dia útil.';
+      })
+      .catch(function () {
+        estado.className = 'form__estado form__estado--erro';
+        estado.innerHTML = 'Não consegui enviar agora. Tente de novo, ou fale ' +
+          '<a href="#" data-whatsapp>pelo WhatsApp</a>.';
+        montarContatos();
+      })
+      .then(function () { botao.disabled = false; });
+  });
+}
+
+
 /* ========================================================================== */
 document.addEventListener('DOMContentLoaded', function () {
   montarContatos();
@@ -467,5 +588,6 @@ document.addEventListener('DOMContentLoaded', function () {
   montarMenuAtivo();
   montarZap();
   montarVideos();
+  montarFormulario();
   montarAbertura();
 });

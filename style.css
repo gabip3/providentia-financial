@@ -1804,3 +1804,95 @@ body.travado { overflow: hidden; }
      a ser quatro, e a dos contatos deixa de ser a que estica. */
   .rodape__in { grid-template-columns: auto auto 1fr auto; }
 }
+
+
+/* ==========================================================================
+   O FORMULÁRIO
+   ========================================================================== */
+.escrever {
+  background: var(--creme);
+  border-top: 1px solid var(--filete);
+  padding-block: var(--respiro);
+}
+.escrever__in { display: grid; gap: clamp(30px, 4vw, 56px); align-items: start; }
+
+.escrever h2 { font-size: clamp(26px, 3.2vw, 40px); margin-bottom: 16px; }
+.escrever__txt p { font-size: 15.5px; line-height: 1.75; color: var(--cinza); max-width: 46ch; }
+.escrever__prazo {
+  margin-top: 14px !important;
+  padding-left: 13px;
+  border-left: 2px solid var(--ouro);
+  font-size: 14px !important;
+}
+
+.form { display: grid; gap: 18px; }
+
+/* Fora da tela, mas ainda enviável. display:none nao serve: o navegador
+   nao manda campo escondido assim, e a armadilha deixaria de funcionar. */
+.fora-da-tela {
+  position: absolute;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.campo { display: grid; gap: 7px; }
+
+.campo label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: var(--marinho);
+}
+.opcional { font-weight: 400; color: var(--cinza); letter-spacing: 0; }
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  min-height: 50px;
+  padding: 13px 15px;
+  background: var(--branco);
+  border: 1px solid var(--filete);
+  border-radius: 0;
+  font-family: var(--texto);
+  font-size: 15px;
+  color: var(--marinho);
+  transition: border-color .2s var(--curva);
+}
+.campo textarea { min-height: 118px; resize: vertical; line-height: 1.6; }
+.campo input:focus, .campo select:focus, .campo textarea:focus { border-color: var(--ouro); }
+
+/* A borda vermelha nao e o unico sinal do erro: a mensagem escrita embaixo
+   diz o que fazer. Cor sozinha nao serve para quem nao distingue vermelho. */
+.com-erro input, .com-erro select, .com-erro textarea { border-color: #a3282d; }
+
+.erro:empty { display: none; }
+.erro { font-size: 12.5px; line-height: 1.5; color: #a3282d; }
+
+.form__estado:empty { display: none; }
+.form__estado {
+  margin: 0;
+  padding-left: 13px;
+  border-left: 2px solid var(--cinza);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--cinza);
+}
+.form__estado a { color: var(--ouro-fundo); border-bottom: 1px solid var(--filete-ouro); }
+.form__estado--certo     { border-left-color: #1f7a3d; color: #1f7a3d; }
+.form__estado--erro      { border-left-color: #a3282d; color: #a3282d; }
+.form__estado--pendente  { border-left-color: var(--ouro); color: var(--marinho); }
+
+.form__aviso {
+  margin: 0;
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--cinza);
+}
+
+@media (min-width: 900px) {
+  .escrever__in { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+}

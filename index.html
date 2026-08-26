@@ -921,6 +921,107 @@
   </div>
 </section>
 
+
+<!-- ==========================================================================
+     O FORMULÁRIO
+     Vem depois da chamada de propósito, e não no lugar dela. Quem já decidiu
+     agenda direto no Calendly; quem ainda tem uma pergunta escreve aqui. São
+     dois momentos diferentes da mesma pessoa.
+
+     COMO FUNCIONA
+     O envio vai para o Web3Forms, que recebe o formulário e encaminha por
+     e-mail. Não há servidor nosso, não há banco de dados, e nada fica
+     guardado neste site.
+
+     [SUBSTITUIR] FALTA A CHAVE
+     Pegue a chave gratuita em https://web3forms.com, informando o e-mail
+     que deve receber as mensagens, e cole no campo "web3forms" do CONFIG,
+     no topo do script.js.
+
+     Enquanto a chave estiver vazia, o formulário aparece desativado com um
+     aviso e um botão de WhatsApp do lado. Ele não some e não finge que
+     funciona: mostra que está pendente.
+
+     [SOBRE OS DADOS] O aviso embaixo do botão pede para a pessoa NÃO mandar
+     número de apólice, SSN nem dado bancário. Formulário de site não é
+     canal seguro para isso, e num site de seguro essa frase precisa estar
+     visível, não escondida na política de privacidade.
+     ========================================================================== -->
+<section class="escrever" id="escrever">
+  <div class="faixa escrever__in">
+
+    <div class="escrever__txt">
+      <h2>Prefere escrever?</h2>
+      <p>
+        Me conta em poucas linhas o que você está pensando. Eu respondo
+        pessoalmente, e não é uma resposta automática.
+      </p>
+      <p class="escrever__prazo">Costumo responder em até um dia útil.</p>
+    </div>
+
+    <form class="form" novalidate>
+      <!-- A chave entra aqui pelo script.js. -->
+      <input type="hidden" name="access_key" value="">
+      <input type="hidden" name="subject" value="Novo contato pelo site da Providentia Financial">
+      <input type="hidden" name="from_name" value="Site da Providentia Financial">
+
+      <!-- Armadilha de robô: fica fora da tela e sem foco. Se vier
+           preenchida, o Web3Forms descarta o envio. Gente não vê, e leitor
+           de tela também não, por causa do aria-hidden. -->
+      <input type="checkbox" name="botcheck" class="fora-da-tela" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="campo">
+        <label for="f-nome">Seu nome</label>
+        <input id="f-nome" name="nome" type="text" autocomplete="name" required>
+        <span class="erro" data-erro="nome"></span>
+      </div>
+
+      <div class="campo">
+        <label for="f-email">Seu e-mail</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+        <span class="erro" data-erro="email"></span>
+      </div>
+
+      <div class="campo">
+        <label for="f-tel">Seu telefone <span class="opcional">(opcional)</span></label>
+        <input id="f-tel" name="telefone" type="tel" autocomplete="tel" inputmode="tel">
+      </div>
+
+      <div class="campo">
+        <label for="f-assunto">Sobre o que você quer falar?</label>
+        <select id="f-assunto" name="assunto">
+          <option value="Ainda não sei">Ainda não sei</option>
+          <option value="Benefícios em Vida">Benefícios em Vida</option>
+          <option value="Aposentadoria livre de impostos">Aposentadoria livre de impostos</option>
+          <option value="IUL para crianças">IUL para crianças</option>
+          <option value="Proteção hipotecária">Proteção hipotecária</option>
+          <option value="Proteção do seu negócio">Proteção do seu negócio</option>
+          <option value="Anuidades com índice fixo">Anuidades com índice fixo</option>
+          <option value="Planejamento imobiliário">Planejamento imobiliário</option>
+          <option value="Planejamento universitário">Planejamento universitário</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="f-msg">Sua mensagem</label>
+        <textarea id="f-msg" name="mensagem" rows="4" required></textarea>
+        <span class="erro" data-erro="mensagem"></span>
+      </div>
+
+      <button class="botao botao--marinho botao--cheio" type="submit">Enviar</button>
+
+      <p class="form__estado" role="status" aria-live="polite"></p>
+
+      <p class="form__aviso">
+        Não envie número de apólice, Social Security ou dados bancários por
+        aqui. Formulário de site não é canal seguro para esse tipo de
+        informação.
+      </p>
+    </form>
+
+  </div>
+</section>
+
 </main>
 
 
