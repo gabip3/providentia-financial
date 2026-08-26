@@ -88,11 +88,12 @@ var VIDEO_INFO = {
 /* ==========================================================================
    SEGURADORAS
    --------------------------------------------------------------------------
-   [CONFIRMAR UMA POR UMA] Esta lista veio da orientação que a Monica
-   recebeu, e lá ela terminava em "etc.". Isso quer dizer que era exemplo,
-   e não a lista dela. Só pode ficar no ar a companhia com quem ela de fato
-   tem nomeação ativa. Listar companhia com quem não se trabalha é o tipo
-   de coisa que a própria companhia reclama.
+   Lista real, informada pela Monica. A versão anterior deste bloco era um
+   exemplo tirado de uma orientação de compliance, e terminava em "etc.":
+   tinha companhia com quem ela não trabalha. Foi substituída.
+
+   Só pode ficar no ar companhia com nomeação ativa. Se alguma sair da
+   carteira dela, apague o bloco aqui e rode o construir.js.
 
    [ANTES DE PÔR LOGO] O disclaimer no rodapé resolve a parte de dizer que
    as marcas são de terceiros. Ele NÃO substitui a autorização de uso da
@@ -107,12 +108,34 @@ var VIDEO_INFO = {
    vazio, o nome aparece em tipografia, que é honesto e não fica feio.
    Depois rode  node construir.js.
    ========================================================================== */
+/* Lista informada pela Monica em 26/08/2026, na ordem em que ela mandou.
+   A National Life Group vem primeiro por escolha dela: e a companhia
+   pioneira em Beneficios em Vida, que e o assunto central do site.
+
+   Saiu da versao anterior: Mutual of Omaha e Allianz. As duas estavam ali
+   porque a orientacao de compliance citava exemplos e terminava em "etc.".
+   Nao sao dela, e nao podiam ficar.
+
+   NOME COMPLETO E SUBSIDIARIA DE CADA UMA, para o dia de pedir autorizacao
+   de marca. O site mostra so o nome curto, que e como cada uma se apresenta
+   hoje:
+     National Life Group    NLG
+     F&G                    antes Fidelity & Guaranty Life
+     Corebridge Financial   antes AIG
+     Foresters Financial
+     American National      ANICO, com a subsidiaria Garden State Life
+     Americo                com a subsidiaria Great Southern Life
+
+   Cuidado com a sigla GSL: ela serve para Garden State Life E para Great
+   Southern Life, que sao de grupos diferentes. Nunca escreva so "GSL". */
 var SEGURADORAS = [
-  { nome: 'National Life Group', logo: '' },
-  { nome: 'Ameritas',            logo: '' },
-  { nome: 'Mutual of Omaha',     logo: '' },
+  { nome: 'National Life Group',  logo: '' },
+  { nome: 'F&G',                  logo: '' },
   { nome: 'Corebridge Financial', logo: '' },
-  { nome: 'Allianz',             logo: '' }
+  { nome: 'Foresters Financial',  logo: '' },
+  { nome: 'American National',    logo: '' },
+  { nome: 'Americo',              logo: '' },
+  { nome: 'Ameritas',             logo: '' }
 ];
 
 var SERVICOS = [
