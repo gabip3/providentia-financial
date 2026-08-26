@@ -33,6 +33,42 @@
    linha, ou o max-width é folgado o bastante para o balance escolher um
    ponto de quebra decente. Nunca encostado no limite.
 
+   COMO CONFERIR, EM VEZ DE CONFIAR NO OLHO
+   Escrevi a regra acima e depois errei de novo, duas vezes, pondo max-width
+   em ch num título novo sem medir. O olho não serve para isso: 24ch parece
+   generoso e dá 601px, que é metade da caixa.
+
+   O teste abaixo olha o RESULTADO, e não se existe teto. A primeira versão
+   dele acusava qualquer título com max-width, e acusava dois que estavam
+   ótimos: teto não é defeito, linha picada é. Ele avisa em dois casos:
+
+     · três linhas ou mais quando cabia em menos
+     · linhas muito desiguais SEM quebra ditada no HTML
+       (com <br class="quebra"> a desigualdade é escolha, não acaso)
+
+   Cole no console de qualquer página:
+
+     document.querySelectorAll('main h1, main h2').forEach(el => {
+       const r = document.createRange(); r.selectNodeContents(el);
+       const cx = [...r.getClientRects()].filter(b => b.height > 4);
+       const tops = [];
+       cx.forEach(b => { if (!tops.some(t => Math.abs(t - b.top) < 4)) tops.push(b.top); });
+       const l = tops.sort((a, b) => a - b).map(t => {
+         const d = cx.filter(b => Math.abs(b.top - t) < 4);
+         return Math.max(...d.map(b => b.right)) - Math.min(...d.map(b => b.left));
+       });
+       if (l.length < 2) return;
+       const dito = !!el.querySelector('br');
+       const desv = 1 - Math.min(...l) / Math.max(...l);
+       const caixa = el.parentElement.getBoundingClientRect().width;
+       const soma = l.reduce((a, b) => a + b, 0);
+       if ((l.length >= 3 && soma < caixa * (l.length - 1)) || (desv > 0.45 && !dito))
+         console.warn(el.textContent.trim().slice(0, 40), '|', l.length, 'linhas |',
+                      Math.round(desv * 100) + '% desiguais |', l.map(Math.round));
+     });
+
+   Silêncio no console quer dizer que nenhum título está picado.
+
    AS FOTOS NÃO LEVAM COR POR CIMA
    A foto da abertura foi feita com a família à direita e o lado esquerdo
    vazio. O véu de creme cobre só a metade vazia e já sumiu antes de chegar
@@ -1676,7 +1712,11 @@ body.travado { overflow: hidden; }
   padding-block: var(--respiro);
 }
 
-.seguradoras h2 { font-size: clamp(26px, 3.2vw, 40px); max-width: 24ch; margin-bottom: 16px; }
+/* Sem max-width. O 24ch que estava aqui dava 601px numa caixa de 1163, e o
+   título precisa de 1159 para caber numa linha: eu tinha cortado ele pela
+   metade sem motivo. Quem limita agora é a coluna, e a quebra é ditada no
+   HTML. */
+.seguradoras h2 { font-size: clamp(26px, 3.2vw, 40px); margin-bottom: 16px; }
 
 .seguradoras__lead {
   font-size: clamp(15.5px, 1.3vw, 18px);
