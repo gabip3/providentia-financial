@@ -102,11 +102,13 @@ var VIDEO_INFO = {
    com regra de tamanho, espaçamento e fundo. Peça a aprovação por escrito
    de cada uma, e o kit de marca junto.
 
-   COMO PÔR O LOGO
-   Ponha o arquivo em  logos/  e escreva o nome dele no campo "logo".
-   Prefira PNG com fundo transparente, ou SVG. Enquanto o campo estiver
-   vazio, o nome aparece em tipografia, que é honesto e não fica feio.
-   Depois rode  node construir.js.
+   COMO TROCAR UM LOGO
+   Ponha o arquivo novo em  logos/, escreva o nome dele no campo "logo" e
+   recalcule a altura pela conta explicada logo abaixo. Depois rode
+   node construir.js.
+
+   Campo "logo" vazio faz o nome aparecer em tipografia, sem quebrar nada:
+   e assim que a secao funcionava antes de as logos chegarem.
    ========================================================================== */
 /* Lista informada pela Monica em 26/08/2026, na ordem em que ela mandou.
    A National Life Group vem primeiro por escolha dela: e a companhia
@@ -128,14 +130,27 @@ var VIDEO_INFO = {
 
    Cuidado com a sigla GSL: ela serve para Garden State Life E para Great
    Southern Life, que sao de grupos diferentes. Nunca escreva so "GSL". */
+/* A ALTURA DE CADA LOGO NAO E A MESMA, E ISSO E DE PROPOSITO
+   --------------------------------------------------------------------------
+   As proporcoes vao de 1,15:1 (F&G, quase quadrada) a 3,51:1 (Ameritas).
+   Com altura igual para todas, a F&G ficaria com um terco da area da
+   Ameritas na tela e pareceria uma logo menor, quando so e mais estreita.
+
+   Entao o que se iguala aqui e a AREA, e nao a altura: cada altura vem de
+   sqrt(area / proporcao), com a area de referencia sendo a de uma logo 3:1
+   com 46px. O resultado fica preso entre 38 e 62px, para nenhuma virar
+   selo nem cartaz.
+
+   Se trocar um arquivo, recalcule: altura = raiz(6440 / (largura/altura)).
+   O comentario ao lado de cada linha guarda as medidas do arquivo. */
 var SEGURADORAS = [
-  { nome: 'National Life Group',  logo: '' },
-  { nome: 'F&G',                  logo: '' },
-  { nome: 'Corebridge Financial', logo: '' },
-  { nome: 'Foresters Financial',  logo: '' },
-  { nome: 'American National',    logo: '' },
-  { nome: 'Americo',              logo: '' },
-  { nome: 'Ameritas',             logo: '' }
+  { nome: 'National Life Group',     logo: 'NLG-logo.png',             altura: 45 },  /* 2026x648, 3.13:1 */
+  { nome: 'F&G',                     logo: 'FG.png',                   altura: 62 },  /* 385x335, 1.15:1 */
+  { nome: 'Corebridge Financial',    logo: 'corebridge.png',           altura: 46 },  /* 1601x522, 3.07:1 */
+  { nome: 'Foresters Financial',     logo: 'forester.png',             altura: 60 },  /* 640x360, 1.78:1 */
+  { nome: 'American National',       logo: 'american.png',             altura: 47 },  /* 403x140, 2.88:1 */
+  { nome: 'Americo',                 logo: 'americo.png',              altura: 60 },  /* 640x360, 1.78:1 */
+  { nome: 'Ameritas',                logo: 'Ameritas-Insurance.png',   altura: 43 },  /* 565x161, 3.51:1 */
 ];
 
 var SERVICOS = [
