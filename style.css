@@ -1720,3 +1720,47 @@ body.travado { overflow: hidden; }
   max-width: 100%;
   object-fit: contain;
 }
+
+
+/* ==========================================================================
+   O SELO DE CREDENCIAL DO RODAPÉ
+   --------------------------------------------------------------------------
+   Fica ao lado da marca, e não dentro da lista de contatos: telefone e
+   e-mail são caminhos para falar com ela, isto é uma afirmação sobre ela.
+   Misturar os dois faria o selo parecer mais um item de contato.
+
+   O filete dourado à esquerda é o mesmo recurso que marcava os campos
+   pendentes. Ele voltou aqui com o sentido invertido: antes apontava o que
+   faltava, agora aponta o que está garantido.
+   ========================================================================== */
+.selo {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  margin: 0;
+  padding-left: 13px;
+  border-left: 2px solid var(--ouro);
+  max-width: 34ch;
+}
+.selo .ico-mini { margin-top: 2px; color: var(--ouro-fundo); }
+.selo span { display: grid; gap: 3px; }
+
+.selo b {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--marinho);
+}
+.selo i {
+  font-style: normal;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--cinza);
+}
+
+@media (min-width: 900px) {
+  /* O rodapé tinha três colunas: marca, contatos, redes. Com o selo passam
+     a ser quatro, e a dos contatos deixa de ser a que estica. */
+  .rodape__in { grid-template-columns: auto auto 1fr auto; }
+}

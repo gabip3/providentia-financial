@@ -82,6 +82,11 @@ Bloqueiam a publicacao:
 
 Convem resolver:
 
+- [ ] Confirmar que ela carrega E&O (Errors & Omissions) ativo. O rodape
+      das dez paginas diz "Licensed & Insured Agent", e no mercado
+      americano "insured" quer dizer exatamente isso. Sem a apolice, a
+      palavra sai.
+
 - [ ] Autorizacao por escrito da Alliance Group para usar os videos.
 - [ ] Biografia revisada por ela. O texto atual e um rascunho.
 - [ ] Lockup horizontal da logo em SVG. Hoje o nome ao lado do escudo esta
