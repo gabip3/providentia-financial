@@ -11,10 +11,13 @@
    --------------------------------------------------------------------------
    Telefone informado pela Monica e conferido.
 
-   O e-mail depende da compra do dominio providentiafinancial.com. Ele ja
-   esta escrito aqui e vai funcionar assim que o dominio existir e a caixa
-   for criada. Enquanto isso, o link mailto abre normalmente no programa de
-   e-mail de quem clicar, mas a mensagem volta.
+   O dominio providentiafinancialgroup.com ja existe e esta na Wix.
+
+   O e-mail ainda depende de a CAIXA ser criada. Dominio registrado nao cria
+   caixa de e-mail sozinho: e preciso contratar o servico, na propria Wix ou
+   em outro lugar, e apontar os registros MX. Enquanto isso nao acontecer, o
+   link mailto abre normalmente no programa de e-mail de quem clicar, mas a
+   mensagem volta.
 
    whatsapp    Só números, com código do país. Nos EUA começa com 1.
                Exemplo: '14049557002'
@@ -31,7 +34,7 @@ var CONFIG = {
   // Telefone real, informado pela Monica.
   whatsapp:  '14703146160',
   telefone:  '(470) 314-6160',
-  email:     'monica@providentiafinancial.com', // vale quando o dominio for comprado
+  email:     'monica@providentiafinancialgroup.com', // <<< depende da caixa ser criada
   /* Agenda da Monica. Todo botão "Agendar uma conversa" do site aponta
      para cá. Vazio faz esses botões voltarem a levar para a seção de
      contato, com telefone e WhatsApp, em vez de quebrarem. */

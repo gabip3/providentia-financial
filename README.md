@@ -77,8 +77,13 @@ Bloqueiam a publicacao:
       comentada no rodape.
 - [ ] Confirmar o telefone. O `(404) 955-7002` veio do mockup e e DDD de
       Atlanta, mas a Monica mora na Florida.
-- [ ] Comprar o dominio providentiafinancial.com e criar a caixa de e-mail.
-      O endereco ja esta no site e passa a funcionar sozinho.
+- [ ] Apontar o dominio para o GitHub Pages. Ele existe e esta na Wix, mas
+      hoje o DNS aponta para a propria Wix. Os registros a trocar estao na
+      secao "Ligar o dominio" mais abaixo.
+- [ ] Criar a caixa de e-mail monica@providentiafinancialgroup.com. Dominio
+      registrado nao cria caixa sozinho: precisa contratar o servico e
+      apontar os registros MX. O endereco ja esta no site e passa a
+      funcionar sozinho quando a caixa existir.
 
 Convem resolver:
 
@@ -102,3 +107,51 @@ Convem resolver:
 
 Apague o `robots.txt` e as linhas `<meta name="robots" content="noindex">`
 das paginas. Elas existem para o Google nao indexar um rascunho.
+
+
+## Ligar o dominio
+
+O site esta em https://gabip3.github.io/providentia-financial/ e o dominio
+www.providentiafinancialgroup.com esta registrado na Wix, apontando para a
+propria Wix.
+
+A ordem importa. Trocar o dominio no GitHub ANTES de o DNS estar pronto
+derruba o endereco atual, porque o github.io passa a redirecionar para um
+dominio que ainda nao responde.
+
+### 1. Na Wix, no editor de DNS do dominio
+
+Troque o registro CNAME de "www":
+
+    Tipo    Host    Valor
+    CNAME   www     gabip3.github.io
+
+Se quiser que providentiafinancialgroup.com sem o "www" tambem funcione,
+troque os registros A do apex por estes quatro:
+
+    Tipo    Host    Valor
+    A       @       185.199.108.153
+    A       @       185.199.109.153
+    A       @       185.199.110.153
+    A       @       185.199.111.153
+
+ATENCAO: se houver um site da Wix publicado nesse dominio, ele sai do ar
+nesse momento. Pelo estado atual do DNS parece ser dominio parado, mas
+confirme antes.
+
+### 2. Espere o DNS propagar
+
+Costuma levar de alguns minutos a algumas horas. Para conferir:
+
+    nslookup www.providentiafinancialgroup.com 8.8.8.8
+
+Quando a resposta trouxer gabip3.github.io, esta pronto.
+
+### 3. So entao, no GitHub
+
+Settings > Pages > Custom domain, escreva
+www.providentiafinancialgroup.com e salve. Marque "Enforce HTTPS" depois
+que o certificado for emitido, o que leva mais alguns minutos.
+
+Isso cria um arquivo CNAME na raiz do repositorio. Nao apague esse arquivo:
+sem ele o dominio personalizado desliga.

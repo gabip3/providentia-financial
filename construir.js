@@ -282,7 +282,7 @@ function cabeca(titulo, descricao, base) {
 
 <title>${esc(titulo)} | Providentia Financial</title>
 <meta name="description" content="${esc(descricao)}">
-<link rel="canonical" href="https://providentiafinancial.com/${base ? 'servicos/' : ''}"><!-- [SUBSTITUIR] domínio real -->
+<link rel="canonical" href="https://www.providentiafinancialgroup.com/${base ? 'servicos/' : ''}">
 <link rel="icon" href="${base}favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="${base}escudo.png">
 
