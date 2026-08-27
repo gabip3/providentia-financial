@@ -565,10 +565,20 @@ function montarFormulario() {
     estado.textContent = 'Enviando...';
     botao.disabled = true;
 
+    /* O assunto e o remetente sao montados aqui, e nao ficam fixos no HTML.
+       Com valor fixo, toda mensagem chegaria com o mesmo titulo e o mesmo
+       nome, e a caixa de entrada viraria uma pilha indistinguivel. Assim
+       ela ve quem escreveu e sobre o que antes de abrir. */
+    var dados = Object.fromEntries(new FormData(form));
+    var quem = (dados.nome || '').trim();
+    var sobre = (dados.assunto || '').trim();
+    dados.subject = 'Site: ' + (quem || 'contato') + (sobre ? ' - ' + sobre : '');
+    dados.from_name = quem || 'Site da Providentia Financial';
+
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      body: JSON.stringify(dados)
     })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
       .then(function (res) {

@@ -976,6 +976,18 @@
     <form class="form" novalidate>
       <!-- A chave entra aqui pelo script.js. -->
       <input type="hidden" name="access_key" value="">
+
+      <!-- RESPONDER DIRETO NO E-MAIL
+           O valor "email" nao e um endereco: e o NOME do campo do formulario
+           de onde o Web3Forms tira o endereco de resposta. Com isso, o
+           Reply-To da mensagem que chega para a Monica passa a ser o e-mail
+           de quem escreveu, e ela responde apertando "Responder", sem
+           copiar endereco de lugar nenhum. -->
+      <input type="hidden" name="replyto" value="email">
+
+      <!-- Assunto e remetente sao preenchidos pelo script antes do envio,
+           com o nome e o assunto que a pessoa escolheu. Os valores abaixo
+           so entram em cena se o script falhar. -->
       <input type="hidden" name="subject" value="Novo contato pelo site da Providentia Financial">
       <input type="hidden" name="from_name" value="Site da Providentia Financial">
 
