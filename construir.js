@@ -265,7 +265,9 @@ function rodape(base) {
 </a>`;
 }
 
-function cabeca(titulo, descricao, base) {
+const SITE_URL = 'https://www.providentiafinancialgroup.com';
+
+function cabeca(titulo, descricao, base, slug) {
   return `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -286,12 +288,41 @@ function cabeca(titulo, descricao, base) {
 <link rel="icon" href="${base}favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="${base}escudo.png">
 
+<!-- ==========================================================================
+     OPEN GRAPH E TWITTER
+     --------------------------------------------------------------------------
+     E o que aparece quando alguem cola o link no WhatsApp, no Facebook, no
+     LinkedIn ou no iMessage. Sem isso, o preview sai so com o endereco.
+
+     A imagem precisa de endereco ABSOLUTO. Caminho relativo funciona no
+     site e falha no preview, porque quem monta o cartao e um servidor de
+     fora que nao sabe de onde o caminho parte.
+
+     width e height evitam que o cartao apareca sem imagem no primeiro
+     compartilhamento: sem eles, algumas plataformas so mostram a foto
+     depois de baixar e medir, o que as vezes nao acontece a tempo.
+
+     [OTIMIZAR] familia.png tem 1,8 MB. Facebook e LinkedIn aguentam, mas o
+     WhatsApp costuma desistir de imagem grande e mostrar o cartao sem foto.
+     Exportar como JPEG qualidade 82 resolve, e e o mesmo arquivo que ja
+     precisa encolher por causa do tempo de carregamento da pagina.
+     ========================================================================== -->
 <meta property="og:type" content="article">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Providentia Financial">
+<meta property="og:url" content="${SITE_URL}/servicos/${slug}.html">
 <meta property="og:title" content="${esc(titulo)} | Providentia Financial">
 <meta property="og:description" content="${esc(descricao)}">
+<meta property="og:image" content="https://www.providentiafinancialgroup.com/familia.png">
+<meta property="og:image:width" content="1693">
+<meta property="og:image:height" content="929">
+<meta property="og:image:alt" content="Uma família reunida na sala de casa: pai, mãe e duas crianças, sorrindo juntos.">
+
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(titulo)} | Providentia Financial">
+<meta name="twitter:description" content="${esc(descricao)}">
+<meta name="twitter:image" content="https://www.providentiafinancialgroup.com/familia.png">
+<meta name="twitter:image:alt" content="Uma família reunida na sala de casa: pai, mãe e duas crianças, sorrindo juntos.">
 <!-- [REMOVER ANTES DE PUBLICAR DE VERDADE]
      Enquanto o site for rascunho para revisão, ele não pode aparecer no
      Google. Ainda tem dados por confirmar e nenhum bloco jurídico.
@@ -324,8 +355,19 @@ function cabeca(titulo, descricao, base) {
      de verdade. Em <meta> o navegador ignora. Para ter esses dois seria
      preciso trocar o GitHub Pages por um servico que deixa configurar
      cabecalho, como Netlify ou Cloudflare Pages.
+
+     POR QUE NAO TEM upgrade-insecure-requests
+     Ela estava aqui e foi tirada. Essa diretiva converte http em https em
+     TODA requisicao, inclusive http://localhost, e o servidor de
+     desenvolvimento nao fala https: o preview local quebrava com
+     ERR_SSL_PROTOCOL_ERROR e parecia erro de codigo.
+
+     O que ela protegeria ja esta coberto: as origens listadas acima sao
+     todas https por extenso, e o site em producao e https com redirecao
+     obrigatoria. Ela so pegaria um http:// que alguem escrevesse errado
+     no futuro, e esse ganho nao paga quebrar o ambiente local.
      ========================================================================== -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://i.vimeocdn.com; frame-src https://player.vimeo.com https://www.youtube-nocookie.com; connect-src 'self' https://api.web3forms.com; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://i.vimeocdn.com; frame-src https://player.vimeo.com https://www.youtube-nocookie.com; connect-src 'self' https://api.web3forms.com; form-action 'self'; base-uri 'self'; object-src 'none'">
 
 <!-- Ao sair do site, manda so o dominio no Referer, e nunca o caminho
      completo da pagina. Em HTTP puro nao manda nada. -->
@@ -377,7 +419,7 @@ ${s.lista.itens.map(([t, d]) => `      <li>
 </nav>
 ` : '';
 
-  return cabeca(s.nome, s.resumo, base) + cabecalho(base, s.slug) + `
+  return cabeca(s.nome, s.resumo, base, s.slug) + cabecalho(base, s.slug) + `
 
 <main id="conteudo">
 
