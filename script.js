@@ -39,12 +39,16 @@ var CONFIG = {
      para cá. Vazio faz esses botões voltarem a levar para a seção de
      contato, com telefone e WhatsApp, em vez de quebrarem. */
   calendly:  'https://calendly.com/monicaprovidentia',
-  /* [SUBSTITUIR] Chave gratuita do Web3Forms, que recebe o formulário e
-     encaminha por e-mail. Pegue em https://web3forms.com informando o
-     e-mail que deve receber as mensagens.
-     Vazia deixa a seção "Prefere escrever?" escondida por inteiro, e o
-     aviso sai só no console. */
-  web3forms: '',
+  /* Chave do Web3Forms, que recebe o formulário e encaminha por e-mail
+     para monica@providentiafinancialgroup.com.
+
+     Ela fica visível no código, e isso é normal: toda chave do Web3Forms
+     aparece no HTML de quem usa o serviço. Ela não dá acesso a nada, só
+     permite mandar mensagem para o endereço cadastrado. Para trocar o
+     destino ou desativar, é no painel do web3forms.com.
+
+     Vazia deixa a seção "Prefere escrever?" escondida por inteiro. */
+  web3forms: 'd70d1245-acf0-4837-a12e-0dfc430a2d95',
   instagram: 'monica.providentia',
   facebook:  '',                             // <<< vazio esconde o ícone
   linkedin:  ''                              // <<< vazio esconde o ícone
