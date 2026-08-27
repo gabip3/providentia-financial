@@ -298,6 +298,39 @@ function cabeca(titulo, descricao, base) {
      Quando tudo estiver aprovado, apague estas duas linhas e o robots.txt. -->
 <meta name="robots" content="noindex, nofollow">
 
+<!-- ==========================================================================
+     SEGURANCA
+     --------------------------------------------------------------------------
+     O GitHub Pages nao deixa configurar cabecalho HTTP. Destes dois, o
+     navegador aceita a versao em <meta>, e e o que da para fazer aqui.
+
+     A POLITICA DE CONTEUDO (CSP)
+     Ela diz de onde a pagina pode carregar cada coisa. Tudo que nao esta na
+     lista e bloqueado pelo navegador, mesmo que alguem consiga injetar
+     codigo no HTML.
+
+     script-src 'self' e a parte que importa: NAO tem 'unsafe-inline'. Este
+     site nao tem nenhum <script> inline, nenhum onclick e nenhum
+     href="javascript:", entao script injetado simplesmente nao roda.
+
+     style-src tem 'unsafe-inline' por causa de sete atributos
+     style="--alt-logo:46px" nos logos das seguradoras, que carregam a
+     altura calculada de cada um. E uma excecao so para estilo: CSS inline
+     nao executa codigo. A protecao que vale, a de script, continua estrita.
+
+     O QUE NAO DA PARA FAZER AQUI
+     frame-ancestors e X-Frame-Options, que impediriam o site de ser
+     embutido num iframe de outra pessoa, so funcionam como cabecalho HTTP
+     de verdade. Em <meta> o navegador ignora. Para ter esses dois seria
+     preciso trocar o GitHub Pages por um servico que deixa configurar
+     cabecalho, como Netlify ou Cloudflare Pages.
+     ========================================================================== -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://i.vimeocdn.com; frame-src https://player.vimeo.com https://www.youtube-nocookie.com; connect-src 'self' https://api.web3forms.com; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests">
+
+<!-- Ao sair do site, manda so o dominio no Referer, e nunca o caminho
+     completo da pagina. Em HTTP puro nao manda nada. -->
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
 <meta name="theme-color" content="#0a2368">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">

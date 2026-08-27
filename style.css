@@ -482,6 +482,9 @@ a:focus-visible, button:focus-visible {
   align-items: center;
   gap: 10px;
   margin-left: auto;
+  /* 44px de altura minima: e o alvo mais tocado do site no celular, e
+     estava com 42. */
+  min-height: 44px;
   padding: 6px 0;
   cursor: pointer;
   font-size: 11px;
@@ -1065,6 +1068,23 @@ body.travado { overflow: hidden; }
 /* Telefone nao quebra no meio: "(470)" numa linha e "314-6160" na outra
    deixa de parecer um numero. */
 .rodape__dados [data-telefone] { white-space: nowrap; }
+
+/* O E-MAIL EMPURRAVA O RODAPE INTEIRO
+   monica@providentiafinancialgroup.com sao 36 caracteres sem um espaco, e
+   por isso indivisivel: a largura minima dele virava a largura minima da
+   coluna, a coluna passou a 303px numa faixa de 280, e a pagina ganhou 3px
+   de rolagem horizontal a 320px.
+
+   overflow-wrap: anywhere deixa o navegador quebrar dentro da palavra, mas
+   so quando nao cabe de outro jeito. Em tela larga o e-mail continua numa
+   linha so.
+
+   O min-width: 0 e o par disso: item de grid nasce com min-width auto, que
+   o impede de encolher abaixo do proprio conteudo. Sem os dois juntos, um
+   nao resolve. */
+.rodape__in > * { min-width: 0; }
+.rodape__dados a,
+.rodape__dados li > span { overflow-wrap: anywhere; }
 /* Sem teto no item do local: eu tinha posto 30ch, que da uns 250px, dentro
    de uma coluna de 419. Ele quebrava em tres linhas por causa do teto, e
    nao por falta de espaco. */
@@ -1286,6 +1306,7 @@ body.travado { overflow: hidden; }
   }
   .cartao:hover { transform: none; }
   .cartao .ico, .linha .ico { animation: none; transform: none; }
+  .botao--linha { animation: none; border-color: #1a8f4c; }
   .zap { transform: none; }
 }
 
@@ -1899,7 +1920,11 @@ body.travado { overflow: hidden; }
   border: 1px solid var(--filete);
   border-radius: 0;
   font-family: var(--texto);
-  font-size: 15px;
+  /* 16px, e nao 15. O Safari no iPhone amplia a pagina inteira quando a
+     pessoa toca num campo com fonte menor que 16px, e depois nao volta
+     sozinho: o resto da navegacao fica desalinhado. Um pixel a mais aqui
+     evita isso. */
+  font-size: 16px;
   color: var(--marinho);
   transition: border-color .2s var(--curva);
 }
@@ -1953,3 +1978,70 @@ body.travado { overflow: hidden; }
 @media (max-width: 1179px) {
   .botao--topo { display: none; }
 }
+
+
+/* ==========================================================================
+   TELAS MUITO ESTREITAS
+   --------------------------------------------------------------------------
+   A 320px o cabecalho nao cabia: a marca ocupa 207px, o sanduiche 79, mais
+   20 de vao, e a faixa util tem 280. Sobravam 26px para fora, e a pagina
+   ganhava barra de rolagem horizontal.
+
+   O corte e 364px e nao 379: a 375 a barra cabe com a palavra (precisa de
+   306px e tem 335), entao esconder ali seria tirar sem motivo. A 360 sobram
+   14px, folga pequena demais para confiar em variacao de fonte, entao ali
+   ela ja sai.
+
+   A palavra "Menu" sai, e fica so o icone. Ela nao e removida do documento:
+   vai para fora da tela pela mesma tecnica do campo-armadilha, entao o
+   leitor de tela continua anunciando o botao como "Menu". Some para o olho,
+   permanece para quem depende dela.
+   ========================================================================== */
+@media (max-width: 364px) {
+  .sanduiche__txt {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .sanduiche { gap: 0; }
+
+  .marca__escudo { height: 44px; }
+  .marca__nome b { font-size: 16px; }
+  .marca__nome i { font-size: 8.5px; letter-spacing: .3em; }
+  .marca { gap: 10px; }
+}
+
+
+/* ==========================================================================
+   O BOTAO DO WHATSAPP: BORDA VERDE QUE PULSA
+   --------------------------------------------------------------------------
+   So a BORDA fica verde. O texto continua no dourado escurecido porque
+   verde de WhatsApp sobre branco mede menos de 3 e reprovaria como texto;
+   como borda, o criterio e outro (3:1 de componente, nao 4,5 de texto) e
+   um verde escurecido cumpre.
+
+   O pulso e lento e de pouca amplitude de proposito: seis segundos entre
+   dois tons proximos. Piscar rapido em elemento de acao vira anuncio, e
+   piscar acima de tres vezes por segundo e risco para quem tem epilepsia
+   fotossensivel. Aqui e um respirar.
+
+   Para quem pediu menos movimento no sistema, o bloco no fim do arquivo
+   desliga a animacao e a borda fica no verde parado.
+   ========================================================================== */
+@keyframes pulsa-verde {
+  from, to { border-color: #1a8f4c; }
+  50%      { border-color: #4fd07f; }
+}
+
+.botao--linha {
+  border-color: #1a8f4c;
+  animation: pulsa-verde 6s ease-in-out infinite;
+}
+
+/* No hover o botao inteiro se preenche, e o pulso brigaria com isso. */
+.botao--linha:hover,
+.botao--linha:focus-visible { animation-play-state: paused; }
+.botao--linha:hover { background: #1a8f4c; border-color: #1a8f4c; color: #ffffff; }
