@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ==========================================================================
+     PROVIDENTIA FINANCIAL — A PÁGINA INICIAL EM INGLÊS
+     --------------------------------------------------------------------------
+     Esta página é a irmã de ../index.html. Mesma estrutura, mesmas seções, na
+     mesma ordem. O que muda é o idioma.
+
+     O QUE É ESCRITO À MÃO AQUI
+     Esta cabeça e todo o miolo da página, menos os quatro trechos marcados
+     com GERADO. Tradução é redação, e por isso não é trabalho de gerador.
+
+     O QUE O construir.js REESCREVE A CADA RODADA
+     Os quatro trechos entre um marcador GERADO e o FIM correspondente:
+     cabeçalho, destaque, educação e rodapé. Não edite lá dentro.
+
+     "BRASILEIRAS" NÃO APARECE NESTA PÁGINA
+     A pedido da Gabi. A versão em português fala com quem já se reconhece
+     como família brasileira nos Estados Unidos; aqui a porta é a mesma para
+     qualquer família. Por isso o texto do "Sobre" e o do rodapé dizem
+     famílias, e ponto.
+
+     OS VÍDEOS AINDA NÃO ESTÃO AQUI
+     Os vídeos da Alliance que estão no site são os dublados em português: os
+     títulos deles no Vimeo estão em português, e o áudio também. Pôr um
+     vídeo em português numa página em inglês seria pior do que não pôr. Os
+     campos esperando link estão no dados.js, em ingles.video de cada
+     serviço, do DESTAQUE e de cada DEPOIMENTOS. Quando os links chegarem, é
+     colar e rodar  node construir.js: o vídeo em destaque, a grade de
+     educação, a página de depoimentos e os itens de menu aparecem sozinhos.
+     ========================================================================== -->
+
+<title>Providentia Financial | Financial protection for what matters most</title>
+
+<meta name="description" content="Life insurance and financial planning for families in the United States. I help you protect the people who depend on you and organize what comes next.">
+
+<link rel="canonical" href="https://www.providentiafinancialgroup.com/en/">
+<link rel="alternate" hreflang="pt-BR" href="https://www.providentiafinancialgroup.com/">
+<link rel="alternate" hreflang="en" href="https://www.providentiafinancialgroup.com/en/">
+<link rel="alternate" hreflang="x-default" href="https://www.providentiafinancialgroup.com/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../escudo.png">
+
+<!-- ==========================================================================
+     OPEN GRAPH E TWITTER
+     --------------------------------------------------------------------------
+     E o que aparece quando alguem cola o link no WhatsApp, no Facebook, no
+     LinkedIn ou no iMessage. Sem isso, o preview sai so com o endereco.
+
+     A imagem precisa de endereco ABSOLUTO. Caminho relativo funciona no site
+     e falha no preview, porque quem monta o cartao e um servidor de fora que
+     nao sabe de onde o caminho parte.
+
+     [OTIMIZAR] familia.png tem 1,8 MB. Facebook e LinkedIn aguentam, mas o
+     WhatsApp costuma desistir de imagem grande e mostrar o cartao sem foto.
+     ========================================================================== -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="pt_BR">
+<meta property="og:site_name" content="Providentia Financial">
+<meta property="og:url" content="https://www.providentiafinancialgroup.com/en/">
+<meta property="og:title" content="Providentia Financial | Financial protection for what matters most">
+<meta property="og:description" content="Life insurance and financial planning for families in the United States. I help you protect the people who depend on you and organize what comes next.">
+<meta property="og:image" content="https://www.providentiafinancialgroup.com/familia.png">
+<meta property="og:image:width" content="1693">
+<meta property="og:image:height" content="929">
+<meta property="og:image:alt" content="A family together in the living room: a father, a mother and two children, smiling.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Providentia Financial | Financial protection for what matters most">
+<meta name="twitter:description" content="Life insurance and financial planning for families in the United States. I help you protect the people who depend on you and organize what comes next.">
+<meta name="twitter:image" content="https://www.providentiafinancialgroup.com/familia.png">
+<meta name="twitter:image:alt" content="A family together in the living room: a father, a mother and two children, smiling.">
+<!-- [REMOVER ANTES DE PUBLICAR DE VERDADE]
+     Enquanto o site for rascunho para revisão, ele não pode aparecer no
+     Google. Quando tudo estiver aprovado, apague esta linha aqui, no
+     ../index.html, nas outras duas páginas de miolo próprio, no construir.js
+     e o robots.txt inteiro. -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- A política de conteúdo é a mesma das outras dezenove páginas. A
+     explicação inteira dela está no ../index.html, para não ficar repetida
+     em vinte arquivos. -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://i.vimeocdn.com; frame-src https://player.vimeo.com https://www.youtube-nocookie.com; connect-src 'self' https://api.web3forms.com; form-action 'self'; base-uri 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#0a2368">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&amp;family=Poppins:wght@300;400;500;600;700&amp;family=Allura&amp;display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<a class="pular" href="#conteudo">Skip to content</a>
+
+<!-- ==========================================================================
+     Daqui ate o FIM quem escreve e o construir.js: e o mesmo cabecalho das
+     outras dezenove paginas, no idioma desta. Nao edite aqui dentro, porque
+     a proxima rodada apaga. Os itens do menu estao no textos.js, e a lista
+     de servicos no dados.js.
+     ========================================================================== -->
+<!-- GERADO: cabecalho -->
+<header class="topo" id="topo">
+  <div class="faixa topo__in">
+
+    <a class="marca" href="index.html" aria-label="Providentia Financial, home">
+      <img class="marca__escudo" src="../escudo.png" alt="" width="500" height="500" decoding="async">
+      <span class="marca__nome"><b>Providentia</b><i>Financial</i></span>
+    </a>
+
+    <nav class="nav" aria-label="Main navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#sobre">About</a></li>
+        <li class="tem-sub">
+          <button class="sub-abre" type="button" aria-expanded="false" aria-controls="sub-servicos">
+            Services
+            <svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
+          <ul class="sub" id="sub-servicos">
+            <li><a href="services/living-benefits.html">Living Benefits</a></li>
+            <li><a href="services/tax-free-retirement.html">Tax-free retirement</a></li>
+            <li><a href="services/iul-for-kids.html">IUL for kids</a></li>
+            <li><a href="services/mortgage-protection.html">Mortgage protection</a></li>
+            <li><a href="services/business-planning.html">Business planning</a></li>
+            <li><a href="services/fixed-indexed-annuities.html">Fixed indexed annuities</a></li>
+            <li><a href="services/estate-planning.html">Estate planning</a></li>
+            <li><a href="services/college-planning.html">College planning</a></li>
+            <li class="sub__todos"><a href="index.html#solucoes">See all services</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#contato">Contact</a></li>
+      </ul>
+    </nav>
+
+    <nav class="idioma" aria-label="Language">
+      <ul>
+      <li><a class="idioma__link" href="../index.html" hreflang="pt-BR" lang="pt-BR" aria-label="View this site in Portuguese"><svg class="bandeira" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="2" fill="#009b3a"/><path d="M12 2.2 22.1 8.5 12 14.8 1.9 8.5z" fill="#fedf00"/><circle cx="12" cy="8.5" r="3.7" fill="#002776"/><path d="M8.4 7.1a10.5 10.5 0 0 1 7.2 1.6 3.7 3.7 0 0 1-.2 1.1 9.2 9.2 0 0 0-6.6-1.5z" fill="#fff"/></svg><b>PT</b></a></li>
+      <li><span class="idioma__atual" aria-current="true"><svg class="bandeira" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="2" fill="#b22234"/><g fill="#fff"><rect y="2.4" width="24" height="1.3"/><rect y="5.1" width="24" height="1.3"/><rect y="7.7" width="24" height="1.3"/><rect y="10.4" width="24" height="1.3"/><rect y="13" width="24" height="1.3"/></g><path d="M0 2a2 2 0 0 1 2-2h8.2v9h-10.2z" fill="#3c3b6e"/><g fill="#fff"><circle cx="2.3" cy="1.9" r=".5"/><circle cx="5.1" cy="1.9" r=".5"/><circle cx="7.9" cy="1.9" r=".5"/><circle cx="3.7" cy="3.6" r=".5"/><circle cx="6.5" cy="3.6" r=".5"/><circle cx="2.3" cy="5.3" r=".5"/><circle cx="5.1" cy="5.3" r=".5"/><circle cx="7.9" cy="5.3" r=".5"/><circle cx="3.7" cy="7" r=".5"/><circle cx="6.5" cy="7" r=".5"/></g></svg><b>EN</b></span></li>
+      </ul>
+    </nav>
+
+    <a class="botao botao--marinho botao--topo" href="index.html#contato" data-agendar="index.html">Book a conversation</a>
+
+    <button class="sanduiche" type="button" aria-expanded="false" aria-controls="menu-movel" data-menu="Menu" data-fechar="Close">
+      <span class="sanduiche__txt">Menu</span>
+      <svg class="ico-menu" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
+    </button>
+
+  </div>
+</header>
+
+<div class="painel" id="menu-movel" inert>
+  <nav class="faixa painel__in" aria-label="Navigation">
+    <ul class="painel__lista">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#sobre">About</a></li>
+      <li><a href="index.html#solucoes">Services</a></li>
+      <li class="painel__sub"><a href="services/living-benefits.html">Living Benefits</a></li>
+      <li class="painel__sub"><a href="services/tax-free-retirement.html">Tax-free retirement</a></li>
+      <li class="painel__sub"><a href="services/iul-for-kids.html">IUL for kids</a></li>
+      <li class="painel__sub"><a href="services/mortgage-protection.html">Mortgage protection</a></li>
+      <li class="painel__sub"><a href="services/business-planning.html">Business planning</a></li>
+      <li class="painel__sub"><a href="services/fixed-indexed-annuities.html">Fixed indexed annuities</a></li>
+      <li class="painel__sub"><a href="services/estate-planning.html">Estate planning</a></li>
+      <li class="painel__sub"><a href="services/college-planning.html">College planning</a></li>
+      <li><a href="index.html#contato">Contact</a></li>
+    </ul>
+    <div class="painel__pe">
+      <nav class="idioma idioma--painel" aria-label="Language">
+      <ul>
+      <li><a class="idioma__link" href="../index.html" hreflang="pt-BR" lang="pt-BR" aria-label="View this site in Portuguese"><svg class="bandeira" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="2" fill="#009b3a"/><path d="M12 2.2 22.1 8.5 12 14.8 1.9 8.5z" fill="#fedf00"/><circle cx="12" cy="8.5" r="3.7" fill="#002776"/><path d="M8.4 7.1a10.5 10.5 0 0 1 7.2 1.6 3.7 3.7 0 0 1-.2 1.1 9.2 9.2 0 0 0-6.6-1.5z" fill="#fff"/></svg><b>PT</b></a></li>
+      <li><span class="idioma__atual" aria-current="true"><svg class="bandeira" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="2" fill="#b22234"/><g fill="#fff"><rect y="2.4" width="24" height="1.3"/><rect y="5.1" width="24" height="1.3"/><rect y="7.7" width="24" height="1.3"/><rect y="10.4" width="24" height="1.3"/><rect y="13" width="24" height="1.3"/></g><path d="M0 2a2 2 0 0 1 2-2h8.2v9h-10.2z" fill="#3c3b6e"/><g fill="#fff"><circle cx="2.3" cy="1.9" r=".5"/><circle cx="5.1" cy="1.9" r=".5"/><circle cx="7.9" cy="1.9" r=".5"/><circle cx="3.7" cy="3.6" r=".5"/><circle cx="6.5" cy="3.6" r=".5"/><circle cx="2.3" cy="5.3" r=".5"/><circle cx="5.1" cy="5.3" r=".5"/><circle cx="7.9" cy="5.3" r=".5"/><circle cx="3.7" cy="7" r=".5"/><circle cx="6.5" cy="7" r=".5"/></g></svg><b>EN</b></span></li>
+      </ul>
+    </nav>
+      <a class="botao botao--marinho botao--cheio" href="index.html#contato" data-agendar="index.html">Book a conversation</a>
+      <a class="botao botao--linha botao--cheio" href="#" data-whatsapp><svg class="ico-zap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg> Message me on WhatsApp</a>
+    </div>
+  </nav>
+</div>
+<!-- FIM: cabecalho -->
+
+<main id="conteudo">
+
+<!-- ==========================================================================
+     ABERTURA
+     Texto à esquerda, fotografia à direita. A foto não leva cor por cima:
+     ela some para a esquerda com uma máscara, e não com um véu colorido,
+     para o rosto continuar com a cor original.
+     ========================================================================== -->
+<section class="abertura">
+
+  <!-- [CONFIRMAR] Esta é uma foto de banco de imagens, não são clientes da
+       Monica. Isso é uso comum e legítimo, mas em nenhum lugar da página
+       pode aparecer texto sugerindo que sejam pessoas reais atendidas por
+       ela. O texto ao lado fala do leitor, não das pessoas da foto. -->
+  <div class="abertura__foto">
+    <img src="../familia.png" alt="A family together in the living room: a father, a mother and two children, smiling." width="1693" height="929" fetchpriority="high" decoding="async">
+  </div>
+
+  <div class="faixa abertura__in">
+    <div class="abertura__txt">
+
+      <h1>Financial protection for what matters most</h1>
+
+      <p class="abertura__sub">
+        I help families and business owners build security, grow what they
+        have and leave a lasting legacy, with solutions shaped around your
+        own life.
+      </p>
+
+      <div class="acoes">
+        <a class="botao botao--marinho" href="#contato" data-agendar="">Book a conversation</a>
+        <a class="botao botao--linha" href="#" data-whatsapp>
+          <svg class="ico-zap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+          Message me on WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ==========================================================================
+     PILARES
+     A faixa marinho logo abaixo da abertura. Quatro itens, divididos por
+     filete. É a única fileira de ícones do site.
+     ========================================================================== -->
+<section class="pilares" aria-label="What guides my work">
+  <ul class="faixa pilares__lista">
+
+    <li class="pilar">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+      <h3>Family first</h3>
+      <p>Solutions designed to protect the people you love.</p>
+    </li>
+
+    <li class="pilar">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+      <h3>Financial strength</h3>
+      <p>Build security today and face tomorrow with confidence.</p>
+    </li>
+
+    <li class="pilar">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 7h6v6"/><path d="m22 7-8.5 8.5-5-5L2 17"/></svg>
+      <h3>Wealth that grows</h3>
+      <p>Strategies that help you accumulate, protect and grow.</p>
+    </li>
+
+    <li class="pilar">
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m11 17 2 2a1 1 0 1 0 3-3"/><path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4"/><path d="m21 3 1 11h-2"/><path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3"/><path d="M3 4h8"/></svg>
+      <h3>Someone you can trust</h3>
+      <p>Guidance you can count on at every step of the way.</p>
+    </li>
+
+  </ul>
+</section>
+
+
+<!-- ==========================================================================
+     A MANHÃ
+     A parte mais antiga do site, do primeiro rascunho. É a única seção que
+     não fala de produto nenhum: fala de uma terça-feira.
+
+     O 08:28 não é aleatório. É Romanos 8:28, e foi escolha da Monica. Por
+     isso o horário não muda de idioma para idioma: ele é uma referência, e
+     não um relógio.
+     ========================================================================== -->
+<section class="manha" id="manha">
+  <div class="faixa">
+
+    <p class="manha__hora">08:28</p>
+    <h2>Up to here, it was just an ordinary Tuesday.</h2>
+
+    <p class="manha__lead">
+      You dropped the kids off at school, answered messages, thought about
+      dinner and got on with your life. The hard part is that life does not
+      send an invitation before it changes.
+    </p>
+
+    <ol class="linha">
+      <li>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M6.38 18.7 4 21"/><path d="M17.64 18.67 20 21"/></svg>
+        <b>06:15</b>
+        <span>the alarm goes off</span>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11 20H2"/><path d="M11 4.562v16.157a1 1 0 0 0 1.242.97L19 20V5.562a2 2 0 0 0-1.515-1.94l-4-1A2 2 0 0 0 11 4.561z"/><path d="M11 4H8a2 2 0 0 0-2 2v14"/><path d="M14 12h.01"/><path d="M22 20h-3"/></svg>
+        <b>07:30</b>
+        <span>everybody heads out</span>
+      </li>
+      <li>
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13 5h8"/><path d="M13 12h8"/><path d="M13 19h8"/><path d="m3 17 2 2 4-4"/><rect x="3" y="4" width="6" height="6" rx="1"/></svg>
+        <b>08:05</b>
+        <span>you think about the rest of the day</span>
+      </li>
+      <li class="linha--virada">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15.914 4a1.5 1.5 0 0 0-2.474-1.561l-9 9A1.5 1.5 0 0 0 5.5 14h4.002a.5.5 0 0 1 .471.666L8.086 20a1.5 1.5 0 0 0 2.475 1.56l9-9A1.5 1.5 0 0 0 18.5 10h-3.997a.5.5 0 0 1-.472-.667z"/></svg>
+        <b>08:28</b>
+        <span>something changes</span>
+      </li>
+    </ol>
+
+    <!-- ====================================================================
+         O DESFECHO
+         A Monica leu a versão em português e disse que faltava um fim, e ela
+         estava certa: a linha do tempo parava em "alguma coisa muda" e
+         acabava ali. Susto sem saída, que é justamente o que o resto do site
+         evita.
+
+         O fim vem na mesma linguagem da história. Ela é contada em horas,
+         então o desfecho é a hora seguinte: 08:29. É a única hora do bloco
+         que não está na linha do tempo, porque ela ainda não aconteceu.
+         ==================================================================== -->
+    <p class="manha__fim">
+      <b>08:29</b>
+      <span>Nobody chooses what happens at 08:28. What comes after, you do.</span>
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SE A RENDA PARASSE
+     A pergunta que a manhã prepara. Também é do primeiro rascunho.
+     ========================================================================== -->
+<section class="renda" id="renda">
+  <div class="faixa">
+
+    <!-- A quebra aqui é manual, e isso é de propósito. O text-wrap: balance
+         iguala o tamanho das linhas, mas não sabe onde está o sentido.
+         Onde a frase tem um ponto de respiro claro, vírgula ou fim de
+         sentença, a quebra é marcada na mão.
+
+         O <br class="quebra"> só existe acima de 760px. Abaixo disso não há
+         largura para escolher nada, e o texto volta a fluir sozinho. -->
+    <h2>If your income stopped tomorrow,<br class="quebra"> what would keep going?</h2>
+    <p class="renda__lead">This is not a question meant to scare you.<br class="quebra"> It is a question meant to organize.</p>
+
+    <ul class="renda__lista">
+      <li>
+        <h3>Does the house <em>keep going?</em></h3>
+        <p>Rent or mortgage, bills, upkeep and everything else that keeps the routine running.</p>
+      </li>
+      <li>
+        <h3>Do the kids <em>carry on?</em></h3>
+        <p>School, college, activities and opportunities you do not want disappearing because of one turn nobody saw coming.</p>
+      </li>
+      <li>
+        <h3>Do the plans <em>stay?</em></h3>
+        <p>Trips, retirement, a business, a move, dreams that have not happened yet but are already part of your life together.</p>
+      </li>
+      <li>
+        <h3>Is there <em>time?</em></h3>
+        <p>Protection also means buying time, so your family does not have to make urgent decisions at the worst possible moment.</p>
+      </li>
+    </ul>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SOLUÇÕES
+     Vem logo depois da história de propósito. Ela termina perguntando "se
+     sua renda parasse amanhã, o que continuaria?", e a resposta é esta
+     lista.
+
+     [CONFIRMAR COM A MONICA] Ela atende os oito? Se não faz algum, apague o
+     bloco dele no dados.js, e ele some das vinte páginas de uma vez.
+     Listar serviço que ela não presta é problema de compliance, e não de
+     texto.
+
+     [ATENÇÃO NO SEGUNDO] "Tax-free retirement" pesa mais em inglês do que
+     "aposentadoria livre de impostos" pesa em português, porque em inglês é
+     o nome do produto como o mercado americano o anuncia. O texto do cartão
+     e o da página não prometem isenção nenhuma: dizem que é uma forma de
+     acumular e acessar depois, e que quem responde por imposto é o
+     contador. Não troque isso por promessa tributária sem autorização
+     escrita do compliance.
+     ========================================================================== -->
+<section class="solucoes" id="solucoes">
+  <div class="faixa">
+
+    <div class="titulo-centro">
+      <h2>How I can help you</h2>
+    </div>
+
+    <ul class="cartoes">
+      <li class="cartao">
+        <a href="services/living-benefits.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27"/></svg>
+          <h3>Living Benefits</h3>
+          <p>Coverage that protects you while you are still living.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="services/tax-free-retirement.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-4V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1z"/><path d="M16 10h.01"/><path d="M2 8v1a2 2 0 0 0 2 2h1"/></svg>
+          <h3>Tax-free retirement</h3>
+          <p>A way to build value over the years and reach it later.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="services/iul-for-kids.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/><path d="M15 12h.01"/><path d="M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1"/><path d="M9 12h.01"/></svg>
+          <h3>IUL for kids</h3>
+          <p>Starting early locks in the age and the health of the child.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="services/mortgage-protection.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          <h3>Mortgage protection</h3>
+          <p>Helps keep your home and the future of your family.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="services/business-planning.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+          <h3>Business planning</h3>
+          <p>Protect your business, your partners and your legacy.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="services/fixed-indexed-annuities.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+          <h3>Fixed indexed annuities</h3>
+          <p>A guaranteed floor, with limited participation in the rise of an index.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="services/estate-planning.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 12h-5"/><path d="M15 8h-5"/><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M8 21h12a2 2 0 0 0 2-2v-1a1 1 0 0 0-1-1H11a1 1 0 0 0-1 1v1a2 2 0 1 1-4 0V5a2 2 0 1 0-4 0v2a1 1 0 0 0 1 1h3"/></svg>
+          <h3>Estate planning</h3>
+          <p>Organizing today what stays for the people who come after.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+      <li class="cartao">
+        <a href="services/college-planning.html">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg>
+          <h3>College planning</h3>
+          <p>Getting ready for the cost of higher education in the United States.</p>
+          <span class="cartao__seta"><svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+        </a>
+      </li>
+    </ul>
+
+    <p class="nota">
+      Not all products are available in all states, and what works for you
+      depends on your age, your health, where you live and the approval of
+      the carrier.
+    </p>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     SOBRE
+     Fotografia à esquerda, texto à direita.
+
+     [SUBSTITUIR] ESTE TEXTO É UM RASCUNHO MEU, traduzido do rascunho em
+     português. Da Monica vieram só o nome completo e os cinco filhos; o
+     resto é escrita. Ela precisa ler e corrigir antes de publicar, nos dois
+     idiomas.
+
+     O que eu deliberadamente NÃO escrevi, e ela precisa preencher:
+       · há quanto tempo trabalha com isso
+       · onde nasceu, onde mora, há quanto tempo está nos EUA
+       · formação, certificações, licença
+     Não inventei nenhum desses porque bio de agente de seguro é declaração,
+     e não texto de marketing.
+
+     "BRASILEIRAS" SAIU DAQUI a pedido da Gabi. Em português o segundo
+     parágrafo diz "famílias brasileiras nos Estados Unidos"; aqui diz
+     famílias, e ponto.
+     ========================================================================== -->
+<section class="sobre" id="sobre">
+  <div class="faixa sobre__in">
+
+    <div class="sobre__foto">
+      <img src="../monica-escritorio.jpeg" alt="Monica Silva at her desk, looking at the camera." width="1024" height="1536" loading="lazy" decoding="async">
+    </div>
+
+    <div class="sobre__txt">
+
+      <h2>Your partner in financial security and peace of mind</h2>
+
+      <p>
+        I am Monica Silva, a mother of five. When five people depend on your
+        routine, that question everyone avoids, the one about what happens if
+        something happens to you, stops being abstract and turns into a very
+        concrete number.
+      </p>
+
+      <p>
+        That is how I came into this work: first organizing the protection of
+        my own family, then helping other families do the same. Today I sit
+        down with families across the United States to put together a plan
+        that keeps working even in the years when life does not cooperate.
+      </p>
+
+      <p class="assinatura" aria-hidden="true">Monica Silva</p>
+
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     A FRASE QUE ABRE COM A ROLAGEM
+     O painel entra estreito e vai abrindo até quase a largura da tela, com o
+     canto endireitando no caminho. É o único movimento do site.
+
+     Sem JavaScript, ou com prefers-reduced-motion, o painel já nasce aberto
+     e a frase aparece igual.
+
+     [VERSÃO B - CONFERIR COM O COMPLIANCE]
+     Risco na palavra "everything": nenhuma apólice cobre tudo, sempre há
+     carência, exclusão e limite. Se o compliance apertar, troque por:
+
+       <p>Insurance is not about expecting the worst.
+          <em>It is about taking care of what you already built.</em></p>
+     ========================================================================== -->
+<section class="frase" data-abre>
+  <div class="frase__painel">
+    <div class="faixa">
+      <!-- A quebra cai na fronteira das duas sentenças, que é exatamente
+           onde a cor muda de marinho para branco.
+
+           A segunda sentença era "protecting everything that is already
+           going right", tradução literal do "tudo o que já está dando
+           certo". Em inglês ela ficava longa demais: caía em três linhas,
+           e a terceira era uma órfã de 130px. Saiu "everything that", que
+           é o pedaço que não carregava sentido nenhum. De quebra, some o
+           absoluto que o comentário abaixo apontava como risco. -->
+      <p>Insurance is not about expecting the worst.<br class="quebra"> <em>It is about protecting what is already going right.</em></p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     VÍDEO EM DESTAQUE
+     Texto escrito pela Monica, traduzido.
+
+     Enquanto o vídeo em inglês não existir, o construir.js deixa este bloco
+     vazio e a seção não aparece. O campo é ingles.video, no bloco DESTAQUE
+     do dados.js.
+
+     [CONFIRMAR] "cost nothing extra" é afirmação forte, e veio do material
+     da Alliance. Em muitas apólices o recurso vem incluso sem prêmio
+     adicional, mas isso depende da companhia e do produto. Confirme que
+     vale para TODAS as apólices que a Monica oferece, ou troque por
+     "usually come included at no additional cost".
+     ========================================================================== -->
+<!-- GERADO: destaque -->
+
+<!-- FIM: destaque -->
+
+
+<!-- ==========================================================================
+     BENEFÍCIOS EM VIDA
+     O conteúdo central da Alliance Group, que é a IMO com quem a Monica
+     trabalha.
+
+     FONTE:  https://alliancegroupatl.com/living-benefits
+     A expressão "life insurance you don't have to die to use" é deles, e
+     aqui ela volta ao original: a versão em português é que era a tradução.
+
+     [CONFERIR COM A MONICA / COMPLIANCE]
+     · O texto explica o CONCEITO. Não cita companhia, não cita valor e não
+       diz que a pessoa tem direito: diz que existem apólices com esses
+       recursos.
+     · A régua de valores existe no material da Alliance e NÃO entrou aqui
+       de propósito. Número de pagamento em página de agente vira promessa.
+     · Eles publicam "up to 70% of Americans are uninsured or underinsured".
+       É estatística deles, não minha, e ficou fora: número sem fonte no ar
+       é passivo.
+     ========================================================================== -->
+<section class="beneficios" id="beneficios">
+  <div class="faixa">
+
+    <h2>There is life insurance you do not have to die to use.</h2>
+
+    <p class="beneficios__lead">
+      Some policies come with features called <em>Living Benefits</em>. If you
+      are diagnosed with a serious condition, you can draw part of your own
+      benefit while you are still living and use it however you need:
+      treatment, the bills at home, the kids at school, whatever it takes.
+    </p>
+
+    <ul class="condicoes">
+      <li>
+        <h3>Terminal illness</h3>
+        <p>When life expectancy drops to one or two years.</p>
+      </li>
+      <li>
+        <h3>Chronic illness</h3>
+        <p>When you can no longer perform two of six basic daily activities, or there is severe cognitive loss.</p>
+      </li>
+      <li>
+        <h3>Critical illness</h3>
+        <p>Cancer, heart attack and stroke are among the conditions usually on the list.</p>
+      </li>
+      <li>
+        <h3>Critical injury</h3>
+        <p>Paralysis, coma, severe burns, serious brain injury.</p>
+      </li>
+    </ul>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     AS SEGURADORAS
+     A seção entra depois do conteúdo, e não antes: primeiro a pessoa entende
+     o que ela faz, depois vê quem está atrás. Antes disso seria crachá.
+
+     [CONFIRMAR] A lista está no dados.js, em SEGURADORAS, e precisa ser
+     conferida uma por uma: só entra companhia com quem a Monica tem
+     nomeação ativa.
+
+     [SOBRE OS LOGOS] O disclaimer do rodapé resolve a parte de dizer que as
+     marcas são de terceiros. Ele NÃO substitui a autorização de uso da
+     marca, e a lista do que pedir está em logos/LEIA-ME.txt.
+     ========================================================================== -->
+<section class="seguradoras" id="seguradoras">
+  <div class="faixa">
+
+    <!-- Aqui NÃO há quebra ditada, e na versão em português há.
+
+         Em português a frase é mais curta e a quebra antes de "dos Estados
+         Unidos" deixa duas linhas parelhas. Em inglês a mesma quebra dava
+         561px na primeira linha e 269 na segunda, e acima de 1100px de
+         tela ela forçava duas linhas onde a frase caberia numa. Sem ela, o
+         text-wrap: balance parte perto do meio quando precisa, e não parte
+         quando não precisa. -->
+    <h2>I work with the largest insurance carriers in the United States</h2>
+
+    <p class="seguradoras__lead">
+      Providentia Financial is an independent agency. That means I do not work
+      for one carrier: I compare what several of them offer and bring you what
+      makes sense in your case.
+    </p>
+
+    <ul class="seguradoras__lista">
+      <li class="seguradora" style="--alt-logo:45px"><img src="../logos/NLG-logo.png" alt="National Life Group" loading="lazy" decoding="async"></li>
+      <li class="seguradora" style="--alt-logo:62px"><img src="../logos/FG.png" alt="F&amp;G" loading="lazy" decoding="async"></li>
+      <li class="seguradora" style="--alt-logo:46px"><img src="../logos/corebridge.png" alt="Corebridge Financial" loading="lazy" decoding="async"></li>
+      <li class="seguradora" style="--alt-logo:60px"><img src="../logos/forester.png" alt="Foresters Financial" loading="lazy" decoding="async"></li>
+      <li class="seguradora" style="--alt-logo:47px"><img src="../logos/american.png" alt="American National" loading="lazy" decoding="async"></li>
+      <li class="seguradora" style="--alt-logo:60px"><img src="../logos/americo.png" alt="Americo" loading="lazy" decoding="async"></li>
+      <li class="seguradora" style="--alt-logo:43px"><img src="../logos/Ameritas-Insurance.png" alt="Ameritas" loading="lazy" decoding="async"></li>
+    </ul>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     CENTRO DE EDUCAÇÃO
+     A grade é gerada a partir do dados.js. Enquanto nenhum serviço tiver
+     vídeo em inglês, ela fica vazia e a seção inteira não aparece, junto com
+     o item "Education" do menu.
+     ========================================================================== -->
+<!-- GERADO: educacao -->
+
+<!-- FIM: educacao -->
+
+
+<!-- ==========================================================================
+     CHAMADA
+     A faixa marinho do fim. Título à esquerda, texto no meio separado por
+     filete vertical, botões à direita.
+     ========================================================================== -->
+<section class="chamada" id="contato">
+  <div class="faixa chamada__in">
+
+    <div class="chamada__tit">
+      <h2>Ready for the next step?</h2>
+    </div>
+
+    <p class="chamada__txt">
+      Book a free conversation and we will build a plan around your life,
+      your goals and your future.
+    </p>
+
+    <!-- Agendar é a ação principal daqui: a seção inteira fala de marcar uma
+         conversa. Telefone e WhatsApp ficam como alternativa para quem
+         prefere falar agora a escolher um horário. -->
+    <div class="chamada__acoes">
+      <a class="botao botao--ouro botao--cheio" href="#contato" data-agendar="">
+        Book a conversation
+      </a>
+      <a class="botao botao--linha-clara botao--cheio" href="#" data-telefone>
+        <span data-preencher="telefone">[ TELEFONE ]</span>
+      </a>
+      <a class="botao botao--linha-clara botao--cheio" href="#" data-whatsapp>
+        Message me on WhatsApp
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ==========================================================================
+     O FORMULÁRIO
+     Vem depois da chamada de propósito, e não no lugar dela. Quem já decidiu
+     agenda direto no Calendly; quem ainda tem uma pergunta escreve aqui. São
+     dois momentos diferentes da mesma pessoa.
+
+     A chave do Web3Forms é a MESMA das duas versões, e está no CONFIG do
+     script.js. As mensagens chegam no mesmo e-mail. O que muda é o idioma
+     dos rótulos e o assunto que o script monta.
+
+     Enquanto a chave estiver vazia, esta seção inteira fica escondida.
+     ========================================================================== -->
+<section class="escrever" id="escrever" hidden>
+  <div class="faixa escrever__in">
+
+    <div class="escrever__txt">
+      <h2>Prefer to write?</h2>
+      <p>
+        Tell me in a few lines what you have been thinking about. I answer
+        personally, and it is not an automated reply.
+      </p>
+      <p class="escrever__prazo">I usually answer within one business day.</p>
+    </div>
+
+    <form class="form" novalidate>
+      <!-- A chave entra aqui pelo script.js. -->
+      <input type="hidden" name="access_key" value="">
+      <!-- RESPONDER DIRETO NO E-MAIL
+           O valor "email" nao e um endereco: e o NOME do campo do formulario
+           de onde o Web3Forms tira o endereco de resposta. Com isso, o
+           Reply-To da mensagem que chega para a Monica passa a ser o e-mail
+           de quem escreveu, e ela responde apertando "Responder". -->
+      <input type="hidden" name="replyto" value="email">
+      <input type="hidden" name="subject" value="New message from the Providentia Financial site">
+      <input type="hidden" name="from_name" value="Providentia Financial site">
+      <!-- Armadilha de robô: fica fora da tela e sem foco. Se vier
+           preenchida, o Web3Forms descarta o envio. -->
+      <input type="checkbox" name="botcheck" class="fora-da-tela" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+      <div class="campo">
+        <label for="f-nome">Your name</label>
+        <input id="f-nome" name="nome" type="text" autocomplete="name" required>
+        <span class="erro" data-erro="nome"></span>
+      </div>
+
+      <div class="campo">
+        <label for="f-email">Your email</label>
+        <input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+        <span class="erro" data-erro="email"></span>
+      </div>
+
+      <div class="campo">
+        <label for="f-tel">Your phone <span class="opcional">(optional)</span></label>
+        <input id="f-tel" name="telefone" type="tel" autocomplete="tel" inputmode="tel">
+      </div>
+
+      <div class="campo">
+        <label for="f-assunto">What would you like to talk about?</label>
+        <select id="f-assunto" name="assunto">
+          <option value="Not sure yet">Not sure yet</option>
+          <option value="Living Benefits">Living Benefits</option>
+          <option value="Tax-free retirement">Tax-free retirement</option>
+          <option value="IUL for kids">IUL for kids</option>
+          <option value="Mortgage protection">Mortgage protection</option>
+          <option value="Business planning">Business planning</option>
+          <option value="Fixed indexed annuities">Fixed indexed annuities</option>
+          <option value="Estate planning">Estate planning</option>
+          <option value="College planning">College planning</option>
+        </select>
+      </div>
+
+      <div class="campo">
+        <label for="f-msg">Your message</label>
+        <textarea id="f-msg" name="mensagem" rows="4" required></textarea>
+        <span class="erro" data-erro="mensagem"></span>
+      </div>
+
+      <button class="botao botao--marinho botao--cheio" type="submit">Send</button>
+      <p class="form__estado" role="status" aria-live="polite"></p>
+
+      <!-- [SOBRE OS DADOS] Este aviso pede para a pessoa NÃO mandar número
+           de apólice, SSN nem dado bancário. Formulário de site não é canal
+           seguro para isso, e num site de seguro essa frase precisa estar
+           visível, e não escondida numa política de privacidade. -->
+      <p class="form__aviso">
+        Please do not send policy numbers, Social Security numbers or bank
+        details through this form. A website form is not a secure channel for
+        that kind of information.
+      </p>
+    </form>
+
+  </div>
+</section>
+
+</main>
+
+<!-- ==========================================================================
+     Daqui ate o FIM quem escreve e o construir.js: e o mesmo rodape das
+     outras dezenove paginas, com o bloco juridico. Nao edite aqui dentro.
+     Os textos estao no textos.js, e assim um disclosure novo entra nos dois
+     idiomas de uma vez.
+     ========================================================================== -->
+<!-- GERADO: rodape -->
+<footer class="rodape">
+  <div class="faixa rodape__in">
+
+    <a class="marca marca--rodape" href="index.html" aria-label="Providentia Financial, home">
+      <img class="marca__escudo" src="../escudo.png" alt="" width="500" height="500" decoding="async">
+      <span class="marca__nome"><b>Providentia</b><i>Financial</i></span>
+    </a>
+
+    <!-- ====================================================================
+         O SELO DE CREDENCIAL
+         --------------------------------------------------------------------
+         [CONFIRMAR AS DUAS PALAVRAS, UMA A UMA]
+
+         "Licensed" e a licenca de corretora. "Insured", no mercado
+         americano, quer dizer que ela carrega E&O: Errors & Omissions,
+         o seguro de responsabilidade profissional. Sao duas afirmacoes
+         verificaveis, e nao slogan.
+
+         A maioria dos agentes carrega E&O, e as IMOs costumam exigir. Mas
+         se por algum motivo ela nao tiver a apolice ativa, a palavra
+         "Insured" tem de sair. Confirme antes de publicar.
+
+         Fica em ingles NOS DOIS IDIOMAS porque e termo do mercado dos
+         Estados Unidos, e e assim que o publico dela ja viu em outros
+         negocios americanos. A linha de baixo e que muda: em portugues ela
+         traduz a expressao, em ingles ela diz o que a expressao cobre.
+         ==================================================================== -->
+    <p class="selo">
+      <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+      <span>
+        <b>Licensed &amp; Insured Agent</b>
+        <i>Licensed agent, carrying professional liability coverage.</i>
+      </span>
+    </p>
+
+    <ul class="rodape__dados">
+      <li>
+        <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+        <a href="#" data-telefone><span data-preencher="telefone">[ TELEFONE ]</span></a>
+      </li>
+      <li>
+        <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
+        <a href="#" data-email><span data-preencher="email">[ E-MAIL ]</span></a>
+      </li>
+      <li>
+        <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+        <!-- [CONFIRMAR ANTES DE PUBLICAR] A Monica informou que atende os
+             Estados Unidos inteiros. Isso e comum entre agentes: da para ser
+             licenciado em varios estados de uma vez. Mas "todos os EUA" e
+             afirmacao verificavel, e um estado em que ela NAO esteja
+             licenciada torna a frase falsa.
+
+             Peca a lista dos estados em que ela tem licenca ativa. Se for
+             mesmo todos, esta frase fica. Se faltar algum, troque por
+             "Atendendo clientes em XX estados" e ponha a lista numa pagina
+             ou no rodape. O texto mora no textos.js, em "atendimento", e
+             muda nos dois idiomas de uma vez.
+
+             A palavra "brasileiras" saiu daqui a pedido da Gabi: o site
+             atende quem chegar. -->
+        <span>Serving families across the United States</span>
+      </li>
+    </ul>
+
+    <ul class="rodape__redes">
+      <li><a href="#" data-facebook aria-label="Providentia Financial on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 8.6V7.1c0-.8.2-1.2 1.4-1.2h1.5V3.2c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v1.5H8.3V11h2.4v8h3v-8h2.5l.4-2.4H14z"/></svg></a></li>
+      <li><a href="#" data-instagram aria-label="Providentia Financial on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.6" y="3.6" width="16.8" height="16.8" rx="5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="3.9" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.1" cy="6.9" r="1.3"/></svg></a></li>
+      <li><a href="#" data-linkedin aria-label="My LinkedIn profile"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.9 8.9H4.2V19h2.7zM5.5 4.4a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2zM19.8 19h-2.7v-4.9c0-1.2 0-2.7-1.6-2.7s-1.9 1.3-1.9 2.6V19H11V8.9h2.6v1.4h.1a2.9 2.9 0 0 1 2.6-1.4c2.8 0 3.3 1.8 3.3 4.2z"/></svg></a></li>
+    </ul>
+
+  </div>
+
+  <div class="faixa rodape__legal">
+    <!-- ====================================================================
+         O BLOCO JURÍDICO
+         --------------------------------------------------------------------
+         SOBRE O NÚMERO DA LICENÇA
+         Ele NÃO é dado sigiloso. Licença de corretor de seguros nos Estados
+         Unidos é registro público: qualquer pessoa consulta a Monica pelo
+         nome no site do Departamento de Seguros da Flórida e vê o número, o
+         status e as linhas em que ela pode atuar.
+
+         Em vários estados publicá-lo é obrigatório. A Califórnia, por
+         exemplo, exige o número da licença em anúncio impresso e cartão de
+         visita. Se a Flórida exige em site, EU NÃO SEI, e isso não é coisa
+         para deduzir: quem responde é o compliance da Alliance ou da
+         companhia, que costuma ter regra própria de publicidade acima da
+         regra do estado.
+
+         O QUE É NECESSÁRIO DE QUALQUER JEITO
+         · o nome sob o qual ela é licenciada, escrito exatamente assim
+         · os estados em que ela pode de fato atender
+         · o disclosure que a companhia exigir
+
+         Um "e mais" que costuma passar batido: se "Providentia Financial"
+         for nome fantasia e não a razão social licenciada, muitos estados
+         pedem que o nome legal apareça em algum lugar da página.
+
+         AGORA SÃO DOIS IDIOMAS, e isso muda uma coisa: o que entrar aqui
+         precisa entrar nos dois. Um disclosure que só existe em português
+         não protege ninguém na página em inglês. É por isso que estes
+         textos moram no textos.js, e não soltos no HTML.
+
+         Quando tiver os textos, descomente e preencha lá, e a linha entra
+         nas vinte páginas de uma vez:
+
+         <p class="rodape__mini">Monica Silva, licenciada como NOME LEGAL.</p>
+         <p class="rodape__mini">Atendendo os estados de XX, XX e XX.</p>
+         <p class="rodape__mini">TEXTO EXATO DO DISCLOSURE DA COMPANHIA.</p>
+         <p class="rodape__mini">Licença nº 000000 (Flórida).</p>
+         ==================================================================== -->
+    <!-- Este parágrafo é obrigatório a partir do momento em que o site cita
+         nome de seguradora. Ele diz três coisas, e as três importam:
+         que a Providentia é agência independente e não pertence a nenhuma
+         delas, que a disponibilidade muda de estado para estado, e que as
+         marcas são de terceiros. O texto veio da orientação de compliance
+         que a Monica recebeu.
+
+         Se a lista de seguradoras mudar, o nome citado aqui muda junto. -->
+    <p class="rodape__mini">
+      Providentia Financial is an independent agency. Product and carrier availability varies by state. National Life Group&reg; and other marks mentioned belong to their respective owners.
+    </p>
+
+    <p class="rodape__mini">
+      This site is for informational purposes and does not constitute tax, legal or investment advice. Guarantees depend on the claims paying ability of the issuing carrier. Not all products are available in all states. Do not send financial information through this site.
+    </p>
+    <p class="rodape__mini">&copy; <span data-ano>2026</span> Providentia Financial.</p>
+  </div>
+</footer>
+
+<a class="zap" href="#" data-whatsapp aria-label="Message me on WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
+</a>
+<!-- FIM: rodape -->
+
+<script src="../script.js"></script>
+</body>
+</html>

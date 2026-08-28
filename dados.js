@@ -42,7 +42,9 @@ var CAPAS = {
   '336429235': 'https://i.vimeocdn.com/video/784437285-64fb45e61442064bc0a15c6c63905b7d67d447bc72287e48c4c65f5442fd7a88-d_1280?region=us',
   '375733638': 'https://i.vimeocdn.com/video/834592931-b9abdc5c95909691d6b7edf3b635b3e57046cb8b4c5a8999800304be6c70e46c-d_1280?region=us',
   '377297016': 'https://i.vimeocdn.com/video/836685560-ec0760807b42d9f1785770e49e727922bee637eaaa74973ccc44e0f5d0134ec5-d_1280?region=us',
-  '520044841': 'https://i.vimeocdn.com/video/1076941238-cfe8e67248cdc38e62c8162ee0a8602671b5cc47861b18d76462d9a03771661d-d_1280?region=us'
+  '520044841': 'https://i.vimeocdn.com/video/1076941238-cfe8e67248cdc38e62c8162ee0a8602671b5cc47861b18d76462d9a03771661d-d_1280?region=us',
+  '957368852': 'https://i.vimeocdn.com/video/1871251336-6306886955333fb83c53121b757f169fc632f7c0a0d3e291038bab5805a4a80a-d_1280?region=us',
+  '572648707': 'https://i.vimeocdn.com/video/1184231154-ea6154248ce4e5c3dc4d235301cf3545b59922a254905a4ee6db156357ab9d8e-d_1280?region=us'
 };
 
 /* Títulos e duração como estão no Vimeo da Alliance. */
@@ -82,6 +84,14 @@ var VIDEO_INFO = {
   "520044841": {
     "titulo": "Pessoas reais. Histórias reais de Benefícios em Vida.",
     "segundos": 134
+  },
+  "957368852": {
+    "titulo": "Uma história de Benefícios em Vida: Roseli de Paula",
+    "segundos": 284
+  },
+  "572648707": {
+    "titulo": "Latasha McCray: uma história de Benefícios em Vida",
+    "segundos": 304
   }
 };
 
@@ -153,10 +163,63 @@ var SEGURADORAS = [
   { nome: 'Ameritas',                logo: 'Ameritas-Insurance.png',   altura: 43 },  /* 565x161, 3.51:1 */
 ];
 
+/* ==========================================================================
+   OS SERVIÇOS, NOS DOIS IDIOMAS
+   --------------------------------------------------------------------------
+   Cada serviço é UM bloco. Os campos de fora são o português; o bloco
+   "ingles" dentro dele é a versão em inglês do MESMO serviço.
+
+   Estar no mesmo bloco é de propósito: assim os dois idiomas não podem se
+   separar. Se alguém apagar um serviço, ele some nos dois; se alguém trocar
+   o vídeo, é no mesmo lugar. A alternativa seria um dados-en.js separado, e
+   aí bastaria uma distração para o site ter oito serviços em português e
+   sete em inglês.
+
+   CUIDADO PARA NÃO CONFUNDIR DOIS CAMPOS COM NOME PARECIDO
+     en:      "Living Benefits"
+              É a linha miudinha em cima do título, na página em PORTUGUÊS.
+              O termo de mercado em inglês, que serve de ponte para quem já
+              ouviu falar assim. Na página em inglês ela não aparece: lá o
+              título já é esse.
+     ingles:  o bloco inteiro da versão em inglês.
+
+   O VÍDEO
+     video:          o vídeo da página em português
+     ingles.video:   o vídeo da página em inglês
+
+   Os vídeos da Alliance que estão aqui são TODOS em português: os títulos
+   no Vimeo estão em português, e o áudio também. Por isso ingles.video está
+   vazio em todos os oito. Enquanto estiver vazio, a página em inglês
+   simplesmente não mostra vídeo, e o construir.js avisa no fim da rodada
+   quais faltam. Quando os links chegarem, é colar um por linha e rodar de
+   novo: nada mais precisa mudar.
+   ========================================================================== */
 var SERVICOS = [
 
   {
     slug:  'beneficios-em-vida',
+
+    /* ---------- a versao em ingles deste mesmo servico ---------- */
+    ingles: {
+      slug:   'living-benefits',
+      nome:   'Living Benefits',
+      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      resumo: 'Coverage that protects you while you are still living.',
+      titulo: 'There is life insurance you do not have to die to use.',
+      texto: [
+        'Some policies come with features called Living Benefits. If you are diagnosed with a serious condition, you can draw part of your own benefit while you are still living and use it however you need: treatment, the bills at home, the kids at school, whatever it takes.',
+        'What is left over continues as a death benefit. Which conditions qualify, how much is released and who is eligible depend on the policy, on the carrier and on the approval of each case.'
+      ],
+      lista: {
+        titulo: 'The four conditions that usually open the door',
+        itens: [
+          ['Terminal illness', 'When life expectancy drops to one or two years.'],
+          ['Chronic illness', 'When you can no longer perform two of six basic daily activities, or there is severe cognitive loss.'],
+          ['Critical illness', 'Cancer, heart attack and stroke are among the conditions usually on the list.'],
+          ['Critical injury', 'Paralysis, coma, severe burns, serious brain injury.']
+        ]
+      }
+    },
     nome:  'Benefícios em Vida',
     en:    'Living Benefits',
     video: '375733638',
@@ -186,6 +249,19 @@ var SERVICOS = [
        escrita do compliance. Apólice mal desenhada vira MEC e perde o
        tratamento, e aí a promessa que ficou no site vira problema. */
     slug:  'aposentadoria-livre-de-impostos',
+
+    /* ---------- a versao em ingles deste mesmo servico ---------- */
+    ingles: {
+      slug:   'tax-free-retirement',
+      nome:   'Tax-free retirement',
+      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      resumo: 'A way to build value over the years and reach it later.',
+      titulo: 'Build it today so you can reach it later.',
+      texto: [
+        'A policy designed to build cash value over the years, with access to that value further down the road. It is a long term strategy: the earlier you start, the more time works in your favor.',
+        'How that access is taxed depends on how the policy is designed and on your own situation. Your accountant is the one who answers that, and I work alongside them. This site does not give tax advice.'
+      ]
+    },
     nome:  'Aposentadoria livre de impostos',
     en:    'Tax-Free Retirement',
     video: '270199244',
@@ -199,6 +275,19 @@ var SERVICOS = [
 
   {
     slug:  'iul-para-criancas',
+
+    /* ---------- a versao em ingles deste mesmo servico ---------- */
+    ingles: {
+      slug:   'iul-for-kids',
+      nome:   'IUL for kids',
+      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      resumo: 'Starting early locks in the age and the health of the child.',
+      titulo: 'Time does the heavy lifting for whoever starts early.',
+      texto: [
+        'A policy opened in childhood locks in the age and the health of the child, and lets the years work in their favor. A small, steady contribution, kept up for a long time, goes a long way.',
+        'It is usually meant for college, a down payment on a house or a first business. And it leaves the child with permanent coverage already secured into adulthood, whatever their health does later on.'
+      ]
+    },
     nome:  'IUL para crianças',
     en:    'IUL for Kids',
     video: '336429235',
@@ -212,6 +301,19 @@ var SERVICOS = [
 
   {
     slug:  'protecao-hipotecaria',
+
+    /* ---------- a versao em ingles deste mesmo servico ---------- */
+    ingles: {
+      slug:   'mortgage-protection',
+      nome:   'Mortgage protection',
+      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      resumo: 'Helps keep your home and the future of your family.',
+      titulo: 'The biggest debt and the biggest asset a family has are the same thing.',
+      texto: [
+        'If the main income of the household stops, the policy is designed so the mortgage keeps being paid. The idea is simple: nobody should lose the house right after losing someone.',
+        'Many of these plans come with Living Benefits included, which means the money can also come in for a serious illness or injury, and not only for a death.'
+      ]
+    },
     nome:  'Proteção hipotecária',
     en:    'Mortgage Protection',
     video: '270160851',
@@ -225,6 +327,19 @@ var SERVICOS = [
 
   {
     slug:  'protecao-do-negocio',
+
+    /* ---------- a versao em ingles deste mesmo servico ---------- */
+    ingles: {
+      slug:   'business-planning',
+      nome:   'Business planning',
+      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      resumo: 'Protect your business, your partners and your legacy.',
+      titulo: 'A business runs on people. And people get sick.',
+      texto: [
+        'A partner leaving, a key person falling ill, a succession nobody ever agreed on. These are risks every business owner knows about and almost nobody organizes ahead of time.',
+        'I help you structure the insurance side of it: key person coverage, buy and sell agreements between partners, continuity. The legal agreement itself is with an attorney and an accountant, and I work alongside them.'
+      ]
+    },
     nome:  'Proteção do seu negócio',
     en:    'Business Planning',
     video: '270162747',
@@ -238,6 +353,19 @@ var SERVICOS = [
 
   {
     slug:  'anuidades',
+
+    /* ---------- a versao em ingles deste mesmo servico ---------- */
+    ingles: {
+      slug:   'fixed-indexed-annuities',
+      nome:   'Fixed indexed annuities',
+      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      resumo: 'A guaranteed floor, with limited participation in the rise of an index.',
+      titulo: 'A floor underneath, and a ceiling above.',
+      texto: [
+        'A fixed indexed annuity guarantees a minimum amount of interest and at the same time takes part, within limits, in the rise of a market index. You do not lose in the down years, and you also do not capture the whole climb.',
+        'It has fees and it has a surrender period: taking money out before that period ends costs you. That goes on the table before anything else, and not afterwards.'
+      ]
+    },
     nome:  'Anuidades com índice fixo',
     en:    'Fixed Indexed Annuities',
     video: '257941782',
@@ -262,6 +390,19 @@ var SERVICOS = [
        o primeiro parágrafo deixam claro logo de cara que o assunto é
        sucessão e herança. */
     slug:  'planejamento-imobiliario',
+
+    /* ---------- a versao em ingles deste mesmo servico ---------- */
+    ingles: {
+      slug:   'estate-planning',
+      nome:   'Estate planning',
+      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      resumo: 'Organizing today what stays for the people who come after.',
+      titulo: 'Leaving things in order is an act of care.',
+      texto: [
+        'Estate planning is deciding, while you are here and with a clear head, what happens to what you built. Without it, the people who stay have to make hard decisions at the worst possible moment.',
+        'Life insurance is usually the simplest piece of that plan, because it delivers money quickly and directly to the people you chose. The other pieces involve an attorney and an accountant, and I work alongside them.'
+      ]
+    },
     nome:  'Planejamento imobiliário',
     en:    'Estate Planning',
     video: '377297016',
@@ -275,6 +416,19 @@ var SERVICOS = [
 
   {
     slug:  'planejamento-universitario',
+
+    /* ---------- a versao em ingles deste mesmo servico ---------- */
+    ingles: {
+      slug:   'college-planning',
+      nome:   'College planning',
+      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      resumo: 'Getting ready for the cost of higher education in the United States.',
+      titulo: 'College gets here faster than it looks.',
+      texto: [
+        'The cost of higher education in the United States has been rising faster than inflation for decades. Whoever starts getting organized early has choices; whoever starts late has debt.',
+        'There are different paths for this, each with its own rule about taxes and about how the money counts when you apply for financial aid. The conversation starts by understanding your situation, and not by picking a product.'
+      ]
+    },
     nome:  'Planejamento universitário',
     en:    'College Planning',
     video: '270183218',
@@ -298,7 +452,90 @@ var DESTAQUE = {
      prêmio adicional, mas isso depende da companhia e do produto.
      Confirme que vale para TODAS as apólices que a Monica oferece antes
      de publicar, ou troque por "costumam vir inclusos sem custo adicional". */
-  texto: 'Os Benefícios em Vida existem há 20 anos, mas a maioria dos americanos ainda não sabe o que são ou o que significam. Eles permitem que o segurado tenha acesso ao valor do seguro de vida por causa de morte, para ter dinheiro em mãos quando mais precisa, caso sofra um ataque cardíaco, derrame, câncer ou outra doença qualificada. E a melhor parte é que esses benefícios não custam nada a mais.'
+  texto: 'Os Benefícios em Vida existem há 20 anos, mas a maioria dos americanos ainda não sabe o que são ou o que significam. Eles permitem que o segurado tenha acesso ao valor do seguro de vida por causa de morte, para ter dinheiro em mãos quando mais precisa, caso sofra um ataque cardíaco, derrame, câncer ou outra doença qualificada. E a melhor parte é que esses benefícios não custam nada a mais.',
+
+  /* A versão em inglês do mesmo bloco, para en/index.html.
+
+     O vídeo está vazio porque o vídeo da Alliance que está no ar é o
+     dublado em português, e não serve numa página em inglês. Enquanto
+     estiver vazio, a seção inteira não é gerada lá, e o construir.js
+     avisa no fim da rodada. */
+  ingles: {
+    video:     '',   /* [COLAR O LINK EM INGLES] */
+    titulo:    'Living Benefit Stories',
+    subtitulo: 'Real clients. Real stories.',
+    texto:     'Living Benefits have been around for 20 years, but most Americans still do not know what they are or what they mean. They let the policyholder reach the value of their own life insurance, the money that would be paid on death, so they have cash in hand when they need it most, if they suffer a heart attack, a stroke, cancer or another qualifying illness. And the best part is that these benefits cost nothing extra.'
+  }
 };
 
-if (typeof module !== 'undefined') { module.exports = { SERVICOS: SERVICOS, DESTAQUE: DESTAQUE, CAPAS: CAPAS, VIDEO_INFO: VIDEO_INFO, SEGURADORAS: SEGURADORAS }; }
+
+
+/* ==========================================================================
+   OS DEPOIMENTOS
+   --------------------------------------------------------------------------
+   Antes esta lista morava escrita à mão dentro do depoimentos.html, e por
+   isso não tinha como existir em inglês: o texto de cada card estava preso
+   no HTML de uma página só. Agora ela mora aqui, e o construir.js escreve a
+   grade nos dois idiomas.
+
+   [CONFIRMAR] Os três vídeos são material da Alliance Group, e os dois de
+   baixo mostram pessoas identificadas pelo nome. Isso é diferente de imagem
+   genérica: são histórias reais de pessoas reais, e o direito de uso vem da
+   autorização de afiliada da Monica. Guarde essa autorização por escrito.
+
+   O texto de cada card saiu da descrição do próprio vídeo no Vimeo, sem
+   acrescentar nada. Não invente detalhe de diagnóstico, de valor pago nem
+   de desfecho.
+
+   Os campos em inglês estão vazios pelo mesmo motivo dos outros: os vídeos
+   que existem são os dublados em português. Enquanto TODOS estiverem
+   vazios, a página em inglês não é gerada e o item "Testimonials" não
+   aparece no menu de lá. Uma página de depoimentos sem depoimento nenhum é
+   pior que não ter a página.
+
+   PARA ACRESCENTAR UM DEPOIMENTO
+   Copie um bloco, troque o número do vídeo, o título e o texto, e pegue a
+   capa em https://vimeo.com/api/oembed.json?url=https://vimeo.com/NUMERO
+   no campo "thumbnail_url". A grade se reorganiza sozinha.
+   ========================================================================== */
+var DEPOIMENTOS = [
+
+  {
+    video:  '520044841',
+    titulo: 'Pessoas reais, histórias reais',
+    texto:  'O que são os Benefícios em Vida, contado por quem precisou usar.',
+    ingles: {
+      video:  '',   /* [COLAR O LINK EM INGLES] */
+      titulo: 'Real people, real stories',
+      texto:  'What Living Benefits are, told by the people who needed to use them.'
+    }
+  },
+
+  {
+    video:  '957368852',
+    titulo: 'Roseli de Paula',
+    texto:  'A jornada de uma brasileira, da chegada aos Estados Unidos até realizar o grande sonho, passando por desafios que ela não escolheu.',
+    ingles: {
+      video:  '',   /* [COLAR O LINK EM INGLES] */
+      titulo: 'Roseli de Paula',
+      /* Aqui "brasileira" fica, nos dois idiomas: não é o site dizendo a
+         quem atende, é a história da própria Roseli. Tirar mudaria o que
+         aconteceu com ela. */
+      texto:  'The journey of a Brazilian woman, from arriving in the United States to reaching the big dream, through challenges she did not choose.'
+    }
+  },
+
+  {
+    video:  '572648707',
+    titulo: 'Latasha McCray',
+    texto:  'Ela estava em ótima forma, com um bom emprego e um plano financeiro pronto para o futuro. O diagnóstico de câncer de mama virou tudo de cabeça para baixo.',
+    ingles: {
+      video:  '',   /* [COLAR O LINK EM INGLES] */
+      titulo: 'Latasha McCray',
+      texto:  'She was in great shape, with a good job and a financial plan ready for the future. A breast cancer diagnosis turned everything upside down.'
+    }
+  }
+
+];
+
+if (typeof module !== 'undefined') { module.exports = { SERVICOS: SERVICOS, DESTAQUE: DESTAQUE, CAPAS: CAPAS, VIDEO_INFO: VIDEO_INFO, SEGURADORAS: SEGURADORAS, DEPOIMENTOS: DEPOIMENTOS }; }

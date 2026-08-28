@@ -384,6 +384,116 @@ a:focus-visible, button:focus-visible {
 
 .botao--topo { display: none; flex: none; }
 
+
+/* ==========================================================================
+   A TROCA DE IDIOMA
+   --------------------------------------------------------------------------
+   Duas pastilhas no topo, PT e EN, cada uma com a bandeirinha do lado. A do
+   idioma que está no ar fica marcada e não é link.
+
+   POR QUE A SIGLA APARECE ESCRITA, E NÃO SÓ A BANDEIRA
+   Bandeira é país, e não idioma: há muito país de língua portuguesa e muito
+   país de língua inglesa. Uma bandeira sozinha também não tem nome nenhum
+   para um leitor de tela ler. Com a sigla ao lado, o rótulo existe na tela
+   e existe na leitura, e a bandeira faz o que ela sabe fazer, que é ser
+   reconhecida de longe e antes da palavra.
+
+   Elas ficam ANTES do botão de agendar, e não depois. Numa barra que se lê
+   da esquerda para a direita, o último elemento é o que a pessoa mais
+   procura quando decidiu agir. Trocar de idioma é a primeira coisa que
+   alguém faz ao cair na página errada, e não a última.
+   ========================================================================== */
+.idioma { flex: none; }
+
+.idioma ul {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 3px;
+  border: 1px solid rgba(10, 35, 104, .16);
+  border-radius: 999px;
+}
+
+.idioma__link,
+.idioma__atual {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  /* 11px em maiúsculas com esta entrelinha dá 12,4px de altura de traço,
+     que é texto pequeno: a régua aqui é 4,5:1, e não 3:1. */
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .09em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* O que está no ar. Fundo marinho e texto branco: 14,45:1 medido. */
+.idioma__atual {
+  background: var(--marinho);
+  color: var(--branco);
+}
+
+/* O outro idioma. Não fica dourado porque
+   dourado neste site quer dizer "a ação principal", e trocar de idioma não
+   é a ação principal de página nenhuma. Cinza sobre branco: 6,28:1. */
+.idioma__link {
+  color: var(--cinza);
+  transition: background-color .2s var(--curva), color .2s var(--curva);
+}
+.idioma__link:hover {
+  background: var(--creme-fundo);
+  color: var(--marinho);
+}
+
+/* A bandeirinha. O filete escuro por cima existe porque as duas têm branco
+   na borda: sem ele, a listra branca da americana encosta no fundo branco
+   da barra e a bandeira parece recortada. */
+.bandeira {
+  display: block;
+  width: 20px;
+  height: auto;
+  flex: none;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px rgba(10, 35, 104, .18);
+}
+
+/* Dentro do painel do celular a barra é escura, então as cores viram.
+
+   E as pastilhas crescem: no topo elas são clicadas com o ponteiro do mouse
+   e 24px de altura bastam, mas dentro do painel elas são tocadas com o
+   dedo. 44px é a régua que o sanduíche deste site já usa, pelo mesmo
+   motivo, e o mínimo da WCAG 2.5.8 é 24: ficava exatamente na linha, o que
+   é passar raspando numa coisa que se toca no celular. */
+.idioma--painel { margin-bottom: 4px; }
+.idioma--painel .idioma__link,
+.idioma--painel .idioma__atual { min-height: 44px; padding: 0 16px; }
+.idioma--painel ul {
+  justify-content: flex-start;
+  border-color: rgba(255, 255, 255, .28);
+}
+/* Branco sobre marinho: 14,45:1 */
+.idioma--painel .idioma__atual { background: var(--branco); color: var(--marinho); }
+/* Cinza claro sobre marinho: 6,87:1 */
+.idioma--painel .idioma__link { color: var(--cinza-claro); }
+.idioma--painel .idioma__link:hover { background: rgba(255, 255, 255, .12); color: var(--branco); }
+.idioma--painel .bandeira { box-shadow: 0 0 0 1px rgba(255, 255, 255, .3); }
+
+/* No topo ela só aparece junto com a nav aberta. Abaixo de 900px quem manda
+   é o sanduíche, e a troca de idioma mora dentro do painel: repetir as duas
+   pastilhas na barra estreita tiraria espaço do que já não cabia. */
+.topo .idioma { display: none; }
+@media (min-width: 900px) {
+  .topo .idioma { display: block; }
+  /* A nav já empurra tudo para a direita com margin-left:auto. O vão até o
+     botão de agendar fica menor que o vão entre itens de menu, para as duas
+     pastilhas lerem como um par, e não como mais um item da navegação. */
+  .nav { margin-right: clamp(16px, 2vw, 28px); }
+}
+
 /* --------------------------------------------------------------------------
    O SUBMENU DE SERVIÇOS
    Abre no hover E no :focus-within. O segundo é o que faz funcionar no
@@ -1969,14 +2079,78 @@ body.travado { overflow: hidden; }
    Entre 900 e 1179px a barra tem marca, nav de seis itens e o botao. Medido
    a 985px: ela precisa de 1050 e tem 905. Faltam 145.
 
-   Apertar os vaos e o padding do botao recupera uns 90, nao os 145. Entao o
-   botao sai nessa faixa. A nav fica inteira, e o item "Contato" leva ao
-   mesmo lugar que ele levaria.
+   COM A TROCA DE IDIOMA A CONTA MUDOU, e os numeros abaixo sao medidos no
+   navegador, e nao estimados. As duas pastilhas somam 134px.
 
-   Abaixo de 900 quem manda e o sanduiche, e o botao ja estava fora.
+     barra com o botao, vaos folgados ....... precisa de 1408px de janela
+     barra com o botao, vaos apertados ...... precisa de 1286px
+
+   Dai as tres faixas:
+     900 a 1023 ...... sanduiche. O menu aberto em portugues, com seis itens
+                       mais as pastilhas, pediria uns 990px.
+     1024 a 1319 ..... menu aberto, vaos apertados, sem o botao
+     1320 para cima .. o botao volta
+
+   OS VAOS FICAM APERTADOS EM TODA LARGURA, E NAO SO NA FAIXA ESTREITA.
+   A primeira versao devolvia os vaos folgados acima de 1440, achando que
+   com tanta tela sobrava espaco. Nao sobra: a coluna de conteudo do site
+   para de crescer em 1240px, e a barra folgada com o botao mais as
+   pastilhas pede 1291. O que acontecia era que o botao saia da coluna e
+   ficava 102px a direita de onde termina o resto da pagina, sem provocar
+   rolagem nenhuma, so desalinhado. Com os vaos apertados a barra pede
+   1188 e sobra folga.
+
+   O botao sai antes de tudo porque ele e o unico repetido: o item "Contato"
+   do menu leva ao mesmo lugar, e a faixa marinho do fim da pagina repete a
+   mesma chamada em tamanho grande. Trocar de idioma nao tem substituto em
+   lugar nenhum da pagina, entao as pastilhas ficam.
    ========================================================================== */
-@media (max-width: 1179px) {
+@media (max-width: 1319px) {
   .botao--topo { display: none; }
+}
+
+
+
+/* ==========================================================================
+   ONDE O MENU ABERTO PASSA A CABER
+   --------------------------------------------------------------------------
+   O ponto de virada era 900px. Com a troca de idioma no topo ele subiu para
+   1024, e a conta é esta.
+
+   Em português a barra tem: a marca (207px), seis itens de menu, e as duas
+   pastilhas de idioma (134px). A 900px isso pede 1049 e tem 900: transborda
+   113px, e a página ganha rolagem lateral.
+
+   Não dá para resolver só apertando. Mesmo com os vãos no mínimo, o menu
+   aberto em português precisa de uns 990px. Então entre 900 e 1023 quem
+   manda volta a ser o sanduíche, que é onde a troca de idioma também mora,
+   dentro do painel. A partir de 1024, que é o iPad deitado, o menu abre.
+
+   Em inglês a barra é mais curta hoje, porque "Testimonials" e "Education"
+   só entram quando os vídeos de lá existirem. O ponto de virada é o mesmo
+   nos dois de propósito: quando os vídeos entrarem, o menu em inglês passa
+   a ter os mesmos seis itens, e um ponto de virada que dependesse do idioma
+   escolheria justamente essa hora para quebrar.
+
+   1024 a 1179 é a faixa apertada: o menu abre, mas o botão de agendar
+   continua fora e os vãos ficam menores. Acima de 1180 tudo respira.
+   ========================================================================== */
+@media (min-width: 900px) and (max-width: 1023px) {
+  .nav { display: none; }
+  .sanduiche { display: inline-flex; }
+  .painel { display: block; }
+}
+
+@media (min-width: 1024px) {
+  /* Os vãos entram no mínimo, e não a fonte: menu de 13px que vira 11px
+     para caber é menu que ninguém lê. */
+  .topo__in { gap: 14px; }
+  .nav > ul { gap: clamp(14px, 1.7vw, 30px); }
+  .nav { margin-right: 14px; }
+  .idioma ul { padding: 2px; }
+  .idioma__link,
+  .idioma__atual { padding: 5px 8px; gap: 5px; }
+  .bandeira { width: 18px; }
 }
 
 

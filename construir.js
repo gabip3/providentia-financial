@@ -5,90 +5,271 @@
 
        node construir.js
 
-   Ele lê o dados.js e gera as oito páginas de serviço, mais o menu que
-   aparece em todas elas. As páginas geradas são HTML puro: o Netlify serve
-   direto, sem build, sem servidor, sem dependência.
+   Ele lê o dados.js e o textos.js e gera o site inteiro nos dois idiomas.
+   As páginas geradas são HTML puro: o servidor entrega direto, sem build,
+   sem servidor de aplicação, sem dependência nenhuma.
+
+   O QUE ELE ESCREVE
+     servicos/*.html            oito páginas de serviço em português
+     en/services/*.html         as mesmas oito em inglês
+     index.html                 cabeçalho, rodapé, destaque e educação
+     en/index.html              idem, em inglês
+     depoimentos.html           cabeçalho, rodapé e a grade de vídeos
+     en/testimonials.html       idem, em inglês
 
    POR QUE ISSO EXISTE
-   São oito páginas com o mesmo cabeçalho e o mesmo rodapé. Sem um gerador,
-   mudar um item do menu significa abrir oito arquivos e editar o mesmo
-   trecho oito vezes. Na nona vez alguém esquece um, e o site fica com dois
-   menus diferentes. Aqui o menu mora num lugar só.
+   São vinte páginas com o mesmo cabeçalho e o mesmo rodapé, em dois
+   idiomas. Sem um gerador, mudar um item do menu significa abrir vinte
+   arquivos e editar o mesmo trecho vinte vezes. Na vigésima primeira vez
+   alguém esquece um, e o site fica com dois menus diferentes.
 
-   NÃO EDITE OS ARQUIVOS  servicos/*.html  NA MÃO.
-   Eles são regerados e as suas mudanças somem. Edite o dados.js ou este
-   arquivo, e rode de novo.
+   ISSO JÁ ACONTECEU AQUI: o depoimentos.html era escrito à mão e divergiu.
+   Enquanto as outras nove páginas já diziam "Flórida", o rodapé dele
+   continuava em "Geórgia". O gerador existe para isso não voltar a
+   acontecer, e agora, com dois idiomas, o risco seria o dobro.
+
+   O QUE É GERADO E O QUE É ESCRITO À MÃO
+   As páginas iniciais e as de depoimentos têm MIOLO escrito à mão: aquilo é
+   redação corrida, e tradução não é trabalho de máquina. Mas o cabeçalho, o
+   rodapé e os blocos marcados assim são costurados a cada rodada:
+
+       <!-- GERADO: destaque -->     ...  <!-- FIM: destaque -->
+       <!-- GERADO: educacao -->     ...  <!-- FIM: educacao -->
+       <!-- GERADO: depoimentos -->  ...  <!-- FIM: depoimentos -->
+
+   O que estiver entre esses marcadores é reescrito. Não edite lá dentro.
+
+   NÃO EDITE OS ARQUIVOS  servicos/*.html  NEM  en/services/*.html  NA MÃO.
+   Eles são regerados por inteiro e as suas mudanças somem. Edite o dados.js
+   ou este arquivo, e rode de novo.
    ========================================================================== */
 
 'use strict';
 
 const fs = require('fs');
 const path = require('path');
-const { SERVICOS, DESTAQUE, CAPAS, VIDEO_INFO } = require('./dados.js');
+const { SERVICOS, DESTAQUE, DEPOIMENTOS, CAPAS, VIDEO_INFO } = require('./dados.js');
+const { IDIOMAS, TEXTOS, BANDEIRAS } = require('./textos.js');
 const { icone } = require('./icones.js');
 
 const raiz = __dirname;
-const saida = path.join(raiz, 'servicos');
+const SITE_URL = 'https://www.providentiafinancialgroup.com';
 
 const esc = s => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+/* 169 segundos viram "2:49" */
+function tempo(segundos) {
+  if (!segundos) { return ''; }
+  const m = Math.floor(segundos / 60);
+  const s = segundos % 60;
+  return m + ':' + (s < 10 ? '0' : '') + s;
+}
 
 /* O ícone do WhatsApp aparece em vários lugares. Fica numa constante para o
    caminho SVG não ser copiado seis vezes. */
 const ZAP = '<svg class="ico-zap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>';
 
+const PLAY = '<span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>';
+
 /* O arquivo oficial do escudo, PNG com fundo transparente. Como tem alfa,
    ele pode ir sobre qualquer cor, e não só sobre branco. O alt fica vazio
    de propósito: o <a> em volta já tem aria-label com o nome da marca, e
    repetir faria o leitor de tela ler a marca duas vezes seguidas. */
-const ESCUDO = function (base) {
-  return '<img class="marca__escudo" src="' + base + 'escudo.png" alt="" width="500" height="500" decoding="async">';
-};
+const ESCUDO = base =>
+  '<img class="marca__escudo" src="' + base + 'escudo.png" alt="" width="500" height="500" decoding="async">';
 
-/* base: '' na raiz, '../' dentro de servicos/ */
-function marca(base, classe) {
-  return `<a class="marca${classe ? ' ' + classe : ''}" href="${base}index.html" aria-label="Providentia Financial, início">
-      ${ESCUDO(base)}
+
+/* ==========================================================================
+   ONDE CADA PÁGINA MORA
+   --------------------------------------------------------------------------
+   Um lugar só decide o endereço de tudo. Assim o menu, o hreflang, o
+   canonical, o og:url e o botão de trocar idioma nunca discordam entre si:
+   os cinco perguntam para esta mesma função.
+
+   Devolve o caminho A PARTIR DA RAIZ DO SITE, sem barra na frente:
+     pt  inicial  ->  index.html
+     pt  serviço  ->  servicos/beneficios-em-vida.html
+     en  inicial  ->  en/index.html
+     en  serviço  ->  en/services/living-benefits.html
+   ========================================================================== */
+function conteudo(idioma, s) { return idioma === 'pt' ? s : s.ingles; }
+
+function caminho(idioma, tipo, s) {
+  const c = IDIOMAS[idioma];
+  if (tipo === 'home') { return c.pasta + 'index.html'; }
+  if (tipo === 'depo') { return c.pasta + c.depo; }
+  return c.pasta + c.servicos + '/' + conteudo(idioma, s).slug + '.html';
+}
+
+/* Quantos "../" para voltar do arquivo até a raiz do site. */
+function subir(caminhoDoArquivo) {
+  return '../'.repeat(caminhoDoArquivo.split('/').length - 1);
+}
+
+/* --------------------------------------------------------------------------
+   O ENDEREÇO DE UMA PÁGINA VISTO DE OUTRA
+   --------------------------------------------------------------------------
+   Os dois vêm a partir da raiz do site, e sai o caminho de um para o outro.
+     de en/index.html          para index.html       ->  ../index.html
+     de en/index.html          para en/index.html    ->  index.html
+     de en/services/x.html     para en/index.html    ->  ../index.html
+     de index.html             para servicos/x.html  ->  servicos/x.html
+
+   Sem isto, montar o endereço como base + pasta + arquivo dava coisas como
+   ../en/index.html para ir de en/ até en/: funciona, mas é caminho que sai
+   da pasta só para voltar. Quem lê o HTML depois tropeça nisso.
+   -------------------------------------------------------------------------- */
+function relativo(de, para) {
+  const daqui = de.split('/');
+  daqui.pop();                        /* a pasta de onde eu estou */
+  const ate = para.split('/');
+  const arquivo = ate.pop();
+  let i = 0;
+  while (i < daqui.length && i < ate.length && daqui[i] === ate[i]) { i++; }
+  return '../'.repeat(daqui.length - i) + ate.slice(i).map(p => p + '/').join('') + arquivo;
+}
+
+/* O vídeo daquele item naquele idioma, ou '' se ainda não houver link. */
+function video(idioma, item) { return (conteudo(idioma, item) || {}).video || ''; }
+
+/* Um idioma só ganha página de depoimentos se tiver ao menos um vídeo. Uma
+   página de depoimentos sem depoimento nenhum é pior do que não ter a
+   página, e um item de menu que leva a uma sala vazia é pior ainda. */
+function temDepoimentos(idioma) {
+  return DEPOIMENTOS.some(d => video(idioma, d));
+}
+
+/* Idem para a grade de educação, que é feita só de vídeos. */
+function temEducacao(idioma) {
+  return SERVICOS.some(s => video(idioma, s));
+}
+
+/* O contexto de uma página: idioma, textos, e todos os endereços de que ela
+   precisa, já relativos a ela mesma. */
+function contexto(idioma, tipo, s) {
+  const meu = caminho(idioma, tipo, s);
+  const base = subir(meu);
+  const c = IDIOMAS[idioma];
+
+  /* O mesmo lugar no outro idioma. Se a página não existir lá, o botão leva
+     para a inicial de lá, e nunca para um endereço que dá 404. É o caso da
+     de depoimentos enquanto faltarem os vídeos em inglês. */
+  const equivalente = outro => (tipo === 'depo' && !temDepoimentos(outro))
+    ? caminho(outro, 'home')
+    : caminho(outro, tipo, s);
+
+  return {
+    idioma: idioma,
+    cfg: c,
+    T: TEXTOS[idioma],
+    tipo: tipo,
+    /* base leva aos arquivos que moram na raiz do site: style.css,
+       escudo.png, favicon.svg, logos/, script.js */
+    base: base,
+    home: relativo(meu, caminho(idioma, 'home')),
+    depo: relativo(meu, caminho(idioma, 'depo')),
+    servicoEm: outro => relativo(meu, caminho(idioma, 'servico', outro)),
+    alternativas: Object.keys(IDIOMAS).map(outro => ({
+      id: outro,
+      cfg: IDIOMAS[outro],
+      href: relativo(meu, equivalente(outro)),
+      absoluto: SITE_URL + '/' + equivalente(outro).replace(/(^|\/)index\.html$/, '$1')
+    })),
+    absoluto: SITE_URL + '/' + meu.replace(/(^|\/)index\.html$/, '$1')
+  };
+}
+
+
+/* ==========================================================================
+   PEÇAS QUE APARECEM EM TODA PÁGINA
+   ========================================================================== */
+function marca(ctx, classe) {
+  return `<a class="marca${classe ? ' ' + classe : ''}" href="${ctx.home}" aria-label="${esc(ctx.T.marcaInicio)}">
+      ${ESCUDO(ctx.base)}
       <span class="marca__nome"><b>Providentia</b><i>Financial</i></span>
     </a>`;
 }
 
-function submenu(base, atual) {
-  return SERVICOS.map(s =>
-    `            <li><a href="${base}servicos/${s.slug}.html"${s.slug === atual ? ' aria-current="page"' : ''}>${esc(s.nome)}</a></li>`
-  ).join('\n');
+/* --------------------------------------------------------------------------
+   O BOTÃO DE TROCAR IDIOMA
+   --------------------------------------------------------------------------
+   Ele leva para a MESMA página no outro idioma, e não para a inicial de lá.
+   Quem está lendo sobre proteção hipotecária em português e aperta EN quer
+   continuar lendo sobre mortgage protection, e não voltar para o começo.
+
+   O idioma que já está no ar aparece marcado e NÃO é link: apertar para ir
+   onde já se está é botão que não faz nada.
+
+   A BANDEIRA NUNCA VEM SOZINHA. Bandeira é país, não é idioma, e há muito
+   país de língua portuguesa e muito país de língua inglesa. Por isso ao
+   lado dela vai a sigla escrita, o link carrega hreflang, e o aria-label
+   diz a frase inteira para quem usa leitor de tela.
+   -------------------------------------------------------------------------- */
+function trocaIdioma(ctx, classe) {
+  const itens = Object.keys(IDIOMAS).map(id => {
+    const a = ctx.alternativas.filter(x => x.id === id)[0];
+    const bandeira = BANDEIRAS[a.cfg.bandeira];
+    if (id === ctx.idioma) {
+      return `      <li><span class="idioma__atual" aria-current="true">${bandeira}<b>${esc(a.cfg.sigla)}</b></span></li>`;
+    }
+    return `      <li><a class="idioma__link" href="${a.href}" hreflang="${a.cfg.codigo}" lang="${a.cfg.codigo}" aria-label="${esc(ctx.T.trocarPara)}">${bandeira}<b>${esc(a.cfg.sigla)}</b></a></li>`;
+  }).join('\n');
+
+  return `<nav class="idioma${classe ? ' ' + classe : ''}" aria-label="${esc(ctx.T.idioma)}">
+      <ul>
+${itens}
+      </ul>
+    </nav>`;
 }
 
-function cabecalho(base, atual) {
+function submenu(ctx, atual) {
+  return SERVICOS.map(s => {
+    const d = conteudo(ctx.idioma, s);
+    const aqui = d.slug === atual ? ' aria-current="page"' : '';
+    return `            <li><a href="${ctx.servicoEm(s)}"${aqui}>${esc(d.nome)}</a></li>`;
+  }).join('\n');
+}
+
+function cabecalho(ctx, atual) {
+  const T = ctx.T;
+  const dep = temDepoimentos(ctx.idioma);
+  const edu = temEducacao(ctx.idioma);
+
+  const itemDepo = dep ? `        <li><a href="${ctx.depo}">${esc(T.depoimentos)}</a></li>\n` : '';
+  const itemEdu = edu ? `        <li><a href="${ctx.home}#educacao">${esc(T.educacao)}</a></li>\n` : '';
+  const painelDepo = dep ? `      <li><a href="${ctx.depo}">${esc(T.depoimentos)}</a></li>\n` : '';
+  const painelEdu = edu ? `      <li><a href="${ctx.home}#educacao">${esc(T.educacao)}</a></li>\n` : '';
+
   return `<header class="topo" id="topo">
   <div class="faixa topo__in">
 
-    ${marca(base)}
+    ${marca(ctx)}
 
-    <nav class="nav" aria-label="Navegação principal">
+    <nav class="nav" aria-label="${esc(T.navPrincipal)}">
       <ul>
-        <li><a href="${base}index.html">Início</a></li>
-        <li><a href="${base}index.html#sobre">Sobre</a></li>
+        <li><a href="${ctx.home}">${esc(T.inicio)}</a></li>
+        <li><a href="${ctx.home}#sobre">${esc(T.sobre)}</a></li>
         <li class="tem-sub">
           <button class="sub-abre" type="button" aria-expanded="false" aria-controls="sub-servicos">
-            Serviços
+            ${esc(T.servicos)}
             <svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
           </button>
           <ul class="sub" id="sub-servicos">
-${submenu(base, atual)}
-            <li class="sub__todos"><a href="${base}index.html#solucoes">Ver todos os serviços</a></li>
+${submenu(ctx, atual)}
+            <li class="sub__todos"><a href="${ctx.home}#solucoes">${esc(T.verTodos)}</a></li>
           </ul>
         </li>
-        <li><a href="${base}depoimentos.html">Depoimentos</a></li>
-        <li><a href="${base}index.html#educacao">Educação</a></li>
-        <li><a href="${base}index.html#contato">Contato</a></li>
+${itemDepo}${itemEdu}        <li><a href="${ctx.home}#contato">${esc(T.contato)}</a></li>
       </ul>
     </nav>
 
-    <a class="botao botao--marinho botao--topo" href="${base}index.html#contato" data-agendar="${base}index.html">Agendar uma conversa</a>
+    ${trocaIdioma(ctx)}
 
-    <button class="sanduiche" type="button" aria-expanded="false" aria-controls="menu-movel">
-      <span class="sanduiche__txt">Menu</span>
+    <a class="botao botao--marinho botao--topo" href="${ctx.home}#contato" data-agendar="${ctx.home}">${esc(T.agendar)}</a>
+
+    <button class="sanduiche" type="button" aria-expanded="false" aria-controls="menu-movel" data-menu="${esc(T.menu)}" data-fechar="${esc(T.fechar)}">
+      <span class="sanduiche__txt">${esc(T.menu)}</span>
       <svg class="ico-menu" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
     </button>
 
@@ -96,29 +277,30 @@ ${submenu(base, atual)}
 </header>
 
 <div class="painel" id="menu-movel" inert>
-  <nav class="faixa painel__in" aria-label="Navegação">
+  <nav class="faixa painel__in" aria-label="${esc(T.navegacao)}">
     <ul class="painel__lista">
-      <li><a href="${base}index.html">Início</a></li>
-      <li><a href="${base}index.html#sobre">Sobre</a></li>
-      <li><a href="${base}index.html#solucoes">Serviços</a></li>
-${SERVICOS.map(s => `      <li class="painel__sub"><a href="${base}servicos/${s.slug}.html">${esc(s.nome)}</a></li>`).join('\n')}
-      <li><a href="${base}depoimentos.html">Depoimentos</a></li>
-      <li><a href="${base}index.html#educacao">Educação</a></li>
-      <li><a href="${base}index.html#contato">Contato</a></li>
+      <li><a href="${ctx.home}">${esc(T.inicio)}</a></li>
+      <li><a href="${ctx.home}#sobre">${esc(T.sobre)}</a></li>
+      <li><a href="${ctx.home}#solucoes">${esc(T.servicos)}</a></li>
+${SERVICOS.map(s => `      <li class="painel__sub"><a href="${ctx.servicoEm(s)}">${esc(conteudo(ctx.idioma, s).nome)}</a></li>`).join('\n')}
+${painelDepo}${painelEdu}      <li><a href="${ctx.home}#contato">${esc(T.contato)}</a></li>
     </ul>
     <div class="painel__pe">
-      <a class="botao botao--marinho botao--cheio" href="${base}index.html#contato" data-agendar="${base}index.html">Agendar uma conversa</a>
-      <a class="botao botao--linha botao--cheio" href="#" data-whatsapp>${ZAP} Falar no WhatsApp</a>
+      ${trocaIdioma(ctx, 'idioma--painel')}
+      <a class="botao botao--marinho botao--cheio" href="${ctx.home}#contato" data-agendar="${ctx.home}">${esc(T.agendar)}</a>
+      <a class="botao botao--linha botao--cheio" href="#" data-whatsapp>${ZAP} ${esc(T.whatsapp)}</a>
     </div>
   </nav>
 </div>`;
 }
 
-function rodape(base) {
+
+function rodape(ctx) {
+  const T = ctx.T;
   return `<footer class="rodape">
   <div class="faixa rodape__in">
 
-    ${marca(base, 'marca--rodape')}
+    ${marca(ctx, 'marca--rodape')}
 
     <!-- ====================================================================
          O SELO DE CREDENCIAL
@@ -134,15 +316,16 @@ function rodape(base) {
          se por algum motivo ela nao tiver a apolice ativa, a palavra
          "Insured" tem de sair. Confirme antes de publicar.
 
-         Fica em ingles porque e termo do mercado dos Estados Unidos, e e
-         assim que o publico dela ja viu em outros negocios americanos. A
-         linha abaixo traduz, para quem nao conhece a expressao.
+         Fica em ingles NOS DOIS IDIOMAS porque e termo do mercado dos
+         Estados Unidos, e e assim que o publico dela ja viu em outros
+         negocios americanos. A linha de baixo e que muda: em portugues ela
+         traduz a expressao, em ingles ela diz o que a expressao cobre.
          ==================================================================== -->
     <p class="selo">
       <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
       <span>
-        <b>Licensed &amp; Insured Agent</b>
-        <i>Agente licenciada, com seguro de responsabilidade profissional.</i>
+        <b>${T.seloTitulo}</b>
+        <i>${esc(T.seloTraducao)}</i>
       </span>
     </p>
 
@@ -166,20 +349,19 @@ function rodape(base) {
              Peca a lista dos estados em que ela tem licenca ativa. Se for
              mesmo todos, esta frase fica. Se faltar algum, troque por
              "Atendendo clientes em XX estados" e ponha a lista numa pagina
-             ou no rodape.
+             ou no rodape. O texto mora no textos.js, em "atendimento", e
+             muda nos dois idiomas de uma vez.
 
-             O texto abaixo evita o problema maior de proposito: fala de
-             ONDE ela atende, e nao promete que todo produto existe em todo
-             lugar. Nem todos os produtos estao disponiveis em todos os
-             estados, e isso ja esta escrito no bloco juridico. -->
-        <span>Atendendo famílias brasileiras em todos os Estados Unidos</span>
+             A palavra "brasileiras" saiu daqui a pedido da Gabi: o site
+             atende quem chegar. -->
+        <span>${esc(T.atendimento)}</span>
       </li>
     </ul>
 
     <ul class="rodape__redes">
-      <li><a href="#" data-facebook aria-label="Facebook da Providentia Financial"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 8.6V7.1c0-.8.2-1.2 1.4-1.2h1.5V3.2c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v1.5H8.3V11h2.4v8h3v-8h2.5l.4-2.4H14z"/></svg></a></li>
-      <li><a href="#" data-instagram aria-label="Instagram da Providentia Financial"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.6" y="3.6" width="16.8" height="16.8" rx="5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="3.9" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.1" cy="6.9" r="1.3"/></svg></a></li>
-      <li><a href="#" data-linkedin aria-label="Meu perfil no LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.9 8.9H4.2V19h2.7zM5.5 4.4a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2zM19.8 19h-2.7v-4.9c0-1.2 0-2.7-1.6-2.7s-1.9 1.3-1.9 2.6V19H11V8.9h2.6v1.4h.1a2.9 2.9 0 0 1 2.6-1.4c2.8 0 3.3 1.8 3.3 4.2z"/></svg></a></li>
+      <li><a href="#" data-facebook aria-label="${esc(T.redeFacebook)}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 8.6V7.1c0-.8.2-1.2 1.4-1.2h1.5V3.2c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v1.5H8.3V11h2.4v8h3v-8h2.5l.4-2.4H14z"/></svg></a></li>
+      <li><a href="#" data-instagram aria-label="${esc(T.redeInstagram)}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3.6" y="3.6" width="16.8" height="16.8" rx="5" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="12" cy="12" r="3.9" fill="none" stroke="currentColor" stroke-width="1.9"/><circle cx="17.1" cy="6.9" r="1.3"/></svg></a></li>
+      <li><a href="#" data-linkedin aria-label="${esc(T.redeLinkedin)}"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6.9 8.9H4.2V19h2.7zM5.5 4.4a1.6 1.6 0 1 0 0 3.2 1.6 1.6 0 0 0 0-3.2zM19.8 19h-2.7v-4.9c0-1.2 0-2.7-1.6-2.7s-1.9 1.3-1.9 2.6V19H11V8.9h2.6v1.4h.1a2.9 2.9 0 0 1 2.6-1.4c2.8 0 3.3 1.8 3.3 4.2z"/></svg></a></li>
     </ul>
 
   </div>
@@ -201,10 +383,6 @@ function rodape(base) {
          companhia, que costuma ter regra própria de publicidade acima da
          regra do estado.
 
-         Por isso o número está aqui como linha SEPARADA e opcional. Se o
-         compliance disser que não vai, apague só aquela linha; o resto do
-         bloco continua necessário.
-
          O QUE É NECESSÁRIO DE QUALQUER JEITO
          · o nome sob o qual ela é licenciada, escrito exatamente assim
          · os estados em que ela pode de fato atender
@@ -213,26 +391,18 @@ function rodape(base) {
          Um "e mais" que costuma passar batido: se "Providentia Financial"
          for nome fantasia e não a razão social licenciada, muitos estados
          pedem que o nome legal apareça em algum lugar da página.
-         ==================================================================== -->
-    <!-- ====================================================================
-         AQUI ENTRA A IDENTIFICAÇÃO LEGAL
-         --------------------------------------------------------------------
-         Os marcadores visíveis saíram a pedido da Monica. O que eles
-         cobravam continua valendo, e é isto:
 
-           · o nome sob o qual ela é licenciada, escrito exatamente assim
-           · os estados em que ela pode atender
-           · o disclosure que a companhia exigir
+         AGORA SÃO DOIS IDIOMAS, e isso muda uma coisa: o que entrar aqui
+         precisa entrar nos dois. Um disclosure que só existe em português
+         não protege ninguém na página em inglês. É por isso que estes
+         textos moram no textos.js, e não soltos no HTML.
 
-         Quando tiver os textos, é só descomentar e preencher:
+         Quando tiver os textos, descomente e preencha lá, e a linha entra
+         nas vinte páginas de uma vez:
 
          <p class="rodape__mini">Monica Silva, licenciada como NOME LEGAL.</p>
          <p class="rodape__mini">Atendendo os estados de XX, XX e XX.</p>
          <p class="rodape__mini">TEXTO EXATO DO DISCLOSURE DA COMPANHIA.</p>
-
-         E, se o compliance pedir o número da licença, que é registro
-         público e em alguns estados obrigatório em publicidade:
-
          <p class="rodape__mini">Licença nº 000000 (Flórida).</p>
          ==================================================================== -->
     <!-- Este parágrafo é obrigatório a partir do momento em que o site cita
@@ -244,49 +414,63 @@ function rodape(base) {
 
          Se a lista de seguradoras mudar, o nome citado aqui muda junto. -->
     <p class="rodape__mini">
-      A Providentia Financial é uma agência independente. A disponibilidade de
-      produtos e seguradoras varia por estado. National Life Group&reg; e demais
-      marcas citadas pertencem aos seus respectivos proprietários.
+      ${T.legalAgencia}
     </p>
 
     <p class="rodape__mini">
-      Este site tem finalidade informativa e não constitui aconselhamento
-      fiscal, jurídico ou de investimento. Garantias dependem da capacidade
-      de pagamento da companhia emissora. Nem todos os produtos estão
-      disponíveis em todos os estados. Não envie dados financeiros por
-      este site.
+      ${esc(T.legalAviso)}
     </p>
-    <p class="rodape__mini">&copy; <span data-ano>2026</span> Providentia Financial.</p>
+    <p class="rodape__mini">&copy; <span data-ano>2026</span> ${esc(T.direitos)}</p>
   </div>
 </footer>
 
-<a class="zap" href="#" data-whatsapp aria-label="Falar comigo no WhatsApp">
+<a class="zap" href="#" data-whatsapp aria-label="${esc(T.whatsappFlutuante)}">
   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
 </a>`;
 }
 
-const SITE_URL = 'https://www.providentiafinancialgroup.com';
 
-function cabeca(titulo, descricao, base, slug) {
+/* ==========================================================================
+   O <head>
+   ========================================================================== */
+function cabeca(ctx, titulo, descricao) {
+  /* hreflang diz ao Google que estas páginas são a mesma coisa em idiomas
+     diferentes, e não conteúdo duplicado. Sem isso as duas versões brigam
+     entre si na busca. O x-default é para quem não bate com nenhum idioma
+     da lista, e aponta para o português, que é a raiz do site. */
+  const alternativas = ctx.alternativas.map(a =>
+    `<link rel="alternate" hreflang="${a.cfg.codigo}" href="${a.absoluto}">`).join('\n');
+  const xDefault = ctx.alternativas
+    .filter(a => a.id === 'pt')
+    .map(a => `<link rel="alternate" hreflang="x-default" href="${a.absoluto}">`)
+    .join('');
+
+  const IMG = SITE_URL + '/familia.png';
+  const IMG_ALT = ctx.idioma === 'pt'
+    ? 'Uma família reunida na sala de casa: pai, mãe e duas crianças, sorrindo juntos.'
+    : 'A family together in the living room: a father, a mother and two children, smiling.';
+
   return `<!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="${ctx.cfg.codigo}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- ==========================================================================
-     ARQUIVO GERADO POR  construir.js  A PARTIR DE  dados.js
+     ARQUIVO GERADO POR  construir.js  A PARTIR DE  dados.js  E  textos.js
      NÃO EDITE ESTE ARQUIVO NA MÃO: ele é reescrito na próxima vez que
      alguém rodar  node construir.js  e as suas mudanças somem.
-     Para mudar o texto, edite dados.js. Para mudar a estrutura da página,
-     edite construir.js.
+     Texto do serviço: dados.js. Menu e rodapé: textos.js. Estrutura da
+     página: construir.js.
      ========================================================================== -->
 
 <title>${esc(titulo)} | Providentia Financial</title>
 <meta name="description" content="${esc(descricao)}">
-<link rel="canonical" href="https://www.providentiafinancialgroup.com/${base ? 'servicos/' : ''}">
-<link rel="icon" href="${base}favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="${base}escudo.png">
+<link rel="canonical" href="${ctx.absoluto}">
+${alternativas}
+${xDefault}
+<link rel="icon" href="${ctx.base}favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="${ctx.base}escudo.png">
 
 <!-- ==========================================================================
      OPEN GRAPH E TWITTER
@@ -298,31 +482,27 @@ function cabeca(titulo, descricao, base, slug) {
      site e falha no preview, porque quem monta o cartao e um servidor de
      fora que nao sabe de onde o caminho parte.
 
-     width e height evitam que o cartao apareca sem imagem no primeiro
-     compartilhamento: sem eles, algumas plataformas so mostram a foto
-     depois de baixar e medir, o que as vezes nao acontece a tempo.
-
      [OTIMIZAR] familia.png tem 1,8 MB. Facebook e LinkedIn aguentam, mas o
      WhatsApp costuma desistir de imagem grande e mostrar o cartao sem foto.
      Exportar como JPEG qualidade 82 resolve, e e o mesmo arquivo que ja
      precisa encolher por causa do tempo de carregamento da pagina.
      ========================================================================== -->
 <meta property="og:type" content="article">
-<meta property="og:locale" content="pt_BR">
+<meta property="og:locale" content="${ctx.cfg.ogLocale}">
 <meta property="og:site_name" content="Providentia Financial">
-<meta property="og:url" content="${SITE_URL}/servicos/${slug}.html">
+<meta property="og:url" content="${ctx.absoluto}">
 <meta property="og:title" content="${esc(titulo)} | Providentia Financial">
 <meta property="og:description" content="${esc(descricao)}">
-<meta property="og:image" content="https://www.providentiafinancialgroup.com/familia.png">
+<meta property="og:image" content="${IMG}">
 <meta property="og:image:width" content="1693">
 <meta property="og:image:height" content="929">
-<meta property="og:image:alt" content="Uma família reunida na sala de casa: pai, mãe e duas crianças, sorrindo juntos.">
+<meta property="og:image:alt" content="${esc(IMG_ALT)}">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${esc(titulo)} | Providentia Financial">
 <meta name="twitter:description" content="${esc(descricao)}">
-<meta name="twitter:image" content="https://www.providentiafinancialgroup.com/familia.png">
-<meta name="twitter:image:alt" content="Uma família reunida na sala de casa: pai, mãe e duas crianças, sorrindo juntos.">
+<meta name="twitter:image" content="${IMG}">
+<meta name="twitter:image:alt" content="${esc(IMG_ALT)}">
 <!-- [REMOVER ANTES DE PUBLICAR DE VERDADE]
      Enquanto o site for rascunho para revisão, ele não pode aparecer no
      Google. Ainda tem dados por confirmar e nenhum bloco jurídico.
@@ -364,8 +544,7 @@ function cabeca(titulo, descricao, base, slug) {
 
      O que ela protegeria ja esta coberto: as origens listadas acima sao
      todas https por extenso, e o site em producao e https com redirecao
-     obrigatoria. Ela so pegaria um http:// que alguem escrevesse errado
-     no futuro, e esse ganho nao paga quebrar o ambiente local.
+     obrigatoria.
      ========================================================================== -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://i.vimeocdn.com; frame-src https://player.vimeo.com https://www.youtube-nocookie.com; connect-src 'self' https://api.web3forms.com; form-action 'self'; base-uri 'self'; object-src 'none'">
 
@@ -379,47 +558,80 @@ function cabeca(titulo, descricao, base, slug) {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&amp;family=Poppins:wght@300;400;500;600;700&amp;family=Allura&amp;display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="${base}style.css">
+<link rel="stylesheet" href="${ctx.base}style.css">
 </head>
 <body>
 
-<a class="pular" href="#conteudo">Ir para o conteúdo</a>
+<a class="pular" href="#conteudo">${esc(ctx.T.pular)}</a>
 
 `;
 }
 
-/* --------------------------------------------------------------------------
-   Uma página de serviço
-   -------------------------------------------------------------------------- */
-function pagina(s, i) {
-  const base = '../';
+
+/* ==========================================================================
+   BLOCOS DE VÍDEO
+   --------------------------------------------------------------------------
+   Todo vídeo do site só carrega depois do clique: antes disso o Vimeo não
+   escreve cookie em quem apenas passou pela página, e a página abre mais
+   leve. Enquanto ninguém clica, o que existe ali é uma imagem.
+
+   Se o idioma ainda não tem link para aquele vídeo, estas funções devolvem
+   string vazia e a seção inteira some daquela página. É o que segura as
+   páginas em inglês hoje: os vídeos da Alliance que estão no ar são os
+   dublados em português, e não servem lá.
+   ========================================================================== */
+function videoGrande(ctx, id, rotulo) {
+  if (!id) { return ''; }
+  return `
+    <div class="video video--largo">
+      <button class="video__capa" type="button" data-vimeo="${esc(id)}" aria-label="${esc(rotulo)}">
+        <img src="${esc(CAPAS[id] || '')}" alt="" width="1280" height="720" loading="lazy" decoding="async">
+        ${PLAY}
+      </button>
+    </div>
+`;
+}
+
+
+/* ==========================================================================
+   UMA PÁGINA DE SERVIÇO
+   ========================================================================== */
+function pagina(s, i, idioma) {
+  const ctx = contexto(idioma, 'servico', s);
+  const d = conteudo(idioma, s);
+  const T = ctx.T;
   const antes = SERVICOS[i - 1];
   const depois = SERVICOS[i + 1];
 
-  const lista = s.lista ? `
-    <h2 class="servico__sub">${esc(s.lista.titulo)}</h2>
+  const lista = d.lista ? `
+    <h2 class="servico__sub">${esc(d.lista.titulo)}</h2>
     <ul class="condicoes">
-${s.lista.itens.map(([t, d]) => `      <li>
-        <h3>${esc(t)}</h3>
-        <p>${esc(d)}</p>
+${d.lista.itens.map(par => `      <li>
+        <h3>${esc(par[0])}</h3>
+        <p>${esc(par[1])}</p>
       </li>`).join('\n')}
     </ul>
 ` : '';
 
+  /* A linha miudinha com o termo em inglês só existe na página em
+     português, onde ela é ponte para quem já ouviu falar assim. Na página
+     em inglês o título já é esse termo, e repetir seria eco. */
+  const termoEn = idioma === 'pt' ? `    <p class="servico__en">${esc(s.en)}</p>\n` : '';
+
   const vizinhos = (antes || depois) ? `
-<nav class="vizinhos faixa" aria-label="Outros serviços">
-  ${antes ? `<a class="vizinho vizinho--antes" href="${antes.slug}.html">
+<nav class="vizinhos faixa" aria-label="${esc(T.outrosServicos)}">
+  ${antes ? `<a class="vizinho vizinho--antes" href="${conteudo(idioma, antes).slug}.html">
     ${icone('arrow-left', 'ico-seta vizinho__seta')}
-    <span class="vizinho__txt"><span>Anterior</span><b>${esc(antes.nome)}</b></span>
+    <span class="vizinho__txt"><span>${esc(T.anterior)}</span><b>${esc(conteudo(idioma, antes).nome)}</b></span>
   </a>` : '<span></span>'}
-  ${depois ? `<a class="vizinho vizinho--depois" href="${depois.slug}.html">
+  ${depois ? `<a class="vizinho vizinho--depois" href="${conteudo(idioma, depois).slug}.html">
     ${icone('arrow-right', 'ico-seta vizinho__seta')}
-    <span class="vizinho__txt"><span>Próximo</span><b>${esc(depois.nome)}</b></span>
+    <span class="vizinho__txt"><span>${esc(T.proximo)}</span><b>${esc(conteudo(idioma, depois).nome)}</b></span>
   </a>` : '<span></span>'}
 </nav>
 ` : '';
 
-  return cabeca(s.nome, s.resumo, base, s.slug) + cabecalho(base, s.slug) + `
+  return cabeca(ctx, d.nome, d.resumo) + cabecalho(ctx, d.slug) + `
 
 <main id="conteudo">
 
@@ -427,40 +639,26 @@ ${s.lista.itens.map(([t, d]) => `      <li>
   <div class="faixa">
 
     <p class="migalha">
-      <a href="${base}index.html">Início</a>
+      <a href="${ctx.home}">${esc(T.inicio)}</a>
       <span aria-hidden="true">/</span>
-      <a href="${base}index.html#solucoes">Serviços</a>
+      <a href="${ctx.home}#solucoes">${esc(T.servicos)}</a>
       <span aria-hidden="true">/</span>
-      <span aria-current="page">${esc(s.nome)}</span>
+      <span aria-current="page">${esc(d.nome)}</span>
     </p>
 
-    <p class="servico__en">${esc(s.en)}</p>
-    <h1>${esc(s.titulo)}</h1>
-
-    <!-- O vídeo só carrega depois do clique: antes disso o Vimeo não
-         escreve cookie em quem apenas passou pela página, e a página abre
-         mais leve. O número do vídeo vem do dados.js. -->
-    <div class="video video--largo">
-      <button class="video__capa" type="button" data-vimeo="${esc(s.video)}" aria-label="Assistir ao vídeo sobre ${esc(s.nome)}">
-        <img src="${esc(CAPAS[s.video] || '')}" alt="" width="1280" height="720" loading="lazy" decoding="async">
-        <span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>
-      </button>
-    </div>
-
+${termoEn}    <h1>${esc(d.titulo)}</h1>
+${videoGrande(ctx, d.video, T.assistirVideo + d.nome)}
     <div class="servico__texto">
-${s.texto.map(p => `      <p>${esc(p)}</p>`).join('\n')}
+${d.texto.map(p => `      <p>${esc(p)}</p>`).join('\n')}
     </div>
 ${lista}
     <div class="servico__acoes">
-      <a class="botao botao--marinho" href="${base}index.html#contato" data-agendar="${base}index.html">Agendar uma conversa</a>
-      <a class="botao botao--linha" href="#" data-whatsapp>${ZAP} Falar no WhatsApp</a>
+      <a class="botao botao--marinho" href="${ctx.home}#contato" data-agendar="${ctx.home}">${esc(T.agendar)}</a>
+      <a class="botao botao--linha" href="#" data-whatsapp>${ZAP} ${esc(T.whatsapp)}</a>
     </div>
 
     <p class="nota nota--esq">
-      Nem todos os produtos estão disponíveis em todos os estados, e o que
-      serve para você depende da sua idade, da sua saúde, de onde você mora
-      e da aprovação da companhia. Esta página é informativa e não é
-      aconselhamento fiscal, jurídico ou de investimento.
+      ${esc(T.notaServico)}
     </p>
 
   </div>
@@ -468,74 +666,248 @@ ${lista}
 ${vizinhos}
 </main>
 
-` + rodape(base) + `
+` + rodape(ctx) + `
 
-<script src="${base}script.js"></script>
+<script src="${ctx.base}script.js"></script>
 </body>
 </html>
 `;
 }
 
-/* --------------------------------------------------------------------------
-   Executa
-   -------------------------------------------------------------------------- */
-if (!fs.existsSync(saida)) { fs.mkdirSync(saida); }
 
-const vistos = new Set();
-SERVICOS.forEach((s, i) => {
-  ['slug', 'nome', 'video', 'resumo', 'titulo', 'texto'].forEach(campo => {
-    if (!s[campo]) { throw new Error('servico ' + i + ' sem "' + campo + '"'); }
-  });
-  if (vistos.has(s.slug)) { throw new Error('slug repetido: ' + s.slug); }
-  vistos.add(s.slug);
-  fs.writeFileSync(path.join(saida, s.slug + '.html'), pagina(s, i));
-});
+/* ==========================================================================
+   OS BLOCOS COSTURADOS NAS PÁGINAS DE MIOLO PRÓPRIO
+   --------------------------------------------------------------------------
+   O miolo da página inicial é escrito à mão, porque é redação. Mas três
+   pedaços dela são dados repetidos, e por isso passam a ser gerados: o
+   vídeo em destaque, a grade de educação e a grade de depoimentos.
 
-/* --------------------------------------------------------------------------
-   depoimentos.html tem corpo próprio, mas cabeçalho e rodapé são os mesmos.
-   Ela era escrita inteira à mão, e divergiu: enquanto as outras nove páginas
-   já diziam "Flórida", o rodapé dela continuava em "Geórgia". Foi
-   exatamente o problema que este gerador existe para não deixar acontecer.
+   Antes a grade de educação era HTML à mão com as durações, os títulos e os
+   endereços de capa copiados do dados.js. Duas cópias da mesma informação,
+   e a segunda envelhece sem ninguém perceber.
+   ========================================================================== */
+function blocoDestaque(ctx) {
+  const d = conteudo(ctx.idioma, DESTAQUE);
+  if (!d.video) { return ''; }
+  const T = ctx.T;
+  const verTodos = temDepoimentos(ctx.idioma)
+    ? `      <a class="botao botao--linha-clara" href="${ctx.depo}">${esc(T.depoimentos)}</a>\n` : '';
 
-   Agora o construir.js reescreve o cabeçalho e o rodapé dela a cada rodada.
-   O miolo, entre <main> e </main>, fica intocado: aquilo é conteúdo.
-   -------------------------------------------------------------------------- */
-function costurarDepoimentos() {
-  const arq = path.join(raiz, 'depoimentos.html');
-  if (!fs.existsSync(arq)) { return false; }
-  let t = fs.readFileSync(arq, 'utf8');
+  return `
+<section class="destaque" id="destaque">
+  <div class="faixa destaque__in">
 
-  const iniCab = t.indexOf('<header class="topo"');
-  const fimCab = t.indexOf('<main id="conteudo">');
-  const iniRod = t.indexOf('<footer class="rodape">');
-  const fimRod = t.indexOf('<script src="script.js">');
-  if (iniCab < 0 || fimCab < 0 || iniRod < 0 || fimRod < 0) {
-    console.log('  aviso: depoimentos.html mudou de forma, cabecalho/rodape nao costurados');
-    return false;
+    <div class="destaque__txt">
+      <p class="destaque__olho">${esc(d.subtitulo)}</p>
+      <h2>${esc(d.titulo)}</h2>
+      <p>${esc(d.texto)}</p>
+${verTodos}    </div>
+${videoGrande(ctx, d.video, T.assistirVideo + d.titulo)}
+  </div>
+</section>
+`;
+}
+
+function blocoEducacao(ctx, lead) {
+  const cards = SERVICOS.filter(s => video(ctx.idioma, s));
+  if (!cards.length) { return ''; }
+
+  const itens = cards.map(s => {
+    const d = conteudo(ctx.idioma, s);
+    const info = VIDEO_INFO[d.video] || {};
+    const dur = tempo(info.segundos);
+    return `      <li class="video">
+        <a href="${ctx.servicoEm(s)}">
+          <span class="video__capa video__capa--link">
+            <img src="${esc(CAPAS[d.video] || '')}" alt="" width="1280" height="720" loading="lazy" decoding="async">
+            ${PLAY}
+${dur ? `            <span class="video__tempo">${dur}</span>\n` : ''}          </span>
+          <h3>${esc(info.titulo || d.nome)}</h3>
+          <p>${esc(d.resumo)}</p>
+        </a>
+      </li>`;
+  }).join('\n');
+
+  return `
+<section class="educacao" id="educacao">
+  <div class="faixa">
+    <h2>${esc(lead.titulo)}</h2>
+    <p class="educacao__lead">
+      ${esc(lead.texto)}
+    </p>
+    <!-- Cada card leva para a página do serviço, onde o vídeo toca. Assim o
+         mesmo vídeo tem UM lugar só onde ele vive, e não duas cópias na
+         mesma página disputando quem carrega primeiro. -->
+    <ul class="videos videos--quatro">
+${itens}
+    </ul>
+  </div>
+</section>
+`;
+}
+
+function blocoDepoimentos(ctx) {
+  const itens = DEPOIMENTOS.filter(x => video(ctx.idioma, x));
+  if (!itens.length) { return ''; }
+
+  const cards = itens.map(x => {
+    const d = conteudo(ctx.idioma, x);
+    const info = VIDEO_INFO[d.video] || {};
+    const dur = tempo(info.segundos);
+    return `      <li class="video">
+        <button class="video__capa" type="button" data-vimeo="${esc(d.video)}" aria-label="${esc(ctx.T.assistirVideo + d.titulo)}">
+          <img src="${esc(CAPAS[d.video] || '')}" alt="" width="1280" height="720" loading="lazy" decoding="async">
+          ${PLAY}
+${dur ? `          <span class="video__tempo">${dur}</span>\n` : ''}        </button>
+        <h2>${esc(d.titulo)}</h2>
+        <p>${esc(d.texto)}</p>
+      </li>`;
+  }).join('\n');
+
+  return `
+    <ul class="videos videos--tres">
+${cards}
+    </ul>
+`;
+}
+
+
+/* ==========================================================================
+   COSTURA
+   --------------------------------------------------------------------------
+   Troca um trecho de um arquivo escrito à mão pelo trecho gerado. É assim
+   que o cabeçalho e o rodapé chegam às páginas que têm miolo próprio.
+   ========================================================================== */
+function trocarEntre(texto, de, ate, novo, nome, arquivo) {
+  const i = texto.indexOf(de);
+  if (i < 0) { throw new Error(arquivo + ': nao achei o comeco de "' + nome + '"  (' + de + ')'); }
+  const j = texto.indexOf(ate, i);
+  if (j < 0) { throw new Error(arquivo + ': nao achei o fim de "' + nome + '"  (' + ate + ')'); }
+  return texto.slice(0, i) + novo + texto.slice(j);
+}
+
+/* Troca o que está entre <!-- GERADO: x --> e <!-- FIM: x -->, mantendo os
+   dois marcadores no lugar para a próxima rodada achar. */
+function trocarMarcado(texto, nome, novo, arquivo) {
+  const de = '<!-- GERADO: ' + nome + ' -->';
+  const ate = '<!-- FIM: ' + nome + ' -->';
+  if (texto.indexOf(de) < 0) { return texto; }   /* esta pagina nao tem esse bloco */
+  return trocarEntre(texto, de, ate, de + '\n' + novo + '\n', nome, arquivo);
+}
+
+/* Exige o marcador: uma página de miolo próprio SEM ele ficaria para trás
+   sem ninguém perceber, que é exatamente o defeito que este gerador existe
+   para não deixar acontecer. */
+function exigirMarcado(texto, nome, novo, arquivo) {
+  if (texto.indexOf('<!-- GERADO: ' + nome + ' -->') < 0) {
+    throw new Error(arquivo + ': falta o marcador <!-- GERADO: ' + nome + ' -->');
   }
+  return trocarMarcado(texto, nome, novo, arquivo);
+}
 
-  t = t.slice(0, iniCab) + cabecalho('', '') + '\n\n' + t.slice(fimCab);
-  const iniRod2 = t.indexOf('<footer class="rodape">');
-  const fimRod2 = t.indexOf('<script src="script.js">');
-  t = t.slice(0, iniRod2) + rodape('') + '\n\n' + t.slice(fimRod2);
+function costurar(arquivo, ctx, lead) {
+  const alvo = path.join(raiz, arquivo);
+  if (!fs.existsSync(alvo)) { return false; }
+  let t = fs.readFileSync(alvo, 'utf8');
 
-  fs.writeFileSync(arq, t);
+  /* Cabeçalho e rodapé usam marcador, e não busca pela tag. Já usaram busca:
+     procuravam o texto <header class="topo" e trocavam até o <main>. Um
+     comentário desta mesma página que CITAVA essa tag, explicando o que era
+     costurado, virou o primeiro resultado da busca, e o gerador escreveu o
+     cabeçalho inteiro dentro do comentário, levando junto o <head> da
+     página. Com marcador isso não acontece: só é trocado o que está
+     declarado como gerado. */
+  t = exigirMarcado(t, 'cabecalho', cabecalho(ctx, ''), arquivo);
+  t = exigirMarcado(t, 'rodape', rodape(ctx), arquivo);
+
+  t = trocarMarcado(t, 'destaque', blocoDestaque(ctx), arquivo);
+  if (lead) { t = trocarMarcado(t, 'educacao', blocoEducacao(ctx, lead), arquivo); }
+  t = trocarMarcado(t, 'depoimentos', blocoDepoimentos(ctx), arquivo);
+
+  fs.writeFileSync(alvo, t);
   return true;
 }
 
-/* O menu e o rodapé das páginas da raiz saem daqui também, para não
-   divergirem das páginas de serviço. */
-fs.writeFileSync(path.join(raiz, '_parciais.json'), JSON.stringify({
-  cabecalho: cabecalho('', ''),
-  rodape: rodape(''),
-  servicos: SERVICOS.map(s => ({ slug: s.slug, nome: s.nome, en: s.en, resumo: s.resumo, video: s.video, capa: CAPAS[s.video] || '', videoTitulo: (VIDEO_INFO[s.video] || {}).titulo || '', segundos: (VIDEO_INFO[s.video] || {}).segundos || 0 })),
-  destaque: Object.assign({}, DESTAQUE, { capa: CAPAS[DESTAQUE.video] || '' })
-}, null, 2));
 
-console.log('geradas ' + SERVICOS.length + ' paginas em servicos/');
-if (costurarDepoimentos()) { console.log('  depoimentos.html: cabecalho e rodape atualizados'); }
-SERVICOS.forEach(s => console.log('  servicos/' + s.slug + '.html   vimeo ' + s.video));
+/* ==========================================================================
+   EXECUTA
+   ========================================================================== */
+const LEAD_EDUCACAO = {
+  pt: {
+    titulo: 'Entenda antes de decidir',
+    texto: 'Oito vídeos curtos, nenhum passa de quatro minutos. Nada aqui é venda: ' +
+           'são as ideias que costumam aparecer na conversa, explicadas com calma ' +
+           'para você poder pensar sem ninguém do lado esperando resposta.'
+  },
+  en: {
+    titulo: 'Understand before you decide',
+    texto: 'Eight short videos, none of them longer than four minutes. Nothing here ' +
+           'is a sales pitch: these are the ideas that usually come up in the ' +
+           'conversation, explained calmly so you can think it through with nobody ' +
+           'sitting beside you waiting for an answer.'
+  }
+};
+
+const avisos = [];
+let contagem = 0;
+
+Object.keys(IDIOMAS).forEach(idioma => {
+  const c = IDIOMAS[idioma];
+  const pasta = path.join(raiz, c.pasta, c.servicos);
+  fs.mkdirSync(pasta, { recursive: true });
+
+  const vistos = new Set();
+  SERVICOS.forEach((s, i) => {
+    const d = conteudo(idioma, s);
+    if (!d) { throw new Error('o servico ' + s.slug + ' nao tem o bloco "' + idioma + '"'); }
+    ['slug', 'nome', 'resumo', 'titulo', 'texto'].forEach(campo => {
+      if (!d[campo]) { throw new Error(idioma + '/' + s.slug + ' sem "' + campo + '"'); }
+    });
+    if (vistos.has(d.slug)) { throw new Error('slug repetido em ' + idioma + ': ' + d.slug); }
+    vistos.add(d.slug);
+    if (!d.video) { avisos.push('falta o video de  ' + idioma + '/' + d.slug); }
+    fs.writeFileSync(path.join(pasta, d.slug + '.html'), pagina(s, i, idioma));
+    contagem++;
+  });
+  console.log('  ' + c.pasta + c.servicos + '/   ' + SERVICOS.length + ' paginas');
+
+  const home = c.pasta + 'index.html';
+  if (costurar(home, contexto(idioma, 'home'), LEAD_EDUCACAO[idioma])) {
+    console.log('  ' + home + '   cabecalho, rodape, destaque e educacao');
+  } else {
+    avisos.push('nao encontrei ' + home);
+  }
+
+  /* A pagina de depoimentos e sempre costurada, mesmo sem video nenhum: ela
+     precisa existir pronta para o dia em que os links chegarem. Sem video, a
+     grade sai vazia, o item some do menu e nada aponta para la. */
+  const dep = c.pasta + c.depo;
+  if (costurar(dep, contexto(idioma, 'depo'))) {
+    console.log('  ' + dep + '   cabecalho, rodape e a grade' +
+      (temDepoimentos(idioma) ? '' : '   (grade vazia)'));
+  } else {
+    avisos.push('nao encontrei ' + dep);
+  }
+  if (!temDepoimentos(idioma)) {
+    avisos.push('sem depoimentos em ' + idioma + ': a grade fica vazia e o item sai do menu');
+  }
+});
+
+if (!conteudo('en', DESTAQUE).video) { avisos.push('falta o video do destaque em ingles'); }
+
+console.log('\ngeradas ' + contagem + ' paginas de servico em ' +
+            Object.keys(IDIOMAS).length + ' idiomas');
+
+if (avisos.length) {
+  console.log('\nO QUE AINDA FALTA');
+  avisos.forEach(a => console.log('  · ' + a));
+  console.log('\n  Os videos da Alliance que estao no ar sao os dublados em portugues,');
+  console.log('  e por isso nao entram nas paginas em ingles. Cole os links em ingles');
+  console.log('  no dados.js e rode este arquivo de novo: as secoes, a pagina de');
+  console.log('  depoimentos e os itens de menu aparecem sozinhos.');
+}
+
 if (SERVICOS.some(s => s.alerta)) {
-  console.log('\nATENCAO:');
+  console.log('\nATENCAO');
   SERVICOS.filter(s => s.alerta).forEach(s => console.log('  ' + s.slug + ': ' + s.alerta));
 }

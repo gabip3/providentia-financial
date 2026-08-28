@@ -5,16 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <!-- ==========================================================================
-     ARQUIVO GERADO POR  construir.js  A PARTIR DE  dados.js
+     ARQUIVO GERADO POR  construir.js  A PARTIR DE  dados.js  E  textos.js
      NÃO EDITE ESTE ARQUIVO NA MÃO: ele é reescrito na próxima vez que
      alguém rodar  node construir.js  e as suas mudanças somem.
-     Para mudar o texto, edite dados.js. Para mudar a estrutura da página,
-     edite construir.js.
+     Texto do serviço: dados.js. Menu e rodapé: textos.js. Estrutura da
+     página: construir.js.
      ========================================================================== -->
 
 <title>Benefícios em Vida | Providentia Financial</title>
 <meta name="description" content="Cobertura que protege você ainda em vida.">
-<link rel="canonical" href="https://www.providentiafinancialgroup.com/servicos/">
+<link rel="canonical" href="https://www.providentiafinancialgroup.com/servicos/beneficios-em-vida.html">
+<link rel="alternate" hreflang="pt-BR" href="https://www.providentiafinancialgroup.com/servicos/beneficios-em-vida.html">
+<link rel="alternate" hreflang="en" href="https://www.providentiafinancialgroup.com/en/services/living-benefits.html">
+<link rel="alternate" hreflang="x-default" href="https://www.providentiafinancialgroup.com/servicos/beneficios-em-vida.html">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../escudo.png">
 
@@ -27,10 +30,6 @@
      A imagem precisa de endereco ABSOLUTO. Caminho relativo funciona no
      site e falha no preview, porque quem monta o cartao e um servidor de
      fora que nao sabe de onde o caminho parte.
-
-     width e height evitam que o cartao apareca sem imagem no primeiro
-     compartilhamento: sem eles, algumas plataformas so mostram a foto
-     depois de baixar e medir, o que as vezes nao acontece a tempo.
 
      [OTIMIZAR] familia.png tem 1,8 MB. Facebook e LinkedIn aguentam, mas o
      WhatsApp costuma desistir de imagem grande e mostrar o cartao sem foto.
@@ -94,8 +93,7 @@
 
      O que ela protegeria ja esta coberto: as origens listadas acima sao
      todas https por extenso, e o site em producao e https com redirecao
-     obrigatoria. Ela so pegaria um http:// que alguem escrevesse errado
-     no futuro, e esse ganho nao paga quebrar o ambiente local.
+     obrigatoria.
      ========================================================================== -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://i.vimeocdn.com; frame-src https://player.vimeo.com https://www.youtube-nocookie.com; connect-src 'self' https://api.web3forms.com; form-action 'self'; base-uri 'self'; object-src 'none'">
 
@@ -133,14 +131,14 @@
             <svg class="ico-seta" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6"/></svg>
           </button>
           <ul class="sub" id="sub-servicos">
-            <li><a href="../servicos/beneficios-em-vida.html" aria-current="page">Benefícios em Vida</a></li>
-            <li><a href="../servicos/aposentadoria-livre-de-impostos.html">Aposentadoria livre de impostos</a></li>
-            <li><a href="../servicos/iul-para-criancas.html">IUL para crianças</a></li>
-            <li><a href="../servicos/protecao-hipotecaria.html">Proteção hipotecária</a></li>
-            <li><a href="../servicos/protecao-do-negocio.html">Proteção do seu negócio</a></li>
-            <li><a href="../servicos/anuidades.html">Anuidades com índice fixo</a></li>
-            <li><a href="../servicos/planejamento-imobiliario.html">Planejamento imobiliário</a></li>
-            <li><a href="../servicos/planejamento-universitario.html">Planejamento universitário</a></li>
+            <li><a href="beneficios-em-vida.html" aria-current="page">Benefícios em Vida</a></li>
+            <li><a href="aposentadoria-livre-de-impostos.html">Aposentadoria livre de impostos</a></li>
+            <li><a href="iul-para-criancas.html">IUL para crianças</a></li>
+            <li><a href="protecao-hipotecaria.html">Proteção hipotecária</a></li>
+            <li><a href="protecao-do-negocio.html">Proteção do seu negócio</a></li>
+            <li><a href="anuidades.html">Anuidades com índice fixo</a></li>
+            <li><a href="planejamento-imobiliario.html">Planejamento imobiliário</a></li>
+            <li><a href="planejamento-universitario.html">Planejamento universitário</a></li>
             <li class="sub__todos"><a href="../index.html#solucoes">Ver todos os serviços</a></li>
           </ul>
         </li>
@@ -150,9 +148,16 @@
       </ul>
     </nav>
 
+    <nav class="idioma" aria-label="Idioma">
+      <ul>
+      <li><span class="idioma__atual" aria-current="true"><svg class="bandeira" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="2" fill="#009b3a"/><path d="M12 2.2 22.1 8.5 12 14.8 1.9 8.5z" fill="#fedf00"/><circle cx="12" cy="8.5" r="3.7" fill="#002776"/><path d="M8.4 7.1a10.5 10.5 0 0 1 7.2 1.6 3.7 3.7 0 0 1-.2 1.1 9.2 9.2 0 0 0-6.6-1.5z" fill="#fff"/></svg><b>PT</b></span></li>
+      <li><a class="idioma__link" href="../en/services/living-benefits.html" hreflang="en" lang="en" aria-label="Ver este site em inglês"><svg class="bandeira" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="2" fill="#b22234"/><g fill="#fff"><rect y="2.4" width="24" height="1.3"/><rect y="5.1" width="24" height="1.3"/><rect y="7.7" width="24" height="1.3"/><rect y="10.4" width="24" height="1.3"/><rect y="13" width="24" height="1.3"/></g><path d="M0 2a2 2 0 0 1 2-2h8.2v9h-10.2z" fill="#3c3b6e"/><g fill="#fff"><circle cx="2.3" cy="1.9" r=".5"/><circle cx="5.1" cy="1.9" r=".5"/><circle cx="7.9" cy="1.9" r=".5"/><circle cx="3.7" cy="3.6" r=".5"/><circle cx="6.5" cy="3.6" r=".5"/><circle cx="2.3" cy="5.3" r=".5"/><circle cx="5.1" cy="5.3" r=".5"/><circle cx="7.9" cy="5.3" r=".5"/><circle cx="3.7" cy="7" r=".5"/><circle cx="6.5" cy="7" r=".5"/></g></svg><b>EN</b></a></li>
+      </ul>
+    </nav>
+
     <a class="botao botao--marinho botao--topo" href="../index.html#contato" data-agendar="../index.html">Agendar uma conversa</a>
 
-    <button class="sanduiche" type="button" aria-expanded="false" aria-controls="menu-movel">
+    <button class="sanduiche" type="button" aria-expanded="false" aria-controls="menu-movel" data-menu="Menu" data-fechar="Fechar">
       <span class="sanduiche__txt">Menu</span>
       <svg class="ico-menu" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
     </button>
@@ -166,19 +171,25 @@
       <li><a href="../index.html">Início</a></li>
       <li><a href="../index.html#sobre">Sobre</a></li>
       <li><a href="../index.html#solucoes">Serviços</a></li>
-      <li class="painel__sub"><a href="../servicos/beneficios-em-vida.html">Benefícios em Vida</a></li>
-      <li class="painel__sub"><a href="../servicos/aposentadoria-livre-de-impostos.html">Aposentadoria livre de impostos</a></li>
-      <li class="painel__sub"><a href="../servicos/iul-para-criancas.html">IUL para crianças</a></li>
-      <li class="painel__sub"><a href="../servicos/protecao-hipotecaria.html">Proteção hipotecária</a></li>
-      <li class="painel__sub"><a href="../servicos/protecao-do-negocio.html">Proteção do seu negócio</a></li>
-      <li class="painel__sub"><a href="../servicos/anuidades.html">Anuidades com índice fixo</a></li>
-      <li class="painel__sub"><a href="../servicos/planejamento-imobiliario.html">Planejamento imobiliário</a></li>
-      <li class="painel__sub"><a href="../servicos/planejamento-universitario.html">Planejamento universitário</a></li>
+      <li class="painel__sub"><a href="beneficios-em-vida.html">Benefícios em Vida</a></li>
+      <li class="painel__sub"><a href="aposentadoria-livre-de-impostos.html">Aposentadoria livre de impostos</a></li>
+      <li class="painel__sub"><a href="iul-para-criancas.html">IUL para crianças</a></li>
+      <li class="painel__sub"><a href="protecao-hipotecaria.html">Proteção hipotecária</a></li>
+      <li class="painel__sub"><a href="protecao-do-negocio.html">Proteção do seu negócio</a></li>
+      <li class="painel__sub"><a href="anuidades.html">Anuidades com índice fixo</a></li>
+      <li class="painel__sub"><a href="planejamento-imobiliario.html">Planejamento imobiliário</a></li>
+      <li class="painel__sub"><a href="planejamento-universitario.html">Planejamento universitário</a></li>
       <li><a href="../depoimentos.html">Depoimentos</a></li>
       <li><a href="../index.html#educacao">Educação</a></li>
       <li><a href="../index.html#contato">Contato</a></li>
     </ul>
     <div class="painel__pe">
+      <nav class="idioma idioma--painel" aria-label="Idioma">
+      <ul>
+      <li><span class="idioma__atual" aria-current="true"><svg class="bandeira" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="2" fill="#009b3a"/><path d="M12 2.2 22.1 8.5 12 14.8 1.9 8.5z" fill="#fedf00"/><circle cx="12" cy="8.5" r="3.7" fill="#002776"/><path d="M8.4 7.1a10.5 10.5 0 0 1 7.2 1.6 3.7 3.7 0 0 1-.2 1.1 9.2 9.2 0 0 0-6.6-1.5z" fill="#fff"/></svg><b>PT</b></span></li>
+      <li><a class="idioma__link" href="../en/services/living-benefits.html" hreflang="en" lang="en" aria-label="Ver este site em inglês"><svg class="bandeira" viewBox="0 0 24 17" aria-hidden="true" focusable="false"><rect width="24" height="17" rx="2" fill="#b22234"/><g fill="#fff"><rect y="2.4" width="24" height="1.3"/><rect y="5.1" width="24" height="1.3"/><rect y="7.7" width="24" height="1.3"/><rect y="10.4" width="24" height="1.3"/><rect y="13" width="24" height="1.3"/></g><path d="M0 2a2 2 0 0 1 2-2h8.2v9h-10.2z" fill="#3c3b6e"/><g fill="#fff"><circle cx="2.3" cy="1.9" r=".5"/><circle cx="5.1" cy="1.9" r=".5"/><circle cx="7.9" cy="1.9" r=".5"/><circle cx="3.7" cy="3.6" r=".5"/><circle cx="6.5" cy="3.6" r=".5"/><circle cx="2.3" cy="5.3" r=".5"/><circle cx="5.1" cy="5.3" r=".5"/><circle cx="7.9" cy="5.3" r=".5"/><circle cx="3.7" cy="7" r=".5"/><circle cx="6.5" cy="7" r=".5"/></g></svg><b>EN</b></a></li>
+      </ul>
+    </nav>
       <a class="botao botao--marinho botao--cheio" href="../index.html#contato" data-agendar="../index.html">Agendar uma conversa</a>
       <a class="botao botao--linha botao--cheio" href="#" data-whatsapp><svg class="ico-zap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg> Falar no WhatsApp</a>
     </div>
@@ -201,9 +212,6 @@
     <p class="servico__en">Living Benefits</p>
     <h1>Existe um seguro de vida que você não precisa morrer para utilizar.</h1>
 
-    <!-- O vídeo só carrega depois do clique: antes disso o Vimeo não
-         escreve cookie em quem apenas passou pela página, e a página abre
-         mais leve. O número do vídeo vem do dados.js. -->
     <div class="video video--largo">
       <button class="video__capa" type="button" data-vimeo="375733638" aria-label="Assistir ao vídeo sobre Benefícios em Vida">
         <img src="https://i.vimeocdn.com/video/834592931-b9abdc5c95909691d6b7edf3b635b3e57046cb8b4c5a8999800304be6c70e46c-d_1280?region=us" alt="" width="1280" height="720" loading="lazy" decoding="async">
@@ -242,10 +250,7 @@
     </div>
 
     <p class="nota nota--esq">
-      Nem todos os produtos estão disponíveis em todos os estados, e o que
-      serve para você depende da sua idade, da sua saúde, de onde você mora
-      e da aprovação da companhia. Esta página é informativa e não é
-      aconselhamento fiscal, jurídico ou de investimento.
+      Nem todos os produtos estão disponíveis em todos os estados, e o que serve para você depende da sua idade, da sua saúde, de onde você mora e da aprovação da companhia. Esta página é informativa e não é aconselhamento fiscal, jurídico ou de investimento.
     </p>
 
   </div>
@@ -283,9 +288,10 @@
          se por algum motivo ela nao tiver a apolice ativa, a palavra
          "Insured" tem de sair. Confirme antes de publicar.
 
-         Fica em ingles porque e termo do mercado dos Estados Unidos, e e
-         assim que o publico dela ja viu em outros negocios americanos. A
-         linha abaixo traduz, para quem nao conhece a expressao.
+         Fica em ingles NOS DOIS IDIOMAS porque e termo do mercado dos
+         Estados Unidos, e e assim que o publico dela ja viu em outros
+         negocios americanos. A linha de baixo e que muda: em portugues ela
+         traduz a expressao, em ingles ela diz o que a expressao cobre.
          ==================================================================== -->
     <p class="selo">
       <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
@@ -315,13 +321,12 @@
              Peca a lista dos estados em que ela tem licenca ativa. Se for
              mesmo todos, esta frase fica. Se faltar algum, troque por
              "Atendendo clientes em XX estados" e ponha a lista numa pagina
-             ou no rodape.
+             ou no rodape. O texto mora no textos.js, em "atendimento", e
+             muda nos dois idiomas de uma vez.
 
-             O texto abaixo evita o problema maior de proposito: fala de
-             ONDE ela atende, e nao promete que todo produto existe em todo
-             lugar. Nem todos os produtos estao disponiveis em todos os
-             estados, e isso ja esta escrito no bloco juridico. -->
-        <span>Atendendo famílias brasileiras em todos os Estados Unidos</span>
+             A palavra "brasileiras" saiu daqui a pedido da Gabi: o site
+             atende quem chegar. -->
+        <span>Atendendo famílias em todos os Estados Unidos</span>
       </li>
     </ul>
 
@@ -350,10 +355,6 @@
          companhia, que costuma ter regra própria de publicidade acima da
          regra do estado.
 
-         Por isso o número está aqui como linha SEPARADA e opcional. Se o
-         compliance disser que não vai, apague só aquela linha; o resto do
-         bloco continua necessário.
-
          O QUE É NECESSÁRIO DE QUALQUER JEITO
          · o nome sob o qual ela é licenciada, escrito exatamente assim
          · os estados em que ela pode de fato atender
@@ -362,26 +363,18 @@
          Um "e mais" que costuma passar batido: se "Providentia Financial"
          for nome fantasia e não a razão social licenciada, muitos estados
          pedem que o nome legal apareça em algum lugar da página.
-         ==================================================================== -->
-    <!-- ====================================================================
-         AQUI ENTRA A IDENTIFICAÇÃO LEGAL
-         --------------------------------------------------------------------
-         Os marcadores visíveis saíram a pedido da Monica. O que eles
-         cobravam continua valendo, e é isto:
 
-           · o nome sob o qual ela é licenciada, escrito exatamente assim
-           · os estados em que ela pode atender
-           · o disclosure que a companhia exigir
+         AGORA SÃO DOIS IDIOMAS, e isso muda uma coisa: o que entrar aqui
+         precisa entrar nos dois. Um disclosure que só existe em português
+         não protege ninguém na página em inglês. É por isso que estes
+         textos moram no textos.js, e não soltos no HTML.
 
-         Quando tiver os textos, é só descomentar e preencher:
+         Quando tiver os textos, descomente e preencha lá, e a linha entra
+         nas vinte páginas de uma vez:
 
          <p class="rodape__mini">Monica Silva, licenciada como NOME LEGAL.</p>
          <p class="rodape__mini">Atendendo os estados de XX, XX e XX.</p>
          <p class="rodape__mini">TEXTO EXATO DO DISCLOSURE DA COMPANHIA.</p>
-
-         E, se o compliance pedir o número da licença, que é registro
-         público e em alguns estados obrigatório em publicidade:
-
          <p class="rodape__mini">Licença nº 000000 (Flórida).</p>
          ==================================================================== -->
     <!-- Este parágrafo é obrigatório a partir do momento em que o site cita
@@ -393,17 +386,11 @@
 
          Se a lista de seguradoras mudar, o nome citado aqui muda junto. -->
     <p class="rodape__mini">
-      A Providentia Financial é uma agência independente. A disponibilidade de
-      produtos e seguradoras varia por estado. National Life Group&reg; e demais
-      marcas citadas pertencem aos seus respectivos proprietários.
+      A Providentia Financial é uma agência independente. A disponibilidade de produtos e seguradoras varia por estado. National Life Group&reg; e demais marcas citadas pertencem aos seus respectivos proprietários.
     </p>
 
     <p class="rodape__mini">
-      Este site tem finalidade informativa e não constitui aconselhamento
-      fiscal, jurídico ou de investimento. Garantias dependem da capacidade
-      de pagamento da companhia emissora. Nem todos os produtos estão
-      disponíveis em todos os estados. Não envie dados financeiros por
-      este site.
+      Este site tem finalidade informativa e não constitui aconselhamento fiscal, jurídico ou de investimento. Garantias dependem da capacidade de pagamento da companhia emissora. Nem todos os produtos estão disponíveis em todos os estados. Não envie dados financeiros por este site.
     </p>
     <p class="rodape__mini">&copy; <span data-ano>2026</span> Providentia Financial.</p>
   </div>

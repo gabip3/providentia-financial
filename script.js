@@ -75,8 +75,71 @@ var VIDEOS = {
   'faculdade':       ''
 };
 
+/* ==========================================================================
+   AS PALAVRAS QUE O SCRIPT ESCREVE
+   --------------------------------------------------------------------------
+   Quase todo texto do site está no HTML, e é o construir.js que o coloca lá.
+   Mas um punhado de frases só existe em resposta a alguma coisa que a pessoa
+   faz: o erro de um campo, o "Enviando...", a mensagem que já vai escrita no
+   WhatsApp. Essas nascem aqui, e por isso precisam existir nos dois idiomas.
+
+   QUAL IDIOMA ESTÁ NO AR
+   Sai do  lang  da própria página, que o construir.js escreve certo em cada
+   uma. Não há adivinhação, não há detecção de navegador e não há cookie: a
+   página em inglês fala inglês porque ela É a página em inglês.
+
+   Se algum dia entrar um terceiro idioma, é copiar o bloco e usar a mesma
+   sigla que estiver no textos.js.
+   ========================================================================== */
+var FALAS = {
+
+  pt: {
+    zap:        'Olá! Vim pelo site da Providentia Financial e gostaria de agendar uma conversa.',
+    videoFalta: 'Vídeo ainda não publicado: ',
+    assistir:   'Assistir: ',
+    nomeVideo:  'vídeo',
+    erroNome:   'Escreva seu nome.',
+    erroEmail:  'Confira o endereço de e-mail.',
+    erroMsg:    'Escreva sua mensagem.',
+    faltam:     'Faltam alguns campos.',
+    enviando:   'Enviando...',
+    recebido:   'Recebido. Respondo em até um dia útil.',
+    falhou:     'Não consegui enviar agora. Tente de novo, ou fale ',
+    peloZap:    'pelo WhatsApp',
+    assunto:    'Site: ',
+    semNome:    'contato',
+    remetente:  'Site da Providentia Financial'
+  },
+
+  en: {
+    zap:        'Hi! I came from the Providentia Financial site and I would like to book a conversation.',
+    videoFalta: 'Video not published yet: ',
+    assistir:   'Watch: ',
+    nomeVideo:  'video',
+    erroNome:   'Please write your name.',
+    erroEmail:  'Please check the email address.',
+    erroMsg:    'Please write your message.',
+    faltam:     'Some fields are missing.',
+    enviando:   'Sending...',
+    recebido:   'Got it. I answer within one business day.',
+    falhou:     'I could not send that right now. Try again, or reach me ',
+    peloZap:    'on WhatsApp',
+    /* O assunto e o remetente do e-mail seguem o idioma de quem escreveu:
+       assim a Monica ve na caixa de entrada, antes de abrir, em que lingua
+       aquela pessoa espera ser respondida. */
+    assunto:    'Site (EN): ',
+    semNome:    'contact',
+    remetente:  'Providentia Financial site'
+  }
+
+};
+
+/* O idioma desta página. pt-BR e pt viram pt; qualquer outro cai em en. */
+var IDIOMA = (document.documentElement.lang || 'pt').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en';
+var FALA = FALAS[IDIOMA];
+
 /* Mensagem que já vai escrita no WhatsApp quando a pessoa clica. */
-var MENSAGEM = 'Olá! Vim pelo site da Providentia Financial e gostaria de agendar uma conversa.';
+var MENSAGEM = FALA.zap;
 
 
 /* -------------------------------------------------------------------------- */
@@ -182,7 +245,7 @@ function montarMenu() {
     painel.removeAttribute('inert');
     painel.classList.add('aberto');
     botao.setAttribute('aria-expanded', 'true');
-    botao.querySelector('.sanduiche__txt').textContent = 'Fechar';
+    botao.querySelector('.sanduiche__txt').textContent = botao.getAttribute('data-fechar') || 'Fechar';
     document.body.classList.add('travado');
   }
 
@@ -190,7 +253,7 @@ function montarMenu() {
     painel.classList.remove('aberto');
     painel.setAttribute('inert', '');
     botao.setAttribute('aria-expanded', 'false');
-    botao.querySelector('.sanduiche__txt').textContent = 'Menu';
+    botao.querySelector('.sanduiche__txt').textContent = botao.getAttribute('data-menu') || 'Menu';
     document.body.classList.remove('travado');
   }
 
@@ -431,17 +494,17 @@ function montarVideos() {
                     : (chave && typeof VIDEOS !== 'undefined' ? (VIDEOS[chave] || '') : '');
 
     var titulo = capa.parentNode.querySelector('h2, h3');
-    var nome = titulo ? titulo.textContent.trim() : 'vídeo';
+    var nome = titulo ? titulo.textContent.trim() : FALA.nomeVideo;
 
     if (!url) {
       capa.setAttribute('disabled', '');
-      capa.setAttribute('aria-label', 'Vídeo ainda não publicado: ' + nome);
+      capa.setAttribute('aria-label', FALA.videoFalta + nome);
       return;
     }
 
     var item = capa.closest('.video') || capa.parentNode;
     if (item) { item.classList.add('video--pronto'); }
-    if (!capa.getAttribute('aria-label')) { capa.setAttribute('aria-label', 'Assistir: ' + nome); }
+    if (!capa.getAttribute('aria-label')) { capa.setAttribute('aria-label', FALA.assistir + nome); }
 
     capa.addEventListener('click', function () {
       var incorporar = paraIncorporar(url);
@@ -510,9 +573,9 @@ function montarFormulario() {
   secao.removeAttribute('hidden');
 
   var regras = {
-    nome:     { msg: 'Escreva seu nome.',              ok: function (v) { return v.trim().length >= 2; } },
-    email:    { msg: 'Confira o endereço de e-mail.',  ok: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); } },
-    mensagem: { msg: 'Escreva sua mensagem.',          ok: function (v) { return v.trim().length >= 5; } }
+    nome:     { msg: FALA.erroNome,  ok: function (v) { return v.trim().length >= 2; } },
+    email:    { msg: FALA.erroEmail, ok: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); } },
+    mensagem: { msg: FALA.erroMsg,   ok: function (v) { return v.trim().length >= 5; } }
   };
 
   function campoDe(input) { return input.closest('.campo'); }
@@ -560,13 +623,13 @@ function montarFormulario() {
     });
     if (primeiro) {
       estado.className = 'form__estado form__estado--erro';
-      estado.textContent = 'Faltam alguns campos.';
+      estado.textContent = FALA.faltam;
       primeiro.focus();
       return;
     }
 
     estado.className = 'form__estado';
-    estado.textContent = 'Enviando...';
+    estado.textContent = FALA.enviando;
     botao.disabled = true;
 
     /* O assunto e o remetente sao montados aqui, e nao ficam fixos no HTML.
@@ -576,8 +639,8 @@ function montarFormulario() {
     var dados = Object.fromEntries(new FormData(form));
     var quem = (dados.nome || '').trim();
     var sobre = (dados.assunto || '').trim();
-    dados.subject = 'Site: ' + (quem || 'contato') + (sobre ? ' - ' + sobre : '');
-    dados.from_name = quem || 'Site da Providentia Financial';
+    dados.subject = FALA.assunto + (quem || FALA.semNome) + (sobre ? ' - ' + sobre : '');
+    dados.from_name = quem || FALA.remetente;
 
     fetch('https://api.web3forms.com/submit', {
       method: 'POST',
@@ -589,12 +652,11 @@ function montarFormulario() {
         if (!res.ok || !res.d.success) { throw new Error(res.d.message || 'falhou'); }
         form.reset();
         estado.className = 'form__estado form__estado--certo';
-        estado.textContent = 'Recebido. Respondo em até um dia útil.';
+        estado.textContent = FALA.recebido;
       })
       .catch(function () {
         estado.className = 'form__estado form__estado--erro';
-        estado.innerHTML = 'Não consegui enviar agora. Tente de novo, ou fale ' +
-          '<a href="#" data-whatsapp>pelo WhatsApp</a>.';
+        estado.innerHTML = FALA.falhou + '<a href="#" data-whatsapp>' + FALA.peloZap + '</a>.';
         montarContatos();
       })
       .then(function () { botao.disabled = false; });
