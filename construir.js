@@ -55,6 +55,40 @@ const { icone } = require('./icones.js');
 const raiz = __dirname;
 const SITE_URL = 'https://www.providentiafinancialgroup.com';
 
+/* ==========================================================================
+   O CARIMBO DE VERSÃO DO CSS E DO JS
+   --------------------------------------------------------------------------
+   Todo endereço de style.css e script.js sai daqui com ?v= e oito letras
+   tiradas do conteúdo do próprio arquivo. Mudou uma vírgula no CSS, muda o
+   carimbo, muda o endereço, e o navegador é obrigado a buscar de novo.
+
+   POR QUE ISSO EXISTE
+   O GitHub Pages entrega os arquivos com Cache-Control: max-age=600. Quem
+   tinha o site aberto recebia o HTML novo e continuava com o CSS velho por
+   até dez minutos. Aconteceu de verdade: a troca de idioma foi ao ar e
+   apareceu para a Gabi como duas bandeiras empilhadas, sem as pastilhas,
+   porque o HTML já tinha as pastilhas e o CSS que as desenha ainda não
+   tinha chegado. O site estava certo no servidor e errado na tela dela.
+
+   A alternativa era pedir para todo mundo apertar Ctrl+Shift+R depois de
+   cada mudança, o que funciona uma vez e falha na segunda, justamente com
+   quem não sabe que precisa: a Monica, olhando a revisão.
+
+   Só CSS e JS levam carimbo. São os dois que mudam a cada rodada. Foto e
+   logo praticamente não mudam, e quando mudarem trocam de nome de arquivo.
+   ========================================================================== */
+const crypto = require('crypto');
+
+function carimbo(arquivo) {
+  const alvo = path.join(raiz, arquivo);
+  if (!fs.existsSync(alvo)) { return ''; }
+  return '?v=' + crypto.createHash('md5')
+    .update(fs.readFileSync(alvo)).digest('hex').slice(0, 8);
+}
+
+const V_CSS = carimbo('style.css');
+const V_JS = carimbo('script.js');
+
 const esc = s => String(s)
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -558,7 +592,7 @@ ${xDefault}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&amp;family=Poppins:wght@300;400;500;600;700&amp;family=Allura&amp;display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="${ctx.base}style.css">
+<link rel="stylesheet" href="${ctx.base}style.css${V_CSS}">
 </head>
 <body>
 
@@ -668,7 +702,7 @@ ${vizinhos}
 
 ` + rodape(ctx) + `
 
-<script src="${ctx.base}script.js"></script>
+<script src="${ctx.base}script.js${V_JS}"></script>
 </body>
 </html>
 `;
@@ -823,6 +857,17 @@ function costurar(arquivo, ctx, lead) {
   t = trocarMarcado(t, 'destaque', blocoDestaque(ctx), arquivo);
   if (lead) { t = trocarMarcado(t, 'educacao', blocoEducacao(ctx, lead), arquivo); }
   t = trocarMarcado(t, 'depoimentos', blocoDepoimentos(ctx), arquivo);
+
+  /* O carimbo de versão do CSS e do JS. Estas quatro páginas têm o <head>
+     escrito à mão, então o endereço é reescrito aqui: apaga o ?v= que
+     estiver lá e põe o de agora. Sem isto elas seriam as únicas quatro do
+     site a continuar servindo CSS velho, e duas delas são as iniciais. */
+  const antes = t;
+  t = t.replace(/(href=")([^"]*style\.css)(\?v=[0-9a-f]+)?(")/g, '$1$2' + V_CSS + '$4');
+  t = t.replace(/(src=")([^"]*script\.js)(\?v=[0-9a-f]+)?(")/g, '$1$2' + V_JS + '$4');
+  if (antes === t && (V_CSS || V_JS)) {
+    console.log('  aviso: ' + arquivo + ' nao tem link de style.css nem script.js');
+  }
 
   fs.writeFileSync(alvo, t);
   return true;
