@@ -221,6 +221,36 @@ a:focus-visible, button:focus-visible {
 .botao--linha:hover { background: var(--ouro); color: var(--branco); }
 
 /* Contorno dourado sobre o marinho */
+/* Contorno marinho, para acao secundaria que NAO e WhatsApp.
+
+   Existe porque o botao--linha deste site virou, na pratica, o botao do
+   WhatsApp: ele carrega a borda verde que pulsa, feita para lembrar a marca
+   de la. Verde num botao que liga para um telefone nao quer dizer nada.
+
+   Marinho sobre branco mede 14,45:1 como texto.
+
+   A BORDA COMECOU EM 30% DE OPACIDADE E FOI PARA 50%. Eu tinha escrito que
+   30% dava 3,4:1; medido no navegador, dava 1,88. A conta de opacidade nao e
+   linear: 30% de marinho sobre branco vira rgb(182,189,210), que e quase
+   branco. A 50% vira rgb(133,145,180) e mede 3,16:1, que e o minimo da WCAG
+   para o contorno de um componente.
+
+   Aqui a borda importa de verdade: e ela que diz que aquilo e um botao, e
+   nao um link em azul. */
+.botao--contorno {
+  background: var(--branco);
+  border-color: rgba(10, 35, 104, .5);
+  color: var(--marinho);
+  /* o pulso verde e do botao do WhatsApp, e nao deste */
+  animation: none;
+}
+.botao--contorno:hover {
+  background: var(--marinho);
+  border-color: var(--marinho);
+  color: var(--branco);
+}
+.botao--contorno .ico-zap { fill: none; }
+
 .botao--linha-clara { background: transparent; border-color: var(--ouro-claro); color: var(--ouro-claro); }
 .botao--linha-clara:hover { background: var(--ouro-claro); color: var(--marinho); }
 
@@ -2089,7 +2119,7 @@ body.travado { overflow: hidden; }
      900 a 1023 ...... sanduiche. O menu aberto em portugues, com seis itens
                        mais as pastilhas, pediria uns 990px.
      1024 a 1319 ..... menu aberto, vaos apertados, sem o botao
-     1320 para cima .. o botao volta
+     1360 para cima .. o botao volta
 
    OS VAOS FICAM APERTADOS EM TODA LARGURA, E NAO SO NA FAIXA ESTREITA.
    A primeira versao devolvia os vaos folgados acima de 1440, achando que
@@ -2100,12 +2130,17 @@ body.travado { overflow: hidden; }
    rolagem nenhuma, so desalinhado. Com os vaos apertados a barra pede
    1188 e sobra folga.
 
+   E o botao volta a 1360, e nao a 1320. A 1320 a coluna tem 1199 e a barra
+   com o botao pede 1212: ela passava 13px para fora da coluna, sem provocar
+   rolagem, so desalinhada. De 1360 para cima a coluna trava em 1240 e sobra
+   folga de verdade.
+
    O botao sai antes de tudo porque ele e o unico repetido: o item "Contato"
    do menu leva ao mesmo lugar, e a faixa marinho do fim da pagina repete a
    mesma chamada em tamanho grande. Trocar de idioma nao tem substituto em
    lugar nenhum da pagina, entao as pastilhas ficam.
    ========================================================================== */
-@media (max-width: 1319px) {
+@media (max-width: 1359px) {
   .botao--topo { display: none; }
 }
 
@@ -2142,15 +2177,44 @@ body.travado { overflow: hidden; }
 }
 
 @media (min-width: 1024px) {
-  /* Os vãos entram no mínimo, e não a fonte: menu de 13px que vira 11px
-     para caber é menu que ninguém lê. */
-  .topo__in { gap: 14px; }
-  .nav > ul { gap: clamp(14px, 1.7vw, 30px); }
-  .nav { margin-right: 14px; }
+  /* --------------------------------------------------------------------
+     O VÃO ENTRE GRUPOS É MAIOR QUE O VÃO ENTRE ITENS DO MESMO GRUPO.
+
+     A primeira versão fazia o contrário: 14px separando marca, menu,
+     pastilhas e botão, contra até 30px separando um item de menu do
+     seguinte. Cada peça ficava à mesma distância de tudo, e sem
+     hierarquia a barra lê como amontoado, mesmo tendo folga. As
+     pastilhas de idioma pareciam encostadas em CONTATO e no botão
+     porque estavam mais perto deles do que CONTATO estava de EDUCAÇÃO.
+
+     Agora são 32px entre grupos contra 20px entre itens, uma vez e meia.
+     A conta cabe: em 1440 a coluna tem 1240, as peças fixas somam 589 e
+     o texto do menu 442, o que deixa 209 para oito vãos. Três de 32 e
+     cinco de 20 dão 196.
+
+     Os vãos entram no mínimo antes da fonte: menu de 13px que vira 11px
+     para caber é menu que ninguém lê.
+
+     A margem à direita do menu saiu. Ela existia quando o menu era a
+     última peça antes do botão; agora o vão entre grupos faz esse
+     trabalho, e manter as duas somava duas separações no mesmo lugar.
+     -------------------------------------------------------------------- */
+  .topo__in { gap: clamp(24px, 2.4vw, 32px); }
+  .nav > ul { gap: clamp(16px, 1.5vw, 20px); }
+  .nav { margin-right: 0; }
+
+  /* As pastilhas encolhem por dentro para o grupo poder respirar por
+     fora. É a troca que interessa: o que dá sensação de aperto é a
+     distância até o vizinho, e não o tamanho da caixa. */
   .idioma ul { padding: 2px; }
   .idioma__link,
-  .idioma__atual { padding: 5px 8px; gap: 5px; }
+  .idioma__atual { padding: 5px 9px; gap: 6px; }
   .bandeira { width: 18px; }
+
+  /* 24px de cada lado viravam 231px de botão, a maior peça da barra
+     depois da marca. Com 20 ele continua com área de clique de sobra e
+     devolve 8px para os vãos. */
+  .botao--topo { padding: 0 20px; }
 }
 
 
