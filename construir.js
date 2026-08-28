@@ -104,6 +104,10 @@ function tempo(segundos) {
    caminho SVG não ser copiado seis vezes. */
 const ZAP = '<svg class="ico-zap" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>';
 
+/* O telefone, para o canal secundário em inglês. É o mesmo desenho do
+   rodapé: traço, e não preenchimento, como todos os ícones deste site. */
+const TEL = '<svg class="ico-tel" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>';
+
 const PLAY = '<span class="video__play" aria-hidden="true"><svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg></span>';
 
 /* O arquivo oficial do escudo, PNG com fundo transparente. Como tem alfa,
@@ -212,6 +216,30 @@ function contexto(idioma, tipo, s) {
     })),
     absoluto: SITE_URL + '/' + meu.replace(/(^|\/)index\.html$/, '$1')
   };
+}
+
+
+/* ==========================================================================
+   O BOTÃO DO CANAL SECUNDÁRIO
+   --------------------------------------------------------------------------
+   Em português leva ao WhatsApp; em inglês, ao telefone. Quem decide é o
+   campo "canal" do idioma, no textos.js, e o porquê está explicado lá.
+
+   As duas versões não são só rótulos diferentes: mudam o destino do link
+   (wa.me contra tel:), o ícone e a cor da borda. A borda verde que pulsa é
+   do WhatsApp, feita para lembrar a marca dele; num botão que liga para um
+   telefone ela não quer dizer nada.
+   ========================================================================== */
+function botaoCanal(ctx, classes) {
+  /* sem classe extra, nao sobra espaco duplo no atributo */
+  const cls = classes ? 'botao ' + classes : 'botao';
+  if (ctx.cfg.canal === 'whatsapp') {
+    return '<a class="' + cls + ' botao--linha" href="#" data-whatsapp>' +
+           ZAP + ' ' + esc(ctx.T.canal) + '</a>';
+  }
+  return '<a class="' + cls + ' botao--contorno" href="#" data-telefone>' +
+         TEL + ' ' + esc(ctx.T.canal) +
+         ' <span data-preencher="telefone">[ TELEFONE ]</span></a>';
 }
 
 
@@ -329,7 +357,7 @@ ${painelDepo}${painelEdu}      <li><a href="${ctx.home}#contato">${esc(T.contato
     <div class="painel__pe">
       ${trocaIdioma(ctx, 'idioma--painel')}
       <a class="botao botao--marinho botao--cheio" href="${ctx.home}#contato" data-agendar="${ctx.home}">${esc(T.agendar)}</a>
-      <a class="botao botao--linha botao--cheio" href="#" data-whatsapp>${ZAP} ${esc(T.whatsapp)}</a>
+      ${botaoCanal(ctx, 'botao--cheio')}
     </div>
   </nav>
 </div>`;
@@ -465,9 +493,13 @@ function rodape(ctx) {
   </div>
 </footer>
 
-<a class="zap" href="#" data-whatsapp aria-label="${esc(T.whatsappFlutuante)}">
+${ctx.cfg.canal === 'whatsapp' ? `<a class="zap" href="#" data-whatsapp aria-label="${esc(T.canalFlutuante)}">
   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
-</a>`;
+</a>` : `<!-- A bolha do canto, em inglês, liga em vez de abrir o WhatsApp. Marinho
+     e não verde: verde aqui é a cor do WhatsApp, e este botão não é ele. -->
+<a class="zap zap--tel" href="#" data-telefone aria-label="${esc(T.canalFlutuante)}">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
+</a>`}`;
 }
 
 
@@ -695,7 +727,7 @@ ${d.texto.map(p => `      <p>${esc(p)}</p>`).join('\n')}
 ${lista}
     <div class="servico__acoes">
       <a class="botao botao--marinho" href="${ctx.home}#contato" data-agendar="${ctx.home}">${esc(T.agendar)}</a>
-      <a class="botao botao--linha" href="#" data-whatsapp>${ZAP} ${esc(T.whatsapp)}</a>
+      ${botaoCanal(ctx)}
     </div>
 
     <p class="nota nota--esq">

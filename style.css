@@ -258,6 +258,12 @@ a:focus-visible, button:focus-visible {
 .botao--topo { min-height: 46px; padding: 0 24px; font-size: 12px; }
 
 .ico-zap  { width: 19px; height: 19px; fill: currentColor; flex: none; }
+/* O telefone do canal em inglês. Traço, e não preenchimento: é assim que
+   todos os ícones deste site são desenhados, e o do WhatsApp é a exceção
+   porque o glifo dele é a marca de outra empresa. */
+.ico-tel  { width: 19px; height: 19px; flex: none;
+            fill: none; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round; }
 .ico-mini {
   width: 17px; height: 17px;
   flex: none;
@@ -686,6 +692,11 @@ body.travado { overflow: hidden; }
 .painel__sub a:hover { padding-left: 30px; }
 
 .painel__pe { display: grid; gap: 14px; margin-top: 36px; max-width: 340px; }
+/* Dentro do painel o fundo é marinho, então o botão de contorno não pode
+   ser marinho: ele sumiria. Vira o mesmo dourado claro do botão do
+   WhatsApp ali, que sobre marinho mede 7,4:1. */
+.painel .botao--contorno { background: transparent; border-color: var(--ouro-claro); color: var(--ouro-claro); }
+.painel .botao--contorno:hover { background: var(--ouro-claro); color: var(--marinho); }
 .painel .botao--linha { background: transparent; border-color: var(--ouro-claro); color: var(--ouro-claro); }
 .painel .botao--linha:hover { background: var(--ouro-claro); color: var(--marinho); }
 
@@ -1315,6 +1326,15 @@ body.travado { overflow: hidden; }
               visibility 0s 0s;
 }
 .zap:hover { background: #178f44; }
+
+/* A bolha em inglês liga em vez de abrir o WhatsApp, e por isso não é
+   verde: verde aqui é a cor de outra empresa, e usá-la num botão que
+   disca um telefone promete uma coisa e entrega outra. Marinho é a cor
+   da casa, e o ícone branco sobre ele mede 14,45:1. */
+.zap--tel { background: var(--marinho); }
+.zap--tel:hover { background: var(--marinho-esc); }
+.zap--tel svg { fill: none; stroke: currentColor; stroke-width: 2;
+                stroke-linecap: round; stroke-linejoin: round; }
 .zap svg { width: 28px; height: 28px; fill: currentColor; }
 
 

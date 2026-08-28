@@ -42,7 +42,10 @@ var IDIOMAS = {
     depo:     'depoimentos.html',
     nome:     'Português',
     sigla:    'PT',
-    bandeira: 'br'
+    bandeira: 'br',
+    /* O canal secundário de contato deste idioma. Ver o comentário em
+       "canal", logo abaixo do bloco en. */
+    canal:    'whatsapp'
   },
 
   en: {
@@ -53,10 +56,34 @@ var IDIOMAS = {
     depo:     'testimonials.html',
     nome:     'English',
     sigla:    'EN',
-    bandeira: 'us'
+    bandeira: 'us',
+    canal:    'telefone'
   }
 
 };
+
+/* --------------------------------------------------------------------------
+   O CANAL SECUNDÁRIO DE CONTATO
+   --------------------------------------------------------------------------
+   Toda página tem duas ações: agendar uma conversa, que é a principal, e um
+   jeito de falar agora, que é a secundária. Qual é esse segundo jeito muda
+   com o idioma, e não é detalhe de tradução.
+
+   Em português é o WhatsApp. É onde o público dela já está, e o botão leva
+   a marca dele: ícone, borda verde, mensagem já escrita.
+
+   Em inglês é o telefone. Nos Estados Unidos o WhatsApp não é o canal
+   padrão para falar com um negócio, e um botão verde de WhatsApp fala com
+   quem já usa e passa em branco por quem não usa. No lugar entra ligar ou
+   mandar mensagem, que é o que um americano espera. O mesmo número serve
+   para os dois: nos Estados Unidos o telefone recebe SMS.
+
+   Isso vale em TODA a versão em inglês, e não só no topo: páginas de
+   serviço, menu do celular, faixa de contato do fim e a bolha do canto.
+
+   O construir.js lê este campo e monta o botão certo. Para trocar de
+   canal, é mudar aqui e rodar o gerador.
+   -------------------------------------------------------------------------- */
 
 /* --------------------------------------------------------------------------
    AS PALAVRAS
@@ -81,8 +108,10 @@ var TEXTOS = {
 
     /* botões */
     agendar:      'Agendar uma conversa',
-    whatsapp:     'Falar no WhatsApp',
-    whatsappFlutuante: 'Falar comigo no WhatsApp',
+    /* O rótulo do canal secundário. Em português ele nomeia o WhatsApp; em
+       inglês, ligar ou mandar mensagem. Ver o comentário sobre "canal". */
+    canal:        'Falar no WhatsApp',
+    canalFlutuante: 'Falar comigo no WhatsApp',
 
     /* troca de idioma */
     idioma:       'Idioma',
@@ -135,8 +164,8 @@ var TEXTOS = {
     marcaInicio:  'Providentia Financial, home',
 
     agendar:      'Book a conversation',
-    whatsapp:     'Message me on WhatsApp',
-    whatsappFlutuante: 'Message me on WhatsApp',
+    canal:        'Call or text',
+    canalFlutuante: 'Call or text me',
 
     idioma:       'Language',
     trocarPara:   'View this site in Portuguese',
