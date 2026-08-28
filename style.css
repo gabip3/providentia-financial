@@ -2187,10 +2187,14 @@ body.travado { overflow: hidden; }
      pastilhas de idioma pareciam encostadas em CONTATO e no botão
      porque estavam mais perto deles do que CONTATO estava de EDUCAÇÃO.
 
-     Agora são 32px entre grupos contra 20px entre itens, uma vez e meia.
-     A conta cabe: em 1440 a coluna tem 1240, as peças fixas somam 589 e
-     o texto do menu 442, o que deixa 209 para oito vãos. Três de 32 e
-     cinco de 20 dão 196.
+     Agora são 40px entre grupos contra 24px entre itens, uma vez e dois
+     terços.
+
+     Os números começaram em 32 e 20, e subiram quando o item "Sobre" saiu
+     do menu a pedido da Gabi. Cinco itens em vez de seis devolveram uns
+     60px, e com eles deu para voltar perto da respiração do desenho
+     original, que era de 40px entre itens quando não havia pastilhas de
+     idioma nem botão na barra.
 
      Os vãos entram no mínimo antes da fonte: menu de 13px que vira 11px
      para caber é menu que ninguém lê.
@@ -2199,8 +2203,8 @@ body.travado { overflow: hidden; }
      última peça antes do botão; agora o vão entre grupos faz esse
      trabalho, e manter as duas somava duas separações no mesmo lugar.
      -------------------------------------------------------------------- */
-  .topo__in { gap: clamp(24px, 2.4vw, 32px); }
-  .nav > ul { gap: clamp(16px, 1.5vw, 20px); }
+  .topo__in { gap: clamp(28px, 2.9vw, 40px); }
+  .nav > ul { gap: clamp(18px, 1.8vw, 24px); }
   .nav { margin-right: 0; }
 
   /* As pastilhas encolhem por dentro para o grupo poder respirar por

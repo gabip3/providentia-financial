@@ -283,7 +283,13 @@ function cabecalho(ctx, atual) {
     <nav class="nav" aria-label="${esc(T.navPrincipal)}">
       <ul>
         <li><a href="${ctx.home}">${esc(T.inicio)}</a></li>
-        <li><a href="${ctx.home}#sobre">${esc(T.sobre)}</a></li>
+        <!-- O item "Sobre" saiu do menu a pedido da Gabi. A SECAO continua na
+             pagina, com a foto e a bio, e continua com id="sobre": o que saiu
+             foi so o atalho no topo. Quem rola chega la de qualquer jeito, e o
+             menu ficou com cinco itens em vez de seis, o que devolveu uns 60px
+             para a barra respirar.
+             Para trazer de volta, e descomentar aqui e no painel:
+             <li><a href="${ctx.home}#sobre">${esc(T.sobre)}</a></li> -->
         <li class="tem-sub">
           <button class="sub-abre" type="button" aria-expanded="false" aria-controls="sub-servicos">
             ${esc(T.servicos)}
@@ -314,7 +320,8 @@ ${itemDepo}${itemEdu}        <li><a href="${ctx.home}#contato">${esc(T.contato)}
   <nav class="faixa painel__in" aria-label="${esc(T.navegacao)}">
     <ul class="painel__lista">
       <li><a href="${ctx.home}">${esc(T.inicio)}</a></li>
-      <li><a href="${ctx.home}#sobre">${esc(T.sobre)}</a></li>
+      <!-- "Sobre" saiu daqui junto com o menu do topo, para os dois nao
+           divergirem. O motivo esta no cabecalho. -->
       <li><a href="${ctx.home}#solucoes">${esc(T.servicos)}</a></li>
 ${SERVICOS.map(s => `      <li class="painel__sub"><a href="${ctx.servicoEm(s)}">${esc(conteudo(ctx.idioma, s).nome)}</a></li>`).join('\n')}
 ${painelDepo}${painelEdu}      <li><a href="${ctx.home}#contato">${esc(T.contato)}</a></li>

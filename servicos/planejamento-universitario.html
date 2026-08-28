@@ -107,7 +107,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&amp;family=Poppins:wght@300;400;500;600;700&amp;family=Allura&amp;display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="../style.css?v=822475ed">
+<link rel="stylesheet" href="../style.css?v=709aa6fb">
 </head>
 <body>
 
@@ -124,7 +124,13 @@
     <nav class="nav" aria-label="Navegação principal">
       <ul>
         <li><a href="../index.html">Início</a></li>
-        <li><a href="../index.html#sobre">Sobre</a></li>
+        <!-- O item "Sobre" saiu do menu a pedido da Gabi. A SECAO continua na
+             pagina, com a foto e a bio, e continua com id="sobre": o que saiu
+             foi so o atalho no topo. Quem rola chega la de qualquer jeito, e o
+             menu ficou com cinco itens em vez de seis, o que devolveu uns 60px
+             para a barra respirar.
+             Para trazer de volta, e descomentar aqui e no painel:
+             <li><a href="../index.html#sobre">Sobre</a></li> -->
         <li class="tem-sub">
           <button class="sub-abre" type="button" aria-expanded="false" aria-controls="sub-servicos">
             Serviços
@@ -169,7 +175,8 @@
   <nav class="faixa painel__in" aria-label="Navegação">
     <ul class="painel__lista">
       <li><a href="../index.html">Início</a></li>
-      <li><a href="../index.html#sobre">Sobre</a></li>
+      <!-- "Sobre" saiu daqui junto com o menu do topo, para os dois nao
+           divergirem. O motivo esta no cabecalho. -->
       <li><a href="../index.html#solucoes">Serviços</a></li>
       <li class="painel__sub"><a href="beneficios-em-vida.html">Benefícios em Vida</a></li>
       <li class="painel__sub"><a href="aposentadoria-livre-de-impostos.html">Aposentadoria livre de impostos</a></li>
