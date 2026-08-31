@@ -67,7 +67,14 @@ var CAPAS = {
      página nenhuma ainda. A descrição dos dois no Vimeo está em português,
      e o título em inglês. Ver o comentário em DEPOIMENTOS. */
   '1208107879': 'https://i.vimeocdn.com/video/2177370676-920b2b327a3223b5bbee01ebe7cf0ede27db7e3137140af68056de89c45fafaf-d_1280?region=us',
-  '1135370735': 'https://i.vimeocdn.com/video/2096123061-2f9368bb9ce687763cf93b197a9b571f18f42559728103114a0c84fbcc9f6aa6-d_1280?region=us'
+  '1135370735': 'https://i.vimeocdn.com/video/2096123061-2f9368bb9ce687763cf93b197a9b571f18f42559728103114a0c84fbcc9f6aa6-d_1280?region=us',
+
+  /* Terceira leva, 31/08/2026: os quatro que faltavam da série Animated
+     Concepts. Com eles, sete dos oito serviços em inglês têm vídeo. */
+  '331851782': 'https://i.vimeocdn.com/video/777378920-10f6c886f673ef3836d3080e5ac04cbc8d2851346eecb98fb997e1fdb6d7700e-d_1280?region=us',
+  '268020199': 'https://i.vimeocdn.com/video/701881785-e342ab9bc074a57bc76dd0daea0af647302cea112671f47c6243b244b91c571d-d_1280?region=us',
+  '268020035': 'https://i.vimeocdn.com/video/702361551-ac80028a3886e1385eb655c9f98b7c9779abac92ca0209007496996611541638-d_1280?region=us',
+  '268019876': 'https://i.vimeocdn.com/video/699918642-a2a63c3480dec6417a6871026942ece9828dad0301c6c8519ba2e57ad5c06950-d_1280?region=us'
 };
 
 /* Títulos e duração como estão no Vimeo da Alliance. */
@@ -128,7 +135,12 @@ var VIDEO_INFO = {
   "379274858":  { "titulo": "Living Benefits & Airbags",  "segundos": 60 },
   "1167522359": { "titulo": "Alexandra Nascimento",       "segundos": 329 },
   "1208107879": { "titulo": "Alexandre Carvalho",         "segundos": 248 },
-  "1135370735": { "titulo": "Pastor Izaque",              "segundos": 294 }
+  "1135370735": { "titulo": "Pastor Izaque",              "segundos": 294 },
+
+  "331851782":  { "titulo": "IUL for Kids",                          "segundos": 140 },
+  "268020199":  { "titulo": "Business Preservation",                 "segundos": 103 },
+  "268020035":  { "titulo": "Fixed Indexed Annuities - Explained!",  "segundos": 164 },
+  "268019876":  { "titulo": "What is Indexed Universal Life?",       "segundos": 214 }
 };
 
 /* ==========================================================================
@@ -293,7 +305,7 @@ var SERVICOS = [
     ingles: {
       slug:   'tax-free-retirement',
       nome:   'Tax-free retirement',
-      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      video:  '268019876',
       resumo: 'A way to build value over the years and reach it later.',
       titulo: 'Build it today so you can reach it later.',
       texto: [
@@ -319,7 +331,7 @@ var SERVICOS = [
     ingles: {
       slug:   'iul-for-kids',
       nome:   'IUL for kids',
-      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      video:  '331851782',
       resumo: 'Starting early locks in the age and the health of the child.',
       titulo: 'Time does the heavy lifting for whoever starts early.',
       texto: [
@@ -371,7 +383,7 @@ var SERVICOS = [
     ingles: {
       slug:   'business-planning',
       nome:   'Business planning',
-      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      video:  '268020199',
       resumo: 'Protect your business, your partners and your legacy.',
       titulo: 'A business runs on people. And people get sick.',
       texto: [
@@ -397,7 +409,7 @@ var SERVICOS = [
     ingles: {
       slug:   'fixed-indexed-annuities',
       nome:   'Fixed indexed annuities',
-      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      video:  '268020035',
       resumo: 'A guaranteed floor, with limited participation in the rise of an index.',
       titulo: 'A floor underneath, and a ceiling above.',
       texto: [
