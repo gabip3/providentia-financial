@@ -44,7 +44,30 @@ var CAPAS = {
   '377297016': 'https://i.vimeocdn.com/video/836685560-ec0760807b42d9f1785770e49e727922bee637eaaa74973ccc44e0f5d0134ec5-d_1280?region=us',
   '520044841': 'https://i.vimeocdn.com/video/1076941238-cfe8e67248cdc38e62c8162ee0a8602671b5cc47861b18d76462d9a03771661d-d_1280?region=us',
   '957368852': 'https://i.vimeocdn.com/video/1871251336-6306886955333fb83c53121b757f169fc632f7c0a0d3e291038bab5805a4a80a-d_1280?region=us',
-  '572648707': 'https://i.vimeocdn.com/video/1184231154-ea6154248ce4e5c3dc4d235301cf3545b59922a254905a4ee6db156357ab9d8e-d_1280?region=us'
+  '572648707': 'https://i.vimeocdn.com/video/1184231154-ea6154248ce4e5c3dc4d235301cf3545b59922a254905a4ee6db156357ab9d8e-d_1280?region=us',
+
+  /* Os cinco em inglês, informados pela Monica em 31/08/2026. A API do
+     Vimeo devolveu estas capas em 640 de largura; aqui elas estão em 1280,
+     que é o mesmo número trocado no fim do endereço, para não ficarem
+     borradas num cartão largo. */
+  '268020148': 'https://i.vimeocdn.com/video/702360332-fe0ba8c4266912f2988ae8de322db60c4fd1f7b264895a1af874961f4cc78ddb-d_1280?region=us',
+  '268020112': 'https://i.vimeocdn.com/video/702340072-d04f526e62c7d4dcd0567b4f9620ea2de47622e7c7d5e5f98a68f5075e963ea0-d_1280?region=us',
+  '268019992': 'https://i.vimeocdn.com/video/699918367-1c6cd9e814e7f0f4315acdd6ba361adf65481102736a1122d01fe1f29eea93c0-d_1280?region=us',
+  '268019628': 'https://i.vimeocdn.com/video/702340405-8bc43e927b3206c1606fb146d416e5f9877c57e3cdc3495be731021d1b6bf4fd-d_1280?region=us',
+  '268019587': 'https://i.vimeocdn.com/video/698665084-75aca23578971206ae424d80f1fcaa032d3ce57bfe9ebc0d897719d9cb6cb1ca-d_1280?region=us',
+
+  /* Segunda leva, 31/08/2026. Estas voltaram da API em 295x166; o 1280 no
+     fim do endereço pede a versão grande do mesmo arquivo. */
+  '1218405681': 'https://i.vimeocdn.com/video/2193919181-bb3589bef0832d24db9842d38b5f3cbc3b33f91d35ea9c1827446bfe52593725-d_1280?region=us',
+  '343000825':  'https://i.vimeocdn.com/video/792032627-e1f0f5432c9acbfb6b7e0fa85c9f74110a443702a6a59daa126eb96374284f15-d_1280?region=us',
+  '379274858':  'https://i.vimeocdn.com/video/839280228-515bee4a5838d065d17ac77de8e6108eedad0cba4cc83379ed54b8f7e6483ea9-d_1280?region=us',
+  '1167522359': 'https://i.vimeocdn.com/video/2125615680-fe76df4784ac1fd42be2b5a5d9bd9dbc8c0a359e69cf88d9cc5041ee59725565-d_1280?region=us',
+
+  /* [CONFIRMAR O IDIOMA] Estes dois estão guardados aqui mas NÃO entram em
+     página nenhuma ainda. A descrição dos dois no Vimeo está em português,
+     e o título em inglês. Ver o comentário em DEPOIMENTOS. */
+  '1208107879': 'https://i.vimeocdn.com/video/2177370676-920b2b327a3223b5bbee01ebe7cf0ede27db7e3137140af68056de89c45fafaf-d_1280?region=us',
+  '1135370735': 'https://i.vimeocdn.com/video/2096123061-2f9368bb9ce687763cf93b197a9b571f18f42559728103114a0c84fbcc9f6aa6-d_1280?region=us'
 };
 
 /* Títulos e duração como estão no Vimeo da Alliance. */
@@ -92,7 +115,20 @@ var VIDEO_INFO = {
   "572648707": {
     "titulo": "Latasha McCray: uma história de Benefícios em Vida",
     "segundos": 304
-  }
+  },
+
+  "268020148": { "titulo": "College Planning",          "segundos": 98 },
+  "268020112": { "titulo": "Compound Interest",         "segundos": 92 },
+  "268019992": { "titulo": "The Impact of Taxes",       "segundos": 103 },
+  "268019628": { "titulo": "The Need to Invest Early",  "segundos": 158 },
+  "268019587": { "titulo": "The Rule of 72",            "segundos": 134 },
+
+  "1218405681": { "titulo": "Living Benefits: Life Insurance That Can Save Your Life", "segundos": 397 },
+  "343000825":  { "titulo": "Estate Planning",            "segundos": 82 },
+  "379274858":  { "titulo": "Living Benefits & Airbags",  "segundos": 60 },
+  "1167522359": { "titulo": "Alexandra Nascimento",       "segundos": 329 },
+  "1208107879": { "titulo": "Alexandre Carvalho",         "segundos": 248 },
+  "1135370735": { "titulo": "Pastor Izaque",              "segundos": 294 }
 };
 
 /* ==========================================================================
@@ -203,7 +239,10 @@ var SERVICOS = [
     ingles: {
       slug:   'living-benefits',
       nome:   'Living Benefits',
-      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      /* 6:37, e o mais longo do site. E a historia da Heather Seidel, com
+         diagnostico de cancer em estagio 4, contada como explicacao do que
+         sao os Beneficios em Vida. */
+      video:  '1218405681',
       resumo: 'Coverage that protects you while you are still living.',
       titulo: 'There is life insurance you do not have to die to use.',
       texto: [
@@ -395,7 +434,7 @@ var SERVICOS = [
     ingles: {
       slug:   'estate-planning',
       nome:   'Estate planning',
-      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      video:  '343000825',
       resumo: 'Organizing today what stays for the people who come after.',
       titulo: 'Leaving things in order is an act of care.',
       texto: [
@@ -421,7 +460,9 @@ var SERVICOS = [
     ingles: {
       slug:   'college-planning',
       nome:   'College planning',
-      video:  '',   /* [COLAR O LINK EM INGLES] o video em PT nao serve aqui */
+      /* O original em ingles. O 270183218 do campo acima e a versao dublada
+         em portugues do mesmo assunto. */
+      video:  '268020148',
       resumo: 'Getting ready for the cost of higher education in the United States.',
       titulo: 'College gets here faster than it looks.',
       texto: [
@@ -498,6 +539,32 @@ var DESTAQUE = {
    capa em https://vimeo.com/api/oembed.json?url=https://vimeo.com/NUMERO
    no campo "thumbnail_url". A grade se reorganiza sozinha.
    ========================================================================== */
+/* ==========================================================================
+   [CONFIRMAR O IDIOMA] DOIS VÍDEOS QUE NÃO ENTRARAM
+   --------------------------------------------------------------------------
+   A Gabi mandou estes dois junto com os em inglês:
+
+     Alexandre Carvalho   https://vimeo.com/1208107879   4:08
+     Pastor Izaque        https://vimeo.com/1135370735   4:54
+
+   O TÍTULO dos dois está em inglês, "A Living Benefits Story", mas a
+   DESCRIÇÃO no Vimeo está em português. A do Pastor Izaque começa em "O
+   Pastor Izaque Silva Alves foi mais do que um cliente para a agente Ana
+   Gusmão"; a do Alexandre, em "Como pai de uma criança de dois anos".
+
+   Se o áudio deles for português, o lugar é a página de depoimentos EM
+   PORTUGUÊS, e não a em inglês. Foi exatamente por isso que os outros
+   vídeos da Alliance ficaram de fora do site em inglês.
+
+   As capas já estão guardadas em CAPAS e a duração em VIDEO_INFO. Para
+   pôr no ar, copie um bloco daqui de baixo e preencha o lado certo.
+
+   E MAIS UMA COISA, sobre os três de depoimento: a descrição deles nomeia
+   OUTROS AGENTES, e não a Monica. A do Pastor Izaque cita Ana Gusmão. São
+   clientes da Alliance, e não dela. Isso não impede o uso, mas depende da
+   autorização de afiliada por escrito, e quem assiste vai ouvir o nome de
+   outra pessoa.
+   ========================================================================== */
 var DEPOIMENTOS = [
 
   {
@@ -526,6 +593,21 @@ var DEPOIMENTOS = [
   },
 
   {
+    /* SÓ EXISTE EM INGLÊS, e por isso o campo de cima está vazio: com ele
+       vazio, este bloco não aparece na página em português. */
+    video:  '',
+    titulo: 'Alexandra Nascimento',
+    texto:  '',
+    ingles: {
+      video:  '1167522359',
+      titulo: 'Alexandra Nascimento',
+      /* Tirado da descrição do próprio vídeo no Vimeo, sem acrescentar
+         nada. Não invente diagnóstico, valor pago nem desfecho. */
+      texto:  'She noticed a weakness in her left hand and did not think much of it. When it spread to her leg, she went looking for answers.'
+    }
+  },
+
+  {
     video:  '572648707',
     titulo: 'Latasha McCray',
     texto:  'Ela estava em ótima forma, com um bom emprego e um plano financeiro pronto para o futuro. O diagnóstico de câncer de mama virou tudo de cabeça para baixo.',
@@ -538,4 +620,74 @@ var DEPOIMENTOS = [
 
 ];
 
-if (typeof module !== 'undefined') { module.exports = { SERVICOS: SERVICOS, DESTAQUE: DESTAQUE, CAPAS: CAPAS, VIDEO_INFO: VIDEO_INFO, SEGURADORAS: SEGURADORAS, DEPOIMENTOS: DEPOIMENTOS }; }
+
+
+/* ==========================================================================
+   OS TEMAS DO CENTRO DE EDUCAÇÃO
+   --------------------------------------------------------------------------
+   Vídeo curto que explica uma IDEIA, e não um produto. Ele não pertence a
+   nenhum dos oito serviços, e por isso não cabe na lista de cima.
+
+   Foi assim que os quatro primeiros chegaram: dos cinco vídeos em inglês que
+   a Monica mandou, só "College Planning" correspondia a um serviço. Os
+   outros quatro falam de juros compostos, de imposto, de começar cedo e da
+   regra do 72. São assunto de quem está entendendo antes de decidir, que é
+   exatamente o que a seção de educação existe para ser.
+
+   COMO ELES APARECEM
+   Na grade de educação, depois dos cartões dos serviços. A diferença é que
+   o cartão de tema TOCA ali mesmo, e o de serviço leva para a página do
+   serviço, onde o vídeo dele vive. Faz sentido: o vídeo de tema não tem
+   outra página para onde ir.
+
+   PARA ACRESCENTAR UM
+   Copie um bloco, ponha o número do Vimeo, o título e uma linha de texto.
+   Depois pegue a capa em
+     https://vimeo.com/api/oembed.json?url=https://vimeo.com/NUMERO
+   no campo "thumbnail_url", troque o 640 do fim por 1280, e ponha em CAPAS.
+   A duração vai em VIDEO_INFO, em segundos. Depois rode node construir.js.
+
+   [NÃO INVENTE NÚMERO] Os textos abaixo dizem do que o vídeo TRATA, e não
+   quanto alguém ganha. Rendimento, porcentagem e prazo em página de agente
+   viram promessa, e promessa é problema de compliance.
+   ========================================================================== */
+var TEMAS = {
+
+  /* Em português ainda não há tema nenhum: os oito vídeos que existem são
+     todos de serviço. Quando houver, é só preencher aqui. */
+  pt: [],
+
+  en: [
+    {
+      video:  '268019587',
+      titulo: 'The Rule of 72',
+      texto:  'A quick way to estimate how long money takes to double.'
+    },
+    {
+      video:  '268020112',
+      titulo: 'Compound Interest',
+      texto:  'How money grows once the earnings start earning too.'
+    },
+    {
+      video:  '268019628',
+      titulo: 'The Need to Invest Early',
+      texto:  'Why the same amount set aside sooner ends up somewhere different.'
+    },
+    {
+      video:  '268019992',
+      titulo: 'The Impact of Taxes',
+      texto:  'What taxes do to savings over a long stretch of time.'
+    },
+    {
+      /* Um minuto, o mais curto do site. A comparação é do próprio vídeo:
+         ninguém compra um carro sem airbag, então por que carregar uma
+         apólice sem os recursos que dão acesso antecipado. */
+      video:  '379274858',
+      titulo: 'Living Benefits & Airbags',
+      texto:  'Why a policy without these features is like a car without airbags.'
+    }
+  ]
+
+};
+
+if (typeof module !== 'undefined') { module.exports = { SERVICOS: SERVICOS, DESTAQUE: DESTAQUE, CAPAS: CAPAS, VIDEO_INFO: VIDEO_INFO, SEGURADORAS: SEGURADORAS, DEPOIMENTOS: DEPOIMENTOS, TEMAS: TEMAS }; }

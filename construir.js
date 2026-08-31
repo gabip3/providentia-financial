@@ -48,7 +48,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const { SERVICOS, DESTAQUE, DEPOIMENTOS, CAPAS, VIDEO_INFO } = require('./dados.js');
+const { SERVICOS, DESTAQUE, DEPOIMENTOS, TEMAS, CAPAS, VIDEO_INFO } = require('./dados.js');
 const { IDIOMAS, TEXTOS, BANDEIRAS } = require('./textos.js');
 const { icone } = require('./icones.js');
 
@@ -178,9 +178,10 @@ function temDepoimentos(idioma) {
   return DEPOIMENTOS.some(d => video(idioma, d));
 }
 
-/* Idem para a grade de educação, que é feita só de vídeos. */
+/* Idem para a grade de educação, que é feita só de vídeos. Ela tem dois
+   tipos de cartão, e basta um deles existir. */
 function temEducacao(idioma) {
-  return SERVICOS.some(s => video(idioma, s));
+  return SERVICOS.some(s => video(idioma, s)) || (TEMAS[idioma] || []).length > 0;
 }
 
 /* O contexto de uma página: idioma, textos, e todos os endereços de que ela
@@ -783,7 +784,8 @@ ${videoGrande(ctx, d.video, T.assistirVideo + d.titulo)}
 
 function blocoEducacao(ctx, lead) {
   const cards = SERVICOS.filter(s => video(ctx.idioma, s));
-  if (!cards.length) { return ''; }
+  const temas = (TEMAS[ctx.idioma] || []).filter(t => t.video);
+  if (!cards.length && !temas.length) { return ''; }
 
   const itens = cards.map(s => {
     const d = conteudo(ctx.idioma, s);
@@ -799,7 +801,32 @@ ${dur ? `            <span class="video__tempo">${dur}</span>\n` : ''}          
           <p>${esc(d.resumo)}</p>
         </a>
       </li>`;
-  }).join('\n');
+  });
+
+  /* ------------------------------------------------------------------
+     OS CARTÕES DE TEMA
+     O de serviço LEVA para a página do serviço, onde o vídeo dele vive.
+     O de tema TOCA aqui mesmo, porque ele não tem outra página para onde
+     ir: fala de uma ideia, e não de um produto.
+
+     Por isso um é <a> e o outro é <button>. Não é detalhe de marcação:
+     leitor de tela anuncia link e botão de formas diferentes, e a pessoa
+     precisa saber se vai sair da página ou se o vídeo vai começar ali.
+     ------------------------------------------------------------------ */
+  const itensTema = temas.map(t => {
+    const info = VIDEO_INFO[t.video] || {};
+    const dur = tempo(info.segundos);
+    return `      <li class="video">
+        <button class="video__capa" type="button" data-vimeo="${esc(t.video)}" aria-label="${esc(ctx.T.assistirVideo + t.titulo)}">
+          <img src="${esc(CAPAS[t.video] || '')}" alt="" width="1280" height="720" loading="lazy" decoding="async">
+          ${PLAY}
+${dur ? `          <span class="video__tempo">${dur}</span>\n` : ''}        </button>
+        <h3>${esc(t.titulo)}</h3>
+        <p>${esc(t.texto)}</p>
+      </li>`;
+  });
+
+  const todos = itens.concat(itensTema).join('\n');
 
   return `
 <section class="educacao" id="educacao">
@@ -811,8 +838,8 @@ ${dur ? `            <span class="video__tempo">${dur}</span>\n` : ''}          
     <!-- Cada card leva para a página do serviço, onde o vídeo toca. Assim o
          mesmo vídeo tem UM lugar só onde ele vive, e não duas cópias na
          mesma página disputando quem carrega primeiro. -->
-    <ul class="videos videos--quatro">
-${itens}
+    <ul class="videos videos--quatro" data-cartoes="${itens.length + itensTema.length}">
+${todos}
     </ul>
   </div>
 </section>
@@ -837,8 +864,10 @@ ${dur ? `          <span class="video__tempo">${dur}</span>\n` : ''}        </bu
       </li>`;
   }).join('\n');
 
+  /* data-cartoes deixa o CSS saber quantos são. Com um ou dois numa grade
+     de três colunas, o buraco à direita faz a página parecer inacabada. */
   return `
-    <ul class="videos videos--tres">
+    <ul class="videos videos--tres" data-cartoes="${itens.length}">
 ${cards}
     </ul>
 `;
@@ -901,12 +930,17 @@ function costurar(arquivo, ctx, lead) {
      escrito à mão, então o endereço é reescrito aqui: apaga o ?v= que
      estiver lá e põe o de agora. Sem isto elas seriam as únicas quatro do
      site a continuar servindo CSS velho, e duas delas são as iniciais. */
-  const antes = t;
+  const temCss = t.indexOf('style.css') >= 0;
+  const temJs = t.indexOf('script.js') >= 0;
   t = t.replace(/(href=")([^"]*style\.css)(\?v=[0-9a-f]+)?(")/g, '$1$2' + V_CSS + '$4');
   t = t.replace(/(src=")([^"]*script\.js)(\?v=[0-9a-f]+)?(")/g, '$1$2' + V_JS + '$4');
-  if (antes === t && (V_CSS || V_JS)) {
-    console.log('  aviso: ' + arquivo + ' nao tem link de style.css nem script.js');
-  }
+  /* O aviso olha se o LINK existe, e nao se o texto mudou. A primeira
+     versao comparava o antes com o depois: quando o carimbo ja estava
+     certo, o texto ficava igual, e ela avisava que a pagina nao tinha
+     folha de estilo nenhuma. Dizia isso das quatro paginas, todas as
+     rodadas, e um aviso que sempre aparece deixa de ser lido. */
+  if (!temCss) { console.log('  AVISO: ' + arquivo + ' sem link de style.css'); }
+  if (!temJs) { console.log('  AVISO: ' + arquivo + ' sem link de script.js'); }
 
   fs.writeFileSync(alvo, t);
   return true;
@@ -916,21 +950,61 @@ function costurar(arquivo, ctx, lead) {
 /* ==========================================================================
    EXECUTA
    ========================================================================== */
+/* --------------------------------------------------------------------------
+   O TEXTO DE ABERTURA DA EDUCAÇÃO
+   --------------------------------------------------------------------------
+   O campo "afirma" existe porque este texto faz afirmações CONFERÍVEIS, e
+   afirmação conferível em texto fixo envelhece calada.
+
+   Aconteceu: a versão em inglês dizia "eight short videos, none of them
+   longer than four minutes", copiada da versão em português. Aí entrou o
+   vídeo de Living Benefits, com 6:37, e a frase virou mentira na mesma
+   rodada em que o vídeo entrou. Ninguém percebeu porque nada quebra: a
+   página monta bonito com a frase errada.
+
+   Agora o gerador confere quantos vídeos existem e qual o mais longo, e
+   avisa no fim se a conta não bate. Quem escrever um texto novo com número
+   dentro põe o número aqui também, ou tira o "afirma" e escreve sem número.
+   -------------------------------------------------------------------------- */
 const LEAD_EDUCACAO = {
   pt: {
     titulo: 'Entenda antes de decidir',
     texto: 'Oito vídeos curtos, nenhum passa de quatro minutos. Nada aqui é venda: ' +
            'são as ideias que costumam aparecer na conversa, explicadas com calma ' +
-           'para você poder pensar sem ninguém do lado esperando resposta.'
+           'para você poder pensar sem ninguém do lado esperando resposta.',
+    afirma: { quantos: 8, maisLongoSegundos: 240 }
   },
   en: {
+    /* Sem número nenhum, de propósito: ela ainda está mandando vídeos, e
+       um texto que não conta nada não precisa ser reescrito a cada link
+       que chega. As durações aparecem no canto de cada capa. */
     titulo: 'Understand before you decide',
-    texto: 'Eight short videos, none of them longer than four minutes. Nothing here ' +
-           'is a sales pitch: these are the ideas that usually come up in the ' +
-           'conversation, explained calmly so you can think it through with nobody ' +
-           'sitting beside you waiting for an answer.'
+    texto: 'Short videos, one idea at a time. Nothing here is a sales pitch: these ' +
+           'are the ideas that usually come up in the conversation, explained ' +
+           'calmly so you can think it through with nobody sitting beside you ' +
+           'waiting for an answer.'
   }
 };
+
+/* Confere o que o texto de abertura afirma contra o que existe de verdade. */
+function conferirLead(idioma) {
+  const lead = LEAD_EDUCACAO[idioma];
+  if (!lead || !lead.afirma) { return; }
+  const ids = SERVICOS.filter(s => video(idioma, s)).map(s => conteudo(idioma, s).video)
+    .concat((TEMAS[idioma] || []).filter(t => t.video).map(t => t.video));
+  const quantos = ids.length;
+  const maisLongo = ids.reduce((m, id) => Math.max(m, (VIDEO_INFO[id] || {}).segundos || 0), 0);
+
+  if (quantos !== lead.afirma.quantos) {
+    avisos.push('o texto da educacao em ' + idioma + ' diz ' + lead.afirma.quantos +
+                ' videos, e agora sao ' + quantos);
+  }
+  if (maisLongo > lead.afirma.maisLongoSegundos) {
+    avisos.push('o texto da educacao em ' + idioma + ' diz que nenhum passa de ' +
+                tempo(lead.afirma.maisLongoSegundos) + ', e o mais longo tem ' +
+                tempo(maisLongo));
+  }
+}
 
 const avisos = [];
 let contagem = 0;
@@ -977,7 +1051,14 @@ Object.keys(IDIOMAS).forEach(idioma => {
   }
 });
 
+Object.keys(IDIOMAS).forEach(conferirLead);
+
 if (!conteudo('en', DESTAQUE).video) { avisos.push('falta o video do destaque em ingles'); }
+
+Object.keys(IDIOMAS).forEach(idioma => {
+  const n = (TEMAS[idioma] || []).filter(t => t.video).length;
+  if (n) { console.log('  ' + n + ' tema(s) de educacao em ' + idioma); }
+});
 
 console.log('\ngeradas ' + contagem + ' paginas de servico em ' +
             Object.keys(IDIOMAS).length + ' idiomas');
