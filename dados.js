@@ -540,30 +540,23 @@ var DESTAQUE = {
    no campo "thumbnail_url". A grade se reorganiza sozinha.
    ========================================================================== */
 /* ==========================================================================
-   [CONFIRMAR O IDIOMA] DOIS VÍDEOS QUE NÃO ENTRARAM
-   --------------------------------------------------------------------------
-   A Gabi mandou estes dois junto com os em inglês:
+   [ESPERANDO] UM VÍDEO QUE AINDA NÃO ENTROU
 
      Alexandre Carvalho   https://vimeo.com/1208107879   4:08
-     Pastor Izaque        https://vimeo.com/1135370735   4:54
 
-   O TÍTULO dos dois está em inglês, "A Living Benefits Story", mas a
-   DESCRIÇÃO no Vimeo está em português. A do Pastor Izaque começa em "O
-   Pastor Izaque Silva Alves foi mais do que um cliente para a agente Ana
-   Gusmão"; a do Alexandre, em "Como pai de uma criança de dois anos".
+   Mesma situação do Pastor Izaque: título em inglês, "A Living Benefits
+   Story", e descrição no Vimeo em português, começando em "Como pai de uma
+   criança de dois anos". Pelo idioma da descrição, o lugar dele é a página
+   em PORTUGUÊS. A capa e a duração já estão guardadas em CAPAS e
+   VIDEO_INFO: para pôr no ar, copie o bloco do Pastor Izaque e troque o
+   número, o título e o texto.
 
-   Se o áudio deles for português, o lugar é a página de depoimentos EM
-   PORTUGUÊS, e não a em inglês. Foi exatamente por isso que os outros
-   vídeos da Alliance ficaram de fora do site em inglês.
-
-   As capas já estão guardadas em CAPAS e a duração em VIDEO_INFO. Para
-   pôr no ar, copie um bloco daqui de baixo e preencha o lado certo.
-
-   E MAIS UMA COISA, sobre os três de depoimento: a descrição deles nomeia
-   OUTROS AGENTES, e não a Monica. A do Pastor Izaque cita Ana Gusmão. São
+   SOBRE OS DEPOIMENTOS EM GERAL, E ISSO VALE PARA TODOS ELES
+   A descrição desses vídeos nomeia OUTROS AGENTES, e não a Monica. São
    clientes da Alliance, e não dela. Isso não impede o uso, mas depende da
-   autorização de afiliada por escrito, e quem assiste vai ouvir o nome de
-   outra pessoa.
+   autorização de afiliada por escrito, e quem assistir vai ouvir o nome de
+   outra pessoa, além de valores pagos e de afirmações sobre imposto que o
+   site nunca faria por escrito. É assunto de compliance, e não de texto.
    ========================================================================== */
 var DEPOIMENTOS = [
 
@@ -608,15 +601,55 @@ var DEPOIMENTOS = [
   },
 
   {
+    /* Entrou no lugar da Latasha McCray, a pedido da Gabi.
+
+       SÓ EM PORTUGUÊS: a descrição do vídeo no Vimeo está inteira em
+       português, o que confirma o idioma do áudio. Era a dúvida que
+       segurava este e o do Alexandre Carvalho.
+
+       [O QUE FICOU DE FORA DESTE TEXTO, E POR QUÊ]
+       A descrição no Vimeo traz três coisas que NÃO entram numa página de
+       agente, e nenhuma delas está no texto abaixo:
+
+         · o valor recebido, US$ 135.728. Número de pagamento vira
+           promessa: o próximo leitor calcula o dele.
+         · a expressão "livre de impostos". Tratamento tributário depende
+           do caso, e o site inteiro evita afirmar isso.
+         · o nome da agente que o atendeu, Ana Gusmão. Ele era cliente
+           dela, e não da Monica.
+
+       [ATENÇÃO] As três coisas continuam DENTRO DO VÍDEO, e quem assistir
+       vai ouvir. Isso é assunto para o compliance da Alliance antes de
+       publicar de verdade, e não é algo que o texto do cartão resolva. */
+    video:  '1135370735',
+    titulo: 'Pastor Izaque',
+    texto:  'Pastor e líder querido da comunidade brasileira na Carolina do Sul. Ele contratou a cobertura com boa saúde, e meses depois um derrame paralisou todo o lado direito do corpo.',
+    ingles: {
+      video:  '',   /* o audio e em portugues; so entra aqui se houver versao legendada */
+      titulo: 'Pastor Izaque',
+      texto:  'A pastor and a beloved leader of the Brazilian community in South Carolina. He took out the coverage in good health, and months later a stroke left the whole right side of his body paralyzed.'
+    }
+  }
+
+  /* ------------------------------------------------------------------
+     A LATASHA McCRAY SAIU, A PEDIDO DA GABI.
+
+     Ela era o terceiro cartão da página em português. O vídeo continua
+     existindo no Vimeo, e a capa e a duração dele continuam guardadas em
+     CAPAS e VIDEO_INFO: para trazer de volta, é descolar o bloco abaixo.
+
+  {
     video:  '572648707',
     titulo: 'Latasha McCray',
     texto:  'Ela estava em ótima forma, com um bom emprego e um plano financeiro pronto para o futuro. O diagnóstico de câncer de mama virou tudo de cabeça para baixo.',
     ingles: {
-      video:  '',   /* [COLAR O LINK EM INGLES] */
+      video:  '',
       titulo: 'Latasha McCray',
       texto:  'She was in great shape, with a good job and a financial plan ready for the future. A breast cancer diagnosis turned everything upside down.'
     }
   }
+
+     ------------------------------------------------------------------ */
 
 ];
 
