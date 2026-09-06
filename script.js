@@ -1,69 +1,21 @@
-/* ==========================================================================
-   PROVIDENTIA FINANCIAL — script.js
-   JavaScript puro, sem dependência nenhuma.
-   TUDO QUE PRECISA SER TROCADO ESTÁ NO BLOCO CONFIG LOGO ABAIXO.
-   ========================================================================== */
+
 
 'use strict';
 
-/* ==========================================================================
-   CONFIG — [CONFIRMAR] dados de contato
-   --------------------------------------------------------------------------
-   Telefone informado pela Monica e conferido.
-
-   O dominio providentiafinancialgroup.com ja existe e esta na Wix.
-
-   O e-mail ainda depende de a CAIXA ser criada. Dominio registrado nao cria
-   caixa de e-mail sozinho: e preciso contratar o servico, na propria Wix ou
-   em outro lugar, e apontar os registros MX. Enquanto isso nao acontecer, o
-   link mailto abre normalmente no programa de e-mail de quem clicar, mas a
-   mensagem volta.
-
-   whatsapp    Só números, com código do país. Nos EUA começa com 1.
-               Exemplo: '14049557002'
-   telefone    Como o número aparece escrito na tela.
-   email       Endereço de e-mail.
-   instagram   Só o usuário, sem @ e sem link.
-   facebook    Só o usuário/página. Vazio esconde o ícone.
-   linkedin    Trecho final da URL do perfil. Vazio esconde o ícone.
-
-   Campo vazio mantém o marcador [ ... ] visível no site, de propósito:
-   é assim que você percebe que faltou preencher.
-   ========================================================================== */
 var CONFIG = {
   // Telefone real, informado pela Monica.
   whatsapp:  '14703146160',
   telefone:  '(470) 314-6160',
   email:     'monica@providentiafinancialgroup.com', // <<< depende da caixa ser criada
-  /* Agenda da Monica. Todo botão "Agendar uma conversa" do site aponta
-     para cá. Vazio faz esses botões voltarem a levar para a seção de
-     contato, com telefone e WhatsApp, em vez de quebrarem. */
+  
   calendly:  'https://calendly.com/monicaprovidentia',
-  /* Chave do Web3Forms, que recebe o formulário e encaminha por e-mail
-     para monica@providentiafinancialgroup.com.
-
-     Ela fica visível no código, e isso é normal: toda chave do Web3Forms
-     aparece no HTML de quem usa o serviço. Ela não dá acesso a nada, só
-     permite mandar mensagem para o endereço cadastrado. Para trocar o
-     destino ou desativar, é no painel do web3forms.com.
-
-     Vazia deixa a seção "Prefere escrever?" escondida por inteiro. */
+  
   web3forms: 'd70d1245-acf0-4837-a12e-0dfc430a2d95',
   instagram: 'monica.providentia',
   facebook:  '',                             // <<< vazio esconde o ícone
   linkedin:  ''                              // <<< vazio esconde o ícone
 };
 
-/* ==========================================================================
-   VIDEOS — [SUBSTITUIR] um link por card
-   --------------------------------------------------------------------------
-   Cole o endereço do vídeo como ele aparece na barra do navegador. Serve
-   YouTube ou Vimeo, nestes formatos:
-     https://www.youtube.com/watch?v=XXXXXXXXXXX
-     https://youtu.be/XXXXXXXXXXX
-     https://vimeo.com/123456789
-   Chave vazia deixa o card marcado como pendente no site.
-   ========================================================================== */
 var VIDEOS = {
   'historia-1':      '',
   'historia-2':      '',
@@ -75,22 +27,6 @@ var VIDEOS = {
   'faculdade':       ''
 };
 
-/* ==========================================================================
-   AS PALAVRAS QUE O SCRIPT ESCREVE
-   --------------------------------------------------------------------------
-   Quase todo texto do site está no HTML, e é o construir.js que o coloca lá.
-   Mas um punhado de frases só existe em resposta a alguma coisa que a pessoa
-   faz: o erro de um campo, o "Enviando...", a mensagem que já vai escrita no
-   WhatsApp. Essas nascem aqui, e por isso precisam existir nos dois idiomas.
-
-   QUAL IDIOMA ESTÁ NO AR
-   Sai do  lang  da própria página, que o construir.js escreve certo em cada
-   uma. Não há adivinhação, não há detecção de navegador e não há cookie: a
-   página em inglês fala inglês porque ela É a página em inglês.
-
-   Se algum dia entrar um terceiro idioma, é copiar o bloco e usar a mesma
-   sigla que estiver no textos.js.
-   ========================================================================== */
 var FALAS = {
 
   pt: {
@@ -124,9 +60,7 @@ var FALAS = {
     recebido:   'Got it. I answer within one business day.',
     falhou:     'I could not send that right now. Try again, or reach me ',
     peloZap:    'on WhatsApp',
-    /* O assunto e o remetente do e-mail seguem o idioma de quem escreveu:
-       assim a Monica ve na caixa de entrada, antes de abrir, em que lingua
-       aquela pessoa espera ser respondida. */
+    
     assunto:    'Site (EN): ',
     semNome:    'contact',
     remetente:  'Providentia Financial site'
@@ -134,26 +68,17 @@ var FALAS = {
 
 };
 
-/* O idioma desta página. pt-BR e pt viram pt; qualquer outro cai em en. */
 var IDIOMA = (document.documentElement.lang || 'pt').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en';
 var FALA = FALAS[IDIOMA];
 
-/* Mensagem que já vai escrita no WhatsApp quando a pessoa clica. */
 var MENSAGEM = FALA.zap;
 
-
-/* -------------------------------------------------------------------------- */
 var reduzirMovimento = window.matchMedia
   && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function $(sel, ctx) { return (ctx || document).querySelector(sel); }
 function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
 
-
-/* ==========================================================================
-   1. Contatos
-   Preenche todo link e todo texto marcado no HTML. Um lugar só para editar.
-   ========================================================================== */
 function montarContatos() {
 
   $$('[data-whatsapp]').forEach(function (el) {
@@ -163,9 +88,7 @@ function montarContatos() {
     el.setAttribute('rel', 'noopener');
   });
 
-  /* A agenda abre em aba nova: é ferramenta de terceiro, e mandar a pessoa
-     para fora do site sem volta no meio de uma decisão é perder a pessoa.
-     Sem endereço configurado, o botão cai para a seção de contato. */
+  
   $$('[data-agendar]').forEach(function (el) {
     if (CONFIG.calendly) {
       el.setAttribute('href', CONFIG.calendly);
@@ -232,10 +155,6 @@ function montarContatos() {
   });
 }
 
-
-/* ==========================================================================
-   2. Menu do celular
-   ========================================================================== */
 function montarMenu() {
   var botao = $('.sanduiche');
   var painel = $('#menu-movel');
@@ -277,14 +196,6 @@ function montarMenu() {
   }, { passive: true });
 }
 
-
-/* ==========================================================================
-   3. Submenu de serviços
-   --------------------------------------------------------------------------
-   Abrir e fechar é trabalho do CSS (:hover e :focus-within). Aqui só entram
-   as duas coisas que o CSS não resolve: fechar no Esc, e informar o estado
-   ao leitor de tela pelo aria-expanded.
-   ========================================================================== */
 function montarSubmenu() {
   $$('.tem-sub').forEach(function (item) {
     var botao = $('.sub-abre', item);
@@ -317,11 +228,6 @@ function montarSubmenu() {
   });
 }
 
-
-/* ==========================================================================
-   4. O item do menu acompanha a rolagem
-   O sublinhado dourado passa para a seção em que a pessoa está.
-   ========================================================================== */
 function montarMenuAtivo() {
   var links = $$('.nav a[href^="#"]');
   if (!links.length || !('IntersectionObserver' in window)) { return; }
@@ -348,22 +254,11 @@ function montarMenuAtivo() {
   secoes.forEach(function (s) { obs.observe(s); });
 }
 
-
-/* ==========================================================================
-   5. Botão flutuante do WhatsApp
-   Só aparece depois que a abertura sai da tela, para não cobrir os botões
-   que já estão ali em cima.
-   ========================================================================== */
 function montarZap() {
   var zap = $('.zap');
   if (!zap) { return; }
 
-  /* POR QUE ISTO TEM DOIS LIMITES E NÃO UM
-     Com um limite só, quem para de rolar exatamente em cima dele fica com o
-     botão entrando e saindo a cada tremida do dedo ou do trackpad: some,
-     volta, some. É o piscar. Com dois, o botão aparece ao passar de ENTRA e
-     só some ao voltar abaixo de SAI. A faixa de 120px entre os dois é a
-     zona morta onde nada acontece. */
+  
   var ENTRA = 0;
   var SAI = 0;
 
@@ -399,31 +294,8 @@ function montarZap() {
   conferir();
 }
 
-
-/* ==========================================================================
-   6. A frase que abre com a rolagem
-   --------------------------------------------------------------------------
-   O painel entra estreito e vai abrindo até quase a largura da tela, com o
-   canto endireitando no caminho. O movimento é amortecido, então continua
-   macio mesmo com a rolagem aos trancos.
-
-   Funciona em qualquer seção marcada com data-abre que tenha dentro um
-   .frase__painel. Para mover o efeito, mova os dois.
-
-   Para calibrar, mexa só neste objeto:
-     larguraDe / larguraAte   largura do painel, em % da seção
-     raioAte                  arredondamento no começo, em px
-     raioTermina              em que ponto da rolagem o canto termina de
-                              endireitar (0 a 1)
-     suavidade                quanto menor, mais lento e mais macio
-
-   Sem JavaScript, ou com prefers-reduced-motion, o painel já nasce aberto
-   e a frase aparece igual. O efeito é enfeite, nunca requisito de leitura.
-   ========================================================================== */
 var ABRE = {
-  /* 74 e nao 66: abaixo disso a faixa util dentro do painel fica menor que
-     os 800px do texto, e a frase quebraria no comeco da rolagem para
-     desquebrar no fim. O movimento perde seis pontos e ganha em nao pular. */
+  
   desktop: { larguraDe: 74, larguraAte: 95 },
   mobile:  { larguraDe: 84, larguraAte: 100 },
   raioAte: 22,
@@ -450,7 +322,7 @@ function montarAbertura() {
 
   if (reduzirMovimento || !('requestAnimationFrame' in window)) { aplicar(1); return; }
 
-  /* 0 quando o topo do painel está na base da tela, 1 quando chega ao topo. */
+  
   function progresso() {
     var r = painel.getBoundingClientRect();
     var altura = window.innerHeight || document.documentElement.clientHeight;
@@ -478,14 +350,6 @@ function montarAbertura() {
   window.addEventListener('resize', acordar, { passive: true });
 }
 
-
-/* ==========================================================================
-   7. Vídeos
-   --------------------------------------------------------------------------
-   O iframe só entra na página depois do clique. Antes disso o YouTube não
-   escreve cookie em quem apenas passou pelo site, e a página abre mais
-   leve, porque um embed custa algumas centenas de KB cada.
-   ========================================================================== */
 function montarVideos() {
   $$('.video__capa').forEach(function (capa) {
     var vimeo = capa.getAttribute('data-vimeo');
@@ -521,8 +385,6 @@ function montarVideos() {
   });
 }
 
-/* Converte o link normal no endereço de incorporação. Devolve string vazia
-   se não reconhecer, e aí o vídeo abre em aba nova em vez de quebrar. */
 function paraIncorporar(url) {
   var yt = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{6,})/);
   if (yt) { return 'https://www.youtube-nocookie.com/embed/' + yt[1] + '?autoplay=1&rel=0'; }
@@ -531,17 +393,6 @@ function paraIncorporar(url) {
   return '';
 }
 
-
-/* ==========================================================================
-   8. Formulário
-   --------------------------------------------------------------------------
-   Envia para o Web3Forms por fetch, sem sair da página. Sem servidor nosso e
-   sem banco de dados: o Web3Forms recebe e encaminha por e-mail.
-
-   Sem chave configurada a seção inteira fica escondida, e o aviso vai só
-   para o console. Formulário desativado na tela é pior que formulário
-   nenhum: parece site quebrado.
-   ========================================================================== */
 function montarFormulario() {
   var form = $('.form');
   if (!form) { return; }
@@ -555,11 +406,7 @@ function montarFormulario() {
   // guarda, o formulario inteiro parava de montar por causa disso.
   if (!chave) { return; }
 
-  /* Sem chave, a secao inteira fica escondida e o visitante nunca sabe que
-     ela existe. A versao anterior mostrava o formulario desativado com um
-     aviso, e o resultado era um site com cara de inacabado.
-
-     O aviso continua existindo, mas so no console, para quem for publicar. */
+  
   if (!CONFIG.web3forms) {
     if (window.console && console.info) {
       console.info('[Providentia] A secao "Prefere escrever?" esta oculta: ' +
@@ -632,10 +479,7 @@ function montarFormulario() {
     estado.textContent = FALA.enviando;
     botao.disabled = true;
 
-    /* O assunto e o remetente sao montados aqui, e nao ficam fixos no HTML.
-       Com valor fixo, toda mensagem chegaria com o mesmo titulo e o mesmo
-       nome, e a caixa de entrada viraria uma pilha indistinguivel. Assim
-       ela ve quem escreveu e sobre o que antes de abrir. */
+    
     var dados = Object.fromEntries(new FormData(form));
     var quem = (dados.nome || '').trim();
     var sobre = (dados.assunto || '').trim();
@@ -663,8 +507,6 @@ function montarFormulario() {
   });
 }
 
-
-/* ========================================================================== */
 document.addEventListener('DOMContentLoaded', function () {
   montarContatos();
   montarMenu();

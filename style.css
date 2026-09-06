@@ -1,90 +1,5 @@
-/* ==========================================================================
-   PROVIDENTIA FINANCIAL — style.css
-   --------------------------------------------------------------------------
-   Construído a partir do mockup. As decisões que não são óbvias:
-
-   O DOURADO TEM TRÊS VERSÕES, E ISSO NÃO É ENFEITE
-   O dourado da marca (#9d8239) mede 3,69 sobre branco. O mínimo para texto
-   pequeno é 4,5. Então:
-     --ouro        #9d8239  o da marca. Linha, contorno de ícone, botão cheio
-     --ouro-fundo  #7c6529  escurecido, para TEXTO pequeno sobre claro
-     --ouro-claro  #c4a961  clareado, para TEXTO pequeno sobre o marinho
-   Onde o mockup mostra dourado escrito em cima do branco, aqui entra o
-   --ouro-fundo. A olho a diferença é mínima; na medição é o que separa
-   aprovado de reprovado.
-
-   O CREME
-   O mockup tem um fundo quente na seção de soluções e na abertura, mais
-   quente que o #F9F9FB da especificação da marca. Ficou #faf9f6, porque é
-   esse calor que faz a página parecer o mockup. Está registrado aqui de
-   propósito: é um desvio consciente do manual, não um descuido.
-
-   A LARGURA DOS TÍTULOS
-   Todo título de display tem text-wrap: balance, que reparte as palavras
-   entre as linhas em vez de encher a primeira e largar o resto. Isso só
-   funciona se houver espaço para ele escolher onde quebrar.
-
-   O erro que estava aqui: max-width apertado 4 a 12 pixels ABAIXO da
-   largura natural do título. "Como eu posso ajudar você" precisa de 580px
-   numa linha e estava limitado a 576. Quebrava em duas por 4 pixels, numa
-   caixa de 1163px de largura. Quebra que não compra nada.
-
-   A regra passa a ser: ou o título não tem max-width nenhum e cabe numa
-   linha, ou o max-width é folgado o bastante para o balance escolher um
-   ponto de quebra decente. Nunca encostado no limite.
-
-   COMO CONFERIR, EM VEZ DE CONFIAR NO OLHO
-   Escrevi a regra acima e depois errei de novo, duas vezes, pondo max-width
-   em ch num título novo sem medir. O olho não serve para isso: 24ch parece
-   generoso e dá 601px, que é metade da caixa.
-
-   O teste abaixo olha o RESULTADO, e não se existe teto. A primeira versão
-   dele acusava qualquer título com max-width, e acusava dois que estavam
-   ótimos: teto não é defeito, linha picada é. Ele avisa em dois casos:
-
-     · três linhas ou mais quando cabia em menos
-     · linhas muito desiguais SEM quebra ditada no HTML
-       (com <br class="quebra"> a desigualdade é escolha, não acaso)
-
-   Cole no console de qualquer página:
-
-     document.querySelectorAll('main h1, main h2').forEach(el => {
-       const r = document.createRange(); r.selectNodeContents(el);
-       const cx = [...r.getClientRects()].filter(b => b.height > 4);
-       const tops = [];
-       cx.forEach(b => { if (!tops.some(t => Math.abs(t - b.top) < 4)) tops.push(b.top); });
-       const l = tops.sort((a, b) => a - b).map(t => {
-         const d = cx.filter(b => Math.abs(b.top - t) < 4);
-         return Math.max(...d.map(b => b.right)) - Math.min(...d.map(b => b.left));
-       });
-       if (l.length < 2) return;
-       const dito = !!el.querySelector('br');
-       const desv = 1 - Math.min(...l) / Math.max(...l);
-       const caixa = el.parentElement.getBoundingClientRect().width;
-       const soma = l.reduce((a, b) => a + b, 0);
-       if ((l.length >= 3 && soma < caixa * (l.length - 1)) || (desv > 0.45 && !dito))
-         console.warn(el.textContent.trim().slice(0, 40), '|', l.length, 'linhas |',
-                      Math.round(desv * 100) + '% desiguais |', l.map(Math.round));
-     });
-
-   Silêncio no console quer dizer que nenhum título está picado.
-
-   AS FOTOS NÃO LEVAM COR POR CIMA
-   A foto da abertura foi feita com a família à direita e o lado esquerdo
-   vazio. O véu de creme cobre só a metade vazia e já sumiu antes de chegar
-   neles. Nenhum filtro, nenhuma cor sobre os rostos.
-
-   --------------------------------------------------------------------------
-   01. Base            05. Pilares        09. Chamada
-   02. Peças           06. Sobre          10. Rodapé
-   03. Topo e submenu  07. A frase        11. WhatsApp flutuante
-   04. Abertura        08. Soluções       12. Responsivo e movimento
-   ========================================================================== */
 
 
-/* ==========================================================================
-   01. BASE
-   ========================================================================== */
 :root {
   --marinho:      #0a2368;
   --marinho-esc:  #071a4e;
@@ -93,10 +8,7 @@
   --ouro:         #9d8239;
   --ouro-fundo:   #7c6529;
   --ouro-claro:   #c4a961;
-  /* Dourado do botão cheio. O da marca com texto branco em cima mede 3,69,
-     e o mínimo é 4,5. Este é o tom mais próximo do original que passa:
-     mede 4,63. A olho a diferença é quase nula; na medição é o que separa
-     aprovado de reprovado. */
+  
   --ouro-botao:   #8a7231;
 
   --branco:       #ffffff;
@@ -110,10 +22,7 @@
   --filete-ouro:  rgba(157, 130, 57, .35);
   --filete-claro: rgba(196, 169, 97, .30);
 
-  /* Lora no lugar da Playfair Display. A Playfair tem contraste alto entre
-     traço grosso e fino, e é isso que faz o texto parecer fora de foco em
-     corpo pequeno. A Lora tem traço mais uniforme e x-height maior: mesma
-     elegância, sem a vista forçando. */
+  
   --serifa: "Lora", Georgia, "Times New Roman", serif;
   --texto:  "Poppins", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
   --script: "Allura", "Segoe Script", "Brush Script MT", cursive;
@@ -152,10 +61,7 @@ h1, h2, h3 {
   line-height: 1.14;
   text-wrap: balance;
 }
-/* text-wrap: pretty pede ao navegador que evite terminar o parágrafo com
-   uma linha muito curta. O lead do Centro de Educação fechava com 213px de
-   texto depois de três linhas de mais de 500: a órfã clássica.
-   Onde não houver suporte, a propriedade é simplesmente ignorada. */
+
 p { margin: 0 0 1.1em; text-wrap: pretty; }
 p:last-child { margin-bottom: 0; }
 ul { margin: 0; padding: 0; list-style: none; }
@@ -186,11 +92,6 @@ a:focus-visible, button:focus-visible {
   outline-color: var(--ouro-claro);
 }
 
-
-/* ==========================================================================
-   02. PEÇAS
-   ========================================================================== */
-
 .botao {
   display: inline-flex;
   align-items: center;
@@ -215,33 +116,14 @@ a:focus-visible, button:focus-visible {
 .botao--ouro { background: var(--ouro-botao); border-color: var(--ouro-botao); color: var(--branco); }
 .botao--ouro:hover { background: var(--ouro-fundo); border-color: var(--ouro-fundo); }
 
-/* Contorno dourado sobre fundo claro. O texto usa o dourado escurecido,
-   porque o da marca não passa em corpo 13. */
 .botao--linha { background: var(--branco); border-color: var(--ouro); color: var(--ouro-fundo); }
 .botao--linha:hover { background: var(--ouro); color: var(--branco); }
 
-/* Contorno dourado sobre o marinho */
-/* Contorno marinho, para acao secundaria que NAO e WhatsApp.
-
-   Existe porque o botao--linha deste site virou, na pratica, o botao do
-   WhatsApp: ele carrega a borda verde que pulsa, feita para lembrar a marca
-   de la. Verde num botao que liga para um telefone nao quer dizer nada.
-
-   Marinho sobre branco mede 14,45:1 como texto.
-
-   A BORDA COMECOU EM 30% DE OPACIDADE E FOI PARA 50%. Eu tinha escrito que
-   30% dava 3,4:1; medido no navegador, dava 1,88. A conta de opacidade nao e
-   linear: 30% de marinho sobre branco vira rgb(182,189,210), que e quase
-   branco. A 50% vira rgb(133,145,180) e mede 3,16:1, que e o minimo da WCAG
-   para o contorno de um componente.
-
-   Aqui a borda importa de verdade: e ela que diz que aquilo e um botao, e
-   nao um link em azul. */
 .botao--contorno {
   background: var(--branco);
   border-color: rgba(10, 35, 104, .5);
   color: var(--marinho);
-  /* o pulso verde e do botao do WhatsApp, e nao deste */
+  
   animation: none;
 }
 .botao--contorno:hover {
@@ -258,9 +140,7 @@ a:focus-visible, button:focus-visible {
 .botao--topo { min-height: 46px; padding: 0 24px; font-size: 12px; }
 
 .ico-zap  { width: 19px; height: 19px; fill: currentColor; flex: none; }
-/* O telefone do canal em inglês. Traço, e não preenchimento: é assim que
-   todos os ícones deste site são desenhados, e o do WhatsApp é a exceção
-   porque o glifo dele é a marca de outra empresa. */
+
 .ico-tel  { width: 19px; height: 19px; flex: none;
             fill: none; stroke: currentColor; stroke-width: 2;
             stroke-linecap: round; stroke-linejoin: round; }
@@ -274,13 +154,6 @@ a:focus-visible, button:focus-visible {
   stroke-linejoin: round;
 }
 
-/* --------------------------------------------------------------------------
-   ÍCONES
-   Todos vêm do Lucide, numa grade de 24x24 desenhada para traço 2. Como
-   aqui eles aparecem grandes, o traço cai para 1.5: a 40px, um traço 2
-   renderiza com 3,3px na tela e o ícone fica pesado demais ao lado de uma
-   serifa fina. A 1.5 ele sai com 2,5px, que é o peso do resto da página.
-   -------------------------------------------------------------------------- */
 .ico {
   width: 40px; height: 40px;
   fill: none;
@@ -306,7 +179,6 @@ a:focus-visible, button:focus-visible {
 }
 .ico-play { width: 24px; height: 24px; fill: var(--marinho); stroke: none; margin-left: 2px; }
 
-/* O que ainda falta da Monica. Marcação de revisão, não caixa decorativa. */
 .falta {
   display: block;
   font-size: 11px;
@@ -329,10 +201,6 @@ a:focus-visible, button:focus-visible {
   color: var(--cinza);
 }
 
-
-/* ==========================================================================
-   03. TOPO E MENU
-   ========================================================================== */
 .topo {
   position: sticky; top: 0; z-index: 60;
   background: rgba(255, 255, 255, .95);
@@ -349,28 +217,13 @@ a:focus-visible, button:focus-visible {
   min-height: var(--barra);
 }
 
-/* --------------------------------------------------------------------------
-   O LOCKUP
-   Escudo à esquerda, PROVIDENTIA em cima e FINANCIAL embaixo, menor e em
-   dourado. O "Pf" dentro do escudo é composto em Playfair itálico, que é
-   o mais perto do monograma manuscrito da logo real.
-
-   [SUBSTITUIR] Quando o SVG oficial chegar, este bloco todo pode sair.
-   -------------------------------------------------------------------------- */
 .marca {
   display: inline-flex;
   align-items: center;
   gap: 13px;
   flex: none;
 }
-/* O ESCUDO
-   Arquivo oficial, PNG 500x500 com fundo transparente. Antes daqui existir,
-   eu recortava o escudo de dentro do JPG do logotipo inteiro usando
-   background-position em porcentagem. Isso foi embora: com o arquivo certo,
-   é só uma imagem.
 
-   Altura fixa e largura automática, porque o escudo é mais alto que largo e
-   quem manda no alinhamento do topo é a altura. */
 .marca__escudo {
   flex: none;
   height: 52px;
@@ -386,11 +239,7 @@ a:focus-visible, button:focus-visible {
   text-transform: uppercase;
   color: var(--marinho);
 }
-/* "FINANCIAL" fica no dourado exato da marca. Ele mede 3,51 sobre o branco,
-   abaixo do mínimo de 4,5 — mas a WCAG isenta logotipo e nome de marca
-   dessa regra (1.4.3, exceção "Logotypes"). Escurecer aqui descaracterizaria
-   a logo à toa. Quando o arquivo real entrar, isto vira imagem e a questão
-   deixa de existir. */
+
 .marca__nome i {
   font-style: normal;
   font-size: clamp(9px, .78vw, 11px);
@@ -415,30 +264,11 @@ a:focus-visible, button:focus-visible {
   transition: color .2s var(--curva), border-color .2s var(--curva);
 }
 .nav a:hover { color: var(--ouro-fundo); border-bottom-color: var(--ouro); }
-/* O item da página atual fica sublinhado em dourado, como no mockup */
+
 .nav__ativo { color: var(--ouro-fundo) !important; border-bottom-color: var(--ouro) !important; }
 
 .botao--topo { display: none; flex: none; }
 
-
-/* ==========================================================================
-   A TROCA DE IDIOMA
-   --------------------------------------------------------------------------
-   Duas pastilhas no topo, PT e EN, cada uma com a bandeirinha do lado. A do
-   idioma que está no ar fica marcada e não é link.
-
-   POR QUE A SIGLA APARECE ESCRITA, E NÃO SÓ A BANDEIRA
-   Bandeira é país, e não idioma: há muito país de língua portuguesa e muito
-   país de língua inglesa. Uma bandeira sozinha também não tem nome nenhum
-   para um leitor de tela ler. Com a sigla ao lado, o rótulo existe na tela
-   e existe na leitura, e a bandeira faz o que ela sabe fazer, que é ser
-   reconhecida de longe e antes da palavra.
-
-   Elas ficam ANTES do botão de agendar, e não depois. Numa barra que se lê
-   da esquerda para a direita, o último elemento é o que a pessoa mais
-   procura quando decidiu agir. Trocar de idioma é a primeira coisa que
-   alguém faz ao cair na página errada, e não a última.
-   ========================================================================== */
 .idioma { flex: none; }
 
 .idioma ul {
@@ -457,8 +287,7 @@ a:focus-visible, button:focus-visible {
   gap: 6px;
   padding: 5px 10px;
   border-radius: 999px;
-  /* 11px em maiúsculas com esta entrelinha dá 12,4px de altura de traço,
-     que é texto pequeno: a régua aqui é 4,5:1, e não 3:1. */
+  
   font-size: 11px;
   font-weight: 600;
   letter-spacing: .09em;
@@ -467,15 +296,11 @@ a:focus-visible, button:focus-visible {
   white-space: nowrap;
 }
 
-/* O que está no ar. Fundo marinho e texto branco: 14,45:1 medido. */
 .idioma__atual {
   background: var(--marinho);
   color: var(--branco);
 }
 
-/* O outro idioma. Não fica dourado porque
-   dourado neste site quer dizer "a ação principal", e trocar de idioma não
-   é a ação principal de página nenhuma. Cinza sobre branco: 6,28:1. */
 .idioma__link {
   color: var(--cinza);
   transition: background-color .2s var(--curva), color .2s var(--curva);
@@ -485,9 +310,6 @@ a:focus-visible, button:focus-visible {
   color: var(--marinho);
 }
 
-/* A bandeirinha. O filete escuro por cima existe porque as duas têm branco
-   na borda: sem ele, a listra branca da americana encosta no fundo branco
-   da barra e a bandeira parece recortada. */
 .bandeira {
   display: block;
   width: 20px;
@@ -497,13 +319,6 @@ a:focus-visible, button:focus-visible {
   box-shadow: 0 0 0 1px rgba(10, 35, 104, .18);
 }
 
-/* Dentro do painel do celular a barra é escura, então as cores viram.
-
-   E as pastilhas crescem: no topo elas são clicadas com o ponteiro do mouse
-   e 24px de altura bastam, mas dentro do painel elas são tocadas com o
-   dedo. 44px é a régua que o sanduíche deste site já usa, pelo mesmo
-   motivo, e o mínimo da WCAG 2.5.8 é 24: ficava exatamente na linha, o que
-   é passar raspando numa coisa que se toca no celular. */
 .idioma--painel { margin-bottom: 4px; }
 .idioma--painel .idioma__link,
 .idioma--painel .idioma__atual { min-height: 44px; padding: 0 16px; }
@@ -511,34 +326,20 @@ a:focus-visible, button:focus-visible {
   justify-content: flex-start;
   border-color: rgba(255, 255, 255, .28);
 }
-/* Branco sobre marinho: 14,45:1 */
+
 .idioma--painel .idioma__atual { background: var(--branco); color: var(--marinho); }
-/* Cinza claro sobre marinho: 6,87:1 */
+
 .idioma--painel .idioma__link { color: var(--cinza-claro); }
 .idioma--painel .idioma__link:hover { background: rgba(255, 255, 255, .12); color: var(--branco); }
 .idioma--painel .bandeira { box-shadow: 0 0 0 1px rgba(255, 255, 255, .3); }
 
-/* No topo ela só aparece junto com a nav aberta. Abaixo de 900px quem manda
-   é o sanduíche, e a troca de idioma mora dentro do painel: repetir as duas
-   pastilhas na barra estreita tiraria espaço do que já não cabia. */
 .topo .idioma { display: none; }
 @media (min-width: 900px) {
   .topo .idioma { display: block; }
-  /* A nav já empurra tudo para a direita com margin-left:auto. O vão até o
-     botão de agendar fica menor que o vão entre itens de menu, para as duas
-     pastilhas lerem como um par, e não como mais um item da navegação. */
+  
   .nav { margin-right: clamp(16px, 2vw, 28px); }
 }
 
-/* --------------------------------------------------------------------------
-   O SUBMENU DE SERVIÇOS
-   Abre no hover E no :focus-within. O segundo é o que faz funcionar no
-   teclado: sem ele, quem navega por Tab nunca chegaria nos seis itens.
-
-   A ponte invisível de 10px entre o botão e a lista existe porque, sem ela,
-   o menu fecha no meio do caminho quando o ponteiro desce. É o defeito
-   clássico de submenu no hover.
-   -------------------------------------------------------------------------- */
 .tem-sub { position: relative; }
 
 .sub-abre {
@@ -571,7 +372,7 @@ a:focus-visible, button:focus-visible {
 .tem-sub:focus-within .sub-abre svg { transform: rotate(180deg); }
 
 .sub {
-  display: block;   /* nunca flex: sao seis itens empilhados */
+  display: block;   
   position: absolute;
   top: 100%;
   left: -18px;
@@ -588,8 +389,7 @@ a:focus-visible, button:focus-visible {
   transform: translateY(-6px);
   transition: opacity .2s var(--curva), transform .2s var(--curva), visibility .2s;
 }
-/* A ponte: cobre o vão entre o botão e a lista para o menu não fechar
-   quando o ponteiro atravessa. */
+
 .sub::before {
   content: "";
   position: absolute;
@@ -628,8 +428,7 @@ a:focus-visible, button:focus-visible {
   align-items: center;
   gap: 10px;
   margin-left: auto;
-  /* 44px de altura minima: e o alvo mais tocado do site no celular, e
-     estava com 42. */
+  
   min-height: 44px;
   padding: 6px 0;
   cursor: pointer;
@@ -646,14 +445,10 @@ a:focus-visible, button:focus-visible {
   fill: none;
   stroke-linecap: round;
 }
-/* O ícone gira 90 graus quando abre. Antes eram três traços que viravam um
-   X à mão; com o ícone da biblioteca, girar é mais honesto que fingir. */
+
 .sanduiche .ico-menu { transition: transform .3s var(--curva); }
 .sanduiche[aria-expanded="true"] .ico-menu { transform: rotate(90deg); }
 
-/* O painel nunca sai do documento: fica invisível e inerte. É o inert que
-   tira os links do caminho do teclado e do leitor de tela sem matar a
-   transição, o que display:none faria. */
 .painel {
   position: fixed;
   inset: var(--barra) 0 0;
@@ -680,9 +475,7 @@ body.travado { overflow: hidden; }
   transition: padding-left .25s var(--curva), color .25s var(--curva);
 }
 .painel__lista a:hover { padding-left: 14px; color: var(--ouro-claro); }
-/* No celular não há hover, então os seis serviços ficam sempre à vista,
-   recuados sob "Serviços". Submenu que só abre no toque some para quem
-   não descobre que ele existe. */
+
 .painel__sub a {
   padding: 13px 0 13px 22px;
   font-family: var(--texto);
@@ -692,20 +485,12 @@ body.travado { overflow: hidden; }
 .painel__sub a:hover { padding-left: 30px; }
 
 .painel__pe { display: grid; gap: 14px; margin-top: 36px; max-width: 340px; }
-/* Dentro do painel o fundo é marinho, então o botão de contorno não pode
-   ser marinho: ele sumiria. Vira o mesmo dourado claro do botão do
-   WhatsApp ali, que sobre marinho mede 7,4:1. */
+
 .painel .botao--contorno { background: transparent; border-color: var(--ouro-claro); color: var(--ouro-claro); }
 .painel .botao--contorno:hover { background: var(--ouro-claro); color: var(--marinho); }
 .painel .botao--linha { background: transparent; border-color: var(--ouro-claro); color: var(--ouro-claro); }
 .painel .botao--linha:hover { background: var(--ouro-claro); color: var(--marinho); }
 
-
-/* ==========================================================================
-   04. ABERTURA
-   No celular a foto vai para cima do texto e ocupa a largura toda.
-   No desktop ela sai da faixa e encosta na borda direita da tela.
-   ========================================================================== */
 .abertura {
   position: relative;
   background: linear-gradient(180deg, var(--creme) 0%, var(--branco) 100%);
@@ -717,26 +502,13 @@ body.travado { overflow: hidden; }
   width: 100%;
   height: clamp(280px, 52vw, 400px);
   object-fit: cover;
-  /* No celular a foto vira faixa. O recorte puxa para a direita porque é
-     onde a família está; centralizado, sobraria só a parede vazia. E sobe
-     um pouco, porque eles estão sentados e o terço de baixo do quadro é
-     quase só chão e tapete. */
+  
   object-position: 74% 38%;
 }
 
 .abertura__in { position: relative; z-index: 2; }
 .abertura__txt { padding-block: clamp(38px, 6vw, 60px) clamp(48px, 7vw, 76px); }
 
-/* A frase tem 43 caracteres e precisa de cerca de 1180px numa linha só com
-   corpo 56. Na coluna de 580px isso virava três linhas de 514, 275 e 347:
-   uma cheia e duas sobras.
-
-   Com corpo 50 ela mede cerca de 1050, o que cabe em duas linhas de ~525
-   dentro da mesma coluna. Manchete em duas linhas parelhas vale mais que
-   seis pixels de corpo.
-
-   Sem max-width: quem limita é a própria coluna, e um teto em cima disso
-   só criaria a mesma quebra à toa que havia nos outros títulos. */
 .abertura h1 {
   font-size: clamp(34px, 4.6vw, 50px);
   line-height: 1.1;
@@ -753,10 +525,6 @@ body.travado { overflow: hidden; }
 
 .acoes { display: flex; flex-wrap: wrap; gap: 14px; }
 
-
-/* ==========================================================================
-   05. PILARES
-   ========================================================================== */
 .pilares {
   background: var(--marinho);
   color: var(--branco);
@@ -786,10 +554,6 @@ body.travado { overflow: hidden; }
 }
 .pilares .ico { stroke: var(--ouro-claro); }
 
-
-/* ==========================================================================
-   06. SOBRE
-   ========================================================================== */
 .sobre { padding-block: var(--respiro); }
 
 .sobre__in {
@@ -798,10 +562,6 @@ body.travado { overflow: hidden; }
   align-items: center;
 }
 
-/* O recorte 4:5 tira 256px de uma foto 1024x1536. Em "center 18%" saem 46px
-   de cima e 210 de baixo, o que cortava o laptop no meio. Em 8% saem 20 de
-   cima e 236 de baixo: sobra o teto que não interessa, mas a mesa fecha
-   inteira embaixo dela. */
 .sobre__foto img {
   width: 100%;
   aspect-ratio: 4 / 5;
@@ -810,8 +570,6 @@ body.travado { overflow: hidden; }
   background: var(--creme-fundo);
 }
 
-/* Sem max-width: quem limita já é a coluna do texto, de 603px. Com o teto
-   de 17ch em cima disso, sobravam três linhas curtas e desiguais. */
 .sobre h2 {
   font-size: clamp(28px, 3.4vw, 40px);
   margin-bottom: 26px;
@@ -823,18 +581,6 @@ body.travado { overflow: hidden; }
   max-width: 52ch;
 }
 
-/* A assinatura manuscrita. É decorativa e está marcada aria-hidden no HTML,
-   porque o nome dela já foi lido no olho da seção. */
-/* A assinatura
-   Allura no lugar da Pinyon Script: a Pinyon é caligrafia de convite de
-   casamento, muito regular para parecer punho de alguém. A Allura tem
-   inclinação e ligadura de escrita corrida, e por isso lê como assinatura.
-
-   O tamanho é grande de propósito. Assinatura pequena vira rodapé; grande,
-   ela fecha o texto como fecharia uma carta. */
-/* Seletor com o pai junto, e não .assinatura sozinho: ".sobre__txt p" tem
-   especificidade (0,2,1) e vencia (0,1,0), então a assinatura saía com os
-   15,5px do corpo do texto em vez do tamanho daqui. */
 .sobre__txt p.assinatura {
   font-family: var(--script);
   font-size: clamp(34px, 3.2vw, 44px);
@@ -844,21 +590,6 @@ body.travado { overflow: hidden; }
   margin: 26px 0 0;
 }
 
-
-/* ==========================================================================
-   A FRASE QUE ABRE COM A ROLAGEM
-   --------------------------------------------------------------------------
-   A seção é transparente; quem carrega a cor é o painel de dentro. Ele entra
-   estreito e vai abrindo, com o canto endireitando no caminho.
-
-   O CONTRASTE SOBRE O DOURADO
-   Marinho escuro sobre o dourado da marca mede 4,27 e o branco mede 3,69.
-   Os dois ficam abaixo de 4,5, que é o mínimo para texto pequeno. Por isso
-   a frase tem piso de 26px: acima de 24px o critério que vale é 3:1, e aí
-   os dois passam com folga. Não reduza esse clamp.
-
-   Sem JavaScript, ou com prefers-reduced-motion, o painel já nasce aberto.
-   ========================================================================== */
 .frase { padding-block: clamp(40px, 5vw, 64px); }
 
 .frase__painel {
@@ -871,19 +602,6 @@ body.travado { overflow: hidden; }
   will-change: width, border-radius;
 }
 
-/* CENTRALIZADA, E COM LARGURA TRAVADA EM PIXELS
-   --------------------------------------------------------------------------
-   O max-width é em px de propósito, e não em ch nem em porcentagem. O painel
-   cresce de 74% para 95% da seção durante a rolagem; se a largura do texto
-   acompanhasse esse crescimento, ele refluiria de três linhas para duas no
-   meio do caminho, a altura do painel mudaria junto e a página pularia.
-
-   Com 800px fixos o texto nunca reflui: o painel abre em volta dele.
-
-   O corpo caiu de 44 para 34 pela mesma razão. Medido: a segunda sentença
-   pede 987px a 44 e 762px a 34. A faixa útil dentro do painel no estado
-   mais estreito é 835px. A 44 não cabia, e era isso que forçava a quebra
-   errada no meio de "esperar o pior". */
 .frase p {
   margin-inline: auto;
   margin-block: 0;
@@ -894,24 +612,12 @@ body.travado { overflow: hidden; }
   line-height: 1.3;
   color: var(--marinho-esc);
 }
-/* A segunda metade da frase muda de cor no meio. É esse corte que faz a
-   frase "abrir": a mesma sentença em duas tintas. */
+
 .frase em {
   font-style: normal;
   color: var(--branco);
 }
 
-
-/* ==========================================================================
-   BENEFÍCIOS EM VIDA
-   --------------------------------------------------------------------------
-   As quatro condições ficam numa grade de filete, e não em quatro cartões.
-   A página já tem seis cartões logo abaixo; repetir o mesmo objeto aqui
-   faria a página inteira virar fileira de caixinha.
-
-   O filete é borda de verdade, e não gap com fundo colorido: com fundo, a
-   cor da régua fica POR BAIXO do texto e escurece o que estiver em cima.
-   ========================================================================== */
 .beneficios { padding-block: var(--respiro); }
 
 .beneficios h2 {
@@ -954,10 +660,6 @@ body.travado { overflow: hidden; }
 
 .nota--esq { margin-inline: 0; text-align: left; max-width: 62ch; }
 
-
-/* ==========================================================================
-   08. SOLUÇÕES
-   ========================================================================== */
 .solucoes {
   background: var(--creme);
   border-top: 1px solid var(--filete);
@@ -965,7 +667,7 @@ body.travado { overflow: hidden; }
 }
 
 .titulo-centro { text-align: center; margin-bottom: clamp(36px, 4.5vw, 56px); }
-/* Sem max-width: 25 caracteres cabem numa linha com folga. */
+
 .titulo-centro h2 { font-size: clamp(30px, 3.8vw, 46px); margin-inline: auto; }
 
 .cartoes {
@@ -973,8 +675,6 @@ body.travado { overflow: hidden; }
   gap: clamp(16px, 1.8vw, 22px);
 }
 
-/* O filete dourado embaixo é o único traço de cor do cartão. Sem sombra:
-   sombra em seis cartões seguidos é o que faz a fileira parecer template. */
 .cartao {
   display: flex;
   flex-direction: column;
@@ -1005,24 +705,12 @@ body.travado { overflow: hidden; }
   color: var(--cinza);
 }
 
-
-/* ==========================================================================
-   CENTRO DE EDUCAÇÃO
-   --------------------------------------------------------------------------
-   A capa do vídeo é um <button>, e não uma <div> com onclick: assim ela já
-   nasce alcançável pelo teclado, anunciável pelo leitor de tela e com o
-   Enter funcionando, sem eu escrever nada disso.
-
-   O quadro guarda 16:9 antes e depois de o vídeo entrar, então a página
-   não pula quando alguém clica.
-   ========================================================================== */
 .educacao {
   background: var(--creme);
   border-top: 1px solid var(--filete);
   padding-block: var(--respiro);
 }
 
-/* Sem max-width: cabe numa linha e não tem por que quebrar. */
 .educacao h2 { font-size: clamp(28px, 3.6vw, 46px); margin-bottom: 16px; }
 
 .educacao__lead {
@@ -1056,13 +744,6 @@ body.travado { overflow: hidden; }
   color: var(--marinho);
 }
 
-/* O título do card é h3 no Centro de Educação e h2 na página de depoimentos:
-   o nível acompanha a hierarquia de cada página, e não o desenho. O
-   espaçamento, esse, vale para os dois.
-
-   Na página de depoimentos ele estava em zero. A regra acima só alcançava
-   h3, então o h2 caía no margin: 0 do reset e o texto encostava no título,
-   e o título na capa. */
 .video h2,
 .video h3 { margin: 16px 0 10px; }
 
@@ -1088,9 +769,6 @@ body.travado { overflow: hidden; }
 }
 .video__capa:hover { background: var(--marinho-esc); }
 
-/* Com poster: a imagem cobre o quadro e o play fica por cima */
-/* A capa vem do CDN do Vimeo. É imagem, e não o player: enquanto ninguém
-   clicar, o Vimeo não carrega script nem escreve cookie. */
 .video__capa img {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -1099,7 +777,6 @@ body.travado { overflow: hidden; }
 }
 .video:hover .video__capa img { transform: scale(1.03); }
 
-/* Quando o card inteiro é link, a "capa" é um <span> e não um <button> */
 .video__capa--link {
   position: relative;
   display: grid;
@@ -1111,8 +788,6 @@ body.travado { overflow: hidden; }
   overflow: hidden;
 }
 
-/* A duração dita se vale a pena começar agora. É a informação que mais
-   falta num card de vídeo. */
 .video__tempo {
   position: absolute;
   right: 8px; bottom: 8px;
@@ -1140,8 +815,6 @@ body.travado { overflow: hidden; }
 .video__capa:hover .video__play { transform: scale(1.08); }
 .video__play svg { width: 26px; height: 26px; fill: var(--marinho); margin-left: 3px; }
 
-/* Enquanto não houver link, o card diz que está pendente. Placeholder que
-   parece pronto é o jeito mais fácil de publicar um site com buraco. */
 .video__vazio {
   position: absolute;
   left: 0; right: 0; bottom: 0;
@@ -1157,10 +830,6 @@ body.travado { overflow: hidden; }
 
 .video__capa iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-
-/* ==========================================================================
-   09. CHAMADA
-   ========================================================================== */
 .chamada {
   background: var(--marinho);
   color: var(--branco);
@@ -1189,10 +858,6 @@ body.travado { overflow: hidden; }
 
 .chamada__acoes { display: grid; gap: 14px; max-width: 340px; }
 
-
-/* ==========================================================================
-   09. RODAPÉ
-   ========================================================================== */
 .rodape {
   background: var(--branco);
   border-top: 1px solid var(--filete);
@@ -1216,29 +881,13 @@ body.travado { overflow: hidden; }
 .rodape__dados svg { color: var(--ouro-fundo); }
 .rodape__dados a { color: var(--cinza); transition: color .2s var(--curva); }
 .rodape__dados a:hover { color: var(--marinho); }
-/* Telefone nao quebra no meio: "(470)" numa linha e "314-6160" na outra
-   deixa de parecer um numero. */
+
 .rodape__dados [data-telefone] { white-space: nowrap; }
 
-/* O E-MAIL EMPURRAVA O RODAPE INTEIRO
-   monica@providentiafinancialgroup.com sao 36 caracteres sem um espaco, e
-   por isso indivisivel: a largura minima dele virava a largura minima da
-   coluna, a coluna passou a 303px numa faixa de 280, e a pagina ganhou 3px
-   de rolagem horizontal a 320px.
-
-   overflow-wrap: anywhere deixa o navegador quebrar dentro da palavra, mas
-   so quando nao cabe de outro jeito. Em tela larga o e-mail continua numa
-   linha so.
-
-   O min-width: 0 e o par disso: item de grid nasce com min-width auto, que
-   o impede de encolher abaixo do proprio conteudo. Sem os dois juntos, um
-   nao resolve. */
 .rodape__in > * { min-width: 0; }
 .rodape__dados a,
 .rodape__dados li > span { overflow-wrap: anywhere; }
-/* Sem teto no item do local: eu tinha posto 30ch, que da uns 250px, dentro
-   de uma coluna de 419. Ele quebrava em tres linhas por causa do teto, e
-   nao por falta de espaco. */
+
 .rodape__dados [aria-disabled="true"] { pointer-events: none; }
 
 .rodape__redes { display: flex; gap: 12px; }
@@ -1269,31 +918,6 @@ body.travado { overflow: hidden; }
   margin: 0 0 8px;
 }
 
-
-/* ==========================================================================
-   10. WHATSAPP FLUTUANTE
-   O verde oficial do WhatsApp com o glifo branco por cima mede 2,15, que
-   reprovaria como texto. Aqui ele é ícone dentro de um botão que já tem
-   aria-label, então o critério que vale é o 1.4.11 (3:1 do componente
-   contra o fundo da página), e o verde contra o branco cumpre.
-   ========================================================================== */
-/* O BOTÃO FLUTUANTE DO WHATSAPP
-   --------------------------------------------------------------------------
-   Tentativa anterior: tirei visibility da transição E do estado escondido,
-   deixando só opacity: 0 com pointer-events: none. Estava errado. Com
-   visibility: visible o elemento continua PINTADO, mesmo transparente:
-   segue na ordem do Tab, segue sendo anunciado pelo leitor de tela, e
-   segue como camada fixa que o compositor repinta a cada quadro. Numa
-   página com doze ícones animados, é ela que pisca.
-
-   O jeito certo é transicionar visibility com duração ZERO e um atraso:
-
-     escondido  -> transition: visibility 0s .3s   (só some DEPOIS do fade)
-     aparecendo -> transition: visibility 0s 0s    (aparece na hora)
-
-   Assim o fade de saída acontece inteiro antes de o elemento sumir, o de
-   entrada começa com ele já presente, e em nenhum momento existe estado
-   intermediário para piscar. */
 .zap {
   position: fixed;
   right: clamp(16px, 3vw, 28px);
@@ -1327,22 +951,12 @@ body.travado { overflow: hidden; }
 }
 .zap:hover { background: #178f44; }
 
-/* A bolha em inglês liga em vez de abrir o WhatsApp, e por isso não é
-   verde: verde aqui é a cor de outra empresa, e usá-la num botão que
-   disca um telefone promete uma coisa e entrega outra. Marinho é a cor
-   da casa, e o ícone branco sobre ele mede 14,45:1. */
 .zap--tel { background: var(--marinho); }
 .zap--tel:hover { background: var(--marinho-esc); }
 .zap--tel svg { fill: none; stroke: currentColor; stroke-width: 2;
                 stroke-linecap: round; stroke-linejoin: round; }
 .zap svg { width: 28px; height: 28px; fill: currentColor; }
 
-
-/* ==========================================================================
-   11. RESPONSIVO
-   ========================================================================== */
-
-/* Dois pilares e dois cartões por linha */
 @media (min-width: 620px) {
   .condicoes { grid-template-columns: 1fr 1fr; }
   .videos { grid-template-columns: 1fr 1fr; }
@@ -1351,8 +965,6 @@ body.travado { overflow: hidden; }
   .chamada__acoes { grid-template-columns: 1fr 1fr; max-width: none; }
 }
 
-/* O ponto de virada do menu: nav aberta em cima, sanduíche embaixo.
-   Um dos dois sempre existe, nunca os dois ao mesmo tempo. */
 @media (min-width: 900px) {
   .nav { display: block; }
   .botao--topo { display: inline-flex; }
@@ -1361,26 +973,16 @@ body.travado { overflow: hidden; }
 
   .nav { margin-left: auto; margin-right: clamp(20px, 2.6vw, 36px); }
 
-  /* A foto ocupa a seção inteira, porque ela já foi feita assim: a Monica
-     à direita e o lado esquerdo vazio. O véu de creme desce sobre a metade
-     vazia e some antes de chegar nela. Nenhuma cor por cima do rosto. */
+  
   .abertura { min-height: clamp(520px, 64vh, 660px); display: grid; align-items: center; }
   .abertura__in { grid-area: 1 / 1; z-index: 2; }
   .abertura__foto { grid-area: 1 / 1; width: 100%; height: 100%; }
   .abertura__foto img {
     width: 100%; height: 100%;
-    /* Eles estão sentados, então o enquadramento desce em relação à foto
-       anterior: em "center 30%" os rostos ficavam colados no topo. */
+    
     object-position: center 42%;
   }
-  /* O véu tem de terminar DEPOIS da coluna de texto, e não em cima dela.
-     A coluna vai até 49,9% da tela e a linha mais longa do título até 49%.
-     Com o véu opaco só até 30% e desaparecendo aos 58%, o fim do título
-     caía na parte transparente, e aí o contraste passava a depender do que
-     a fotografia tem atrás naquele ponto. Isso não se controla.
-
-     Agora ele é sólido até 52% (depois de todo o texto) e some aos 70%,
-     bem antes de encostar nela. */
+  
   .abertura__foto::after {
     content: "";
     position: absolute;
@@ -1397,7 +999,7 @@ body.travado { overflow: hidden; }
     padding-block: clamp(56px, 7vw, 88px);
   }
 
-  /* Os pilares ganham o filete vertical entre eles */
+  
   .pilares__lista { grid-template-columns: repeat(4, 1fr); gap: 0; }
   .pilar { padding-inline: clamp(20px, 2.4vw, 32px); }
   .pilar:not(:first-child) { border-left: 1px solid rgba(196, 169, 97, .28); }
@@ -1412,25 +1014,12 @@ body.travado { overflow: hidden; }
   .videos--tres { grid-template-columns: repeat(3, 1fr); }
   .videos--quatro { grid-template-columns: repeat(4, 1fr); }
 
-  /* --------------------------------------------------------------------
-     QUANDO HÁ MENOS CARTÕES DO QUE COLUNAS
-     --------------------------------------------------------------------
-     Uma grade de três colunas com um cartão só deixa o cartão encostado
-     à esquerda e dois terços de branco à direita. Não é minimalismo, é
-     cara de página que ficou pela metade.
-
-     Aconteceu de verdade: a página de depoimentos em inglês estreou com
-     um depoimento, porque só um dos vídeos que chegaram estava em inglês.
-
-     O número vem do gerador, no atributo data-cartoes. Podia vir do CSS
-     com :has(li:only-child), que funciona nos navegadores de hoje, mas o
-     gerador já sabe a conta e não custa nada dizer.
-     -------------------------------------------------------------------- */
+  
   .videos[data-cartoes="1"] { grid-template-columns: minmax(0, 520px); justify-content: center; }
   .videos[data-cartoes="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 820px; margin-inline: auto; }
   .videos--quatro[data-cartoes="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
-  /* Chamada em três colunas, com filete vertical entre título e texto */
+  
   .chamada__in { grid-template-columns: minmax(0, 5fr) minmax(0, 5fr) minmax(0, 5fr); }
   .chamada__txt {
     border-left: 1px solid rgba(196, 169, 97, .3);
@@ -1438,13 +1027,7 @@ body.travado { overflow: hidden; }
   }
   .chamada__acoes { grid-template-columns: 1fr; max-width: 320px; justify-self: end; }
 
-  /* Quatro blocos: marca, selo, contatos e redes.
-     Os contatos ficam EMPILHADOS, e nao lado a lado. Enfileirados eles
-     precisavam de uns 700px (telefone 110, e-mail 250, local 250, mais os
-     vaos), e com o selo ocupando uma coluna sobrava um terco disso: o
-     telefone quebrava em tres linhas e o local em cinco.
-
-     Empilhados, o bloco todo cabe em 280px e ainda sobra folga. */
+  
   .rodape__in {
     grid-template-columns: auto auto minmax(240px, 1fr) auto;
     gap: clamp(28px, 3.4vw, 52px);
@@ -1452,14 +1035,11 @@ body.travado { overflow: hidden; }
   }
 }
 
-/* Abaixo de 620px o botão do topo e as ações da abertura ocupam a linha */
 @media (max-width: 519px) {
   .acoes { display: grid; }
   .acoes .botao { width: 100%; }
 }
 
-/* No toque, alvo mínimo de 44px. Os links de telefone e e-mail do rodapé
-   são texto corrido e ficavam com 23px de altura, o que é errar o dedo. */
 @media (hover: none) {
   .rodape__dados a {
     display: inline-flex;
@@ -1469,12 +1049,6 @@ body.travado { overflow: hidden; }
   .rodape__redes a { width: 44px; height: 44px; }
 }
 
-
-/* ==========================================================================
-   12. MOVIMENTO
-   Quase nada se move. O que se move, se move pouco, e some inteiro para
-   quem pediu menos movimento no sistema.
-   ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
@@ -1488,10 +1062,6 @@ body.travado { overflow: hidden; }
   .zap { transform: none; }
 }
 
-
-/* ==========================================================================
-   O VÍDEO EM DESTAQUE
-   ========================================================================== */
 .destaque {
   background: var(--marinho);
   color: var(--branco);
@@ -1520,12 +1090,6 @@ body.travado { overflow: hidden; }
   margin-bottom: 26px;
 }
 
-
-/* ==========================================================================
-   O CARTÃO VIROU LINK
-   A área clicável é o <a> inteiro, e não só o título: cartão em que só o
-   título clica é o erro de usabilidade mais comum desse padrão.
-   ========================================================================== */
 .cartao { padding: 0; }
 .cartao > a {
   display: flex;
@@ -1558,17 +1122,12 @@ body.travado { overflow: hidden; }
 .cartao__seta {
   margin-top: auto;
   color: var(--ouro-fundo);
-  /* Um pouco mais devagar que os 250ms de antes: o percurso triplicou, e no
-     mesmo tempo o movimento ficaria brusco em vez de decidido. */
+  
   transition: transform .32s var(--curva);
 }
 .cartao > a:hover .cartao__seta,
 .cartao > a:focus-visible .cartao__seta { transform: translateX(16px); }
 
-
-/* ==========================================================================
-   AS PÁGINAS DE SERVIÇO E A DE DEPOIMENTOS
-   ========================================================================== */
 .servico, .depo { padding-block: clamp(34px, 4vw, 52px) var(--respiro); }
 
 .migalha {
@@ -1581,9 +1140,7 @@ body.travado { overflow: hidden; }
 }
 .migalha a { color: var(--cinza); border-bottom: 1px solid var(--filete); }
 .migalha a:hover { color: var(--marinho); border-bottom-color: var(--marinho); }
-/* A barra separadora é decorativa, mas continua sendo texto na tela. No
-   --cinza-claro ela media 2,1 sobre o branco. Cor sólida, e não opacidade:
-   opacidade sobre branco clareia a cor e piora a medida em vez de manter. */
+
 .migalha span[aria-hidden] { color: var(--cinza); }
 .migalha [aria-current] { color: var(--marinho); }
 
@@ -1607,8 +1164,7 @@ body.travado { overflow: hidden; }
   max-width: 54ch;
   margin: 0 0 20px;
 }
-/* De quem são os depoimentos. Fica em destaque de propósito: dizer que são
-   clientes da Alliance, e não da Monica, é obrigação e não rodapé. */
+
 .depo__origem {
   font-size: 13.5px;
   line-height: 1.7;
@@ -1644,16 +1200,13 @@ body.travado { overflow: hidden; }
 
 .video--largo { max-width: 900px; margin-block: clamp(8px, 1.4vw, 18px) 0; }
 
-/* Anterior e próximo, no pé da página de serviço */
 .vizinhos {
   display: grid;
   gap: 14px;
   padding-top: clamp(26px, 3vw, 38px);
   border-top: 1px solid var(--filete);
 }
-/* A seta fica do lado para onde o link leva: à esquerda em "Anterior", à
-   direita em "Próximo". No hover ela anda PARA FORA do cartão, e não para
-   dentro, porque é para fora que o clique leva. */
+
 .vizinho {
   display: flex;
   align-items: center;
@@ -1684,12 +1237,8 @@ body.travado { overflow: hidden; }
 .vizinho--depois:hover .vizinho__seta,
 .vizinho--depois:focus-visible .vizinho__seta { transform: translateX(8px); }
 
-/* No "Próximo" a seta vai para a direita: a ordem visual inverte, e o texto
-   encosta na seta em vez de fugir dela. */
 .vizinho--depois { flex-direction: row-reverse; text-align: right; }
 
-/* Só um dos dois existe nas pontas da lista. Sem isto, na primeira página
-   o "Próximo" ficaria colado à esquerda em vez de na sua coluna. */
 .vizinhos > span:empty { display: block; }
 
 @media (min-width: 620px) {
@@ -1700,13 +1249,6 @@ body.travado { overflow: hidden; }
   .cartoes { grid-template-columns: repeat(4, 1fr); }
 }
 
-
-/* ==========================================================================
-   A MANHÃ
-   --------------------------------------------------------------------------
-   A hora é o maior número da página inteira, e é o único lugar onde um
-   número aparece grande. Ele funciona como imagem, e não como dado.
-   ========================================================================== */
 .manha {
   background: var(--creme);
   border-top: 1px solid var(--filete);
@@ -1744,19 +1286,9 @@ body.travado { overflow: hidden; }
 }
 .linha span { font-size: 14px; line-height: 1.55; color: var(--cinza); }
 
-/* O quarto momento é a virada. O filete dele é dourado e mais grosso: é a
-   única diferença, e é suficiente para o olho entender que ali muda. */
 .linha--virada { border-top-color: var(--ouro) !important; border-top-width: 2px !important; }
 .linha--virada b { color: var(--ouro-fundo); }
 
-/* O DESFECHO
-   Fica fora da linha do tempo de propósito. Os quatro momentos aconteceram;
-   este ainda não. Por isso ele não tem filete em cima como os outros: tem
-   um traço curto ao lado, que separa sem enfileirar.
-
-   A hora usa o mesmo corpo dos momentos, e não o corpo gigante do 08:28 do
-   título: se ela competisse com aquele, a seção passaria a ter dois
-   começos em vez de um começo e um fim. */
 .manha__fim {
   display: flex;
   flex-wrap: wrap;
@@ -1782,14 +1314,8 @@ body.travado { overflow: hidden; }
   text-wrap: balance;
 }
 
-
-/* ==========================================================================
-   SE A RENDA PARASSE
-   ========================================================================== */
 .renda { padding-block: var(--respiro); }
-/* 26ch dava cerca de 600px, e "Se sua renda parasse amanhã," precisa de 620.
-   Faltando 20px, a quebra manual era ignorada e o navegador partia de novo
-   onde queria. Sem teto: quem limita é a coluna. */
+
 .renda h2 { font-size: clamp(28px, 3.6vw, 46px); margin-bottom: 16px; }
 .renda__lead {
   font-size: clamp(15.5px, 1.3vw, 18px);
@@ -1813,8 +1339,7 @@ body.travado { overflow: hidden; }
   font-size: clamp(21px, 2vw, 28px);
   margin: 0 0 10px;
 }
-/* A pergunta fica em dourado dentro do próprio título: é ela que carrega
-   a seção, e separar em duas linhas quebrava o ritmo da leitura. */
+
 .renda__lista em { font-style: italic; color: var(--ouro-fundo); }
 .renda__lista p { margin: 0; font-size: 14px; line-height: 1.65; color: var(--cinza); max-width: 38ch; }
 
@@ -1826,40 +1351,13 @@ body.travado { overflow: hidden; }
   .linha { grid-template-columns: repeat(4, 1fr); }
 }
 
-
-/* O escudo do rodapé tem mais espaço que o do topo */
 .marca--rodape .marca__escudo { height: 60px; }
 
-
-/* ==========================================================================
-   OS ÍCONES DOS CARTÕES FLUTUAM
-   --------------------------------------------------------------------------
-   Seis pixels de sobe e desce, num ciclo de seis segundos. É pouco de
-   propósito: o objetivo é a página não parecer congelada, e não chamar
-   atenção para o ícone.
-
-   POR QUE CADA UM TEM UM TEMPO DIFERENTE
-   Com a mesma duração para os oito, eles sobem e descem em bloco, e o que
-   era sutil vira uma onda mecânica atravessando a grade. Durações primas
-   entre si (6s, 6.4s, 6.9s...) nunca voltam a coincidir depois do começo.
-
-   POR QUE OS ATRASOS SÃO NEGATIVOS
-   Atraso negativo faz a animação começar já no meio do ciclo. Sem isso, os
-   oito partiriam juntos do zero e o primeiro segundo da página seria
-   justamente o momento em que eles estão mais sincronizados.
-
-   Quem pediu menos movimento no sistema não vê nada disso: o bloco
-   prefers-reduced-motion no fim do arquivo desliga tudo.
-   ========================================================================== */
 @keyframes flutua {
   from, to { transform: translateY(0); }
   50%      { transform: translateY(-6px); }
 }
 
-/* Sem will-change: transform já é propriedade composta, e o navegador
-   promove a camada sozinho enquanto a animação roda. Declarar will-change
-   fixo mantém doze camadas vivas o tempo todo, mesmo com a seção fora da
-   tela, e é pressão de compositor sem contrapartida. */
 .cartao .ico {
   animation: flutua 6s ease-in-out infinite;
 }
@@ -1872,23 +1370,8 @@ body.travado { overflow: hidden; }
 .cartao:nth-child(7) .ico { animation-duration: 6.9s; animation-delay: -0.9s; }
 .cartao:nth-child(8) .ico { animation-duration: 7.6s; animation-delay: -5.3s; }
 
-/* No hover o cartão inteiro já sobe. Se o ícone continuasse flutuando por
-   cima disso, os dois movimentos brigariam: ele para e fica onde está. */
 .cartao:hover .ico { animation-play-state: paused; }
 
-
-/* ==========================================================================
-   OS ÍCONES DA MANHÃ FLUTUAM
-   --------------------------------------------------------------------------
-   Mesmo desenho dos cartões: pouco deslocamento, ciclo longo, e nenhuma
-   duração igual à outra para os quatro nunca subirem em bloco.
-
-   São só quatro e ficam lado a lado, então aqui a diferença entre eles
-   precisa ser MAIOR que nos cartões: com oito numa grade, um pouco de
-   defasagem já basta para o olho não ver padrão; com quatro em linha, o
-   olho acha o padrão fácil. Por isso as durações vão de 6,5s a 8,3s, e
-   não de 6s a 7,6s.
-   ========================================================================== */
 .linha .ico {
   animation: flutua 7s ease-in-out infinite;
 }
@@ -1897,53 +1380,21 @@ body.travado { overflow: hidden; }
 .linha li:nth-child(3) .ico { animation-duration: 8.3s; animation-delay: -0.6s; }
 .linha li:nth-child(4) .ico { animation-duration: 6.9s; animation-delay: -5.5s; }
 
-
-/* ==========================================================================
-   QUEBRA DITA
-   --------------------------------------------------------------------------
-   Existe para as poucas frases em que a quebra automática parte o sentido.
-   Só vale acima de 760px: abaixo disso não há largura para escolher nada, e
-   forçar uma quebra ali deixaria linhas soltas de duas palavras.
-   ========================================================================== */
 .quebra { display: none; }
 
 @media (min-width: 760px) {
   .quebra { display: inline; }
 }
 
-/* Quando "Trabalhamos" virou "Trabalho", o titulo encurtou de 1159 para
-   1084px e passou a caber numa linha na caixa de 1163. Aí a quebra ditada
-   virou estorvo: forcava duas linhas de 708 e 365, 48% desiguais, onde uma
-   linha limpa cabe.
-
-   Mas ela continua util abaixo de 1200px, onde a caixa fica menor que os
-   1084 e o texto quebraria de qualquer jeito, so que num ponto escolhido
-   pelo acaso. Entao a quebra desta secao vale so no meio: some no largo,
-   volta no medio, e some de novo no estreito junto com todas as outras. */
 @media (min-width: 1200px) {
   .seguradoras h2 .quebra { display: none; }
 }
 
-
-/* ==========================================================================
-   SEGURADORAS
-   --------------------------------------------------------------------------
-   A lista aceita as duas formas: logo em imagem ou nome em tipografia. As
-   duas ocupam a mesma caixa, com a mesma altura, então trocar uma pela
-   outra depois não mexe no resto da página.
-
-   Altura fixa e object-fit: contain nas imagens, porque logo de companhia
-   vem em proporção qualquer. Sem isso, um logo largo empurraria os outros.
-   ========================================================================== */
 .seguradoras {
   border-top: 1px solid var(--filete);
   padding-block: var(--respiro);
 }
 
-/* Sem max-width. O 24ch que estava aqui dava 601px numa caixa de 1163, e o
-   título precisa de 1159 para caber numa linha: eu tinha cortado ele pela
-   metade sem motivo. Quem limita agora é a coluna, e a quebra é ditada no
-   HTML. */
 .seguradoras h2 { font-size: clamp(26px, 3.2vw, 40px); margin-bottom: 16px; }
 
 .seguradoras__lead {
@@ -1954,10 +1405,6 @@ body.travado { overflow: hidden; }
   margin: 0 0 clamp(34px, 4vw, 50px);
 }
 
-/* Filete de borda, e nao gap com fundo colorido. Sao sete logos, e sete
-   nunca fecha a grade: no celular a ultima fileira tem uma vaga vazia. Com
-   o truque do gap, essa vaga virava um bloco azulado do tamanho de uma
-   celula. Com borda, ela e so espaco em branco. */
 .seguradoras__lista {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -1968,22 +1415,16 @@ body.travado { overflow: hidden; }
 .seguradora {
   display: grid;
   place-items: center;
-  /* 116 e nao 96: a logo mais alta tem 62px, e com 20px de folga em cima e
-     embaixo ela precisa de 102. O resto do espaco e respiro. */
+  
   border-right: 1px solid var(--filete);
   border-bottom: 1px solid var(--filete);
   min-height: 116px;
-  /* 12px nas laterais, e nao 16: a Ameritas e a mais larga em relacao a
-     altura (3,51:1) e pedia 151px. Com 16 de cada lado sobravam 133, e o
-     object-fit encolhia a logo para caber. Com 12 sobram 141. */
+  
   padding: 24px 12px;
   background: var(--branco);
   text-align: center;
 }
 
-/* O nome em tipografia, enquanto não houver arquivo de logo. Fica em
-   serifa e não em caixa alta: nome de companhia em versalete espaçado
-   pareceria rótulo de seção, e aqui ele é o conteúdo. */
 .seguradora span {
   font-family: var(--serifa);
   font-size: clamp(15px, 1.3vw, 18px);
@@ -1992,9 +1433,6 @@ body.travado { overflow: hidden; }
   text-wrap: balance;
 }
 
-/* A altura vem do dados.js, por logo, calculada para igualar a area optica.
-   Ver o comentario em SEGURADORAS lá: altura igual para todas faria a logo
-   quase quadrada parecer menor que as outras. */
 .seguradora img {
   height: var(--alt-logo, 46px);
   width: auto;
@@ -2002,18 +1440,6 @@ body.travado { overflow: hidden; }
   object-fit: contain;
 }
 
-
-/* ==========================================================================
-   O SELO DE CREDENCIAL DO RODAPÉ
-   --------------------------------------------------------------------------
-   Fica ao lado da marca, e não dentro da lista de contatos: telefone e
-   e-mail são caminhos para falar com ela, isto é uma afirmação sobre ela.
-   Misturar os dois faria o selo parecer mais um item de contato.
-
-   O filete dourado à esquerda é o mesmo recurso que marcava os campos
-   pendentes. Ele voltou aqui com o sentido invertido: antes apontava o que
-   faltava, agora aponta o que está garantido.
-   ========================================================================== */
 .selo {
   display: flex;
   align-items: flex-start;
@@ -2021,10 +1447,7 @@ body.travado { overflow: hidden; }
   margin: 0;
   padding-left: 13px;
   border-left: 2px solid var(--ouro);
-  /* 29ch e nao 34: a linha em portugues cabe igual em duas linhas, e os
-     40px que sobram vao para a coluna dos contatos, onde faziam falta.
-     "Atendendo familias brasileiras em todos os Estados Unidos" pedia
-     399px e tinha 391: quebrava por oito pixels. */
+  
   max-width: 29ch;
 }
 .selo .ico-mini { margin-top: 2px; color: var(--ouro-fundo); }
@@ -2044,11 +1467,6 @@ body.travado { overflow: hidden; }
   color: var(--cinza);
 }
 
-
-
-/* ==========================================================================
-   O FORMULÁRIO
-   ========================================================================== */
 .escrever {
   background: var(--creme);
   border-top: 1px solid var(--filete);
@@ -2067,8 +1485,6 @@ body.travado { overflow: hidden; }
 
 .form { display: grid; gap: 18px; }
 
-/* Fora da tela, mas ainda enviável. display:none nao serve: o navegador
-   nao manda campo escondido assim, e a armadilha deixaria de funcionar. */
 .fora-da-tela {
   position: absolute;
   width: 1px; height: 1px;
@@ -2098,10 +1514,7 @@ body.travado { overflow: hidden; }
   border: 1px solid var(--filete);
   border-radius: 0;
   font-family: var(--texto);
-  /* 16px, e nao 15. O Safari no iPhone amplia a pagina inteira quando a
-     pessoa toca num campo com fonte menor que 16px, e depois nao volta
-     sozinho: o resto da navegacao fica desalinhado. Um pixel a mais aqui
-     evita isso. */
+  
   font-size: 16px;
   color: var(--marinho);
   transition: border-color .2s var(--curva);
@@ -2109,8 +1522,6 @@ body.travado { overflow: hidden; }
 .campo textarea { min-height: 118px; resize: vertical; line-height: 1.6; }
 .campo input:focus, .campo select:focus, .campo textarea:focus { border-color: var(--ouro); }
 
-/* A borda vermelha nao e o unico sinal do erro: a mensagem escrita embaixo
-   diz o que fazer. Cor sozinha nao serve para quem nao distingue vermelho. */
 .com-erro input, .com-erro select, .com-erro textarea { border-color: #a3282d; }
 
 .erro:empty { display: none; }
@@ -2140,74 +1551,10 @@ body.travado { overflow: hidden; }
   .escrever__in { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
 }
 
-
-/* ==========================================================================
-   O BOTAO DO TOPO SAI NA FAIXA DO MEIO
-   --------------------------------------------------------------------------
-   Entre 900 e 1179px a barra tem marca, nav de seis itens e o botao. Medido
-   a 985px: ela precisa de 1050 e tem 905. Faltam 145.
-
-   COM A TROCA DE IDIOMA A CONTA MUDOU, e os numeros abaixo sao medidos no
-   navegador, e nao estimados. As duas pastilhas somam 134px.
-
-     barra com o botao, vaos folgados ....... precisa de 1408px de janela
-     barra com o botao, vaos apertados ...... precisa de 1286px
-
-   Dai as tres faixas:
-     900 a 1023 ...... sanduiche. O menu aberto em portugues, com seis itens
-                       mais as pastilhas, pediria uns 990px.
-     1024 a 1319 ..... menu aberto, vaos apertados, sem o botao
-     1360 para cima .. o botao volta
-
-   OS VAOS FICAM APERTADOS EM TODA LARGURA, E NAO SO NA FAIXA ESTREITA.
-   A primeira versao devolvia os vaos folgados acima de 1440, achando que
-   com tanta tela sobrava espaco. Nao sobra: a coluna de conteudo do site
-   para de crescer em 1240px, e a barra folgada com o botao mais as
-   pastilhas pede 1291. O que acontecia era que o botao saia da coluna e
-   ficava 102px a direita de onde termina o resto da pagina, sem provocar
-   rolagem nenhuma, so desalinhado. Com os vaos apertados a barra pede
-   1188 e sobra folga.
-
-   E o botao volta a 1360, e nao a 1320. A 1320 a coluna tem 1199 e a barra
-   com o botao pede 1212: ela passava 13px para fora da coluna, sem provocar
-   rolagem, so desalinhada. De 1360 para cima a coluna trava em 1240 e sobra
-   folga de verdade.
-
-   O botao sai antes de tudo porque ele e o unico repetido: o item "Contato"
-   do menu leva ao mesmo lugar, e a faixa marinho do fim da pagina repete a
-   mesma chamada em tamanho grande. Trocar de idioma nao tem substituto em
-   lugar nenhum da pagina, entao as pastilhas ficam.
-   ========================================================================== */
 @media (max-width: 1359px) {
   .botao--topo { display: none; }
 }
 
-
-
-/* ==========================================================================
-   ONDE O MENU ABERTO PASSA A CABER
-   --------------------------------------------------------------------------
-   O ponto de virada era 900px. Com a troca de idioma no topo ele subiu para
-   1024, e a conta é esta.
-
-   Em português a barra tem: a marca (207px), seis itens de menu, e as duas
-   pastilhas de idioma (134px). A 900px isso pede 1049 e tem 900: transborda
-   113px, e a página ganha rolagem lateral.
-
-   Não dá para resolver só apertando. Mesmo com os vãos no mínimo, o menu
-   aberto em português precisa de uns 990px. Então entre 900 e 1023 quem
-   manda volta a ser o sanduíche, que é onde a troca de idioma também mora,
-   dentro do painel. A partir de 1024, que é o iPad deitado, o menu abre.
-
-   Em inglês a barra é mais curta hoje, porque "Testimonials" e "Education"
-   só entram quando os vídeos de lá existirem. O ponto de virada é o mesmo
-   nos dois de propósito: quando os vídeos entrarem, o menu em inglês passa
-   a ter os mesmos seis itens, e um ponto de virada que dependesse do idioma
-   escolheria justamente essa hora para quebrar.
-
-   1024 a 1179 é a faixa apertada: o menu abre, mas o botão de agendar
-   continua fora e os vãos ficam menores. Acima de 1180 tudo respira.
-   ========================================================================== */
 @media (min-width: 900px) and (max-width: 1023px) {
   .nav { display: none; }
   .sanduiche { display: inline-flex; }
@@ -2215,68 +1562,21 @@ body.travado { overflow: hidden; }
 }
 
 @media (min-width: 1024px) {
-  /* --------------------------------------------------------------------
-     O VÃO ENTRE GRUPOS É MAIOR QUE O VÃO ENTRE ITENS DO MESMO GRUPO.
-
-     A primeira versão fazia o contrário: 14px separando marca, menu,
-     pastilhas e botão, contra até 30px separando um item de menu do
-     seguinte. Cada peça ficava à mesma distância de tudo, e sem
-     hierarquia a barra lê como amontoado, mesmo tendo folga. As
-     pastilhas de idioma pareciam encostadas em CONTATO e no botão
-     porque estavam mais perto deles do que CONTATO estava de EDUCAÇÃO.
-
-     Agora são 40px entre grupos contra 24px entre itens, uma vez e dois
-     terços.
-
-     Os números começaram em 32 e 20, e subiram quando o item "Sobre" saiu
-     do menu a pedido da Gabi. Cinco itens em vez de seis devolveram uns
-     60px, e com eles deu para voltar perto da respiração do desenho
-     original, que era de 40px entre itens quando não havia pastilhas de
-     idioma nem botão na barra.
-
-     Os vãos entram no mínimo antes da fonte: menu de 13px que vira 11px
-     para caber é menu que ninguém lê.
-
-     A margem à direita do menu saiu. Ela existia quando o menu era a
-     última peça antes do botão; agora o vão entre grupos faz esse
-     trabalho, e manter as duas somava duas separações no mesmo lugar.
-     -------------------------------------------------------------------- */
+  
   .topo__in { gap: clamp(28px, 2.9vw, 40px); }
   .nav > ul { gap: clamp(18px, 1.8vw, 24px); }
   .nav { margin-right: 0; }
 
-  /* As pastilhas encolhem por dentro para o grupo poder respirar por
-     fora. É a troca que interessa: o que dá sensação de aperto é a
-     distância até o vizinho, e não o tamanho da caixa. */
+  
   .idioma ul { padding: 2px; }
   .idioma__link,
   .idioma__atual { padding: 5px 9px; gap: 6px; }
   .bandeira { width: 18px; }
 
-  /* 24px de cada lado viravam 231px de botão, a maior peça da barra
-     depois da marca. Com 20 ele continua com área de clique de sobra e
-     devolve 8px para os vãos. */
+  
   .botao--topo { padding: 0 20px; }
 }
 
-
-/* ==========================================================================
-   TELAS MUITO ESTREITAS
-   --------------------------------------------------------------------------
-   A 320px o cabecalho nao cabia: a marca ocupa 207px, o sanduiche 79, mais
-   20 de vao, e a faixa util tem 280. Sobravam 26px para fora, e a pagina
-   ganhava barra de rolagem horizontal.
-
-   O corte e 364px e nao 379: a 375 a barra cabe com a palavra (precisa de
-   306px e tem 335), entao esconder ali seria tirar sem motivo. A 360 sobram
-   14px, folga pequena demais para confiar em variacao de fonte, entao ali
-   ela ja sai.
-
-   A palavra "Menu" sai, e fica so o icone. Ela nao e removida do documento:
-   vai para fora da tela pela mesma tecnica do campo-armadilha, entao o
-   leitor de tela continua anunciando o botao como "Menu". Some para o olho,
-   permanece para quem depende dela.
-   ========================================================================== */
 @media (max-width: 364px) {
   .sanduiche__txt {
     position: absolute;
@@ -2294,23 +1594,6 @@ body.travado { overflow: hidden; }
   .marca { gap: 10px; }
 }
 
-
-/* ==========================================================================
-   O BOTAO DO WHATSAPP: BORDA VERDE QUE PULSA
-   --------------------------------------------------------------------------
-   So a BORDA fica verde. O texto continua no dourado escurecido porque
-   verde de WhatsApp sobre branco mede menos de 3 e reprovaria como texto;
-   como borda, o criterio e outro (3:1 de componente, nao 4,5 de texto) e
-   um verde escurecido cumpre.
-
-   O pulso e lento e de pouca amplitude de proposito: seis segundos entre
-   dois tons proximos. Piscar rapido em elemento de acao vira anuncio, e
-   piscar acima de tres vezes por segundo e risco para quem tem epilepsia
-   fotossensivel. Aqui e um respirar.
-
-   Para quem pediu menos movimento no sistema, o bloco no fim do arquivo
-   desliga a animacao e a borda fica no verde parado.
-   ========================================================================== */
 @keyframes pulsa-verde {
   from, to { border-color: #1a8f4c; }
   50%      { border-color: #4fd07f; }
@@ -2321,7 +1604,6 @@ body.travado { overflow: hidden; }
   animation: pulsa-verde 6s ease-in-out infinite;
 }
 
-/* No hover o botao inteiro se preenche, e o pulso brigaria com isso. */
 .botao--linha:hover,
 .botao--linha:focus-visible { animation-play-state: paused; }
 .botao--linha:hover { background: #1a8f4c; border-color: #1a8f4c; color: #ffffff; }

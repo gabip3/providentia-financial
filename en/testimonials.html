@@ -4,21 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- ==========================================================================
-     PROVIDENTIA FINANCIAL — DEPOIMENTOS, EM INGLÊS
-     --------------------------------------------------------------------------
-     A irmã de ../depoimentos.html.
-
-     A GRADE DE VÍDEOS ESTÁ VAZIA HOJE, E ISSO É ESPERADO.
-     Os três depoimentos que existem são os dublados em português. Enquanto
-     ingles.video estiver vazio nos três blocos de DEPOIMENTOS, no dados.js,
-     esta página fica sem cards, o item "Testimonials" não aparece no menu em
-     inglês e nada aponta para cá. A página existe pronta para o dia em que
-     os links chegarem: é colar e rodar  node construir.js.
-
-     Cabeçalho, rodapé e a grade são escritos pelo construir.js.
-     ========================================================================== -->
-
 <title>Testimonials | Providentia Financial</title>
 <meta name="description" content="Real stories from people who used their Living Benefits when they needed them most. Real clients, telling what happened.">
 
@@ -62,13 +47,6 @@
 
 <a class="pular" href="#conteudo">Skip to content</a>
 
-<!-- ==========================================================================
-     Daqui ate o FIM quem escreve e o construir.js: e o mesmo cabecalho das
-     outras dezenove paginas, no idioma desta. Nao edite aqui dentro, porque
-     a proxima rodada apaga. Os itens do menu estao no textos.js, e a lista
-     de servicos no dados.js.
-     ========================================================================== -->
-<!-- GERADO: cabecalho -->
 <header class="topo" id="topo">
   <div class="faixa topo__in">
 
@@ -80,13 +58,7 @@
     <nav class="nav" aria-label="Main navigation">
       <ul>
         <li><a href="index.html">Home</a></li>
-        <!-- O item "Sobre" saiu do menu a pedido da Gabi. A SECAO continua na
-             pagina, com a foto e a bio, e continua com id="sobre": o que saiu
-             foi so o atalho no topo. Quem rola chega la de qualquer jeito, e o
-             menu ficou com cinco itens em vez de seis, o que devolveu uns 60px
-             para a barra respirar.
-             Para trazer de volta, e descomentar aqui e no painel:
-             <li><a href="index.html#sobre">About</a></li> -->
+        
         <li class="tem-sub">
           <button class="sub-abre" type="button" aria-expanded="false" aria-controls="sub-servicos">
             Services
@@ -131,8 +103,7 @@
   <nav class="faixa painel__in" aria-label="Navigation">
     <ul class="painel__lista">
       <li><a href="index.html">Home</a></li>
-      <!-- "Sobre" saiu daqui junto com o menu do topo, para os dois nao
-           divergirem. O motivo esta no cabecalho. -->
+      
       <li><a href="index.html#solucoes">Services</a></li>
       <li class="painel__sub"><a href="services/living-benefits.html">Living Benefits</a></li>
       <li class="painel__sub"><a href="services/tax-free-retirement.html">Tax-free retirement</a></li>
@@ -158,7 +129,6 @@
     </div>
   </nav>
 </div>
-<!-- FIM: cabecalho -->
 
 <main id="conteudo">
 
@@ -178,21 +148,8 @@
       happened when they needed to use the policy.
     </p>
 
-    <!-- ====================================================================
-         [CONFIRMAR] Os vídeos são material da Alliance Group, e mostram
-         pessoas identificadas pelo nome. Isso é diferente de imagem
-         genérica: são histórias reais de pessoas reais, e o direito de uso
-         vem da autorização de afiliada da Monica, e não de uma licença de
-         banco de imagens. Guarde essa autorização por escrito.
-
-         O texto de cada card sai da descrição do próprio vídeo, sem
-         acrescentar nada. Não invente detalhe de diagnóstico, de valor pago
-         nem de desfecho.
-
-         Daqui ate o FIM quem escreve e o construir.js, a partir da lista
-         DEPOIMENTOS do dados.js.
-         ==================================================================== -->
-    <!-- GERADO: depoimentos -->
+    
+    
 
     <ul class="videos videos--tres" data-cartoes="1">
       <li class="video">
@@ -206,8 +163,6 @@
       </li>
     </ul>
 
-<!-- FIM: depoimentos -->
-
     <div class="servico__acoes">
       <a class="botao botao--marinho" href="index.html#contato" data-agendar="index.html">Book a conversation</a>
       <a class="botao botao--contorno" href="#" data-telefone><svg class="ico-tel" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg> Call or text <span data-preencher="telefone">[ TELEFONE ]</span></a>
@@ -218,14 +173,6 @@
 
 </main>
 
-
-<!-- ==========================================================================
-     Daqui ate o FIM quem escreve e o construir.js: e o mesmo rodape das
-     outras dezenove paginas, com o bloco juridico. Nao edite aqui dentro.
-     Os textos estao no textos.js, e assim um disclosure novo entra nos dois
-     idiomas de uma vez.
-     ========================================================================== -->
-<!-- GERADO: rodape -->
 <footer class="rodape">
   <div class="faixa rodape__in">
 
@@ -234,25 +181,7 @@
       <span class="marca__nome"><b>Providentia</b><i>Financial</i></span>
     </a>
 
-    <!-- ====================================================================
-         O SELO DE CREDENCIAL
-         --------------------------------------------------------------------
-         [CONFIRMAR AS DUAS PALAVRAS, UMA A UMA]
-
-         "Licensed" e a licenca de corretora. "Insured", no mercado
-         americano, quer dizer que ela carrega E&O: Errors & Omissions,
-         o seguro de responsabilidade profissional. Sao duas afirmacoes
-         verificaveis, e nao slogan.
-
-         A maioria dos agentes carrega E&O, e as IMOs costumam exigir. Mas
-         se por algum motivo ela nao tiver a apolice ativa, a palavra
-         "Insured" tem de sair. Confirme antes de publicar.
-
-         Fica em ingles NOS DOIS IDIOMAS porque e termo do mercado dos
-         Estados Unidos, e e assim que o publico dela ja viu em outros
-         negocios americanos. A linha de baixo e que muda: em portugues ela
-         traduz a expressao, em ingles ela diz o que a expressao cobre.
-         ==================================================================== -->
+    
     <p class="selo">
       <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
       <span>
@@ -272,20 +201,7 @@
       </li>
       <li>
         <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-        <!-- [CONFIRMAR ANTES DE PUBLICAR] A Monica informou que atende os
-             Estados Unidos inteiros. Isso e comum entre agentes: da para ser
-             licenciado em varios estados de uma vez. Mas "todos os EUA" e
-             afirmacao verificavel, e um estado em que ela NAO esteja
-             licenciada torna a frase falsa.
-
-             Peca a lista dos estados em que ela tem licenca ativa. Se for
-             mesmo todos, esta frase fica. Se faltar algum, troque por
-             "Atendendo clientes em XX estados" e ponha a lista numa pagina
-             ou no rodape. O texto mora no textos.js, em "atendimento", e
-             muda nos dois idiomas de uma vez.
-
-             A palavra "brasileiras" saiu daqui a pedido da Gabi: o site
-             atende quem chegar. -->
+        
         <span>Serving families across the United States</span>
       </li>
     </ul>
@@ -299,52 +215,8 @@
   </div>
 
   <div class="faixa rodape__legal">
-    <!-- ====================================================================
-         O BLOCO JURÍDICO
-         --------------------------------------------------------------------
-         SOBRE O NÚMERO DA LICENÇA
-         Ele NÃO é dado sigiloso. Licença de corretor de seguros nos Estados
-         Unidos é registro público: qualquer pessoa consulta a Monica pelo
-         nome no site do Departamento de Seguros da Flórida e vê o número, o
-         status e as linhas em que ela pode atuar.
-
-         Em vários estados publicá-lo é obrigatório. A Califórnia, por
-         exemplo, exige o número da licença em anúncio impresso e cartão de
-         visita. Se a Flórida exige em site, EU NÃO SEI, e isso não é coisa
-         para deduzir: quem responde é o compliance da Alliance ou da
-         companhia, que costuma ter regra própria de publicidade acima da
-         regra do estado.
-
-         O QUE É NECESSÁRIO DE QUALQUER JEITO
-         · o nome sob o qual ela é licenciada, escrito exatamente assim
-         · os estados em que ela pode de fato atender
-         · o disclosure que a companhia exigir
-
-         Um "e mais" que costuma passar batido: se "Providentia Financial"
-         for nome fantasia e não a razão social licenciada, muitos estados
-         pedem que o nome legal apareça em algum lugar da página.
-
-         AGORA SÃO DOIS IDIOMAS, e isso muda uma coisa: o que entrar aqui
-         precisa entrar nos dois. Um disclosure que só existe em português
-         não protege ninguém na página em inglês. É por isso que estes
-         textos moram no textos.js, e não soltos no HTML.
-
-         Quando tiver os textos, descomente e preencha lá, e a linha entra
-         nas vinte páginas de uma vez:
-
-         <p class="rodape__mini">Monica Silva, licenciada como NOME LEGAL.</p>
-         <p class="rodape__mini">Atendendo os estados de XX, XX e XX.</p>
-         <p class="rodape__mini">TEXTO EXATO DO DISCLOSURE DA COMPANHIA.</p>
-         <p class="rodape__mini">Licença nº 000000 (Flórida).</p>
-         ==================================================================== -->
-    <!-- Este parágrafo é obrigatório a partir do momento em que o site cita
-         nome de seguradora. Ele diz três coisas, e as três importam:
-         que a Providentia é agência independente e não pertence a nenhuma
-         delas, que a disponibilidade muda de estado para estado, e que as
-         marcas são de terceiros. O texto veio da orientação de compliance
-         que a Monica recebeu.
-
-         Se a lista de seguradoras mudar, o nome citado aqui muda junto. -->
+    
+    
     <p class="rodape__mini">
       Providentia Financial is an independent agency. Product and carrier availability varies by state. National Life Group&reg; and other marks mentioned belong to their respective owners.
     </p>
@@ -356,12 +228,9 @@
   </div>
 </footer>
 
-<!-- A bolha do canto, em inglês, liga em vez de abrir o WhatsApp. Marinho
-     e não verde: verde aqui é a cor do WhatsApp, e este botão não é ele. -->
 <a class="zap zap--tel" href="#" data-telefone aria-label="Call or text me">
   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"/></svg>
 </a>
-<!-- FIM: rodape -->
 
 <script src="../script.js?v=73bfa434"></script>
 </body>

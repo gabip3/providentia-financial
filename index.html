@@ -4,58 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- ==========================================================================
-     PROVIDENTIA FINANCIAL
-     --------------------------------------------------------------------------
-     Layout construído a partir do mockup enviado pela Monica.
-     Sete blocos, nesta ordem: topo, abertura, pilares, sobre, soluções,
-     chamada, rodapé. Nada além disso, de propósito.
-
-     TRÊS ARQUIVOS, SEM DEPENDÊNCIA:  index.html · style.css · script.js
-     Pronto para Netlify. Basta arrastar a pasta.
-
-     TUDO QUE PRECISA SER TROCADO ESTÁ MARCADO COM [SUBSTITUIR] OU
-     [CONFIRMAR]. Os dados de contato ficam no bloco CONFIG do script.js.
-     ========================================================================== -->
-
 <title>Providentia Financial | Proteção financeira para o que mais importa</title>
 
-<!-- Esta frase e a que aparece no Google e embaixo do titulo no preview de
-     link. Estava em terceira pessoa, "A Monica ajuda familias...", enquanto o
-     site inteiro fala "eu". Era o unico texto do projeto que tinha escapado
-     da revisao de voz, justamente por nao ser visivel na pagina. -->
 <meta name="description" content="Seguro de vida e planejamento financeiro para famílias nos Estados Unidos. Eu ajudo você a proteger quem depende de você e a organizar o que vem depois.">
 
 <link rel="canonical" href="https://www.providentiafinancialgroup.com/">
-<!-- hreflang: diz ao Google que estas duas paginas sao a MESMA coisa em
-     idiomas diferentes, e nao conteudo duplicado. Sem isso as duas versoes
-     brigam entre si na busca. O x-default e para quem nao bate com nenhum
-     idioma da lista, e aponta para o portugues, que e a raiz do site. -->
+
 <link rel="alternate" hreflang="pt-BR" href="https://www.providentiafinancialgroup.com/">
 <link rel="alternate" hreflang="en" href="https://www.providentiafinancialgroup.com/en/">
 <link rel="alternate" hreflang="x-default" href="https://www.providentiafinancialgroup.com/">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="escudo.png">
 
-<!-- ==========================================================================
-     OPEN GRAPH E TWITTER
-     --------------------------------------------------------------------------
-     E o que aparece quando alguem cola o link no WhatsApp, no Facebook, no
-     LinkedIn ou no iMessage. Sem isso, o preview sai so com o endereco.
-
-     A imagem precisa de endereco ABSOLUTO. Caminho relativo funciona no
-     site e falha no preview, porque quem monta o cartao e um servidor de
-     fora que nao sabe de onde o caminho parte.
-
-     width e height evitam que o cartao apareca sem imagem no primeiro
-     compartilhamento: sem eles, algumas plataformas so mostram a foto
-     depois de baixar e medir, o que as vezes nao acontece a tempo.
-
-     [OTIMIZAR] familia.png tem 1,8 MB. Facebook e LinkedIn aguentam, mas o
-     WhatsApp costuma desistir de imagem grande e mostrar o cartao sem foto.
-     Exportar como JPEG qualidade 82 resolve, e e o mesmo arquivo que ja
-     precisa encolher por causa do tempo de carregamento da pagina.
-     ========================================================================== -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Providentia Financial">
@@ -73,48 +33,8 @@
 <meta name="twitter:image" content="https://www.providentiafinancialgroup.com/familia.png">
 <meta name="twitter:image:alt" content="Uma família reunida na sala de casa: pai, mãe e duas crianças, sorrindo juntos.">
 
-<!-- ==========================================================================
-     SEGURANCA
-     --------------------------------------------------------------------------
-     O GitHub Pages nao deixa configurar cabecalho HTTP. Destes dois, o
-     navegador aceita a versao em <meta>, e e o que da para fazer aqui.
-
-     A POLITICA DE CONTEUDO (CSP)
-     Ela diz de onde a pagina pode carregar cada coisa. Tudo que nao esta na
-     lista e bloqueado pelo navegador, mesmo que alguem consiga injetar
-     codigo no HTML.
-
-     script-src 'self' e a parte que importa: NAO tem 'unsafe-inline'. Este
-     site nao tem nenhum <script> inline, nenhum onclick e nenhum
-     href="javascript:", entao script injetado simplesmente nao roda.
-
-     style-src tem 'unsafe-inline' por causa de sete atributos
-     style="--alt-logo:46px" nos logos das seguradoras, que carregam a
-     altura calculada de cada um. E uma excecao so para estilo: CSS inline
-     nao executa codigo. A protecao que vale, a de script, continua estrita.
-
-     O QUE NAO DA PARA FAZER AQUI
-     frame-ancestors e X-Frame-Options, que impediriam o site de ser
-     embutido num iframe de outra pessoa, so funcionam como cabecalho HTTP
-     de verdade. Em <meta> o navegador ignora. Para ter esses dois seria
-     preciso trocar o GitHub Pages por um servico que deixa configurar
-     cabecalho, como Netlify ou Cloudflare Pages.
-
-     POR QUE NAO TEM upgrade-insecure-requests
-     Ela estava aqui e foi tirada. Essa diretiva converte http em https em
-     TODA requisicao, inclusive http://localhost, e o servidor de
-     desenvolvimento nao fala https: o preview local quebrava com
-     ERR_SSL_PROTOCOL_ERROR e parecia erro de codigo.
-
-     O que ela protegeria ja esta coberto: as origens listadas acima sao
-     todas https por extenso, e o site em producao e https com redirecao
-     obrigatoria. Ela so pegaria um http:// que alguem escrevesse errado
-     no futuro, e esse ganho nao paga quebrar o ambiente local.
-     ========================================================================== -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://i.vimeocdn.com; frame-src https://player.vimeo.com https://www.youtube-nocookie.com; connect-src 'self' https://api.web3forms.com; form-action 'self'; base-uri 'self'; object-src 'none'">
 
-<!-- Ao sair do site, manda so o dominio no Referer, e nunca o caminho
-     completo da pagina. Em HTTP puro nao manda nada. -->
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <meta name="theme-color" content="#0a2368">
@@ -129,25 +49,6 @@
 
 <a class="pular" href="#conteudo">Ir para o conteúdo</a>
 
-
-<!-- ==========================================================================
-     TOPO
-     No desktop a navegação fica aberta. O sanduíche só existe abaixo de
-     900px, onde ele resolve alguma coisa.
-
-     [CONFIRMAR] O mockup traz cinco itens: HOME ABOUT SERVICES RESOURCES
-     CONTACT. "Recursos" ficou de fora porque não existe conteúdo para
-     apontar, e link de menu que não leva a lugar nenhum é pior que menu
-     curto. No dia em que houver blog ou biblioteca de vídeos, é somar um
-     <li> aqui e outro no menu do celular.
-     ========================================================================== -->
-<!-- ==========================================================================
-     Daqui ate o FIM quem escreve e o construir.js: e o mesmo cabecalho das
-     outras dezenove paginas, no idioma desta. Nao edite aqui dentro, porque
-     a proxima rodada apaga. Os itens do menu estao no textos.js, e a lista
-     de servicos no dados.js.
-     ========================================================================== -->
-<!-- GERADO: cabecalho -->
 <header class="topo" id="topo">
   <div class="faixa topo__in">
 
@@ -159,13 +60,7 @@
     <nav class="nav" aria-label="Navegação principal">
       <ul>
         <li><a href="index.html">Início</a></li>
-        <!-- O item "Sobre" saiu do menu a pedido da Gabi. A SECAO continua na
-             pagina, com a foto e a bio, e continua com id="sobre": o que saiu
-             foi so o atalho no topo. Quem rola chega la de qualquer jeito, e o
-             menu ficou com cinco itens em vez de seis, o que devolveu uns 60px
-             para a barra respirar.
-             Para trazer de volta, e descomentar aqui e no painel:
-             <li><a href="index.html#sobre">Sobre</a></li> -->
+        
         <li class="tem-sub">
           <button class="sub-abre" type="button" aria-expanded="false" aria-controls="sub-servicos">
             Serviços
@@ -210,8 +105,7 @@
   <nav class="faixa painel__in" aria-label="Navegação">
     <ul class="painel__lista">
       <li><a href="index.html">Início</a></li>
-      <!-- "Sobre" saiu daqui junto com o menu do topo, para os dois nao
-           divergirem. O motivo esta no cabecalho. -->
+      
       <li><a href="index.html#solucoes">Serviços</a></li>
       <li class="painel__sub"><a href="servicos/beneficios-em-vida.html">Benefícios em Vida</a></li>
       <li class="painel__sub"><a href="servicos/aposentadoria-livre-de-impostos.html">Aposentadoria livre de impostos</a></li>
@@ -237,32 +131,12 @@
     </div>
   </nav>
 </div>
-<!-- FIM: cabecalho -->
 
 <main id="conteudo">
 
-<!-- ==========================================================================
-     ABERTURA
-     Texto à esquerda, fotografia à direita. A foto não leva cor por cima:
-     ela some para a esquerda com uma máscara, e não com um véu colorido,
-     para o rosto continuar com a cor original.
-     ========================================================================== -->
 <section class="abertura">
 
-  <!-- A foto foi feita para este enquadramento: a família à direita, o lado
-       esquerdo vazio e claro, que é exatamente onde o texto entra. Por isso
-       o véu de creme cobre só a metade vazia e nunca chega neles.
-
-       [CONFIRMAR] Esta é uma foto de banco de imagens, não são clientes da
-       Monica. Isso é uso comum e legítimo, mas em nenhum lugar da página
-       pode aparecer texto sugerindo que sejam pessoas reais atendidas por
-       ela. O texto ao lado fala do leitor, não das pessoas da foto.
-
-       [OTIMIZAR] familia.png tem 1,8 MB, e é a PRIMEIRA imagem que a página
-       carrega: e ela que segura o site abrindo no celular. Exporte a MESMA
-       imagem como JPEG qualidade 82 ou WebP e ela cai para algo entre 150 e
-       250 KB, sem diferença visivel. Depois troque só o src aqui. Não dá
-       para fazer isso daqui: não há conversor de imagem nesta máquina. -->
+  
   <div class="abertura__foto">
     <img src="familia.png" alt="Uma família reunida na sala de casa: pai, mãe e duas crianças, sorrindo juntos." width="1693" height="929" fetchpriority="high" decoding="async">
   </div>
@@ -290,12 +164,6 @@
 
 </section>
 
-
-<!-- ==========================================================================
-     PILARES
-     A faixa marinho logo abaixo da abertura. Quatro itens, divididos por
-     filete. É a única fileira de ícones do site.
-     ========================================================================== -->
 <section class="pilares" aria-label="O que orienta o trabalho da Monica">
   <ul class="faixa pilares__lista">
 
@@ -326,21 +194,6 @@
   </ul>
 </section>
 
-
-<!-- ==========================================================================
-     A MANHÃ
-     A parte mais antiga do site, do primeiro rascunho. É a única seção que
-     não fala de produto nenhum: fala de uma terça-feira.
-
-     O 08:28 não é aleatório. É Romanos 8:28, e foi escolha da Monica.
-
-     [VERSÃO B - COMPLIANCE]
-     Risco: indução pelo medo. A frase "a vida não manda convite antes de
-     mudar" é sugestiva. Se o compliance apertar, troque o parágrafo por:
-
-       Você deixou as crianças na escola, respondeu mensagens, pensou no
-       jantar e seguiu a vida. A parte difícil é que nem tudo dá para prever.
-     ========================================================================== -->
 <section class="manha" id="manha">
   <div class="faixa">
 
@@ -376,24 +229,7 @@
       </li>
     </ol>
 
-    <!-- ====================================================================
-         O DESFECHO
-         A Monica leu e disse que faltava um fim, e ela estava certa: a
-         linha do tempo parava em "alguma coisa muda" e acabava ali. Susto
-         sem saída, que é justamente o que o resto do site evita.
-
-         O fim vem na mesma linguagem da história. Ela é contada em horas,
-         então o desfecho é a hora seguinte: 08:29. É a única hora do bloco
-         que não está na linha do tempo, porque ela ainda não aconteceu.
-
-         [VERSÃO B - SE O COMPLIANCE APERTAR]
-         "O que vem depois, sim" fala de preparo, não promete resultado
-         nenhum e não cita cobertura. Se ainda assim pedirem para suavizar:
-
-           <b>08:29</b>
-           <span>Ninguém escolhe o que acontece às 08:28.
-           Dá para chegar nele mais preparado.</span>
-         ==================================================================== -->
+    
     <p class="manha__fim">
       <b>08:29</b>
       <span>Ninguém escolhe o que acontece às 08:28. O que vem depois, sim.</span>
@@ -402,31 +238,10 @@
   </div>
 </section>
 
-
-<!-- ==========================================================================
-     SE A RENDA PARASSE
-     A pergunta que a manhã prepara. Também é do primeiro rascunho.
-
-     [VERSÃO B - COMPLIANCE]
-     Risco no último item: "pior momento possível" é indução pelo medo.
-     Troca sugerida: "Proteção também é dar tempo para que sua família
-     possa decidir com calma, sem pressa e sem aperto."
-     ========================================================================== -->
 <section class="renda" id="renda">
   <div class="faixa">
 
-    <!-- A quebra aqui é manual, e isso é de propósito. O text-wrap: balance
-         iguala o tamanho das linhas, mas não sabe onde está o sentido: ele
-         escolhia "Se sua renda parasse / amanhã, o que continuaria?", que
-         parte "parasse amanhã" no meio, porque essa divisão dá linhas mais
-         parelhas (450 e 593) do que a divisão na vírgula (620 e 420).
-
-         Balance ganha do acaso, mas perde para a intenção. Onde a frase tem
-         um ponto de respiro claro, vírgula ou fim de sentença, a quebra é
-         marcada na mão.
-
-         O <br class="quebra"> só existe acima de 760px. Abaixo disso não há
-         largura para escolher nada, e o texto volta a fluir sozinho. -->
+    
     <h2>Se sua renda parasse amanhã,<br class="quebra"> o que continuaria?</h2>
     <p class="renda__lead">Não é uma pergunta para assustar.<br class="quebra"> É uma pergunta para organizar.</p>
 
@@ -452,26 +267,6 @@
   </div>
 </section>
 
-
-<!-- ==========================================================================
-     SOLUÇÕES
-     Vem logo depois da história de propósito. Ela termina perguntando "se
-     sua renda parasse amanhã, o que continuaria?", e a resposta é esta
-     lista. Antes, a resposta só aparecia quatro seções adiante, e quem
-     lesse a pergunta ficava sem ela na mão.
-     Os seis cartões do mockup, na mesma ordem.
-
-     [CONFIRMAR COM A MONICA] Ela atende os seis? Se não faz algum, apague o
-     <li> inteiro. Listar serviço que ela não presta é problema de
-     compliance, e não de texto.
-
-     [ATENÇÃO NO QUINTO] O mockup diz "tax-advantaged strategies". Aqui ficou
-     "estratégias de longo prazo", sem promessa tributária. Promessa de
-     imposto em página de agente é o item mais arriscado da categoria:
-     depende do desenho da apólice, e uma apólice mal desenhada vira MEC e
-     perde o tratamento. Só volte ao texto original com autorização escrita
-     do compliance.
-     ========================================================================== -->
 <section class="solucoes" id="solucoes">
   <div class="faixa">
 
@@ -563,32 +358,10 @@
   </div>
 </section>
 
-
-<!-- ==========================================================================
-     SOBRE
-     Fotografia à esquerda, texto à direita.
-
-     [SUBSTITUIR] O TEXTO ABAIXO VEIO DO MOCKUP DA MONICA, NÃO FUI EU QUE
-     ESCREVI. Antes de publicar ela precisa confirmar palavra por palavra,
-     em especial:
-       · "consultora licenciada". Dizer que é licenciada é declaração
-         regulada. Só fica no ar com o número da licença e os estados.
-       · o vínculo com a Alliance Group. Confirmar como o compliance da
-         Alliance exige que a relação seja descrita: agente independente,
-         agente nomeado e representante são coisas diferentes no papel.
-         Por isso o nome da Alliance NÃO está no ar aqui.
-     ========================================================================== -->
 <section class="sobre" id="sobre">
   <div class="faixa sobre__in">
 
-    <!-- Retrato no escritório. Entrou no lugar da foto do café por um motivo
-         simples: aqui ela olha para a câmera, e lá olhava para a cliente.
-         Numa seção em que o texto é ela falando na primeira pessoa, olhar
-         para quem lê vale mais que a cena.
-
-         É retrato (2:3), então o recorte é 4:5 e não o 4:3 do mockup:
-         cortar uma vertical em horizontal decepava a mesa ou o alto da
-         cabeça. E são 95 KB, contra 1,8 MB da foto da abertura. -->
+    
     <div class="sobre__foto">
       <img src="monica-escritorio.jpeg" alt="Monica Silva à mesa de trabalho, olhando para a câmera." width="1024" height="1536" loading="lazy" decoding="async">
     </div>
@@ -597,17 +370,7 @@
 
       <h2>Sua parceira em segurança financeira e tranquilidade</h2>
 
-      <!-- [CONFIRMAR PALAVRA POR PALAVRA] Este texto é um rascunho meu, a
-           partir do que a Monica contou: o nome completo e os cinco filhos.
-           O resto é escrita, não é informação que ela me deu. Ela precisa
-           ler e corrigir antes de publicar.
-
-           O que eu deliberadamente NÃO escrevi, e ela precisa preencher:
-             · há quanto tempo trabalha com isso
-             · onde nasceu, onde mora, há quanto tempo está nos EUA
-             · formação, certificações, licença
-           Não inventei nenhum desses porque bio de agente de seguro é
-           declaração, e não texto de marketing. -->
+      
       <p>
         Sou a Monica Silva, mãe de cinco filhos. Quando cinco pessoas dependem
         da sua rotina, aquela pergunta que todo mundo evita, o "e se acontecer
@@ -615,10 +378,7 @@
         concreta.
       </p>
 
-      <!-- A palavra "brasileiras" saiu daqui a pedido da Gabi, junto com a
-           versao em ingles. A frase dizia "famílias brasileiras nos Estados
-           Unidos". O publico continua sendo o mesmo, e a diferenca e que a
-           porta nao se fecha antes de a pessoa entrar. -->
+      
       <p>
         Foi por aí que eu entrei neste trabalho: primeiro organizando a
         proteção da minha própria família, depois ajudando outras a fazer o
@@ -627,72 +387,24 @@
         não coopera.
       </p>
 
-      <!-- Aqui havia um terceiro parágrafo, sobre a conversa começar pela
-           situação da pessoa e não por um produto. Saiu: a primeira versão
-           não se entendia, a segunda ficou explicativa demais, e a bio
-           fecha melhor no parágrafo acima. Duas ideias bastam. -->
+      
 
       <p class="assinatura" aria-hidden="true">Monica Silva</p>
 
-      <!-- Aqui havia um segundo marcador de licença e estados atendidos.
-           Saiu porque era duplicata: quando o rodapé ainda era uma linha só,
-           fazia sentido repetir a exigência perto da bio. Depois que ele
-           virou três linhas próprias, esta passou a cobrar a mesma coisa
-           duas vezes na mesma página.
-
-           A exigência não sumiu do site: ela continua no bloco jurídico do
-           rodapé, que aparece nas dez páginas. Aqui era só eco. -->
+      
     </div>
 
   </div>
 </section>
 
-
-<!-- ==========================================================================
-     A FRASE QUE ABRE COM A ROLAGEM
-     O painel entra estreito e vai abrindo até quase a largura da tela,
-     com o canto endireitando no caminho. É o único movimento do site.
-
-     Sem JavaScript, ou com prefers-reduced-motion, o painel já nasce
-     aberto e a frase aparece igual. A calibragem fica no objeto ABRE,
-     no script.js.
-
-     [VERSÃO B - CONFERIR COM O COMPLIANCE]
-     Risco na palavra "tudo": nenhuma apólice cobre tudo, sempre há
-     carência, exclusão e limite. Se o compliance apertar, troque o
-     parágrafo por este, que guarda a mesma ideia sem o absoluto:
-
-       <p>Seguro não é sobre esperar o pior.
-          <em>É sobre cuidar do que você já construiu.</em></p>
-     ========================================================================== -->
 <section class="frase" data-abre>
   <div class="frase__painel">
     <div class="faixa">
-      <!-- A quebra cai na fronteira das duas sentenças, que é exatamente
-           onde a cor muda de marinho para branco. Antes ela caía depois de
-           "esperar", partindo "esperar o pior" no meio e deixando a virada
-           de cor no meio da segunda linha. -->
+      
       <p>Seguro não é sobre esperar o pior.<br class="quebra"> <em>É sobre proteger tudo o que já está dando certo.</em></p>
     </div>
   </div>
 </section>
-
-
-<!-- ==========================================================================
-     VÍDEO EM DESTAQUE
-     Texto escrito pela Monica. O vídeo é do Vimeo da Alliance Group e ela
-     informou que pode usá-lo por ser afiliada.
-
-     [CONFIRMAR] "não custam nada a mais" é afirmação forte. Em muitas
-     apólices o recurso vem incluso sem prêmio adicional, mas isso depende
-     da companhia e do produto. Confirme que vale para TODAS as apólices
-     que a Monica oferece, ou troque por "costumam vir inclusos sem custo
-     adicional".
-     ========================================================================== -->
-<!-- Daqui ate o FIM quem escreve e o construir.js, a partir do bloco
-     DESTAQUE do dados.js. Nao edite aqui dentro: a proxima rodada
-     apaga. O texto esta no dados.js. -->
-<!-- GERADO: destaque -->
 
 <section class="destaque" id="destaque">
   <div class="faixa destaque__in">
@@ -714,38 +426,6 @@
   </div>
 </section>
 
-<!-- FIM: destaque -->
-
-
-<!-- ==========================================================================
-     BENEFÍCIOS EM VIDA
-     O conteúdo central da Alliance Group, que é a IMO com quem a Monica
-     trabalha. Sem isto o site fala de seguro em geral; com isto ele fala
-     do que a Alliance de fato vende.
-
-     FONTE, e a tradução NÃO é minha:
-       https://alliancegroupatl.com/living-benefits
-       https://alliancegroupatl.com/portuguese   <- a página em PT deles
-     Os termos saíram de lá:
-       Living Benefits ............ Benefícios em Vida
-       "life insurance you don't
-        have to die to use" ....... "seguro de vida que não precisa
-                                     morrer para utilizar"
-       Medical bankruptcy ......... Falência Médica
-
-     [CONFERIR COM A MONICA / COMPLIANCE]
-     · O texto explica o CONCEITO. Não cita companhia, não cita valor e não
-       diz que a pessoa tem direito: diz que existem apólices com esses
-       recursos. Quem se qualifica a quê depende da apólice, da companhia e
-       da aprovação, e isso está escrito no fim da seção.
-     · A régua de valores existe no material da Alliance (ex.: uma apólice
-       de 500 mil liberando parte grande num diagnóstico grave) e NÃO entrou
-       aqui de propósito. Número de pagamento em página de agente vira
-       promessa.
-     · Eles publicam "até 70% dos americanos estão sem seguro ou com seguro
-       insuficiente". É estatística deles, não minha, e ficou fora: número
-       sem fonte no ar é passivo.
-     ========================================================================== -->
 <section class="beneficios" id="beneficios">
   <div class="faixa">
 
@@ -777,54 +457,16 @@
       </li>
     </ul>
 
-    <!-- [REMOVIDO A PEDIDO DA MONICA] Aqui havia o parágrafo de ressalva:
-         o que sobra segue valendo como benefício por morte, e quem se
-         qualifica a quê depende da apólice, da companhia e da aprovação.
-
-         O mesmo conteúdo continua no ar dentro da página do serviço, em
-         servicos/beneficios-em-vida.html, que é onde o assunto é explicado
-         por inteiro. Para trazer de volta para cá, é descomentar:
-
-         <p class="nota nota--esq">
-           O que sobra continua valendo como benefício por morte. Quais
-           condições entram, quanto é liberado e quem se qualifica dependem
-           da apólice, da companhia e dos critérios de aprovação de cada
-           caso. É exatamente isso que eu explico na nossa conversa.
-         </p>
-    -->
+    
 
   </div>
 </section>
 
-
-
-
-<!-- ==========================================================================
-     SEGURADORAS
-     Vem depois dos serviços de propósito: primeiro a pessoa entende o que
-     ela faz, depois vê quem está atrás. Antes disso seria crachá.
-
-     [CONFIRMAR] A lista está no dados.js, em SEGURADORAS, e precisa ser
-     conferida uma por uma: só entra companhia com quem a Monica tem
-     nomeação ativa.
-
-     [SOBRE OS LOGOS] Enquanto não houver os arquivos, os nomes aparecem em
-     tipografia. Isso não é remendo: a própria orientação de compliance diz
-     "logos OU texto mencionando". Texto não precisa de aprovação de uso de
-     marca, logo precisa. Se as aprovações demorarem, dá para publicar
-     assim sem problema nenhum.
-
-     Para pôr um logo: arquivo em logos/, nome do arquivo no campo "logo"
-     do dados.js, e rode node construir.js.
-     ========================================================================== -->
 <section class="seguradoras" id="seguradoras">
   <div class="faixa">
 
-    <!-- A quebra fica antes de "dos Estados Unidos", que é o complemento.
-         Sem ela o balance partia em três linhas de 383, 390 e 365 pixels,
-         picando "as maiores seguradoras" no meio. -->
-    <!-- Primeira pessoa, como o resto do site. Estava em "Trabalhamos", que
-         e a voz de uma empresa; aqui quem fala e ela. -->
+    
+    
     <h2>Trabalho com as maiores seguradoras<br class="quebra"> dos Estados Unidos</h2>
 
     <p class="seguradoras__lead">
@@ -846,50 +488,13 @@
   </div>
 </section>
 
-
-<!-- ==========================================================================
-     CENTRO DE EDUCAÇÃO
-     Estrutura tirada de https://alliancegroupatl.com/education-center
-     Lá são duas fileiras: histórias reais de clientes, e temas curtos.
-     Aqui é a mesma coisa.
-
-     COMO COLOCAR OS VÍDEOS
-     Não mexa neste HTML. Abra o script.js e preencha o objeto VIDEOS, no
-     topo do arquivo. A chave de cada card está no data-video abaixo.
-     Aceita link do YouTube ou do Vimeo, colado como está na barra do
-     navegador. Enquanto a chave estiver vazia o card aparece marcado como
-     pendente, de propósito, para ninguém publicar sem ver que faltou.
-
-     O vídeo só é carregado quando a pessoa clica. Antes disso não existe
-     iframe na página, então o YouTube não escreve cookie em quem só
-     passou pelo site, e a página abre mais rápido.
-
-     [SUBSTITUIR] OS TRÊS DEPOIMENTOS
-     Os depoimentos do site da Alliance são de clientes DELES, não da
-     Monica, e estão publicados no canal deles. Duas saídas:
-       a) usar depoimentos de clientes da própria Monica, com autorização
-          por escrito de cada pessoa. É o melhor caminho.
-       b) usar os vídeos institucionais da Alliance, e aí o texto tem que
-          dizer que são clientes da Alliance Group, e não dela. Precisa da
-          autorização de uso da Alliance.
-     Não invente nome nem história. Enquanto não houver os dois, deixe
-     esta fileira inteira comentada.
-     ========================================================================== -->
-<!-- Daqui ate o FIM quem escreve e o construir.js, a partir da lista
-     SERVICOS do dados.js. Antes esta grade era HTML a mao, com as
-     duracoes, os titulos e os enderecos de capa copiados de la: duas
-     copias da mesma informacao, e a segunda envelhecia sozinha. -->
-<!-- GERADO: educacao -->
-
 <section class="educacao" id="educacao">
   <div class="faixa">
     <h2>Entenda antes de decidir</h2>
     <p class="educacao__lead">
       Oito vídeos curtos, nenhum passa de quatro minutos. Nada aqui é venda: são as ideias que costumam aparecer na conversa, explicadas com calma para você poder pensar sem ninguém do lado esperando resposta.
     </p>
-    <!-- Cada card leva para a página do serviço, onde o vídeo toca. Assim o
-         mesmo vídeo tem UM lugar só onde ele vive, e não duas cópias na
-         mesma página disputando quem carrega primeiro. -->
+    
     <ul class="videos videos--quatro" data-cartoes="8">
       <li class="video">
         <a href="servicos/beneficios-em-vida.html">
@@ -983,14 +588,6 @@
   </div>
 </section>
 
-<!-- FIM: educacao -->
-
-
-<!-- ==========================================================================
-     CHAMADA
-     A faixa marinho do fim. Título à esquerda, texto no meio separado por
-     filete vertical, botões à direita.
-     ========================================================================== -->
 <section class="chamada" id="contato">
   <div class="faixa chamada__in">
 
@@ -1003,9 +600,7 @@
       sua vida, os seus objetivos e o seu futuro.
     </p>
 
-    <!-- Agendar é a ação principal daqui: a seção inteira fala de marcar
-         uma conversa. Telefone e WhatsApp ficam como alternativa para quem
-         prefere falar agora a escolher um horário. -->
+    
     <div class="chamada__acoes">
       <a class="botao botao--ouro botao--cheio" href="#contato" data-agendar="">
         <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
@@ -1024,42 +619,6 @@
   </div>
 </section>
 
-
-<!-- ==========================================================================
-     O FORMULÁRIO
-     Vem depois da chamada de propósito, e não no lugar dela. Quem já decidiu
-     agenda direto no Calendly; quem ainda tem uma pergunta escreve aqui. São
-     dois momentos diferentes da mesma pessoa.
-
-     COMO FUNCIONA
-     O envio vai para o Web3Forms, que recebe o formulário e encaminha por
-     e-mail. Não há servidor nosso, não há banco de dados, e nada fica
-     guardado neste site.
-
-     [SUBSTITUIR] FALTA A CHAVE
-     Pegue a chave gratuita em https://web3forms.com, informando o e-mail
-     que deve receber as mensagens, e cole no campo "web3forms" do CONFIG,
-     no topo do script.js.
-
-     Enquanto a chave estiver vazia esta seção inteira fica escondida, e o
-     aviso aparece só no console do navegador. Assim o site nunca mostra um
-     formulário que não envia. Assim que a chave entrar, a seção aparece
-     sozinha, sem mexer em mais nada.
-
-     [SOBRE OS DADOS] O aviso embaixo do botão pede para a pessoa NÃO mandar
-     número de apólice, SSN nem dado bancário. Formulário de site não é
-     canal seguro para isso, e num site de seguro essa frase precisa estar
-     visível, não escondida na política de privacidade.
-     ========================================================================== -->
-<!-- Nasce com hidden. O script.js tira o hidden SE houver chave do
-     Web3Forms configurada. Sem chave, a seção simplesmente não existe para
-     quem visita: nada de formulário desativado com aviso, que é jeito de
-     um site parecer inacabado.
-
-     Escondida por padrão, e não por JavaScript depois de aparecer, porque
-     assim ela nunca pisca na tela antes de sumir. E quem estiver sem
-     JavaScript também não vê um formulário que não teria como enviar: o
-     envio é por fetch. -->
 <section class="escrever" id="escrever" hidden>
   <div class="faixa escrever__in">
 
@@ -1073,26 +632,17 @@
     </div>
 
     <form class="form" novalidate>
-      <!-- A chave entra aqui pelo script.js. -->
+      
       <input type="hidden" name="access_key" value="">
 
-      <!-- RESPONDER DIRETO NO E-MAIL
-           O valor "email" nao e um endereco: e o NOME do campo do formulario
-           de onde o Web3Forms tira o endereco de resposta. Com isso, o
-           Reply-To da mensagem que chega para a Monica passa a ser o e-mail
-           de quem escreveu, e ela responde apertando "Responder", sem
-           copiar endereco de lugar nenhum. -->
+      
       <input type="hidden" name="replyto" value="email">
 
-      <!-- Assunto e remetente sao preenchidos pelo script antes do envio,
-           com o nome e o assunto que a pessoa escolheu. Os valores abaixo
-           so entram em cena se o script falhar. -->
+      
       <input type="hidden" name="subject" value="Novo contato pelo site da Providentia Financial">
       <input type="hidden" name="from_name" value="Site da Providentia Financial">
 
-      <!-- Armadilha de robô: fica fora da tela e sem foco. Se vier
-           preenchida, o Web3Forms descarta o envio. Gente não vê, e leitor
-           de tela também não, por causa do aria-hidden. -->
+      
       <input type="checkbox" name="botcheck" class="fora-da-tela" tabindex="-1" autocomplete="off" aria-hidden="true">
 
       <div class="campo">
@@ -1149,17 +699,6 @@
 
 </main>
 
-
-<!-- ==========================================================================
-     RODAPÉ
-     ========================================================================== -->
-<!-- ==========================================================================
-     Daqui ate o FIM quem escreve e o construir.js: e o mesmo rodape das
-     outras dezenove paginas, com o bloco juridico. Nao edite aqui dentro.
-     Os textos estao no textos.js, e assim um disclosure novo entra nos dois
-     idiomas de uma vez.
-     ========================================================================== -->
-<!-- GERADO: rodape -->
 <footer class="rodape">
   <div class="faixa rodape__in">
 
@@ -1168,25 +707,7 @@
       <span class="marca__nome"><b>Providentia</b><i>Financial</i></span>
     </a>
 
-    <!-- ====================================================================
-         O SELO DE CREDENCIAL
-         --------------------------------------------------------------------
-         [CONFIRMAR AS DUAS PALAVRAS, UMA A UMA]
-
-         "Licensed" e a licenca de corretora. "Insured", no mercado
-         americano, quer dizer que ela carrega E&O: Errors & Omissions,
-         o seguro de responsabilidade profissional. Sao duas afirmacoes
-         verificaveis, e nao slogan.
-
-         A maioria dos agentes carrega E&O, e as IMOs costumam exigir. Mas
-         se por algum motivo ela nao tiver a apolice ativa, a palavra
-         "Insured" tem de sair. Confirme antes de publicar.
-
-         Fica em ingles NOS DOIS IDIOMAS porque e termo do mercado dos
-         Estados Unidos, e e assim que o publico dela ja viu em outros
-         negocios americanos. A linha de baixo e que muda: em portugues ela
-         traduz a expressao, em ingles ela diz o que a expressao cobre.
-         ==================================================================== -->
+    
     <p class="selo">
       <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
       <span>
@@ -1206,20 +727,7 @@
       </li>
       <li>
         <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-        <!-- [CONFIRMAR ANTES DE PUBLICAR] A Monica informou que atende os
-             Estados Unidos inteiros. Isso e comum entre agentes: da para ser
-             licenciado em varios estados de uma vez. Mas "todos os EUA" e
-             afirmacao verificavel, e um estado em que ela NAO esteja
-             licenciada torna a frase falsa.
-
-             Peca a lista dos estados em que ela tem licenca ativa. Se for
-             mesmo todos, esta frase fica. Se faltar algum, troque por
-             "Atendendo clientes em XX estados" e ponha a lista numa pagina
-             ou no rodape. O texto mora no textos.js, em "atendimento", e
-             muda nos dois idiomas de uma vez.
-
-             A palavra "brasileiras" saiu daqui a pedido da Gabi: o site
-             atende quem chegar. -->
+        
         <span>Atendendo famílias em todos os Estados Unidos</span>
       </li>
     </ul>
@@ -1233,52 +741,8 @@
   </div>
 
   <div class="faixa rodape__legal">
-    <!-- ====================================================================
-         O BLOCO JURÍDICO
-         --------------------------------------------------------------------
-         SOBRE O NÚMERO DA LICENÇA
-         Ele NÃO é dado sigiloso. Licença de corretor de seguros nos Estados
-         Unidos é registro público: qualquer pessoa consulta a Monica pelo
-         nome no site do Departamento de Seguros da Flórida e vê o número, o
-         status e as linhas em que ela pode atuar.
-
-         Em vários estados publicá-lo é obrigatório. A Califórnia, por
-         exemplo, exige o número da licença em anúncio impresso e cartão de
-         visita. Se a Flórida exige em site, EU NÃO SEI, e isso não é coisa
-         para deduzir: quem responde é o compliance da Alliance ou da
-         companhia, que costuma ter regra própria de publicidade acima da
-         regra do estado.
-
-         O QUE É NECESSÁRIO DE QUALQUER JEITO
-         · o nome sob o qual ela é licenciada, escrito exatamente assim
-         · os estados em que ela pode de fato atender
-         · o disclosure que a companhia exigir
-
-         Um "e mais" que costuma passar batido: se "Providentia Financial"
-         for nome fantasia e não a razão social licenciada, muitos estados
-         pedem que o nome legal apareça em algum lugar da página.
-
-         AGORA SÃO DOIS IDIOMAS, e isso muda uma coisa: o que entrar aqui
-         precisa entrar nos dois. Um disclosure que só existe em português
-         não protege ninguém na página em inglês. É por isso que estes
-         textos moram no textos.js, e não soltos no HTML.
-
-         Quando tiver os textos, descomente e preencha lá, e a linha entra
-         nas vinte páginas de uma vez:
-
-         <p class="rodape__mini">Monica Silva, licenciada como NOME LEGAL.</p>
-         <p class="rodape__mini">Atendendo os estados de XX, XX e XX.</p>
-         <p class="rodape__mini">TEXTO EXATO DO DISCLOSURE DA COMPANHIA.</p>
-         <p class="rodape__mini">Licença nº 000000 (Flórida).</p>
-         ==================================================================== -->
-    <!-- Este parágrafo é obrigatório a partir do momento em que o site cita
-         nome de seguradora. Ele diz três coisas, e as três importam:
-         que a Providentia é agência independente e não pertence a nenhuma
-         delas, que a disponibilidade muda de estado para estado, e que as
-         marcas são de terceiros. O texto veio da orientação de compliance
-         que a Monica recebeu.
-
-         Se a lista de seguradoras mudar, o nome citado aqui muda junto. -->
+    
+    
     <p class="rodape__mini">
       A Providentia Financial é uma agência independente. A disponibilidade de produtos e seguradoras varia por estado. National Life Group&reg; e demais marcas citadas pertencem aos seus respectivos proprietários.
     </p>
@@ -1293,7 +757,6 @@
 <a class="zap" href="#" data-whatsapp aria-label="Falar comigo no WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.87 9.87 0 0 0 4.74 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm0 18.15c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.38c0-4.54 3.7-8.23 8.24-8.23 2.2 0 4.27.86 5.82 2.42a8.18 8.18 0 0 1 2.41 5.82c0 4.54-3.69 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.13-.16.24-.64.8-.79.97-.14.16-.29.18-.54.06-.25-.13-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.01-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.43h-.47c-.17 0-.43.06-.66.31-.22.25-.87.85-.87 2.07s.89 2.4 1.02 2.56c.12.17 1.75 2.67 4.23 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.15-1.18-.06-.11-.22-.17-.47-.29z"/></svg>
 </a>
-<!-- FIM: rodape -->
 
 <script src="script.js?v=73bfa434"></script>
 </body>

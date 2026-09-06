@@ -4,14 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<!-- ==========================================================================
-     ARQUIVO GERADO POR  construir.js  A PARTIR DE  dados.js  E  textos.js
-     NÃO EDITE ESTE ARQUIVO NA MÃO: ele é reescrito na próxima vez que
-     alguém rodar  node construir.js  e as suas mudanças somem.
-     Texto do serviço: dados.js. Menu e rodapé: textos.js. Estrutura da
-     página: construir.js.
-     ========================================================================== -->
-
 <title>Proteção do seu negócio | Providentia Financial</title>
 <meta name="description" content="Proteja seu negócio, seus sócios e o seu legado.">
 <link rel="canonical" href="https://www.providentiafinancialgroup.com/servicos/protecao-do-negocio.html">
@@ -21,21 +13,6 @@
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../escudo.png">
 
-<!-- ==========================================================================
-     OPEN GRAPH E TWITTER
-     --------------------------------------------------------------------------
-     E o que aparece quando alguem cola o link no WhatsApp, no Facebook, no
-     LinkedIn ou no iMessage. Sem isso, o preview sai so com o endereco.
-
-     A imagem precisa de endereco ABSOLUTO. Caminho relativo funciona no
-     site e falha no preview, porque quem monta o cartao e um servidor de
-     fora que nao sabe de onde o caminho parte.
-
-     [OTIMIZAR] familia.png tem 1,8 MB. Facebook e LinkedIn aguentam, mas o
-     WhatsApp costuma desistir de imagem grande e mostrar o cartao sem foto.
-     Exportar como JPEG qualidade 82 resolve, e e o mesmo arquivo que ja
-     precisa encolher por causa do tempo de carregamento da pagina.
-     ========================================================================== -->
 <meta property="og:type" content="article">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="Providentia Financial">
@@ -52,53 +29,11 @@
 <meta name="twitter:description" content="Proteja seu negócio, seus sócios e o seu legado.">
 <meta name="twitter:image" content="https://www.providentiafinancialgroup.com/familia.png">
 <meta name="twitter:image:alt" content="Uma família reunida na sala de casa: pai, mãe e duas crianças, sorrindo juntos.">
-<!-- [REMOVER ANTES DE PUBLICAR DE VERDADE]
-     Enquanto o site for rascunho para revisão, ele não pode aparecer no
-     Google. Ainda tem dados por confirmar e nenhum bloco jurídico.
-     Quando tudo estiver aprovado, apague estas duas linhas e o robots.txt. -->
+
 <meta name="robots" content="noindex, nofollow">
 
-<!-- ==========================================================================
-     SEGURANCA
-     --------------------------------------------------------------------------
-     O GitHub Pages nao deixa configurar cabecalho HTTP. Destes dois, o
-     navegador aceita a versao em <meta>, e e o que da para fazer aqui.
-
-     A POLITICA DE CONTEUDO (CSP)
-     Ela diz de onde a pagina pode carregar cada coisa. Tudo que nao esta na
-     lista e bloqueado pelo navegador, mesmo que alguem consiga injetar
-     codigo no HTML.
-
-     script-src 'self' e a parte que importa: NAO tem 'unsafe-inline'. Este
-     site nao tem nenhum <script> inline, nenhum onclick e nenhum
-     href="javascript:", entao script injetado simplesmente nao roda.
-
-     style-src tem 'unsafe-inline' por causa de sete atributos
-     style="--alt-logo:46px" nos logos das seguradoras, que carregam a
-     altura calculada de cada um. E uma excecao so para estilo: CSS inline
-     nao executa codigo. A protecao que vale, a de script, continua estrita.
-
-     O QUE NAO DA PARA FAZER AQUI
-     frame-ancestors e X-Frame-Options, que impediriam o site de ser
-     embutido num iframe de outra pessoa, so funcionam como cabecalho HTTP
-     de verdade. Em <meta> o navegador ignora. Para ter esses dois seria
-     preciso trocar o GitHub Pages por um servico que deixa configurar
-     cabecalho, como Netlify ou Cloudflare Pages.
-
-     POR QUE NAO TEM upgrade-insecure-requests
-     Ela estava aqui e foi tirada. Essa diretiva converte http em https em
-     TODA requisicao, inclusive http://localhost, e o servidor de
-     desenvolvimento nao fala https: o preview local quebrava com
-     ERR_SSL_PROTOCOL_ERROR e parecia erro de codigo.
-
-     O que ela protegeria ja esta coberto: as origens listadas acima sao
-     todas https por extenso, e o site em producao e https com redirecao
-     obrigatoria.
-     ========================================================================== -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://i.vimeocdn.com; frame-src https://player.vimeo.com https://www.youtube-nocookie.com; connect-src 'self' https://api.web3forms.com; form-action 'self'; base-uri 'self'; object-src 'none'">
 
-<!-- Ao sair do site, manda so o dominio no Referer, e nunca o caminho
-     completo da pagina. Em HTTP puro nao manda nada. -->
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
 <meta name="theme-color" content="#0a2368">
@@ -124,13 +59,7 @@
     <nav class="nav" aria-label="Navegação principal">
       <ul>
         <li><a href="../index.html">Início</a></li>
-        <!-- O item "Sobre" saiu do menu a pedido da Gabi. A SECAO continua na
-             pagina, com a foto e a bio, e continua com id="sobre": o que saiu
-             foi so o atalho no topo. Quem rola chega la de qualquer jeito, e o
-             menu ficou com cinco itens em vez de seis, o que devolveu uns 60px
-             para a barra respirar.
-             Para trazer de volta, e descomentar aqui e no painel:
-             <li><a href="../index.html#sobre">Sobre</a></li> -->
+        
         <li class="tem-sub">
           <button class="sub-abre" type="button" aria-expanded="false" aria-controls="sub-servicos">
             Serviços
@@ -175,8 +104,7 @@
   <nav class="faixa painel__in" aria-label="Navegação">
     <ul class="painel__lista">
       <li><a href="../index.html">Início</a></li>
-      <!-- "Sobre" saiu daqui junto com o menu do topo, para os dois nao
-           divergirem. O motivo esta no cabecalho. -->
+      
       <li><a href="../index.html#solucoes">Serviços</a></li>
       <li class="painel__sub"><a href="beneficios-em-vida.html">Benefícios em Vida</a></li>
       <li class="painel__sub"><a href="aposentadoria-livre-de-impostos.html">Aposentadoria livre de impostos</a></li>
@@ -264,25 +192,7 @@
       <span class="marca__nome"><b>Providentia</b><i>Financial</i></span>
     </a>
 
-    <!-- ====================================================================
-         O SELO DE CREDENCIAL
-         --------------------------------------------------------------------
-         [CONFIRMAR AS DUAS PALAVRAS, UMA A UMA]
-
-         "Licensed" e a licenca de corretora. "Insured", no mercado
-         americano, quer dizer que ela carrega E&O: Errors & Omissions,
-         o seguro de responsabilidade profissional. Sao duas afirmacoes
-         verificaveis, e nao slogan.
-
-         A maioria dos agentes carrega E&O, e as IMOs costumam exigir. Mas
-         se por algum motivo ela nao tiver a apolice ativa, a palavra
-         "Insured" tem de sair. Confirme antes de publicar.
-
-         Fica em ingles NOS DOIS IDIOMAS porque e termo do mercado dos
-         Estados Unidos, e e assim que o publico dela ja viu em outros
-         negocios americanos. A linha de baixo e que muda: em portugues ela
-         traduz a expressao, em ingles ela diz o que a expressao cobre.
-         ==================================================================== -->
+    
     <p class="selo">
       <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
       <span>
@@ -302,20 +212,7 @@
       </li>
       <li>
         <svg class="ico-mini" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-        <!-- [CONFIRMAR ANTES DE PUBLICAR] A Monica informou que atende os
-             Estados Unidos inteiros. Isso e comum entre agentes: da para ser
-             licenciado em varios estados de uma vez. Mas "todos os EUA" e
-             afirmacao verificavel, e um estado em que ela NAO esteja
-             licenciada torna a frase falsa.
-
-             Peca a lista dos estados em que ela tem licenca ativa. Se for
-             mesmo todos, esta frase fica. Se faltar algum, troque por
-             "Atendendo clientes em XX estados" e ponha a lista numa pagina
-             ou no rodape. O texto mora no textos.js, em "atendimento", e
-             muda nos dois idiomas de uma vez.
-
-             A palavra "brasileiras" saiu daqui a pedido da Gabi: o site
-             atende quem chegar. -->
+        
         <span>Atendendo famílias em todos os Estados Unidos</span>
       </li>
     </ul>
@@ -329,52 +226,8 @@
   </div>
 
   <div class="faixa rodape__legal">
-    <!-- ====================================================================
-         O BLOCO JURÍDICO
-         --------------------------------------------------------------------
-         SOBRE O NÚMERO DA LICENÇA
-         Ele NÃO é dado sigiloso. Licença de corretor de seguros nos Estados
-         Unidos é registro público: qualquer pessoa consulta a Monica pelo
-         nome no site do Departamento de Seguros da Flórida e vê o número, o
-         status e as linhas em que ela pode atuar.
-
-         Em vários estados publicá-lo é obrigatório. A Califórnia, por
-         exemplo, exige o número da licença em anúncio impresso e cartão de
-         visita. Se a Flórida exige em site, EU NÃO SEI, e isso não é coisa
-         para deduzir: quem responde é o compliance da Alliance ou da
-         companhia, que costuma ter regra própria de publicidade acima da
-         regra do estado.
-
-         O QUE É NECESSÁRIO DE QUALQUER JEITO
-         · o nome sob o qual ela é licenciada, escrito exatamente assim
-         · os estados em que ela pode de fato atender
-         · o disclosure que a companhia exigir
-
-         Um "e mais" que costuma passar batido: se "Providentia Financial"
-         for nome fantasia e não a razão social licenciada, muitos estados
-         pedem que o nome legal apareça em algum lugar da página.
-
-         AGORA SÃO DOIS IDIOMAS, e isso muda uma coisa: o que entrar aqui
-         precisa entrar nos dois. Um disclosure que só existe em português
-         não protege ninguém na página em inglês. É por isso que estes
-         textos moram no textos.js, e não soltos no HTML.
-
-         Quando tiver os textos, descomente e preencha lá, e a linha entra
-         nas vinte páginas de uma vez:
-
-         <p class="rodape__mini">Monica Silva, licenciada como NOME LEGAL.</p>
-         <p class="rodape__mini">Atendendo os estados de XX, XX e XX.</p>
-         <p class="rodape__mini">TEXTO EXATO DO DISCLOSURE DA COMPANHIA.</p>
-         <p class="rodape__mini">Licença nº 000000 (Flórida).</p>
-         ==================================================================== -->
-    <!-- Este parágrafo é obrigatório a partir do momento em que o site cita
-         nome de seguradora. Ele diz três coisas, e as três importam:
-         que a Providentia é agência independente e não pertence a nenhuma
-         delas, que a disponibilidade muda de estado para estado, e que as
-         marcas são de terceiros. O texto veio da orientação de compliance
-         que a Monica recebeu.
-
-         Se a lista de seguradoras mudar, o nome citado aqui muda junto. -->
+    
+    
     <p class="rodape__mini">
       A Providentia Financial é uma agência independente. A disponibilidade de produtos e seguradoras varia por estado. National Life Group&reg; e demais marcas citadas pertencem aos seus respectivos proprietários.
     </p>
